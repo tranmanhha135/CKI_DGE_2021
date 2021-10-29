@@ -335,13 +335,39 @@ div.tocify {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Introduction</a>
+  <a href="index.html">Home</a>
 </li>
 <li>
-  <a href="setUp.html">Setting Up</a>
+  <a href="about.html">About</a>
 </li>
-<li>
-  <a href="dge.html">Differential Gene Expression Analysis</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Setting Up
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="obtainData.html">Obtaining Data</a>
+    </li>
+    <li>
+      <a href="setUp.html">QC and Pre-processing</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Analysis
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="dge.html">DE Analysis</a>
+    </li>
+    <li class="dropdown-header">GO Term Enrichment Analysis</li>
+    <li class="dropdown-header">KEGG Pathway Enrichment Analysis</li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -372,7 +398,7 @@ div.tocify {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -381,7 +407,7 @@ div.tocify {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -390,10 +416,10 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-10-29
+<strong>Last updated:</strong> 2021-10-30
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>01_CKI_DGE/1_analysis/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -409,12 +435,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -481,16 +507,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree27a88ea13aa27f2c5061ad9dd9d8ee9dfe969cb5targetblank27a88eaa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/27a88ea13aa27f2c5061ad9dd9d8ee9dfe969cb5" target="_blank">27a88ea</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree67e2d670268223ebb4a53e199040aa1830496a7ftargetblank67e2d67a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/67e2d670268223ebb4a53e199040aa1830496a7f" target="_blank">67e2d67</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree27a88ea13aa27f2c5061ad9dd9d8ee9dfe969cb5targetblank27a88eaa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree67e2d670268223ebb4a53e199040aa1830496a7ftargetblank67e2d67a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/27a88ea13aa27f2c5061ad9dd9d8ee9dfe969cb5" target="_blank">27a88ea</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/67e2d670268223ebb4a53e199040aa1830496a7f" target="_blank">67e2d67</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -499,19 +525,89 @@ Note that you need to be careful to ensure that all relevant files for the analy
 Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
+    Ignored:    2_plots/3_go/
+    Ignored:    2_plots/4_kegg/
 
 Untracked files:
-    Untracked:  01_CKI_DGE.Rproj
-    Untracked:  0_data/rds_object/apply_treat.rds
-    Untracked:  0_data/rds_object/contrastMatrix.rds
-    Untracked:  0_data/rds_object/designMatrix.rds
-    Untracked:  0_data/rds_object/dge.rds
-    Untracked:  0_data/rds_object/dge_treat_filtered.rds
-    Untracked:  0_data/rds_object/qlf.rds
-    Untracked:  0_data/rds_object/qlf_filtered.rds
-    Untracked:  1_analysis/
-    Untracked:  2_plots/
-    Untracked:  3_output/
+    Untracked:  0_data/rds_object/dge_treat_unfiltered.rds
+    Untracked:  0_data/rds_object/enrichGO_treat.rds
+    Untracked:  0_data/rds_object/enrichKEGG_treat_filtered.rds
+    Untracked:  0_data/rds_object/treat.rds
+    Untracked:  0_data/rds_object/treat_filtered.rds
+    Untracked:  0_data/rds_object/treat_unfiltered.rds
+    Untracked:  1_analysis/about.Rmd
+    Untracked:  1_analysis/about.html
+    Untracked:  1_analysis/go.Rmd
+    Untracked:  1_analysis/kegg.Rmd
+    Untracked:  1_analysis/obtainData.Rmd
+    Untracked:  1_analysis/setUp_files/
+    Untracked:  1_analysis/site_libs/
+    Untracked:  3_output/enrichGO_treat.xlsx
+    Untracked:  3_output/enrichKEGG_treat_unfiltered.xlsx
+
+Unstaged changes:
+    Deleted:    0_data/rds_object/apply_treat.rds
+    Deleted:    0_data/rds_object/dge_treat_filtered.rds
+    Modified:   1_analysis/_site.yml
+    Modified:   1_analysis/dge.Rmd
+    Deleted:    1_analysis/figure/dge.Rmd/MAplotCustom_qlf-1.png
+    Deleted:    1_analysis/figure/dge.Rmd/MAplotCustom_qlf-2.png
+    Deleted:    1_analysis/figure/dge.Rmd/MAplotCustom_qlf-3.png
+    Deleted:    1_analysis/figure/dge.Rmd/MAplotCustom_qlf-4.png
+    Deleted:    1_analysis/figure/dge.Rmd/MAplotCustom_qlf-5.png
+    Deleted:    1_analysis/figure/dge.Rmd/MAplotCustom_treat-1.png
+    Deleted:    1_analysis/figure/dge.Rmd/MAplotCustom_treat-2.png
+    Deleted:    1_analysis/figure/dge.Rmd/MAplotCustom_treat-3.png
+    Deleted:    1_analysis/figure/dge.Rmd/MAplotCustom_treat-4.png
+    Deleted:    1_analysis/figure/dge.Rmd/MAplotCustom_treat-5.png
+    Deleted:    1_analysis/figure/dge.Rmd/estimateDispersion-1.png
+    Deleted:    1_analysis/figure/dge.Rmd/fitGLMqlf-1.png
+    Deleted:    1_analysis/figure/dge.Rmd/pValueHistogram_qlf-1.png
+    Deleted:    1_analysis/figure/dge.Rmd/pValueHistogram_qlf-2.png
+    Deleted:    1_analysis/figure/dge.Rmd/pValueHistogram_qlf-3.png
+    Deleted:    1_analysis/figure/dge.Rmd/pValueHistogram_qlf-4.png
+    Deleted:    1_analysis/figure/dge.Rmd/pValueHistogram_qlf-5.png
+    Deleted:    1_analysis/figure/dge.Rmd/pValueHistogram_treat-1.png
+    Deleted:    1_analysis/figure/dge.Rmd/pValueHistogram_treat-2.png
+    Deleted:    1_analysis/figure/dge.Rmd/pValueHistogram_treat-3.png
+    Deleted:    1_analysis/figure/dge.Rmd/pValueHistogram_treat-4.png
+    Deleted:    1_analysis/figure/dge.Rmd/pValueHistogram_treat-5.png
+    Deleted:    1_analysis/figure/dge.Rmd/volcanoPlot_qlf-1.png
+    Deleted:    1_analysis/figure/dge.Rmd/volcanoPlot_qlf-2.png
+    Deleted:    1_analysis/figure/dge.Rmd/volcanoPlot_qlf-3.png
+    Deleted:    1_analysis/figure/dge.Rmd/volcanoPlot_qlf-4.png
+    Deleted:    1_analysis/figure/dge.Rmd/volcanoPlot_qlf-5.png
+    Deleted:    1_analysis/figure/dge.Rmd/volcanoPlot_treat-1.png
+    Deleted:    1_analysis/figure/dge.Rmd/volcanoPlot_treat-2.png
+    Deleted:    1_analysis/figure/dge.Rmd/volcanoPlot_treat-3.png
+    Deleted:    1_analysis/figure/dge.Rmd/volcanoPlot_treat-4.png
+    Deleted:    1_analysis/figure/dge.Rmd/volcanoPlot_treat-5.png
+    Deleted:    1_analysis/figure/setUp.Rmd/MDSplot-1.png
+    Deleted:    1_analysis/figure/setUp.Rmd/afterFiltering-1.png
+    Deleted:    1_analysis/figure/setUp.Rmd/libraryChecks-1.png
+    Deleted:    1_analysis/figure/setUp.Rmd/pcaSampleGroup-1.png
+    Deleted:    1_analysis/figure/setUp.Rmd/pcaSampleType-1.png
+    Deleted:    1_analysis/figure/setUp.Rmd/visualisingNormalisation-1.png
+    Modified:   2_plots/2_dge/estimate_dispersion.svg
+    Modified:   2_plots/2_dge/qlf_dispersion.svg
+    Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Mac vs CKI.svg
+    Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Nme vs CKI.svg
+    Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Omt vs CKI.svg
+    Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Tri vs CKI.svg
+    Modified:   2_plots/2_dge/qlf_pValue_histogram_UT vs CKI.svg
+    Modified:   2_plots/2_dge/treat_pValue_histogram_CKI-Mac vs CKI.svg
+    Modified:   2_plots/2_dge/treat_pValue_histogram_CKI-Nme vs CKI.svg
+    Modified:   2_plots/2_dge/treat_pValue_histogram_CKI-Omt vs CKI.svg
+    Modified:   2_plots/2_dge/treat_pValue_histogram_CKI-Tri vs CKI.svg
+    Modified:   2_plots/2_dge/treat_pValue_histogram_UT vs CKI.svg
+    Modified:   2_plots/2_dge/volcano_plot_treat_CKI-Mac vs CKI.svg
+    Modified:   2_plots/2_dge/volcano_plot_treat_CKI-Nme vs CKI.svg
+    Modified:   2_plots/2_dge/volcano_plot_treat_CKI-Omt vs CKI.svg
+    Modified:   2_plots/2_dge/volcano_plot_treat_CKI-Tri vs CKI.svg
+    Modified:   2_plots/2_dge/volcano_plot_treat_UT vs CKI.svg
+    Modified:   3_output/qlf_filtered.xlsx
+    Modified:   3_output/treat_filtered.xlsx
+    Deleted:    CKI_DGE.Rproj
 
 </code></pre>
 <p>
@@ -524,9 +620,69 @@ Note that any generated files, e.g. HTML, png, CSS, etc., are not included in t
 <hr>
 </div>
 <div id="versions" class="tab-pane fade">
+
 <p>
-There are no past versions. Publish this analysis with <code>wflow_publish()</code> to start tracking its development.
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>1_analysis/dge.Rmd</code>) and HTML (<code>docs/dge.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
 </p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/tranmanhha135/01_CKI_DGE/blob/67e2d670268223ebb4a53e199040aa1830496a7f/1_analysis/dge.Rmd" target="_blank">67e2d67</a>
+</td>
+<td>
+Ha Tran
+</td>
+<td>
+2021-10-29
+</td>
+<td>
+copied code from old workflow for setup and dge
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/tranmanhha135/01_CKI_DGE/67e2d670268223ebb4a53e199040aa1830496a7f/docs/dge.html" target="_blank">67e2d67</a>
+</td>
+<td>
+Ha Tran
+</td>
+<td>
+2021-10-29
+</td>
+<td>
+copied code from old workflow for setup and dge
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <hr>
 </div>
 </div>
@@ -555,12 +711,26 @@ library(pheatmap)
 library(ggpubr)
 library(ggbiplot)
 library(ggrepel)
-theme_set(theme_bw())
 
 # Bioconductor packages:
 library(edgeR)
 library(limma)
-library(Glimma)</code></pre>
+library(Glimma)
+
+# Set ggplot theme
+theme_set(theme_bw())
+
+theme_update(legend.background = element_rect(fill = &quot;transparent&quot;, colour = NA),
+      legend.box.background = element_rect(fill = &quot;transparent&quot;, colour = NA),
+      
+      panel.background = element_rect(fill = &quot;transparent&quot;,colour = NA),
+      plot.background = element_rect(fill = &quot;transparent&quot;, colour = NA),
+      
+      plot.title = element_text(color = &quot;gray20&quot;, size = 22, angle = 0, hjust = 0, vjust = .5, face = &quot;bold&quot;),
+      axis.text.x = element_text(color = &quot;gray30&quot;, size = 12, angle = 0, hjust = .5, vjust = .5, face = &quot;plain&quot;),
+      axis.text.y = element_text(color = &quot;gray30&quot;, size = 12, angle = 0, hjust = 1, vjust = 0, face = &quot;plain&quot;),  
+      axis.title.x = element_text(color = &quot;gray30&quot;, size = 12, angle = 0, hjust = .5, vjust = 0, face = &quot;plain&quot;),
+      axis.title.y = element_text(color = &quot;gray30&quot;, size = 12, angle = 90, hjust = .5, vjust = .5, face = &quot;plain&quot;))</code></pre>
 </div>
 <div id="import-dgelist-data" class="section level3">
 <h3>Import DGElist Data</h3>
@@ -675,58 +845,58 @@ plotQLDisp(glmfit = fit_GLM_qlf)</code></pre>
 <div id="apply-qlf-test" class="section level3">
 <h3>Apply QLF test</h3>
 <pre class="r"><code># Create list object
-apply_qlf=list()
-dge_qlf_decideTest=list()
-dge_qlf_unfiltered=list()
-dge_qlf_filtered=list()
+qlf=list()
+qlf_decideTest=list()
+qlf_unfiltered=list()
+qlf_filtered=list()
 
 for (i in 1:ncol(contrast)){
   #at each iteration, let x = name of each contrast group
   x=comparison_group[i,]
 
   #populate list with DGELRT object for every comparison
-  apply_qlf[[x]] &lt;-
+  qlf[[x]] &lt;-
     edgeR::glmQLFTest(glmfit = fit_GLM_qlf, contrast = contrast[,x])
 
   #populate significant list with decide test
-  dge_qlf_decideTest[[x]] &lt;-
-    decideTests(apply_qlf[[x]], p.value = 0.05, adjust.method = &quot;fdr&quot;) %&gt;% summary()
+  qlf_decideTest[[x]] &lt;-
+    decideTests(qlf[[x]], p.value = 0.05, adjust.method = &quot;fdr&quot;) %&gt;% summary()
 
   #populate unfiltered list with list of all DE genes
-  dge_qlf_unfiltered[[x]] &lt;-
-    edgeR::topTags(object = apply_qlf[[x]], n = Inf) %&gt;% as.data.frame()
+  qlf_unfiltered[[x]] &lt;-
+    edgeR::topTags(object = qlf[[x]], n = Inf) %&gt;% as.data.frame()
 
   #populate filtered list with list of significant DE genes
-  dge_qlf_filtered[[x]] &lt;-
-    edgeR::topTags(object = apply_qlf[[x]], n = Inf, adjust.method = &quot;fdr&quot;, p.value = 0.05, sort.by = &quot;PValue&quot;) %&gt;% as.data.frame()
+  qlf_filtered[[x]] &lt;-
+    edgeR::topTags(object = qlf[[x]], n = Inf, adjust.method = &quot;fdr&quot;, p.value = 0.05, sort.by = &quot;PValue&quot;) %&gt;% as.data.frame()
 }
 
 # save rds object for use in downstream GO and KEGG analysis
-apply_qlf%&gt;% saveRDS(file = &quot;../0_data/rds_object/qlf.rds&quot;)
-# dge_qlf_unfiltered %&gt;% saveRDS(file = &quot;../0_data/rds_object/qlf_unfiltered.rds&quot;)
-dge_qlf_filtered %&gt;% saveRDS(file = &quot;../0_data/rds_object/qlf_filtered.rds&quot;)
+qlf%&gt;% saveRDS(file = &quot;../0_data/rds_object/qlf.rds&quot;)
+# qlf_unfiltered %&gt;% saveRDS(file = &quot;../0_data/rds_object/qlf_unfiltered.rds&quot;)
+qlf_filtered %&gt;% saveRDS(file = &quot;../0_data/rds_object/qlf_filtered.rds&quot;)
 
 #save each unfiltered comparison group in the output directory
 
 # dont need this
-# writexl::write_xlsx(x = dge_qlf_unfiltered,
+# writexl::write_xlsx(x = qlf_unfiltered,
                     # path = &quot;../3_output/qlf_unfiltered.xlsx&quot;)
-writexl::write_xlsx(x = dge_qlf_filtered,
+writexl::write_xlsx(x = qlf_filtered,
                     path = &quot;../3_output/qlf_filtered.xlsx&quot;)</code></pre>
 <div id="visualisation" class="section level4 tabset">
 <h4 class="tabset">Visualisation</h4>
 <div id="p-value-histogram" class="section level5">
 <h5>P Value histogram</h5>
-<pre class="r"><code>lapply(1:length(apply_qlf),
+<pre class="r"><code>lapply(1:length(qlf),
        function(x){
-         hist(x = apply_qlf[[x]]$table$PValue,
+         hist(x = qlf[[x]]$table$PValue,
               breaks = 50,
-              main = paste0(&quot;P-Values qlf &quot;, names(apply_qlf[x])),
+              main = paste0(&quot;P-Values qlf &quot;, names(qlf[x])),
               xlab = &quot;P-Value&quot;,
               col = &quot;gray50&quot;)
 
 invisible(dev.print(pdf,
-                    paste0(&quot;../2_plots/2_dge/qlf_pValue_histogram_&quot;, names(apply_qlf[x]), &quot;.svg&quot;)))
+                    paste0(&quot;../2_plots/2_dge/qlf_pValue_histogram_&quot;, names(qlf[x]), &quot;.svg&quot;)))
 })</code></pre>
 <p><img src="figure/dge.Rmd/pValueHistogram_qlf-1.png" width="1056" style="display: block; margin: auto;" /><img src="figure/dge.Rmd/pValueHistogram_qlf-2.png" width="1056" style="display: block; margin: auto;" /><img src="figure/dge.Rmd/pValueHistogram_qlf-3.png" width="1056" style="display: block; margin: auto;" /><img src="figure/dge.Rmd/pValueHistogram_qlf-4.png" width="1056" style="display: block; margin: auto;" /><img src="figure/dge.Rmd/pValueHistogram_qlf-5.png" width="1056" style="display: block; margin: auto;" /></p>
 <pre><code>[[1]]
@@ -753,11 +923,11 @@ png
 <h5>Mean-Difference plot</h5>
 <p>The differential expression can initial visualised through <code>plotMD</code> function, where the <code>logFC</code> is plotted against the relative abundance of the gene <code>logCPM</code>. Significant genes with FDR of 0.05 or less are highlighted.</p>
 <p><strong>NOTE: this does not account for minimal <code>logFC</code> value</strong></p>
-<pre class="r"><code>lapply(1:length(dge_qlf_unfiltered),
+<pre class="r"><code>lapply(1:length(qlf_filtered),
        function(x) {
 
          #create data.frame specific for the custome MA plot
-         MAplotData_qlf &lt;- dplyr::select(as.data.frame(dge_qlf_unfiltered[[x]]), logCPM, logFC, FDR)
+         MAplotData_qlf &lt;- dplyr::select(as.data.frame(qlf_filtered[[x]]), logCPM, logFC, FDR)
          colnames(MAplotData_qlf) &lt;- c(&quot;baseMeanLog2&quot;, &quot;log2FoldChange&quot;, &quot;padj&quot;)
 
          #create custom MA plot
@@ -774,7 +944,7 @@ png
            select.top.method = c(&quot;padj&quot;, &quot;fc&quot;),
            main = &quot;MA Plot from GLM-QLF &quot;,
            legend = &quot;bottom&quot;,
-           submain = names(dge_qlf_unfiltered[x]),
+           submain = names(qlf_filtered[x]),
            xlab = expression(&quot;log&quot;[2]*&quot;CPM&quot;),
            ylab = expression(&quot;log&quot;[2]*&quot;FC&quot;),
            ylim = c(-8, 8),
@@ -786,7 +956,7 @@ png
            font.y = c(13, &quot;plain&quot;, &quot;black&quot;))
 
          #save MA plot
-         # ggsave(paste0(&quot;MA_plot_qlf_&quot;, names(dge_qlf_unfiltered[x]), &quot;.svg&quot;),
+         # ggsave(paste0(&quot;MA_plot_qlf_&quot;, names(qlf_filtered[x]), &quot;.svg&quot;),
          #        plot = MAplot_qlf,
          #        path = &quot;../2_plots/2_dge/&quot;)
 
@@ -811,11 +981,11 @@ png
 <div id="volcano-plot" class="section level5">
 <h5>Volcano Plot</h5>
 <p>Here the <code>ggplot</code> function can also be used to illustrate the DE genes significant <code>pValue</code> and <code>logFC</code>. In this instance, the significance is determined as genes with <code>PValue &lt; 0.05</code> <strong>and</strong> <code>abs(logFC)&gt;log(2)</code>.</p>
-<pre class="r"><code>lapply(1:length(dge_qlf_unfiltered),
+<pre class="r"><code>lapply(1:length(qlf_filtered),
        function(x) {
 
          #add an extra column and determine whether the DE genes are significant
-         dge_qlf_unfiltered[[x]] &lt;- dge_qlf_unfiltered[[x]] %&gt;% as.data.frame() %&gt;%
+         qlf_filtered[[x]] &lt;- qlf_filtered[[x]] %&gt;% as.data.frame() %&gt;%
            dplyr::mutate(Expression = case_when
                          (FDR &lt;= 0.05 &amp; logFC &gt;= 1.5 ~ &quot;Up-regulated&quot;,
                           FDR &lt;= 0.05 &amp; logFC &lt;= -1.5 ~ &quot;Down-regulated&quot;,
@@ -824,11 +994,11 @@ png
          #adding labels to top genes
          top &lt;- 5
          top_genes_qlf &lt;- bind_rows(
-           dge_qlf_unfiltered[[x]] %&gt;%
+           qlf_filtered[[x]] %&gt;%
              filter(Expression == &#39;Up-regulated&#39;) %&gt;%
              arrange(FDR, desc(abs(logFC))) %&gt;%
              head(top),
-           dge_qlf_unfiltered[[x]] %&gt;%
+           qlf_filtered[[x]] %&gt;%
              filter(Expression == &#39;Down-regulated&#39;) %&gt;%
              arrange(FDR, desc(abs(logFC))) %&gt;%
              head(top)
@@ -836,7 +1006,7 @@ png
          invisible(top_genes_qlf %&gt;% as.data.frame())
 
          #generate volcano plot with the allDEgene data.frame
-         volcano_plot_qlf &lt;- dge_qlf_unfiltered[[x]] %&gt;%
+         volcano_plot_qlf &lt;- qlf_filtered[[x]] %&gt;%
            ggplot(aes(x = logFC,
                       y = -log(FDR, 10))) +
            geom_point(aes(colour = Expression),
@@ -853,11 +1023,11 @@ png
            scale_color_manual(values = c(&quot;dodgerblue3&quot;, &quot;gray50&quot;, &quot;firebrick3&quot;)) +
            guides(colour = guide_legend(override.aes = list(size=1.5))) +
            labs(title = &quot;Volcano Plot: GLM-QLF&quot;,
-                subtitle = paste0(names(dge_qlf_unfiltered[x])),
+                subtitle = paste0(names(qlf_filtered[x])),
                 colour = &quot;Expression&quot;)
 
          #save to directory
-         # ggsave(paste0(&quot;volcano_plot_qlf_&quot;, names(dge_qlf_unfiltered[x]), &quot;.svg&quot;),
+         # ggsave(paste0(&quot;volcano_plot_qlf_&quot;, names(qlf_filtered[x]), &quot;.svg&quot;),
          #        plot = volcano_plot_qlf,
          #        path = &quot;../2_plots/2_dge/&quot;)
 
@@ -884,55 +1054,55 @@ png
 <div id="apply-treat" class="section level3">
 <h3>Apply TREAT</h3>
 <pre class="r"><code># Create list object
-apply_treat=list()
-dge_treat_decideTest=list()
-dge_treat_unfiltered=list()
-dge_treat_filtered=list()
+treat=list()
+treat_decideTest=list()
+treat_unfiltered=list()
+treat_filtered=list()
 
 for (i in 1:ncol(contrast)){
   #at each iteration, let x = name of each contrast group
   x=comparison_group[i,]
 
   #populate list with DGELRT object for every comparison
-  apply_treat[[x]] &lt;-
+  treat[[x]] &lt;-
     edgeR::glmTreat(glmfit =  fit_GLM_qlf, contrast = contrast[,x], lfc = 1.5)
 
   #populate significant list with decide test
-  dge_treat_decideTest[[x]] &lt;- decideTests(apply_treat[[x]], p.value = 0.05, adjust.method = &quot;fdr&quot;) %&gt;% summary()
+  treat_decideTest[[x]] &lt;- decideTests(treat[[x]], p.value = 0.05, adjust.method = &quot;fdr&quot;) %&gt;% summary()
 
 
   #populate unfiltered list with list of all DE genes
-  dge_treat_unfiltered[[x]] &lt;-
-    edgeR::topTags(object = apply_treat[[x]], n = Inf) %&gt;% as.data.frame()
+  treat_unfiltered[[x]] &lt;-
+    edgeR::topTags(object = treat[[x]], n = Inf) %&gt;% as.data.frame()
 
   #populate filtered list with list of significant DE genes
-  dge_treat_filtered[[x]] &lt;-
-    edgeR::topTags(object = apply_treat[[x]], n = Inf, adjust.method = &quot;fdr&quot;, p.value = 0.05, sort.by = &quot;PValue&quot;) %&gt;% as.data.frame()
+  treat_filtered[[x]] &lt;-
+    edgeR::topTags(object = treat[[x]], n = Inf, adjust.method = &quot;fdr&quot;, p.value = 0.05, sort.by = &quot;PValue&quot;) %&gt;% as.data.frame()
 }
 
 # save rds object for use in downstream GO and KEGG analysis
-apply_treat %&gt;% saveRDS(file = &quot;../0_data/rds_object/apply_treat.rds&quot;)
-# dge_treat_unfiltered %&gt;% saveRDS(file = &quot;../0_data/rds_object/dge_treat_unfiltered.rds&quot;)
-dge_treat_filtered %&gt;% saveRDS(file = &quot;../0_data/rds_object/dge_treat_filtered.rds&quot;)
+treat %&gt;% saveRDS(file = &quot;../0_data/rds_object/treat.rds&quot;)
+treat_unfiltered %&gt;% saveRDS(file = &quot;../0_data/rds_object/treat_unfiltered.rds&quot;)
+treat_filtered %&gt;% saveRDS(file = &quot;../0_data/rds_object/treat_filtered.rds&quot;)
 
 #save each unfiltered comparison group in the output directory
-# writexl::write_xlsx(x = dge_treat_unfiltered,
+# writexl::write_xlsx(x = treat_unfiltered,
                     # path = &quot;../3_output/treat_unfiltered.xlsx&quot;)
-writexl::write_xlsx(x = dge_treat_filtered,
+writexl::write_xlsx(x = treat_filtered,
                     path = &quot;../3_output/treat_filtered.xlsx&quot;)</code></pre>
 <div id="visualisation-1" class="section level4 tabset">
 <h4 class="tabset">Visualisation</h4>
 <div id="p-value-histogram-1" class="section level5">
 <h5>P Value histogram</h5>
-<pre class="r"><code>lapply(1:length(apply_treat),
+<pre class="r"><code>lapply(1:length(treat),
        function(x){
-         hist(x = apply_treat[[x]]$table$PValue,
+         hist(x = treat[[x]]$table$PValue,
               breaks = 50,
-              main = paste0(&quot;P-Values treat &quot;, names(apply_treat[x])),
+              main = paste0(&quot;P-Values treat &quot;, names(treat[x])),
               xlab = &quot;P-Value&quot;,
               col = &quot;gray50&quot;)
 
-invisible(dev.print(pdf, paste0(&quot;../2_plots/2_dge/treat_pValue_histogram_&quot;, names(apply_treat[x]), &quot;.svg&quot;)))
+invisible(dev.print(pdf, paste0(&quot;../2_plots/2_dge/treat_pValue_histogram_&quot;, names(treat[x]), &quot;.svg&quot;)))
 })</code></pre>
 <p><img src="figure/dge.Rmd/pValueHistogram_treat-1.png" width="1056" style="display: block; margin: auto;" /><img src="figure/dge.Rmd/pValueHistogram_treat-2.png" width="1056" style="display: block; margin: auto;" /><img src="figure/dge.Rmd/pValueHistogram_treat-3.png" width="1056" style="display: block; margin: auto;" /><img src="figure/dge.Rmd/pValueHistogram_treat-4.png" width="1056" style="display: block; margin: auto;" /><img src="figure/dge.Rmd/pValueHistogram_treat-5.png" width="1056" style="display: block; margin: auto;" /></p>
 <pre><code>[[1]]
@@ -959,11 +1129,11 @@ png
 <h5>Mean-Difference plot</h5>
 <p>The differential expression can initial visualised through <code>plotMD</code> function, where the <code>logFC</code> is plotted against the relative abundance of the gene <code>logCPM</code>. Significant genes with FDR of 0.05 or less are highlighted.</p>
 <p><strong>NOTE: this does not account for minimal <code>logFC</code> value</strong></p>
-<pre class="r"><code>lapply(1:length(dge_treat_unfiltered),
+<pre class="r"><code>lapply(1:length(treat_unfiltered),
        function(x) {
 
          #create data.frame specific for the custome MA plot
-         MAplotData_treat &lt;- dplyr::select(as.data.frame(dge_treat_unfiltered[[x]]), logCPM, logFC, FDR)
+         MAplotData_treat &lt;- dplyr::select(as.data.frame(treat_unfiltered[[x]]), logCPM, logFC, FDR)
          colnames(MAplotData_treat) &lt;- c(&quot;baseMeanLog2&quot;, &quot;log2FoldChange&quot;, &quot;padj&quot;)
 
          #create custom MA plot
@@ -980,7 +1150,7 @@ png
            ylim = c(-8, 8),
            select.top.method = c(&quot;padj&quot;, &quot;fc&quot;),
            main = &quot;MA Plot from GLM-TREAT&quot;,
-           submain = names(dge_treat_unfiltered[x]),
+           submain = names(treat_unfiltered[x]),
            legend = &quot;bottom&quot;,
            legend.title = &quot;Expression&quot;,
            xlab = expression(&quot;log&quot;[2]*&quot;CPM&quot;),
@@ -994,7 +1164,7 @@ png
            ggtheme = ggplot2::theme_minimal())
 
          #save MA plot
-         ggsave(paste0(&quot;MA_plot_treat_&quot;, names(dge_treat_unfiltered[x]), &quot;.svg&quot;),
+         ggsave(paste0(&quot;MA_plot_treat_&quot;, names(treat_unfiltered[x]), &quot;.svg&quot;),
                 plot = MAplot_treat,
                 path = &quot;../2_plots/2_dge/&quot;)
 
@@ -1019,11 +1189,11 @@ png
 <div id="volcano-plot-1" class="section level5">
 <h5>Volcano Plot</h5>
 <p>Here the <code>ggplot</code> function can also be used to illustrate the DE genes significant <code>pValue</code> and <code>logFC</code>. In this instance, the significance is determined as genes with <code>PValue &lt; 0.05</code> <strong>and</strong> <code>abs(logFC)&gt;log(2)</code>.</p>
-<pre class="r"><code>lapply(1:length(dge_treat_unfiltered),
+<pre class="r"><code>lapply(1:length(treat_unfiltered),
        function(x) {
 
          #add an extra column and determine whether the DE genes are significant
-         dge_treat_unfiltered[[x]] &lt;- dge_treat_unfiltered[[x]] %&gt;% as.data.frame() %&gt;%
+         treat_unfiltered[[x]] &lt;- treat_unfiltered[[x]] %&gt;% as.data.frame() %&gt;%
            dplyr::mutate(Expression = case_when
                          (FDR &lt;= 0.05 &amp; logFC &gt;= 1.5 ~ &quot;Up-regulated&quot;,
                           FDR &lt;= 0.05 &amp; logFC &lt;= -1.5 ~ &quot;Down-regulated&quot;,
@@ -1032,11 +1202,11 @@ png
          #adding labels to top genes
          top &lt;- 5
          top_genes_treat &lt;- bind_rows(
-           dge_treat_unfiltered[[x]] %&gt;%
+           treat_unfiltered[[x]] %&gt;%
              filter(Expression == &#39;Up-regulated&#39;) %&gt;%
              arrange(FDR, desc(abs(logFC))) %&gt;%
              head(top),
-           dge_treat_unfiltered[[x]] %&gt;%
+           treat_unfiltered[[x]] %&gt;%
              filter(Expression == &#39;Down-regulated&#39;) %&gt;%
              arrange(FDR, desc(abs(logFC))) %&gt;%
              head(top)
@@ -1044,7 +1214,7 @@ png
          invisible(top_genes_treat %&gt;% as.data.frame())
 
          #generate volcano plot with the allDEgene data.frame
-         volcano_plot_treat &lt;- dge_treat_unfiltered[[x]] %&gt;%
+         volcano_plot_treat &lt;- treat_unfiltered[[x]] %&gt;%
            ggplot(aes(x = logFC,
                       y = -log(FDR, 10))) +
            geom_point(aes(colour = Expression),
@@ -1061,11 +1231,11 @@ png
            scale_color_manual(values = c(&quot;dodgerblue3&quot;, &quot;gray50&quot;, &quot;firebrick3&quot;)) +
            guides(colour = guide_legend(override.aes = list(size=1.5))) +
            labs(title = &quot;Volcano Plot: GLM-TREAT&quot;,
-                subtitle = paste0(names(dge_treat_unfiltered[x])),
+                subtitle = paste0(names(treat_unfiltered[x])),
                 colour = &quot;Expression&quot;)
 
          #save to directory
-         ggsave(paste0(&quot;volcano_plot_treat_&quot;, names(dge_treat_unfiltered[x]), &quot;.svg&quot;),
+         ggsave(paste0(&quot;volcano_plot_treat_&quot;, names(treat_unfiltered[x]), &quot;.svg&quot;),
                 plot = volcano_plot_treat,
                 path = &quot;../2_plots/2_dge/&quot;)
 
@@ -1178,28 +1348,28 @@ loaded via a namespace (and not attached):
  [71] fastmap_1.1.0               yaml_2.2.1                 
  [73] knitr_1.36                  bit64_4.0.5                
  [75] fs_1.5.0                    zip_2.2.0                  
- [77] KEGGREST_1.32.0             xml2_1.3.2                 
- [79] compiler_4.1.0              rstudioapi_0.13            
- [81] curl_4.3.2                  png_0.1-7                  
- [83] ggsignif_0.6.3              reprex_2.0.1               
- [85] statmod_1.4.36              geneplotter_1.70.0         
- [87] bslib_0.3.1                 stringi_1.6.2              
- [89] highr_0.9                   lattice_0.20-44            
- [91] Matrix_1.3-3                vctrs_0.3.8                
- [93] pillar_1.6.4                lifecycle_1.0.1            
- [95] jquerylib_0.1.4             data.table_1.14.0          
- [97] bitops_1.0-7                httpuv_1.6.1               
- [99] GenomicRanges_1.44.0        R6_2.5.1                   
-[101] promises_1.2.0.1            rio_0.5.27                 
-[103] writexl_1.4.0               IRanges_2.26.0             
-[105] assertthat_0.2.1            SummarizedExperiment_1.22.0
-[107] DESeq2_1.32.0               rprojroot_2.0.2            
-[109] withr_2.4.2                 S4Vectors_0.30.0           
-[111] GenomeInfoDbData_1.2.6      parallel_4.1.0             
-[113] hms_1.1.1                   rmarkdown_2.11             
-[115] MatrixGenerics_1.4.3        carData_3.0-4              
-[117] git2r_0.28.0                Biobase_2.52.0             
-[119] lubridate_1.7.10           </code></pre>
+ [77] KEGGREST_1.32.0             whisker_0.4                
+ [79] xml2_1.3.2                  compiler_4.1.0             
+ [81] rstudioapi_0.13             curl_4.3.2                 
+ [83] png_0.1-7                   ggsignif_0.6.3             
+ [85] reprex_2.0.1                statmod_1.4.36             
+ [87] geneplotter_1.70.0          bslib_0.3.1                
+ [89] stringi_1.6.2               highr_0.9                  
+ [91] lattice_0.20-44             Matrix_1.3-3               
+ [93] vctrs_0.3.8                 pillar_1.6.4               
+ [95] lifecycle_1.0.1             jquerylib_0.1.4            
+ [97] data.table_1.14.0           bitops_1.0-7               
+ [99] httpuv_1.6.1                GenomicRanges_1.44.0       
+[101] R6_2.5.1                    promises_1.2.0.1           
+[103] rio_0.5.27                  writexl_1.4.0              
+[105] IRanges_2.26.0              assertthat_0.2.1           
+[107] SummarizedExperiment_1.22.0 DESeq2_1.32.0              
+[109] rprojroot_2.0.2             withr_2.4.2                
+[111] S4Vectors_0.30.0            GenomeInfoDbData_1.2.6     
+[113] parallel_4.1.0              hms_1.1.1                  
+[115] rmarkdown_2.11              MatrixGenerics_1.4.3       
+[117] carData_3.0-4               git2r_0.28.0               
+[119] Biobase_2.52.0              lubridate_1.7.10           </code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1270,28 +1440,28 @@ loaded via a namespace (and not attached):
  [71] fastmap_1.1.0               yaml_2.2.1                 
  [73] knitr_1.36                  bit64_4.0.5                
  [75] fs_1.5.0                    zip_2.2.0                  
- [77] KEGGREST_1.32.0             xml2_1.3.2                 
- [79] compiler_4.1.0              rstudioapi_0.13            
- [81] curl_4.3.2                  png_0.1-7                  
- [83] ggsignif_0.6.3              reprex_2.0.1               
- [85] statmod_1.4.36              geneplotter_1.70.0         
- [87] bslib_0.3.1                 stringi_1.6.2              
- [89] highr_0.9                   lattice_0.20-44            
- [91] Matrix_1.3-3                vctrs_0.3.8                
- [93] pillar_1.6.4                lifecycle_1.0.1            
- [95] jquerylib_0.1.4             data.table_1.14.0          
- [97] bitops_1.0-7                httpuv_1.6.1               
- [99] GenomicRanges_1.44.0        R6_2.5.1                   
-[101] promises_1.2.0.1            rio_0.5.27                 
-[103] writexl_1.4.0               IRanges_2.26.0             
-[105] assertthat_0.2.1            SummarizedExperiment_1.22.0
-[107] DESeq2_1.32.0               rprojroot_2.0.2            
-[109] withr_2.4.2                 S4Vectors_0.30.0           
-[111] GenomeInfoDbData_1.2.6      parallel_4.1.0             
-[113] hms_1.1.1                   rmarkdown_2.11             
-[115] MatrixGenerics_1.4.3        carData_3.0-4              
-[117] git2r_0.28.0                Biobase_2.52.0             
-[119] lubridate_1.7.10           </code></pre>
+ [77] KEGGREST_1.32.0             whisker_0.4                
+ [79] xml2_1.3.2                  compiler_4.1.0             
+ [81] rstudioapi_0.13             curl_4.3.2                 
+ [83] png_0.1-7                   ggsignif_0.6.3             
+ [85] reprex_2.0.1                statmod_1.4.36             
+ [87] geneplotter_1.70.0          bslib_0.3.1                
+ [89] stringi_1.6.2               highr_0.9                  
+ [91] lattice_0.20-44             Matrix_1.3-3               
+ [93] vctrs_0.3.8                 pillar_1.6.4               
+ [95] lifecycle_1.0.1             jquerylib_0.1.4            
+ [97] data.table_1.14.0           bitops_1.0-7               
+ [99] httpuv_1.6.1                GenomicRanges_1.44.0       
+[101] R6_2.5.1                    promises_1.2.0.1           
+[103] rio_0.5.27                  writexl_1.4.0              
+[105] IRanges_2.26.0              assertthat_0.2.1           
+[107] SummarizedExperiment_1.22.0 DESeq2_1.32.0              
+[109] rprojroot_2.0.2             withr_2.4.2                
+[111] S4Vectors_0.30.0            GenomeInfoDbData_1.2.6     
+[113] parallel_4.1.0              hms_1.1.1                  
+[115] rmarkdown_2.11              MatrixGenerics_1.4.3       
+[117] carData_3.0-4               git2r_0.28.0               
+[119] Biobase_2.52.0              lubridate_1.7.10           </code></pre>
 </div>
 </div>
 

@@ -1,0 +1,194 @@
+---
+title: "GO Analysis"
+author: "Ha Tran"
+date: "08/09/2021"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      eval = TRUE,
+                      fig.width = 11)
+```
+
+# Data Setup
+
+### Load Library
+```{r load libraries}
+# working with data
+library(dplyr)
+library(magrittr)
+library(readr)
+library(tibble)
+library(reshape2)
+library(tidyverse)
+
+# Visualisation:
+library(kableExtra)
+library(ggplot2)
+library(grid)
+library(pander)
+library(cowplot)
+
+# Custom ggplot 
+library(ggbiplot)
+library(ggrepel)
+
+# Bioconductor packages:
+library(edgeR)
+library(limma)
+library(Glimma)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+# library(enrichplot)
+library(biomaRt)
+
+```
+
+
+### Import RDS Data
+
+DGElist object containing the raw feature count, sample metadata, and gene metadata, created in the Set Up stage. 
+
+```{r importData, eval=FALSE}
+# load DGElist previously created in the set up
+dge <- readRDS("../0_data/rds_object/dge.rds")
+designMatrix <- readRDS("../0_data/rds_object/designMatrix.rds")
+contrast <- readRDS("../0_data/rds_object/contrastMatrix.rds")
+
+treat <- readRDS("../0_data/rds_object/treat.rds")
+treat_filtered <- readRDS("../0_data/rds_object/treat_filtered.rds")
+
+qlf <- readRDS("../0_data/rds_object/qlf.rds")
+qlf_filtered <- readRDS("../0_data/rds_object/qlf_filtered.rds")
+```
+
+# Gene Ontology (GO) Enrichment Analysis
+
+### Using the `clusterProfiler::enrichGO` package {.tabset}
+
+GO enrichment analysis is performed using the DGE obtained from GLM:QLF + TREAT.
+
+The top 30 most significant GO terms are displayed in relation to their respective comparison
+
+```{r treat_enrichGO}
+comparison_group=colnames(contrast) %>% as.data.frame()
+goSummaries <- url("https://uofabioinformaticshub.github.io/summaries2GO/data/goSummaries.RDS") %>%
+  readRDS() 
+minPath <- 3
+
+# Create list object
+enrichGO_treat=list()
+for (i in 1:ncol(contrast)){
+  #at each iteration, let x = name of each contrast group
+  x=comparison_group[i,]
+  
+  #populate the enrichGo list with all GO terms
+  GOresults <- enrichGO(gene = treat_filtered[[x]]$entrezid,
+                        keyType = "ENTREZID",
+                        ont = "ALL",
+                        OrgDb = org.Hs.eg.db,
+                        pAdjustMethod = "fdr")
+
+  enrichGO_treat[[x]] <- GOresults@result
+  
+  enrichGO_treat[[x]] <- enrichGO_treat[[x]] %>% rownames_to_column("id") %>%
+  left_join(goSummaries) %>%
+  dplyr::filter(shortest_path >= minPath) %>%
+  column_to_rownames("id")
+
+  #filter only significant GO terms
+  # enrichGO_treat_sig[[x]] <- enrichGO_treat[[x]] %>% filter(pvalue <= 0.05)
+  
+}
+
+# save rds object for use in downstream GO and KEGG analysis
+enrichGO_treat %>% saveRDS(file = "../0_data/rds_object/enrichGO_treat.rds")
+# enrichGO_treat_sig %>% saveRDS(file = "../0_data/rds_object/enrichGO_treat_filtered.rds")
+
+#save each unfiltered comparison group in the output directory
+writexl::write_xlsx(x = enrichGO_treat,
+                    path = "../3_output/enrichGO_treat.xlsx")
+  
+
+# GOnetwork_plot <- enrichGO_treat[["CKI-Omt vs CKI"]] %>% as.data.frame() %>%
+#   cnetplot(cex_label_gene = 0.4,
+#            showCategory = nrow(enrichGO_treat))
+# GOnetwork_plot
+
+```
+
+#### Untreated vs CKI
+
+```{r}
+enrichGO_treat[["UT vs CKI"]][1:30,] %>% as.data.frame() %>% dplyr::select(-c("ID", "shortest_path", "longest_path", "terminal_node", "ontology")) %>% kable() %>% kable_styling(bootstrap_options = c("striped", "hover")) %>% scroll_box(height="600px")
+```
+
+#### CKI-Mac vs CKI
+
+```{r}
+enrichGO_treat[["CKI-Mac vs CKI"]][1:30,] %>% as.data.frame() %>% dplyr::select(-c("ID", "shortest_path", "longest_path", "terminal_node", "ontology")) %>% kable() %>% kable_styling(bootstrap_options = c("striped", "hover")) %>% scroll_box(height="600px")
+```
+
+#### CKI-Nme vs CKI
+
+```{r}
+enrichGO_treat[["CKI-Nme vs CKI"]][1:30,] %>% as.data.frame() %>% dplyr::select(-c("ID", "shortest_path", "longest_path", "terminal_node", "ontology")) %>% kable() %>% kable_styling(bootstrap_options = c("striped", "hover")) %>% scroll_box(height="600px")
+```
+
+#### CKI-Omt vs CKI
+
+```{r}
+enrichGO_treat[["CKI-Omt vs CKI"]][1:30,] %>% as.data.frame() %>% dplyr::select(-c("ID", "shortest_path", "longest_path", "terminal_node", "ontology")) %>% kable() %>% kable_styling(bootstrap_options = c("striped", "hover")) %>% scroll_box(height="600px")
+```
+
+#### CKI-Tri vs CKI
+
+```{r}
+enrichGO_treat[["CKI-Tri vs CKI"]][1:30,] %>% as.data.frame() %>% dplyr::select(-c("ID", "shortest_path", "longest_path", "terminal_node", "ontology")) %>% kable() %>% kable_styling(bootstrap_options = c("striped", "hover")) %>% scroll_box(height="600px")
+```
+
+
+
+<!-- ### Using the `edgeR::goanaLRT` package -->
+
+<!-- #### TREAT -->
+
+```{r treatGOana, eval=FALSE}
+# Create list object
+goana_treat=list()
+goana_treat_sig=list()
+for (i in 1:ncol(contrast)){
+  #at each iteration, let x = name of each contrast group
+  x=comparison_group[i,]
+  
+  #populate the goana list with all GO terms
+  goana_treat[[x]] <- edgeR::goana.DGELRT(de = apply_treat[[x]], 
+                                          geneid = apply_treat[[x]]$genes$entrezid, 
+                                          species = "Hs",
+                                          FDR = 0.05, 
+                                          ont = "GOTERM_BP_8")
+  
+  
+  #filter only significant GO terms
+  goana_treat_sig[[x]] <- topGO(results = goana_treat[[x]], number = 30)
+} 
+
+# save rds object for use in downstream GO and KEGG analysis
+goana_treat %>% saveRDS(file = "../0_data/rds_object/goana_treat_unfiltered.rds")
+goana_treat_sig %>% saveRDS(file = "../0_data/rds_object/goana_treat_filtered.rds")
+
+#save each unfiltered comparison group in the output directory
+writexl::write_xlsx(x = goana_treat,
+                    path = "../6_output/3_GO/treat/goana_treat_unfiltered.xlsx")
+
+```
+
+
+# Setup
+```{r sessionInfo}
+sessionInfo()
+
+```
+

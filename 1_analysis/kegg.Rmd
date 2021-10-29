@@ -1,0 +1,328 @@
+---
+title: "KEGG Analysis"
+author: "Ha Tran"
+date: "19/10/2021"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      eval = TRUE,
+                      fig.width = 11)
+```
+
+# Data Setup
+
+### Load Library
+```{r load libraries}
+# working with data
+library(dplyr)
+library(magrittr)
+library(readr)
+library(tibble)
+library(reshape2)
+library(tidyverse)
+library(KEGGREST)
+
+# Visualisation:
+library(kableExtra)
+library(ggplot2)
+library(grid)
+library(pander)
+library(cowplot)
+library(pheatmap)
+
+# Custom ggplot 
+library(ggbiplot)
+library(ggrepel)
+
+# Bioconductor packages:
+library(edgeR)
+library(limma)
+library(Glimma)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(enrichplot)
+library(biomaRt)
+
+# Set ggplot theme
+theme_set(theme_bw())
+
+theme_update(legend.background = element_rect(fill = "transparent", colour = NA),
+      legend.box.background = element_rect(fill = "transparent", colour = NA),
+      
+      panel.background = element_rect(fill = "transparent",colour = NA),
+      plot.background = element_rect(fill = "transparent", colour = NA),
+      
+      plot.title = element_text(color = "gray20", size = 22, angle = 0, hjust = 0, vjust = .5, face = "bold"),
+      axis.text.x = element_text(color = "gray30", size = 12, angle = 0, hjust = .5, vjust = .5, face = "plain"),
+      axis.text.y = element_text(color = "gray30", size = 12, angle = 0, hjust = 1, vjust = 0, face = "plain"),  
+      axis.title.x = element_text(color = "gray30", size = 12, angle = 0, hjust = .5, vjust = 0, face = "plain"),
+      axis.title.y = element_text(color = "gray30", size = 12, angle = 90, hjust = .5, vjust = .5, face = "plain"))
+```
+
+
+### Import RDS Data
+
+DGElist object containing the raw feature count, sample metadata, and gene metadata, created in the Set Up stage. 
+
+```{r importData, eval=FALSE}
+# load DGElist previously created in the set up
+dge <- readRDS("../0_data/rds_object/dge.rds")
+designMatrix <- readRDS("../0_data/rds_object/designMatrix.rds")
+contrast <- readRDS("../0_data/rds_object/contrastMatrix.rds")
+
+treat <- readRDS("../0_data/rds_object/treat.rds")
+# treat <- readRDS("../0_data/rds_object/treat_unfiltered")
+treat_filtered <- readRDS("../0_data/rds_object/treat_filtered.rds")
+
+qlf <- readRDS("../0_data/rds_object/qlf.rds")
+qlf_filtered <- readRDS("../0_data/rds_object/qlf_filtered.rds")
+```
+
+
+# KEGG enrichment analysis
+
+### Using the `clusterProfiler::enrichKEGG` package {.tabset}
+
+KEGG pathway enrichment analysis is performed with GLM:QLF + TREAT.
+
+The top 30 most significant KEGG terms are displayed in relation to their respective comparison. KEGG terms with `qvalue <= 0.2` are considered as significant
+
+```{r treatKEGGanalysis}
+comparison_group=colnames(contrast) %>% as.data.frame()
+
+# Create list object
+enrichKEGG_treat=list()
+enrichKEGG_treat_sig=list()
+for (i in 1:ncol(contrast)){
+  #at each iteration, let x = name of each contrast group
+  x=comparison_group[i,]
+  
+  #populate the enrichGo list with all KEGG terms
+  KEGGresults <- clusterProfiler::enrichKEGG(gene = treat_filtered[[x]]$entrezid,
+                        organism = "hsa",
+                        pvalueCutoff = 0.05,
+                        pAdjustMethod = "fdr") 
+  
+  enrichKEGG_treat[[x]] <- KEGGresults@result %>% as.data.frame()
+ 
+  #filter only significant KEGG terms
+  enrichKEGG_treat_sig[[x]] <- enrichKEGG_treat[[x]] %>% dplyr::filter(qvalue <= 0.2)
+} 
+# save rds object for use in downstream GO and KEGG analysis
+# enrichKEGG_treat %>% saveRDS(file = "../0_data/rds_object/enrichKEGG_treat_unfiltered.rds")
+enrichKEGG_treat_sig %>% saveRDS(file = "../0_data/rds_object/enrichKEGG_treat_filtered.rds")
+
+#save each unfiltered comparison group in the output directory
+writexl::write_xlsx(x = enrichKEGG_treat,
+                    path = "../3_output/enrichKEGG_treat_unfiltered.xlsx")
+
+```
+
+#### UT vs CKI
+
+```{r}
+enrichKEGG_treat_sig[["UT vs CKI"]][1:12,] %>% as.data.frame() %>% dplyr::select(-c("ID")) %>% kable() %>% kable_styling(bootstrap_options = c("striped", "hover")) %>% scroll_box(height="600px")
+```
+
+#### CKI-Mac vs CKI
+
+```{r}
+enrichKEGG_treat_sig[["CKI-Mac vs CKI"]][1:30,] %>% as.data.frame() %>% dplyr::select(-c("ID")) %>% kable() %>% kable_styling(bootstrap_options = c("striped", "hover")) %>% scroll_box(height="600px")
+```
+
+#### CKI-Nme vs CKI
+
+```{r}
+enrichKEGG_treat_sig[["CKI-Nme vs CKI"]][1:30,] %>% as.data.frame() %>% dplyr::select(-c("ID")) %>% kable() %>% kable_styling(bootstrap_options = c("striped", "hover")) %>% scroll_box(height="600px")
+```
+
+#### CKI-Omt vs CKI
+
+```{r}
+enrichKEGG_treat_sig[["CKI-Omt vs CKI"]][1:30,] %>% as.data.frame() %>% dplyr::select(-c("ID")) %>% kable() %>% kable_styling(bootstrap_options = c("striped", "hover")) %>% scroll_box(height="600px")
+```
+
+#### CKI-Tri vs CKI
+
+```{r}
+enrichKEGG_treat_sig[["CKI-Tri vs CKI"]][1:30,] %>% as.data.frame() %>% dplyr::select(-c("ID")) %>% kable() %>% kable_styling(bootstrap_options = c("striped", "hover")) %>% scroll_box(height="600px")
+```
+
+<!-- #### QLF -->
+
+<!-- not working -->
+
+```{r qlfKEGGanalysis, eval=FALSE}
+#why is CKI vs Omt not significant at all?
+comparison_group=colnames(contrast) %>% as.data.frame()
+
+# Create list object
+enrichKEGG_qlf=list()
+enrichKEGG_qlf_sig=list()
+for (i in 1:ncol(contrast)){
+  #at each iteration, let x = name of each contrast group
+  x=comparison_group[i,]
+  
+  #populate the enrichGo list with all KEGG terms
+  KEGGresults <- clusterProfiler::enrichKEGG(gene = qlf_filtered[[x]]$entrezid,
+                        organism = "hsa",
+                        pAdjustMethod = "fdr") 
+  
+  enrichKEGG_qlf[[x]] <- KEGGresults@result %>% as.data.frame()
+ 
+  #filter only significant KEGG terms
+  enrichKEGG_qlf_sig[[x]] <- enrichKEGG_qlf[[x]] %>% filter(pvalue <= 0.05)
+} 
+# save rds object for use in downstream GO and KEGG analysis
+enrichKEGG_qlf %>% saveRDS(file = "../0_data/rds_object/enrichKEGG_qlf_unfiltered.rds")
+enrichKEGG_qlf_sig %>% saveRDS(file = "../0_data/rds_object/enrichKEGG_qlf_filtered.rds")
+
+#save each unfiltered comparison group in the output directory
+writexl::write_xlsx(x = enrichKEGG_qlf,
+                    path = "../3_output/enrichKEGG_qlf_unfiltered.xlsx")
+
+```
+
+<!-- ### Using the `edgeR::keggaLRT` package -->
+
+<!-- #### TREAT -->
+
+```{r treatKEGGA, eval=FALSE}
+# Create list object
+kegga_treat=list()
+kegga_treat_sig=list()
+for (i in 1:ncol(contrast)){
+  #at each iteration, let x = name of each contrast group
+  x=comparison_group[i,]
+  
+  #populate the kegga list with all KEGG terms
+  kegga_treat[[x]] <- edgeR::kegga.DGELRT(de = treat[[x]], 
+                                          geneid = treat[[x]]$genes$entrezid, 
+                                          species = "Hs",
+                                          trend = TRUE,
+                                          FDR = 0.05)
+  
+  #filter only significant KEGG terms
+  kegga_treat_sig[[x]] <- topKEGG(results = kegga_treat[[x]], number = 30)
+} 
+
+# save rds object for use in downstream GO and KEGG analysis
+kegga_treat %>% saveRDS(file = "../0_data/rds_object/kegga_treat_unfiltered.rds")
+kegga_treat_sig %>% saveRDS(file = "../0_data/rds_object/kegga_treat_filtered.rds")
+
+#save each unfiltered comparison group in the output directory
+writexl::write_xlsx(x = kegga_treat,
+                    path = "../3_output/kegga_treat_unfiltered.xlsx")
+
+```
+
+<!-- #### QLF -->
+
+```{r qlfKegga, eval=FALSE}
+# Create list object
+kegga_qlf=list()
+kegga_qlf_sig=list()
+for (i in 1:ncol(contrast)){
+  #at each iteration, let x = name of each contrast group
+  x=comparison_group[i,]
+  
+  #populate the kegga list with all KEGG terms
+  kegga_qlf[[x]] <- edgeR::kegga.DGELRT(de = qlf[[x]], 
+                                          geneid = qlf[[x]]$genes$entrezid, 
+                                          species = "Hs",
+                                          trend = TRUE,
+                                          FDR = 0.05)
+  
+  #filter only significant KEGG terms
+  kegga_qlf_sig[[x]] <- topKEGG(results = kegga_qlf[[x]], number = 30)
+} 
+
+# save rds object for use in downstream GO and KEGG analysis
+kegga_qlf %>% saveRDS(file = "../0_data/rds_object/kegga_qlf_unfiltered.rds")
+kegga_qlf_sig %>% saveRDS(file = "../0_data/rds_object/kegga_qlf_filtered.rds")
+
+#save each unfiltered comparison group in the output directory
+writexl::write_xlsx(x = kegga_qlf,
+                    path = "../3_output/kegga_qlf_unfiltered.xlsx")
+```
+
+# Visualisation
+
+## Heatmap
+
+```{r coolmap, eval=FALSE, include=FALSE}
+logCPM <- cpm(dge, prior.count=2, log=TRUE)
+rownames(logCPM) <- dge$genes$gene
+colnames(logCPM) <- paste(dge$samples$sample_group, 1:3, sep="-")
+
+o <- order(treat$CKIvsOMT$table$PValue)
+logCPM <- logCPM[o[1:30],]
+
+coolmap(x = p53_treat_UTvsCKI_test, 
+        margins=c(7,7), lhei=c(1,5), lwid=c(1,3))
+```
+
+
+```{r}
+kegg_id <- "hsa04657"
+kegg_pathway <- KEGGREST::keggGet(kegg_id)
+kegg_pathway_name <- kegg_pathway[[1]]$NAME
+
+entrezID=list()
+matrix=list()
+
+for (i in 1:ncol(contrast)){
+  #at each iteration, let x = name of each contrast group
+  x=comparison_group[i,]
+  
+  entrezID[[x]] <- enrichKEGG_treat_sig[[x]][,c("ID", "geneID")] %>% as.data.frame()
+  entrezID[[x]] <- entrezID[[x]][kegg_id,"geneID"] %>% as.data.frame()
+  entrezID[[x]] <- separate_rows(entrezID[[x]],.,sep = "/")
+  colnames(entrezID[[x]]) <- "entrezid"
+  
+  match <- treat_filtered[[x]]$entrezid %in% entrezID[[x]]$entrezid
+
+  matrix[[x]] <- treat_filtered[[x]][match, c("gene_name", "logFC")]
+}
+
+matrix_merged <- matrix$`UT vs CKI` %>% 
+  left_join(matrix$`CKI-Mac vs CKI`, by = "gene_name") %>% 
+  left_join(matrix$`CKI-Nme vs CKI`, by = "gene_name") %>% 
+  left_join(matrix$`CKI-Omt vs CKI`, by = "gene_name") %>% 
+  left_join(matrix$`CKI-Tri vs CKI`, by = "gene_name") %>% 
+  column_to_rownames("gene_name")
+
+colnames(matrix_merged) <- c("UT\nvs\nCKI", "CKI-Mac\nvs\nCKI", "CKI-Nme\nvs\nCKI", "CKI-Omt\nvs\nCKI", "CKI-Tri\nvs\nCKI")
+
+
+
+my_palette <- colorRampPalette(c("dodgerblue3", "white", "firebrick3"))(n = 201)
+
+pheatmap(mat = matrix_merged,
+         clustering_distance_rows = "euclidean",
+         treeheight_row = 100,
+         legend_labels = "logFC",
+         main = paste0("Heatmap of ", kegg_pathway_name),
+         fontsize = 16,
+         fontsize_row = 14,
+         fontsize_number = 10,
+         fontsize_col = 14,
+         angle_col = 0,
+         border_color = "gray60",
+         color = my_palette)
+
+
+
+```
+
+
+
+# Setup
+```{r sessionInfo}
+sessionInfo()
+
+```
+

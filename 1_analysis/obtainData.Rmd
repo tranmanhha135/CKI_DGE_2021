@@ -1,0 +1,19 @@
+---
+title: "Obtain Data"
+author: "Ha Tran"
+date: "30/10/2021"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+This document simply provides the bash code used for obtaining and manipulating the raw feature count matrix prior to importing into R studio.
+
+## Basic Script
+
+```{r}
+cat(readLines("../0_data/obtain_data.sh"), sep = "\n")
+```

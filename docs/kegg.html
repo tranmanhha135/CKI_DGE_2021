@@ -1,0 +1,5441 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Ha Tran" />
+
+
+<title>KEGG Analysis</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">CKI_DGE</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Setting Up
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="obtainData.html">Obtaining Data</a>
+    </li>
+    <li>
+      <a href="setUp.html">QC and Pre-processing</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Analysis
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="dge.html">DE Analysis</a>
+    </li>
+    <li class="dropdown-header">GO Term Enrichment Analysis</li>
+    <li class="dropdown-header">KEGG Pathway Enrichment Analysis</li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">KEGG Analysis</h1>
+<h4 class="author">Ha Tran</h4>
+<h4 class="date">19/10/2021</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2021-10-30
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 2
+</p>
+<p>
+<strong>Knit directory:</strong> <code>01_CKI_DGE/1_analysis/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The R Markdown is untracked by Git. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongobjectspresent"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>Environment:</strong> objects present </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongobjectspresent" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+The global environment had objects present when the code in the R Markdown file was run. These objects can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment. Use <code>wflow_publish</code> or <code>wflow_build</code> to ensure that the code is always run in an empty environment.
+</p>
+<p>
+The following objects were defined in the global environment when these results were created:
+</p>
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th style="text-align:left;">
+Name
+</th>
+<th style="text-align:left;">
+Class
+</th>
+<th style="text-align:left;">
+Size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+comparison_group
+</td>
+<td style="text-align:left;">
+data.frame
+</td>
+<td style="text-align:left;">
+1.1 Kb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+contrast
+</td>
+<td style="text-align:left;">
+matrix;array
+</td>
+<td style="text-align:left;">
+1.7 Kb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+designMatrix
+</td>
+<td style="text-align:left;">
+matrix;array
+</td>
+<td style="text-align:left;">
+3.5 Kb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dge
+</td>
+<td style="text-align:left;">
+DGEList
+</td>
+<td style="text-align:left;">
+12 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+enrichGO_treat
+</td>
+<td style="text-align:left;">
+list
+</td>
+<td style="text-align:left;">
+742 Kb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+estimateDispersion
+</td>
+<td style="text-align:left;">
+DGEList
+</td>
+<td style="text-align:left;">
+12.5 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+fit_GLM_qlf
+</td>
+<td style="text-align:left;">
+DGEGLM
+</td>
+<td style="text-align:left;">
+20.6 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+GOresults
+</td>
+<td style="text-align:left;">
+enrichResult
+</td>
+<td style="text-align:left;">
+123.8 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+goSummaries
+</td>
+<td style="text-align:left;">
+tbl_df;tbl;data.frame
+</td>
+<td style="text-align:left;">
+13.4 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i
+</td>
+<td style="text-align:left;">
+integer
+</td>
+<td style="text-align:left;">
+56 bytes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+minPath
+</td>
+<td style="text-align:left;">
+numeric
+</td>
+<td style="text-align:left;">
+56 bytes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+qlf
+</td>
+<td style="text-align:left;">
+list
+</td>
+<td style="text-align:left;">
+101 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+qlf_decideTest
+</td>
+<td style="text-align:left;">
+list
+</td>
+<td style="text-align:left;">
+5.6 Kb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+qlf_filtered
+</td>
+<td style="text-align:left;">
+list
+</td>
+<td style="text-align:left;">
+37.5 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+qlf_unfiltered
+</td>
+<td style="text-align:left;">
+list
+</td>
+<td style="text-align:left;">
+49.2 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+treat
+</td>
+<td style="text-align:left;">
+list
+</td>
+<td style="text-align:left;">
+96.1 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+treat_decideTest
+</td>
+<td style="text-align:left;">
+list
+</td>
+<td style="text-align:left;">
+5.6 Kb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+treat_filtered
+</td>
+<td style="text-align:left;">
+list
+</td>
+<td style="text-align:left;">
+1.7 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+treat_unfiltered
+</td>
+<td style="text-align:left;">
+list
+</td>
+<td style="text-align:left;">
+49.2 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+x
+</td>
+<td style="text-align:left;">
+character
+</td>
+<td style="text-align:left;">
+120 bytes
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed12345code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(12345)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed12345code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(12345)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree67e2d670268223ebb4a53e199040aa1830496a7ftargetblank67e2d67a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/67e2d670268223ebb4a53e199040aa1830496a7f" target="_blank">67e2d67</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree67e2d670268223ebb4a53e199040aa1830496a7ftargetblank67e2d67a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/67e2d670268223ebb4a53e199040aa1830496a7f" target="_blank">67e2d67</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    2_plots/3_go/
+    Ignored:    2_plots/4_kegg/
+
+Untracked files:
+    Untracked:  0_data/rds_object/dge_treat_unfiltered.rds
+    Untracked:  0_data/rds_object/enrichGO_treat.rds
+    Untracked:  0_data/rds_object/enrichKEGG_treat_filtered.rds
+    Untracked:  0_data/rds_object/treat.rds
+    Untracked:  0_data/rds_object/treat_filtered.rds
+    Untracked:  0_data/rds_object/treat_unfiltered.rds
+    Untracked:  1_analysis/about.Rmd
+    Untracked:  1_analysis/about.html
+    Untracked:  1_analysis/dge.html
+    Untracked:  1_analysis/go.Rmd
+    Untracked:  1_analysis/go.html
+    Untracked:  1_analysis/index.html
+    Untracked:  1_analysis/kegg.Rmd
+    Untracked:  1_analysis/obtainData.Rmd
+    Untracked:  1_analysis/setUp_files/
+    Untracked:  1_analysis/site_libs/
+    Untracked:  3_output/enrichGO_treat.xlsx
+    Untracked:  3_output/enrichKEGG_treat_unfiltered.xlsx
+
+Unstaged changes:
+    Deleted:    0_data/rds_object/apply_treat.rds
+    Deleted:    0_data/rds_object/dge_treat_filtered.rds
+    Modified:   1_analysis/_site.yml
+    Modified:   1_analysis/dge.Rmd
+    Modified:   1_analysis/figure/dge.Rmd/MAplotCustom_qlf-1.png
+    Modified:   1_analysis/figure/dge.Rmd/MAplotCustom_qlf-2.png
+    Modified:   1_analysis/figure/dge.Rmd/MAplotCustom_qlf-3.png
+    Modified:   1_analysis/figure/dge.Rmd/MAplotCustom_qlf-4.png
+    Modified:   1_analysis/figure/dge.Rmd/MAplotCustom_qlf-5.png
+    Modified:   1_analysis/figure/dge.Rmd/volcanoPlot_qlf-1.png
+    Modified:   1_analysis/figure/dge.Rmd/volcanoPlot_qlf-2.png
+    Modified:   1_analysis/figure/dge.Rmd/volcanoPlot_qlf-3.png
+    Modified:   1_analysis/figure/dge.Rmd/volcanoPlot_qlf-4.png
+    Modified:   1_analysis/figure/dge.Rmd/volcanoPlot_qlf-5.png
+    Modified:   1_analysis/figure/dge.Rmd/volcanoPlot_treat-1.png
+    Modified:   1_analysis/figure/dge.Rmd/volcanoPlot_treat-2.png
+    Modified:   1_analysis/figure/dge.Rmd/volcanoPlot_treat-3.png
+    Modified:   1_analysis/figure/dge.Rmd/volcanoPlot_treat-4.png
+    Modified:   1_analysis/figure/dge.Rmd/volcanoPlot_treat-5.png
+    Deleted:    1_analysis/figure/setUp.Rmd/MDSplot-1.png
+    Deleted:    1_analysis/figure/setUp.Rmd/afterFiltering-1.png
+    Deleted:    1_analysis/figure/setUp.Rmd/libraryChecks-1.png
+    Deleted:    1_analysis/figure/setUp.Rmd/pcaSampleGroup-1.png
+    Deleted:    1_analysis/figure/setUp.Rmd/pcaSampleType-1.png
+    Deleted:    1_analysis/figure/setUp.Rmd/visualisingNormalisation-1.png
+    Modified:   2_plots/2_dge/estimate_dispersion.svg
+    Modified:   2_plots/2_dge/qlf_dispersion.svg
+    Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Mac vs CKI.svg
+    Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Nme vs CKI.svg
+    Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Omt vs CKI.svg
+    Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Tri vs CKI.svg
+    Modified:   2_plots/2_dge/qlf_pValue_histogram_UT vs CKI.svg
+    Modified:   2_plots/2_dge/treat_pValue_histogram_CKI-Mac vs CKI.svg
+    Modified:   2_plots/2_dge/treat_pValue_histogram_CKI-Nme vs CKI.svg
+    Modified:   2_plots/2_dge/treat_pValue_histogram_CKI-Omt vs CKI.svg
+    Modified:   2_plots/2_dge/treat_pValue_histogram_CKI-Tri vs CKI.svg
+    Modified:   2_plots/2_dge/treat_pValue_histogram_UT vs CKI.svg
+    Modified:   2_plots/2_dge/volcano_plot_treat_CKI-Mac vs CKI.svg
+    Modified:   2_plots/2_dge/volcano_plot_treat_CKI-Nme vs CKI.svg
+    Modified:   2_plots/2_dge/volcano_plot_treat_CKI-Omt vs CKI.svg
+    Modified:   2_plots/2_dge/volcano_plot_treat_CKI-Tri vs CKI.svg
+    Modified:   2_plots/2_dge/volcano_plot_treat_UT vs CKI.svg
+    Modified:   3_output/qlf_filtered.xlsx
+    Modified:   3_output/treat_filtered.xlsx
+    Deleted:    CKI_DGE.Rproj
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+<p>
+There are no past versions. Publish this analysis with <code>wflow_publish()</code> to start tracking its development.
+</p>
+<hr>
+</div>
+</div>
+</div>
+<div id="data-setup" class="section level1">
+<h1>Data Setup</h1>
+<div id="load-library" class="section level3">
+<h3>Load Library</h3>
+<pre class="r"><code># working with data
+library(dplyr)
+library(magrittr)
+library(readr)
+library(tibble)
+library(reshape2)
+library(tidyverse)
+library(KEGGREST)
+
+# Visualisation:
+library(kableExtra)
+library(ggplot2)
+library(grid)
+library(pander)
+library(cowplot)
+library(pheatmap)
+
+# Custom ggplot 
+library(ggbiplot)
+library(ggrepel)
+
+# Bioconductor packages:
+library(edgeR)
+library(limma)
+library(Glimma)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+library(enrichplot)
+library(biomaRt)
+
+# Set ggplot theme
+theme_set(theme_bw())
+
+theme_update(legend.background = element_rect(fill = &quot;transparent&quot;, colour = NA),
+      legend.box.background = element_rect(fill = &quot;transparent&quot;, colour = NA),
+      
+      panel.background = element_rect(fill = &quot;transparent&quot;,colour = NA),
+      plot.background = element_rect(fill = &quot;transparent&quot;, colour = NA),
+      
+      plot.title = element_text(color = &quot;gray20&quot;, size = 22, angle = 0, hjust = 0, vjust = .5, face = &quot;bold&quot;),
+      axis.text.x = element_text(color = &quot;gray30&quot;, size = 12, angle = 0, hjust = .5, vjust = .5, face = &quot;plain&quot;),
+      axis.text.y = element_text(color = &quot;gray30&quot;, size = 12, angle = 0, hjust = 1, vjust = 0, face = &quot;plain&quot;),  
+      axis.title.x = element_text(color = &quot;gray30&quot;, size = 12, angle = 0, hjust = .5, vjust = 0, face = &quot;plain&quot;),
+      axis.title.y = element_text(color = &quot;gray30&quot;, size = 12, angle = 90, hjust = .5, vjust = .5, face = &quot;plain&quot;))</code></pre>
+</div>
+<div id="import-rds-data" class="section level3">
+<h3>Import RDS Data</h3>
+<p>DGElist object containing the raw feature count, sample metadata, and gene metadata, created in the Set Up stage.</p>
+<pre class="r"><code># load DGElist previously created in the set up
+dge &lt;- readRDS(&quot;../0_data/rds_object/dge.rds&quot;)
+designMatrix &lt;- readRDS(&quot;../0_data/rds_object/designMatrix.rds&quot;)
+contrast &lt;- readRDS(&quot;../0_data/rds_object/contrastMatrix.rds&quot;)
+
+treat &lt;- readRDS(&quot;../0_data/rds_object/treat.rds&quot;)
+# treat &lt;- readRDS(&quot;../0_data/rds_object/treat_unfiltered&quot;)
+treat_filtered &lt;- readRDS(&quot;../0_data/rds_object/treat_filtered.rds&quot;)
+
+qlf &lt;- readRDS(&quot;../0_data/rds_object/qlf.rds&quot;)
+qlf_filtered &lt;- readRDS(&quot;../0_data/rds_object/qlf_filtered.rds&quot;)</code></pre>
+</div>
+</div>
+<div id="kegg-enrichment-analysis" class="section level1">
+<h1>KEGG enrichment analysis</h1>
+<div id="using-the-clusterprofilerenrichkegg-package" class="section level3 tabset">
+<h3 class="tabset">Using the <code>clusterProfiler::enrichKEGG</code> package</h3>
+<p>KEGG pathway enrichment analysis is performed with GLM:QLF + TREAT.</p>
+<p>The top 30 most significant KEGG terms are displayed in relation to their respective comparison. KEGG terms with <code>qvalue &lt;= 0.2</code> are considered as significant</p>
+<pre class="r"><code>comparison_group=colnames(contrast) %&gt;% as.data.frame()
+
+# Create list object
+enrichKEGG_treat=list()
+enrichKEGG_treat_sig=list()
+for (i in 1:ncol(contrast)){
+  #at each iteration, let x = name of each contrast group
+  x=comparison_group[i,]
+  
+  #populate the enrichGo list with all KEGG terms
+  KEGGresults &lt;- clusterProfiler::enrichKEGG(gene = treat_filtered[[x]]$entrezid,
+                        organism = &quot;hsa&quot;,
+                        pvalueCutoff = 0.05,
+                        pAdjustMethod = &quot;fdr&quot;) 
+  
+  enrichKEGG_treat[[x]] &lt;- KEGGresults@result %&gt;% as.data.frame()
+ 
+  #filter only significant KEGG terms
+  enrichKEGG_treat_sig[[x]] &lt;- enrichKEGG_treat[[x]] %&gt;% dplyr::filter(qvalue &lt;= 0.2)
+} 
+# save rds object for use in downstream GO and KEGG analysis
+# enrichKEGG_treat %&gt;% saveRDS(file = &quot;../0_data/rds_object/enrichKEGG_treat_unfiltered.rds&quot;)
+enrichKEGG_treat_sig %&gt;% saveRDS(file = &quot;../0_data/rds_object/enrichKEGG_treat_filtered.rds&quot;)
+
+#save each unfiltered comparison group in the output directory
+writexl::write_xlsx(x = enrichKEGG_treat,
+                    path = &quot;../3_output/enrichKEGG_treat_unfiltered.xlsx&quot;)</code></pre>
+<div id="ut-vs-cki" class="section level4">
+<h4>UT vs CKI</h4>
+<pre class="r"><code>enrichKEGG_treat_sig[[&quot;UT vs CKI&quot;]][1:12,] %&gt;% as.data.frame() %&gt;% dplyr::select(-c(&quot;ID&quot;)) %&gt;% kable() %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;% scroll_box(height=&quot;600px&quot;)</code></pre>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:600px; ">
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Description
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+GeneRatio
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+BgRatio
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+pvalue
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+p.adjust
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+qvalue
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+geneID
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+hsa00140
+</td>
+<td style="text-align:left;">
+Steroid hormone biosynthesis
+</td>
+<td style="text-align:left;">
+6/95
+</td>
+<td style="text-align:left;">
+61/8102
+</td>
+<td style="text-align:right;">
+0.0000732
+</td>
+<td style="text-align:right;">
+0.0150827
+</td>
+<td style="text-align:right;">
+0.0134874
+</td>
+<td style="text-align:left;">
+1543/1545/8644/1645/3290/1646
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05323
+</td>
+<td style="text-align:left;">
+Rheumatoid arthritis
+</td>
+<td style="text-align:left;">
+6/95
+</td>
+<td style="text-align:left;">
+93/8102
+</td>
+<td style="text-align:right;">
+0.0007441
+</td>
+<td style="text-align:right;">
+0.0355556
+</td>
+<td style="text-align:right;">
+0.0317947
+</td>
+<td style="text-align:left;">
+7042/4312/2919/3569/3576/2920
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04657
+</td>
+<td style="text-align:left;">
+IL-17 signaling pathway
+</td>
+<td style="text-align:left;">
+6/95
+</td>
+<td style="text-align:left;">
+94/8102
+</td>
+<td style="text-align:right;">
+0.0007874
+</td>
+<td style="text-align:right;">
+0.0355556
+</td>
+<td style="text-align:right;">
+0.0317947
+</td>
+<td style="text-align:left;">
+4312/2919/3569/3934/3576/2920
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05417
+</td>
+<td style="text-align:left;">
+Lipid and atherosclerosis
+</td>
+<td style="text-align:left;">
+9/95
+</td>
+<td style="text-align:left;">
+215/8102
+</td>
+<td style="text-align:right;">
+0.0008975
+</td>
+<td style="text-align:right;">
+0.0355556
+</td>
+<td style="text-align:right;">
+0.0317947
+</td>
+<td style="text-align:left;">
+1543/19/4312/2919/3569/7157/9619/3576/2920
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04061
+</td>
+<td style="text-align:left;">
+Viral protein interaction with cytokine and cytokine receptor
+</td>
+<td style="text-align:left;">
+6/95
+</td>
+<td style="text-align:left;">
+100/8102
+</td>
+<td style="text-align:right;">
+0.0010898
+</td>
+<td style="text-align:right;">
+0.0355556
+</td>
+<td style="text-align:right;">
+0.0317947
+</td>
+<td style="text-align:left;">
+2919/3569/3576/2920/7133/8794
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04933
+</td>
+<td style="text-align:left;">
+AGE-RAGE signaling pathway in diabetic complications
+</td>
+<td style="text-align:left;">
+6/95
+</td>
+<td style="text-align:left;">
+100/8102
+</td>
+<td style="text-align:right;">
+0.0010898
+</td>
+<td style="text-align:right;">
+0.0355556
+</td>
+<td style="text-align:right;">
+0.0317947
+</td>
+<td style="text-align:left;">
+7042/3569/7056/2335/3576/1958
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05146
+</td>
+<td style="text-align:left;">
+Amoebiasis
+</td>
+<td style="text-align:left;">
+6/95
+</td>
+<td style="text-align:left;">
+102/8102
+</td>
+<td style="text-align:right;">
+0.0012082
+</td>
+<td style="text-align:right;">
+0.0355556
+</td>
+<td style="text-align:right;">
+0.0317947
+</td>
+<td style="text-align:left;">
+7042/2919/3569/2335/3576/2920
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa00380
+</td>
+<td style="text-align:left;">
+Tryptophan metabolism
+</td>
+<td style="text-align:left;">
+4/95
+</td>
+<td style="text-align:left;">
+42/8102
+</td>
+<td style="text-align:right;">
+0.0014118
+</td>
+<td style="text-align:right;">
+0.0363546
+</td>
+<td style="text-align:right;">
+0.0325092
+</td>
+<td style="text-align:left;">
+1543/1545/51166/224
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa00980
+</td>
+<td style="text-align:left;">
+Metabolism of xenobiotics by cytochrome P450
+</td>
+<td style="text-align:left;">
+5/95
+</td>
+<td style="text-align:left;">
+78/8102
+</td>
+<td style="text-align:right;">
+0.0021434
+</td>
+<td style="text-align:right;">
+0.0490605
+</td>
+<td style="text-align:right;">
+0.0438712
+</td>
+<td style="text-align:left;">
+1543/1545/1645/3290/218
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05134
+</td>
+<td style="text-align:left;">
+Legionellosis
+</td>
+<td style="text-align:left;">
+4/95
+</td>
+<td style="text-align:left;">
+57/8102
+</td>
+<td style="text-align:right;">
+0.0043592
+</td>
+<td style="text-align:right;">
+0.0897986
+</td>
+<td style="text-align:right;">
+0.0803002
+</td>
+<td style="text-align:left;">
+2919/3569/3576/2920
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05204
+</td>
+<td style="text-align:left;">
+Chemical carcinogenesis - DNA adducts
+</td>
+<td style="text-align:left;">
+4/95
+</td>
+<td style="text-align:left;">
+69/8102
+</td>
+<td style="text-align:right;">
+0.0085770
+</td>
+<td style="text-align:right;">
+0.1606230
+</td>
+<td style="text-align:right;">
+0.1436333
+</td>
+<td style="text-align:left;">
+1543/1545/3290/1646
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05219
+</td>
+<td style="text-align:left;">
+Bladder cancer
+</td>
+<td style="text-align:left;">
+3/95
+</td>
+<td style="text-align:left;">
+41/8102
+</td>
+<td style="text-align:right;">
+0.0120659
+</td>
+<td style="text-align:right;">
+0.2071317
+</td>
+<td style="text-align:right;">
+0.1852225
+</td>
+<td style="text-align:left;">
+4312/7157/3576
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cki-mac-vs-cki" class="section level4">
+<h4>CKI-Mac vs CKI</h4>
+<pre class="r"><code>enrichKEGG_treat_sig[[&quot;CKI-Mac vs CKI&quot;]][1:30,] %&gt;% as.data.frame() %&gt;% dplyr::select(-c(&quot;ID&quot;)) %&gt;% kable() %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;% scroll_box(height=&quot;600px&quot;)</code></pre>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:600px; ">
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Description
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+GeneRatio
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+BgRatio
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+pvalue
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+p.adjust
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+qvalue
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+geneID
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+hsa04657
+</td>
+<td style="text-align:left;">
+IL-17 signaling pathway
+</td>
+<td style="text-align:left;">
+14/160
+</td>
+<td style="text-align:left;">
+94/8102
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000009
+</td>
+<td style="text-align:right;">
+0.0000008
+</td>
+<td style="text-align:left;">
+3569/2919/3553/5743/2921/1437/1440/3934/2920/6364/3576/7128/4314/7184
+</td>
+<td style="text-align:right;">
+14
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04668
+</td>
+<td style="text-align:left;">
+TNF signaling pathway
+</td>
+<td style="text-align:left;">
+13/160
+</td>
+<td style="text-align:left;">
+112/8102
+</td>
+<td style="text-align:right;">
+0.0000003
+</td>
+<td style="text-align:right;">
+0.0000342
+</td>
+<td style="text-align:right;">
+0.0000301
+</td>
+<td style="text-align:left;">
+3569/2919/3553/5743/2921/1437/2920/6364/7128/4314/9586/9021/7185
+</td>
+<td style="text-align:right;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05323
+</td>
+<td style="text-align:left;">
+Rheumatoid arthritis
+</td>
+<td style="text-align:left;">
+11/160
+</td>
+<td style="text-align:left;">
+93/8102
+</td>
+<td style="text-align:right;">
+0.0000019
+</td>
+<td style="text-align:right;">
+0.0001627
+</td>
+<td style="text-align:right;">
+0.0001432
+</td>
+<td style="text-align:left;">
+3569/2919/3553/2921/1437/3552/2920/6364/3576/245972/4314
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05146
+</td>
+<td style="text-align:left;">
+Amoebiasis
+</td>
+<td style="text-align:left;">
+11/160
+</td>
+<td style="text-align:left;">
+102/8102
+</td>
+<td style="text-align:right;">
+0.0000048
+</td>
+<td style="text-align:right;">
+0.0002451
+</td>
+<td style="text-align:right;">
+0.0002157
+</td>
+<td style="text-align:left;">
+3569/2919/3553/2921/1437/2920/3576/3911/284217/929/2774
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05417
+</td>
+<td style="text-align:left;">
+Lipid and atherosclerosis
+</td>
+<td style="text-align:left;">
+16/160
+</td>
+<td style="text-align:left;">
+215/8102
+</td>
+<td style="text-align:right;">
+0.0000048
+</td>
+<td style="text-align:right;">
+0.0002451
+</td>
+<td style="text-align:right;">
+0.0002157
+</td>
+<td style="text-align:left;">
+3569/2919/3553/2921/6648/19/1543/2920/3576/4688/3309/4314/1649/929/7184/114548
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04060
+</td>
+<td style="text-align:left;">
+Cytokine-cytokine receptor interaction
+</td>
+<td style="text-align:left;">
+18/160
+</td>
+<td style="text-align:left;">
+295/8102
+</td>
+<td style="text-align:right;">
+0.0000191
+</td>
+<td style="text-align:right;">
+0.0008148
+</td>
+<td style="text-align:right;">
+0.0007169
+</td>
+<td style="text-align:left;">
+3569/2919/3553/2921/1437/1440/3552/9966/2920/6364/3576/652/26525/11009/3570/4803/3624/8794
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04064
+</td>
+<td style="text-align:left;">
+NF-kappa B signaling pathway
+</td>
+<td style="text-align:left;">
+10/160
+</td>
+<td style="text-align:left;">
+104/8102
+</td>
+<td style="text-align:right;">
+0.0000361
+</td>
+<td style="text-align:right;">
+0.0013196
+</td>
+<td style="text-align:right;">
+0.0011612
+</td>
+<td style="text-align:left;">
+2919/3553/5743/2921/2920/3576/7128/29775/929/7185
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05202
+</td>
+<td style="text-align:left;">
+Transcriptional misregulation in cancer
+</td>
+<td style="text-align:left;">
+13/160
+</td>
+<td style="text-align:left;">
+192/8102
+</td>
+<td style="text-align:right;">
+0.0001029
+</td>
+<td style="text-align:right;">
+0.0032916
+</td>
+<td style="text-align:right;">
+0.0028964
+</td>
+<td style="text-align:left;">
+3569/1437/3576/64332/8464/3486/4314/1649/929/894/7185/26471/7490
+</td>
+<td style="text-align:right;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05134
+</td>
+<td style="text-align:left;">
+Legionellosis
+</td>
+<td style="text-align:left;">
+7/160
+</td>
+<td style="text-align:left;">
+57/8102
+</td>
+<td style="text-align:right;">
+0.0001185
+</td>
+<td style="text-align:right;">
+0.0033705
+</td>
+<td style="text-align:right;">
+0.0029658
+</td>
+<td style="text-align:left;">
+3569/2919/3553/2921/2920/3576/929
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04061
+</td>
+<td style="text-align:left;">
+Viral protein interaction with cytokine and cytokine receptor
+</td>
+<td style="text-align:left;">
+9/160
+</td>
+<td style="text-align:left;">
+100/8102
+</td>
+<td style="text-align:right;">
+0.0001495
+</td>
+<td style="text-align:right;">
+0.0038260
+</td>
+<td style="text-align:right;">
+0.0033667
+</td>
+<td style="text-align:left;">
+3569/2919/2921/2920/6364/3576/11009/3570/8794
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04151
+</td>
+<td style="text-align:left;">
+PI3K-Akt signaling pathway
+</td>
+<td style="text-align:left;">
+17/160
+</td>
+<td style="text-align:left;">
+354/8102
+</td>
+<td style="text-align:right;">
+0.0005951
+</td>
+<td style="text-align:right;">
+0.0138487
+</td>
+<td style="text-align:right;">
+0.0121859
+</td>
+<td style="text-align:left;">
+3569/1440/3911/896/3371/8515/284217/3570/4803/9586/5649/1950/894/7184/2261/6446/3693
+</td>
+<td style="text-align:right;">
+17
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05165
+</td>
+<td style="text-align:left;">
+Human papillomavirus infection
+</td>
+<td style="text-align:left;">
+16/160
+</td>
+<td style="text-align:left;">
+331/8102
+</td>
+<td style="text-align:right;">
+0.0008071
+</td>
+<td style="text-align:right;">
+0.0172184
+</td>
+<td style="text-align:right;">
+0.0151511
+</td>
+<td style="text-align:left;">
+5743/3911/245972/896/3371/8515/284217/7477/9586/5649/1950/4854/894/4242/3693/1869
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05219
+</td>
+<td style="text-align:left;">
+Bladder cancer
+</td>
+<td style="text-align:left;">
+5/160
+</td>
+<td style="text-align:left;">
+41/8102
+</td>
+<td style="text-align:right;">
+0.0011905
+</td>
+<td style="text-align:right;">
+0.0234443
+</td>
+<td style="text-align:right;">
+0.0206295
+</td>
+<td style="text-align:left;">
+3576/1950/1870/2261/1869
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04630
+</td>
+<td style="text-align:left;">
+JAK-STAT signaling pathway
+</td>
+<td style="text-align:left;">
+10/160
+</td>
+<td style="text-align:left;">
+162/8102
+</td>
+<td style="text-align:right;">
+0.0013427
+</td>
+<td style="text-align:right;">
+0.0245522
+</td>
+<td style="text-align:right;">
+0.0216043
+</td>
+<td style="text-align:left;">
+3569/1437/1440/11009/896/3570/9021/1950/894/8835
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04512
+</td>
+<td style="text-align:left;">
+ECM-receptor interaction
+</td>
+<td style="text-align:left;">
+7/160
+</td>
+<td style="text-align:left;">
+88/8102
+</td>
+<td style="text-align:right;">
+0.0017076
+</td>
+<td style="text-align:right;">
+0.0291428
+</td>
+<td style="text-align:right;">
+0.0256437
+</td>
+<td style="text-align:left;">
+3911/3371/8515/284217/5649/3693/375790
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04640
+</td>
+<td style="text-align:left;">
+Hematopoietic cell lineage
+</td>
+<td style="text-align:left;">
+7/160
+</td>
+<td style="text-align:left;">
+99/8102
+</td>
+<td style="text-align:right;">
+0.0033438
+</td>
+<td style="text-align:right;">
+0.0509156
+</td>
+<td style="text-align:right;">
+0.0448024
+</td>
+<td style="text-align:left;">
+3569/3553/1437/1440/3552/3570/929
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04621
+</td>
+<td style="text-align:left;">
+NOD-like receptor signaling pathway
+</td>
+<td style="text-align:left;">
+10/160
+</td>
+<td style="text-align:left;">
+184/8102
+</td>
+<td style="text-align:right;">
+0.0034312
+</td>
+<td style="text-align:right;">
+0.0509156
+</td>
+<td style="text-align:right;">
+0.0448024
+</td>
+<td style="text-align:left;">
+3569/2919/3553/2921/2920/3576/7128/114548/837/10135
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04218
+</td>
+<td style="text-align:left;">
+Cellular senescence
+</td>
+<td style="text-align:left;">
+9/160
+</td>
+<td style="text-align:left;">
+156/8102
+</td>
+<td style="text-align:right;">
+0.0036676
+</td>
+<td style="text-align:right;">
+0.0509156
+</td>
+<td style="text-align:right;">
+0.0448024
+</td>
+<td style="text-align:left;">
+3569/3552/3576/5054/896/3486/894/1870/1869
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05133
+</td>
+<td style="text-align:left;">
+Pertussis
+</td>
+<td style="text-align:left;">
+6/160
+</td>
+<td style="text-align:left;">
+76/8102
+</td>
+<td style="text-align:right;">
+0.0037789
+</td>
+<td style="text-align:right;">
+0.0509156
+</td>
+<td style="text-align:right;">
+0.0448024
+</td>
+<td style="text-align:left;">
+3569/3553/3552/3576/929/114548
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05167
+</td>
+<td style="text-align:left;">
+Kaposi sarcoma-associated herpesvirus infection
+</td>
+<td style="text-align:left;">
+10/160
+</td>
+<td style="text-align:left;">
+194/8102
+</td>
+<td style="text-align:right;">
+0.0049903
+</td>
+<td style="text-align:right;">
+0.0638758
+</td>
+<td style="text-align:right;">
+0.0562065
+</td>
+<td style="text-align:left;">
+3569/2919/5743/2921/1437/2920/3576/1827/1870/1869
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05171
+</td>
+<td style="text-align:left;">
+Coronavirus disease - COVID-19
+</td>
+<td style="text-align:left;">
+11/160
+</td>
+<td style="text-align:left;">
+232/8102
+</td>
+<td style="text-align:right;">
+0.0061369
+</td>
+<td style="text-align:right;">
+0.0748120
+</td>
+<td style="text-align:right;">
+0.0658296
+</td>
+<td style="text-align:left;">
+3569/3553/1437/1440/200916/3576/3570/629/4314/23521/114548
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa00532
+</td>
+<td style="text-align:left;">
+Glycosaminoglycan biosynthesis - chondroitin sulfate / dermatan sulfate
+</td>
+<td style="text-align:left;">
+3/160
+</td>
+<td style="text-align:left;">
+20/8102
+</td>
+<td style="text-align:right;">
+0.0067317
+</td>
+<td style="text-align:right;">
+0.0775948
+</td>
+<td style="text-align:right;">
+0.0682783
+</td>
+<td style="text-align:left;">
+56548/54480/55501
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04936
+</td>
+<td style="text-align:left;">
+Alcoholic liver disease
+</td>
+<td style="text-align:left;">
+8/160
+</td>
+<td style="text-align:left;">
+142/8102
+</td>
+<td style="text-align:right;">
+0.0069714
+</td>
+<td style="text-align:right;">
+0.0775948
+</td>
+<td style="text-align:right;">
+0.0682783
+</td>
+<td style="text-align:left;">
+3569/2919/3553/2921/2920/3576/2194/929
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05222
+</td>
+<td style="text-align:left;">
+Small cell lung cancer
+</td>
+<td style="text-align:left;">
+6/160
+</td>
+<td style="text-align:left;">
+92/8102
+</td>
+<td style="text-align:right;">
+0.0095315
+</td>
+<td style="text-align:right;">
+0.1016693
+</td>
+<td style="text-align:right;">
+0.0894623
+</td>
+<td style="text-align:left;">
+5743/3911/284217/7185/1870/1869
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04932
+</td>
+<td style="text-align:left;">
+Non-alcoholic fatty liver disease
+</td>
+<td style="text-align:left;">
+8/160
+</td>
+<td style="text-align:left;">
+155/8102
+</td>
+<td style="text-align:right;">
+0.0115389
+</td>
+<td style="text-align:right;">
+0.1156065
+</td>
+<td style="text-align:right;">
+0.1017261
+</td>
+<td style="text-align:left;">
+3569/3553/3552/3576/3570/9021/1649/125965
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05120
+</td>
+<td style="text-align:left;">
+Epithelial cell signaling in Helicobacter pylori infection
+</td>
+<td style="text-align:left;">
+5/160
+</td>
+<td style="text-align:left;">
+70/8102
+</td>
+<td style="text-align:right;">
+0.0121761
+</td>
+<td style="text-align:right;">
+0.1156065
+</td>
+<td style="text-align:right;">
+0.1017261
+</td>
+<td style="text-align:left;">
+2919/2921/2920/3576/245972
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05215
+</td>
+<td style="text-align:left;">
+Prostate cancer
+</td>
+<td style="text-align:left;">
+6/160
+</td>
+<td style="text-align:left;">
+97/8102
+</td>
+<td style="text-align:right;">
+0.0121929
+</td>
+<td style="text-align:right;">
+0.1156065
+</td>
+<td style="text-align:right;">
+0.1017261
+</td>
+<td style="text-align:left;">
+4314/9586/1950/7184/1870/1869
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04933
+</td>
+<td style="text-align:left;">
+AGE-RAGE signaling pathway in diabetic complications
+</td>
+<td style="text-align:left;">
+6/160
+</td>
+<td style="text-align:left;">
+100/8102
+</td>
+<td style="text-align:right;">
+0.0140199
+</td>
+<td style="text-align:right;">
+0.1281823
+</td>
+<td style="text-align:right;">
+0.1127920
+</td>
+<td style="text-align:left;">
+3569/3553/3552/3576/5054/2152
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05144
+</td>
+<td style="text-align:left;">
+Malaria
+</td>
+<td style="text-align:left;">
+4/160
+</td>
+<td style="text-align:left;">
+50/8102
+</td>
+<td style="text-align:right;">
+0.0166793
+</td>
+<td style="text-align:right;">
+0.1472376
+</td>
+<td style="text-align:right;">
+0.1295594
+</td>
+<td style="text-align:left;">
+3569/3553/1440/3576
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04510
+</td>
+<td style="text-align:left;">
+Focal adhesion
+</td>
+<td style="text-align:left;">
+9/160
+</td>
+<td style="text-align:left;">
+201/8102
+</td>
+<td style="text-align:right;">
+0.0179345
+</td>
+<td style="text-align:right;">
+0.1530413
+</td>
+<td style="text-align:right;">
+0.1346663
+</td>
+<td style="text-align:left;">
+3911/896/3371/8515/284217/5649/1950/894/3693
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cki-nme-vs-cki" class="section level4">
+<h4>CKI-Nme vs CKI</h4>
+<pre class="r"><code>enrichKEGG_treat_sig[[&quot;CKI-Nme vs CKI&quot;]][1:30,] %&gt;% as.data.frame() %&gt;% dplyr::select(-c(&quot;ID&quot;)) %&gt;% kable() %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;% scroll_box(height=&quot;600px&quot;)</code></pre>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:600px; ">
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Description
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+GeneRatio
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+BgRatio
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+pvalue
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+p.adjust
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+qvalue
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+geneID
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+hsa04657
+</td>
+<td style="text-align:left;">
+IL-17 signaling pathway
+</td>
+<td style="text-align:left;">
+14/182
+</td>
+<td style="text-align:left;">
+94/8102
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000048
+</td>
+<td style="text-align:right;">
+0.0000041
+</td>
+<td style="text-align:left;">
+5743/7184/3569/2921/2919/3576/3934/2920/4314/4312/2353/6364/1440/3553
+</td>
+<td style="text-align:right;">
+14
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05323
+</td>
+<td style="text-align:left;">
+Rheumatoid arthritis
+</td>
+<td style="text-align:left;">
+13/182
+</td>
+<td style="text-align:left;">
+93/8102
+</td>
+<td style="text-align:right;">
+0.0000001
+</td>
+<td style="text-align:right;">
+0.0000171
+</td>
+<td style="text-align:right;">
+0.0000146
+</td>
+<td style="text-align:left;">
+3569/2921/2919/3576/3552/2920/245972/4314/4312/2353/6364/3109/3553
+</td>
+<td style="text-align:right;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05417
+</td>
+<td style="text-align:left;">
+Lipid and atherosclerosis
+</td>
+<td style="text-align:left;">
+18/182
+</td>
+<td style="text-align:left;">
+215/8102
+</td>
+<td style="text-align:right;">
+0.0000014
+</td>
+<td style="text-align:right;">
+0.0001228
+</td>
+<td style="text-align:right;">
+0.0001046
+</td>
+<td style="text-align:left;">
+1543/7184/19/3569/2921/2919/3576/2920/4688/4314/3309/929/4312/2353/1649/3310/3553/5608
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04668
+</td>
+<td style="text-align:left;">
+TNF signaling pathway
+</td>
+<td style="text-align:left;">
+12/182
+</td>
+<td style="text-align:left;">
+112/8102
+</td>
+<td style="text-align:right;">
+0.0000072
+</td>
+<td style="text-align:right;">
+0.0004696
+</td>
+<td style="text-align:right;">
+0.0003999
+</td>
+<td style="text-align:left;">
+5743/3569/2921/2919/2920/4314/9021/2353/6364/9586/3553/5608
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05134
+</td>
+<td style="text-align:left;">
+Legionellosis
+</td>
+<td style="text-align:left;">
+8/182
+</td>
+<td style="text-align:left;">
+57/8102
+</td>
+<td style="text-align:right;">
+0.0000359
+</td>
+<td style="text-align:right;">
+0.0018790
+</td>
+<td style="text-align:right;">
+0.0016004
+</td>
+<td style="text-align:left;">
+3569/2921/2919/3576/2920/929/3310/3553
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04061
+</td>
+<td style="text-align:left;">
+Viral protein interaction with cytokine and cytokine receptor
+</td>
+<td style="text-align:left;">
+10/182
+</td>
+<td style="text-align:left;">
+100/8102
+</td>
+<td style="text-align:right;">
+0.0000769
+</td>
+<td style="text-align:right;">
+0.0033575
+</td>
+<td style="text-align:right;">
+0.0028598
+</td>
+<td style="text-align:left;">
+3569/2921/2919/3576/2920/11009/8794/1436/6364/58985
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05146
+</td>
+<td style="text-align:left;">
+Amoebiasis
+</td>
+<td style="text-align:left;">
+10/182
+</td>
+<td style="text-align:left;">
+102/8102
+</td>
+<td style="text-align:right;">
+0.0000910
+</td>
+<td style="text-align:right;">
+0.0034067
+</td>
+<td style="text-align:right;">
+0.0029017
+</td>
+<td style="text-align:left;">
+3569/2921/2919/3576/2920/3911/929/284217/2774/3553
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05165
+</td>
+<td style="text-align:left;">
+Human papillomavirus infection
+</td>
+<td style="text-align:left;">
+19/182
+</td>
+<td style="text-align:left;">
+331/8102
+</td>
+<td style="text-align:right;">
+0.0001525
+</td>
+<td style="text-align:right;">
+0.0049947
+</td>
+<td style="text-align:right;">
+0.0042542
+</td>
+<td style="text-align:left;">
+5743/896/7477/1869/3693/3911/245972/8515/3955/4854/3371/284217/1950/5649/4242/5159/9134/894/9586
+</td>
+<td style="text-align:right;">
+19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05219
+</td>
+<td style="text-align:left;">
+Bladder cancer
+</td>
+<td style="text-align:left;">
+6/182
+</td>
+<td style="text-align:left;">
+41/8102
+</td>
+<td style="text-align:right;">
+0.0002767
+</td>
+<td style="text-align:right;">
+0.0080544
+</td>
+<td style="text-align:right;">
+0.0068603
+</td>
+<td style="text-align:left;">
+3576/1869/2261/1870/4312/1950
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04151
+</td>
+<td style="text-align:left;">
+PI3K-Akt signaling pathway
+</td>
+<td style="text-align:left;">
+19/182
+</td>
+<td style="text-align:left;">
+354/8102
+</td>
+<td style="text-align:right;">
+0.0003602
+</td>
+<td style="text-align:right;">
+0.0088260
+</td>
+<td style="text-align:right;">
+0.0075175
+</td>
+<td style="text-align:left;">
+7184/3569/896/3693/3911/2261/8515/3371/284217/1950/5649/4804/1436/5159/1440/9134/894/2264/9586
+</td>
+<td style="text-align:right;">
+19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05202
+</td>
+<td style="text-align:left;">
+Transcriptional misregulation in cancer
+</td>
+<td style="text-align:left;">
+13/182
+</td>
+<td style="text-align:left;">
+192/8102
+</td>
+<td style="text-align:right;">
+0.0003706
+</td>
+<td style="text-align:right;">
+0.0088260
+</td>
+<td style="text-align:right;">
+0.0075175
+</td>
+<td style="text-align:left;">
+3569/3576/8464/4314/929/7490/1649/4804/1436/26471/64332/894/3486
+</td>
+<td style="text-align:right;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04218
+</td>
+<td style="text-align:left;">
+Cellular senescence
+</td>
+<td style="text-align:left;">
+11/182
+</td>
+<td style="text-align:left;">
+156/8102
+</td>
+<td style="text-align:right;">
+0.0007485
+</td>
+<td style="text-align:right;">
+0.0163415
+</td>
+<td style="text-align:right;">
+0.0139189
+</td>
+<td style="text-align:left;">
+3569/896/3576/3552/1869/1870/9134/894/5608/4605/3486
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04010
+</td>
+<td style="text-align:left;">
+MAPK signaling pathway
+</td>
+<td style="text-align:left;">
+16/182
+</td>
+<td style="text-align:left;">
+294/8102
+</td>
+<td style="text-align:right;">
+0.0009166
+</td>
+<td style="text-align:right;">
+0.0177846
+</td>
+<td style="text-align:right;">
+0.0151480
+</td>
+<td style="text-align:left;">
+3552/2261/929/25780/1850/5801/1950/2353/1649/4804/1436/5159/3310/2264/3553/5608
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04060
+</td>
+<td style="text-align:left;">
+Cytokine-cytokine receptor interaction
+</td>
+<td style="text-align:left;">
+16/182
+</td>
+<td style="text-align:left;">
+295/8102
+</td>
+<td style="text-align:right;">
+0.0009503
+</td>
+<td style="text-align:right;">
+0.0177846
+</td>
+<td style="text-align:right;">
+0.0151480
+</td>
+<td style="text-align:left;">
+3569/2921/2919/652/3576/3552/2920/11009/8794/26525/4804/1436/6364/1440/58985/3553
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05215
+</td>
+<td style="text-align:left;">
+Prostate cancer
+</td>
+<td style="text-align:left;">
+8/182
+</td>
+<td style="text-align:left;">
+97/8102
+</td>
+<td style="text-align:right;">
+0.0014624
+</td>
+<td style="text-align:right;">
+0.0255439
+</td>
+<td style="text-align:right;">
+0.0217570
+</td>
+<td style="text-align:left;">
+7184/1869/4314/1870/1950/5159/9134/9586
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04064
+</td>
+<td style="text-align:left;">
+NF-kappa B signaling pathway
+</td>
+<td style="text-align:left;">
+8/182
+</td>
+<td style="text-align:left;">
+104/8102
+</td>
+<td style="text-align:right;">
+0.0022823
+</td>
+<td style="text-align:right;">
+0.0373722
+</td>
+<td style="text-align:right;">
+0.0318317
+</td>
+<td style="text-align:left;">
+5743/2921/2919/3576/2920/29775/929/3553
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04512
+</td>
+<td style="text-align:left;">
+ECM-receptor interaction
+</td>
+<td style="text-align:left;">
+7/182
+</td>
+<td style="text-align:left;">
+88/8102
+</td>
+<td style="text-align:right;">
+0.0035307
+</td>
+<td style="text-align:right;">
+0.0544138
+</td>
+<td style="text-align:right;">
+0.0463468
+</td>
+<td style="text-align:left;">
+3693/3911/8515/3371/284217/5649/1605
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05167
+</td>
+<td style="text-align:left;">
+Kaposi sarcoma-associated herpesvirus infection
+</td>
+<td style="text-align:left;">
+11/182
+</td>
+<td style="text-align:left;">
+194/8102
+</td>
+<td style="text-align:right;">
+0.0042420
+</td>
+<td style="text-align:right;">
+0.0617442
+</td>
+<td style="text-align:right;">
+0.0525905
+</td>
+<td style="text-align:left;">
+5743/3569/2921/2919/3576/1869/2920/1827/1870/2353/5608
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa01523
+</td>
+<td style="text-align:left;">
+Antifolate resistance
+</td>
+<td style="text-align:left;">
+4/182
+</td>
+<td style="text-align:left;">
+31/8102
+</td>
+<td style="text-align:right;">
+0.0048245
+</td>
+<td style="text-align:right;">
+0.0665277
+</td>
+<td style="text-align:right;">
+0.0566648
+</td>
+<td style="text-align:left;">
+3569/2352/2348/3553
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa00051
+</td>
+<td style="text-align:left;">
+Fructose and mannose metabolism
+</td>
+<td style="text-align:left;">
+4/182
+</td>
+<td style="text-align:left;">
+33/8102
+</td>
+<td style="text-align:right;">
+0.0060596
+</td>
+<td style="text-align:right;">
+0.0793813
+</td>
+<td style="text-align:right;">
+0.0676128
+</td>
+<td style="text-align:left;">
+57016/230/3795/80201
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04640
+</td>
+<td style="text-align:left;">
+Hematopoietic cell lineage
+</td>
+<td style="text-align:left;">
+7/182
+</td>
+<td style="text-align:left;">
+99/8102
+</td>
+<td style="text-align:right;">
+0.0067417
+</td>
+<td style="text-align:right;">
+0.0798478
+</td>
+<td style="text-align:right;">
+0.0680102
+</td>
+<td style="text-align:left;">
+3569/3552/929/1436/3109/1440/3553
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05133
+</td>
+<td style="text-align:left;">
+Pertussis
+</td>
+<td style="text-align:left;">
+6/182
+</td>
+<td style="text-align:left;">
+76/8102
+</td>
+<td style="text-align:right;">
+0.0070451
+</td>
+<td style="text-align:right;">
+0.0798478
+</td>
+<td style="text-align:right;">
+0.0680102
+</td>
+<td style="text-align:left;">
+3569/3576/3552/929/2353/3553
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04145
+</td>
+<td style="text-align:left;">
+Phagosome
+</td>
+<td style="text-align:left;">
+9/182
+</td>
+<td style="text-align:left;">
+152/8102
+</td>
+<td style="text-align:right;">
+0.0071467
+</td>
+<td style="text-align:right;">
+0.0798478
+</td>
+<td style="text-align:right;">
+0.0680102
+</td>
+<td style="text-align:left;">
+9902/81035/4688/3693/245972/929/7277/3109/10381
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05140
+</td>
+<td style="text-align:left;">
+Leishmaniasis
+</td>
+<td style="text-align:left;">
+6/182
+</td>
+<td style="text-align:left;">
+77/8102
+</td>
+<td style="text-align:right;">
+0.0075016
+</td>
+<td style="text-align:right;">
+0.0798478
+</td>
+<td style="text-align:right;">
+0.0680102
+</td>
+<td style="text-align:left;">
+5743/3552/4688/2353/3109/3553
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04015
+</td>
+<td style="text-align:left;">
+Rap1 signaling pathway
+</td>
+<td style="text-align:left;">
+11/182
+</td>
+<td style="text-align:left;">
+210/8102
+</td>
+<td style="text-align:right;">
+0.0076191
+</td>
+<td style="text-align:right;">
+0.0798478
+</td>
+<td style="text-align:right;">
+0.0680102
+</td>
+<td style="text-align:left;">
+9002/2357/3397/2261/25780/1950/4804/1436/5159/2264/5608
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa00100
+</td>
+<td style="text-align:left;">
+Steroid biosynthesis
+</td>
+<td style="text-align:left;">
+3/182
+</td>
+<td style="text-align:left;">
+20/8102
+</td>
+<td style="text-align:right;">
+0.0095929
+</td>
+<td style="text-align:right;">
+0.0966666
+</td>
+<td style="text-align:right;">
+0.0823355
+</td>
+<td style="text-align:left;">
+7108/10682/1718
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04630
+</td>
+<td style="text-align:left;">
+JAK-STAT signaling pathway
+</td>
+<td style="text-align:left;">
+9/182
+</td>
+<td style="text-align:left;">
+162/8102
+</td>
+<td style="text-align:right;">
+0.0106465
+</td>
+<td style="text-align:right;">
+0.1033103
+</td>
+<td style="text-align:right;">
+0.0879943
+</td>
+<td style="text-align:left;">
+3569/896/11009/9021/1950/5159/1440/894/58985
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05162
+</td>
+<td style="text-align:left;">
+Measles
+</td>
+<td style="text-align:left;">
+8/182
+</td>
+<td style="text-align:left;">
+139/8102
+</td>
+<td style="text-align:right;">
+0.0128841
+</td>
+<td style="text-align:right;">
+0.1153197
+</td>
+<td style="text-align:right;">
+0.0982233
+</td>
+<td style="text-align:left;">
+3569/896/3552/2353/3310/9134/894/3553
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05418
+</td>
+<td style="text-align:left;">
+Fluid shear stress and atherosclerosis
+</td>
+<td style="text-align:left;">
+8/182
+</td>
+<td style="text-align:left;">
+139/8102
+</td>
+<td style="text-align:right;">
+0.0128841
+</td>
+<td style="text-align:right;">
+0.1153197
+</td>
+<td style="text-align:right;">
+0.0982233
+</td>
+<td style="text-align:left;">
+2817/7184/652/3552/4688/2353/3553/5608
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05130
+</td>
+<td style="text-align:left;">
+Pathogenic Escherichia coli infection
+</td>
+<td style="text-align:left;">
+10/182
+</td>
+<td style="text-align:left;">
+197/8102
+</td>
+<td style="text-align:right;">
+0.0132045
+</td>
+<td style="text-align:right;">
+0.1153197
+</td>
+<td style="text-align:right;">
+0.0982233
+</td>
+<td style="text-align:left;">
+9076/3569/3576/27128/7277/2353/837/9075/10381/3553
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cki-omt-vs-cki" class="section level4">
+<h4>CKI-Omt vs CKI</h4>
+<pre class="r"><code>enrichKEGG_treat_sig[[&quot;CKI-Omt vs CKI&quot;]][1:30,] %&gt;% as.data.frame() %&gt;% dplyr::select(-c(&quot;ID&quot;)) %&gt;% kable() %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;% scroll_box(height=&quot;600px&quot;)</code></pre>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:600px; ">
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Description
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+GeneRatio
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+BgRatio
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+pvalue
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+p.adjust
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+qvalue
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+geneID
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+hsa04110
+</td>
+<td style="text-align:left;">
+Cell cycle
+</td>
+<td style="text-align:left;">
+26/284
+</td>
+<td style="text-align:left;">
+126/8102
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:right;">
+0.0000000
+</td>
+<td style="text-align:left;">
+890/9088/699/983/894/701/9134/8318/5347/995/993/7272/9700/4085/990/9133/891/1870/896/5933/4174/4175/1869/4998/1647/1875
+</td>
+<td style="text-align:right;">
+26
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04115
+</td>
+<td style="text-align:left;">
+p53 signaling pathway
+</td>
+<td style="text-align:left;">
+13/284
+</td>
+<td style="text-align:left;">
+73/8102
+</td>
+<td style="text-align:right;">
+0.0000012
+</td>
+<td style="text-align:right;">
+0.0001659
+</td>
+<td style="text-align:right;">
+0.0001501
+</td>
+<td style="text-align:left;">
+6241/983/894/9134/9133/891/896/1647/3732/143686/7161/3486/83667
+</td>
+<td style="text-align:right;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04218
+</td>
+<td style="text-align:left;">
+Cellular senescence
+</td>
+<td style="text-align:left;">
+19/284
+</td>
+<td style="text-align:left;">
+156/8102
+</td>
+<td style="text-align:right;">
+0.0000020
+</td>
+<td style="text-align:right;">
+0.0001818
+</td>
+<td style="text-align:right;">
+0.0001644
+</td>
+<td style="text-align:left;">
+3569/890/3552/983/894/9134/993/4605/3576/2113/9133/891/1870/896/5933/1869/1647/1875/3486
+</td>
+<td style="text-align:right;">
+19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa03460
+</td>
+<td style="text-align:left;">
+Fanconi anemia pathway
+</td>
+<td style="text-align:left;">
+10/284
+</td>
+<td style="text-align:left;">
+54/8102
+</td>
+<td style="text-align:right;">
+0.0000146
+</td>
+<td style="text-align:right;">
+0.0010098
+</td>
+<td style="text-align:right;">
+0.0009133
+</td>
+<td style="text-align:left;">
+672/641/83990/55215/2177/5888/2175/116028/29089/9894
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04657
+</td>
+<td style="text-align:left;">
+IL-17 signaling pathway
+</td>
+<td style="text-align:left;">
+13/284
+</td>
+<td style="text-align:left;">
+94/8102
+</td>
+<td style="text-align:right;">
+0.0000216
+</td>
+<td style="text-align:right;">
+0.0011977
+</td>
+<td style="text-align:right;">
+0.0010833
+</td>
+<td style="text-align:left;">
+3569/3553/2921/1437/2919/3576/7128/5743/6364/2920/3934/1440/4314
+</td>
+<td style="text-align:right;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa00260
+</td>
+<td style="text-align:left;">
+Glycine, serine and threonine metabolism
+</td>
+<td style="text-align:left;">
+8/284
+</td>
+<td style="text-align:left;">
+40/8102
+</td>
+<td style="text-align:right;">
+0.0000598
+</td>
+<td style="text-align:right;">
+0.0027585
+</td>
+<td style="text-align:right;">
+0.0024949
+</td>
+<td style="text-align:left;">
+314/8639/23464/26227/29968/4129/1491/113675
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa03440
+</td>
+<td style="text-align:left;">
+Homologous recombination
+</td>
+<td style="text-align:left;">
+8/284
+</td>
+<td style="text-align:left;">
+41/8102
+</td>
+<td style="text-align:right;">
+0.0000720
+</td>
+<td style="text-align:right;">
+0.0028495
+</td>
+<td style="text-align:right;">
+0.0025772
+</td>
+<td style="text-align:left;">
+672/641/83990/8438/7516/5888/25788/580
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05323
+</td>
+<td style="text-align:left;">
+Rheumatoid arthritis
+</td>
+<td style="text-align:left;">
+12/284
+</td>
+<td style="text-align:left;">
+93/8102
+</td>
+<td style="text-align:right;">
+0.0000898
+</td>
+<td style="text-align:right;">
+0.0031082
+</td>
+<td style="text-align:right;">
+0.0028111
+</td>
+<td style="text-align:left;">
+3569/3553/3552/2921/1437/2919/3576/6364/2920/245972/4314/155066
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04668
+</td>
+<td style="text-align:left;">
+TNF signaling pathway
+</td>
+<td style="text-align:left;">
+12/284
+</td>
+<td style="text-align:left;">
+112/8102
+</td>
+<td style="text-align:right;">
+0.0005263
+</td>
+<td style="text-align:right;">
+0.0161994
+</td>
+<td style="text-align:right;">
+0.0146511
+</td>
+<td style="text-align:left;">
+3569/3553/2921/1437/2919/7128/5743/6364/2920/197259/4314/3976
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04114
+</td>
+<td style="text-align:left;">
+Oocyte meiosis
+</td>
+<td style="text-align:left;">
+13/284
+</td>
+<td style="text-align:left;">
+131/8102
+</td>
+<td style="text-align:right;">
+0.0006543
+</td>
+<td style="text-align:right;">
+0.0181245
+</td>
+<td style="text-align:right;">
+0.0163923
+</td>
+<td style="text-align:left;">
+9088/699/983/9134/5347/995/151648/9700/4085/9133/891/89869/286151
+</td>
+<td style="text-align:right;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04914
+</td>
+<td style="text-align:left;">
+Progesterone-mediated oocyte maturation
+</td>
+<td style="text-align:left;">
+11/284
+</td>
+<td style="text-align:left;">
+102/8102
+</td>
+<td style="text-align:right;">
+0.0008455
+</td>
+<td style="text-align:right;">
+0.0212911
+</td>
+<td style="text-align:right;">
+0.0192562
+</td>
+<td style="text-align:left;">
+890/9088/699/983/5347/995/993/4085/9133/891/3835
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa03030
+</td>
+<td style="text-align:left;">
+DNA replication
+</td>
+<td style="text-align:left;">
+6/284
+</td>
+<td style="text-align:left;">
+36/8102
+</td>
+<td style="text-align:right;">
+0.0014113
+</td>
+<td style="text-align:right;">
+0.0325765
+</td>
+<td style="text-align:right;">
+0.0294631
+</td>
+<td style="text-align:left;">
+5557/2237/5427/4174/4175/5983
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa00360
+</td>
+<td style="text-align:left;">
+Phenylalanine metabolism
+</td>
+<td style="text-align:left;">
+4/284
+</td>
+<td style="text-align:left;">
+17/8102
+</td>
+<td style="text-align:right;">
+0.0024507
+</td>
+<td style="text-align:right;">
+0.0522188
+</td>
+<td style="text-align:right;">
+0.0472281
+</td>
+<td style="text-align:left;">
+314/8639/4129/218
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05146
+</td>
+<td style="text-align:left;">
+Amoebiasis
+</td>
+<td style="text-align:left;">
+10/284
+</td>
+<td style="text-align:left;">
+102/8102
+</td>
+<td style="text-align:right;">
+0.0029551
+</td>
+<td style="text-align:right;">
+0.0553875
+</td>
+<td style="text-align:right;">
+0.0500940
+</td>
+<td style="text-align:left;">
+3569/3553/284217/2921/1437/2919/3576/2920/3911/2774
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05202
+</td>
+<td style="text-align:left;">
+Transcriptional misregulation in cancer
+</td>
+<td style="text-align:left;">
+15/284
+</td>
+<td style="text-align:left;">
+192/8102
+</td>
+<td style="text-align:right;">
+0.0029993
+</td>
+<td style="text-align:right;">
+0.0553875
+</td>
+<td style="text-align:right;">
+0.0500940
+</td>
+<td style="text-align:left;">
+3569/890/1437/894/3576/7490/64332/51274/3398/4314/1647/26471/1649/3486/3728
+</td>
+<td style="text-align:right;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa01523
+</td>
+<td style="text-align:left;">
+Antifolate resistance
+</td>
+<td style="text-align:left;">
+5/284
+</td>
+<td style="text-align:left;">
+31/8102
+</td>
+<td style="text-align:right;">
+0.0041049
+</td>
+<td style="text-align:right;">
+0.0699506
+</td>
+<td style="text-align:right;">
+0.0632652
+</td>
+<td style="text-align:left;">
+3569/3553/7298/1719/2352
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04630
+</td>
+<td style="text-align:left;">
+JAK-STAT signaling pathway
+</td>
+<td style="text-align:left;">
+13/284
+</td>
+<td style="text-align:left;">
+162/8102
+</td>
+<td style="text-align:right;">
+0.0044486
+</td>
+<td style="text-align:right;">
+0.0699506
+</td>
+<td style="text-align:right;">
+0.0632652
+</td>
+<td style="text-align:left;">
+3569/1437/894/8835/11009/3570/896/1950/1440/3563/5155/58985/3976
+</td>
+<td style="text-align:right;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa01230
+</td>
+<td style="text-align:left;">
+Biosynthesis of amino acids
+</td>
+<td style="text-align:left;">
+8/284
+</td>
+<td style="text-align:left;">
+75/8102
+</td>
+<td style="text-align:right;">
+0.0045455
+</td>
+<td style="text-align:right;">
+0.0699506
+</td>
+<td style="text-align:right;">
+0.0632652
+</td>
+<td style="text-align:left;">
+445/230/26227/29968/1373/2027/1491/113675
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa00051
+</td>
+<td style="text-align:left;">
+Fructose and mannose metabolism
+</td>
+<td style="text-align:left;">
+5/284
+</td>
+<td style="text-align:left;">
+33/8102
+</td>
+<td style="text-align:right;">
+0.0054162
+</td>
+<td style="text-align:right;">
+0.0789625
+</td>
+<td style="text-align:right;">
+0.0714159
+</td>
+<td style="text-align:left;">
+230/57016/3795/80201/5208
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04060
+</td>
+<td style="text-align:left;">
+Cytokine-cytokine receptor interaction
+</td>
+<td style="text-align:left;">
+19/284
+</td>
+<td style="text-align:left;">
+295/8102
+</td>
+<td style="text-align:right;">
+0.0076011
+</td>
+<td style="text-align:right;">
+0.1036175
+</td>
+<td style="text-align:right;">
+0.0937144
+</td>
+<td style="text-align:left;">
+3569/3553/9966/3552/2921/1437/2919/3576/6364/11009/3570/2920/652/9518/1440/3563/58985/26525/3976
+</td>
+<td style="text-align:right;">
+19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa00350
+</td>
+<td style="text-align:left;">
+Tyrosine metabolism
+</td>
+<td style="text-align:left;">
+5/284
+</td>
+<td style="text-align:left;">
+36/8102
+</td>
+<td style="text-align:right;">
+0.0078998
+</td>
+<td style="text-align:right;">
+0.1036175
+</td>
+<td style="text-align:right;">
+0.0937144
+</td>
+<td style="text-align:left;">
+314/8639/4129/218/2954
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04061
+</td>
+<td style="text-align:left;">
+Viral protein interaction with cytokine and cytokine receptor
+</td>
+<td style="text-align:left;">
+9/284
+</td>
+<td style="text-align:left;">
+100/8102
+</td>
+<td style="text-align:right;">
+0.0082295
+</td>
+<td style="text-align:right;">
+0.1036175
+</td>
+<td style="text-align:right;">
+0.0937144
+</td>
+<td style="text-align:left;">
+3569/2921/2919/3576/6364/11009/3570/2920/58985
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04064
+</td>
+<td style="text-align:left;">
+NF-kappa B signaling pathway
+</td>
+<td style="text-align:left;">
+9/284
+</td>
+<td style="text-align:left;">
+104/8102
+</td>
+<td style="text-align:right;">
+0.0105341
+</td>
+<td style="text-align:right;">
+0.1268677
+</td>
+<td style="text-align:right;">
+0.1147426
+</td>
+<td style="text-align:left;">
+3553/2921/2919/3576/7128/5743/2920/29775/1647
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05165
+</td>
+<td style="text-align:left;">
+Human papillomavirus infection
+</td>
+<td style="text-align:left;">
+20/284
+</td>
+<td style="text-align:left;">
+331/8102
+</td>
+<td style="text-align:right;">
+0.0122102
+</td>
+<td style="text-align:right;">
+0.1409264
+</td>
+<td style="text-align:right;">
+0.1274577
+</td>
+<td style="text-align:left;">
+890/284217/894/9134/8638/5649/3371/5743/896/245972/5933/8515/3911/1950/1869/3955/7481/7483/155066/8321
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa00240
+</td>
+<td style="text-align:left;">
+Pyrimidine metabolism
+</td>
+<td style="text-align:left;">
+6/284
+</td>
+<td style="text-align:left;">
+56/8102
+</td>
+<td style="text-align:right;">
+0.0131324
+</td>
+<td style="text-align:right;">
+0.1455074
+</td>
+<td style="text-align:right;">
+0.1316008
+</td>
+<td style="text-align:left;">
+6241/7083/7298/978/7378/6240
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05134
+</td>
+<td style="text-align:left;">
+Legionellosis
+</td>
+<td style="text-align:left;">
+6/284
+</td>
+<td style="text-align:left;">
+57/8102
+</td>
+<td style="text-align:right;">
+0.0142590
+</td>
+<td style="text-align:right;">
+0.1519132
+</td>
+<td style="text-align:right;">
+0.1373944
+</td>
+<td style="text-align:left;">
+3569/3553/2921/2919/3576/2920
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05226
+</td>
+<td style="text-align:left;">
+Gastric cancer
+</td>
+<td style="text-align:left;">
+11/284
+</td>
+<td style="text-align:left;">
+149/8102
+</td>
+<td style="text-align:right;">
+0.0154305
+</td>
+<td style="text-align:right;">
+0.1583057
+</td>
+<td style="text-align:right;">
+0.1431760
+</td>
+<td style="text-align:left;">
+4041/9134/1870/1950/1869/7481/1647/7483/399694/8321/3728
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04068
+</td>
+<td style="text-align:left;">
+FoxO signaling pathway
+</td>
+<td style="text-align:left;">
+10/284
+</td>
+<td style="text-align:left;">
+131/8102
+</td>
+<td style="text-align:right;">
+0.0165367
+</td>
+<td style="text-align:right;">
+0.1635952
+</td>
+<td style="text-align:right;">
+0.1479600
+</td>
+<td style="text-align:left;">
+3569/10733/894/5347/6648/9133/891/1950/1647/6446
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05412
+</td>
+<td style="text-align:left;">
+Arrhythmogenic right ventricular cardiomyopathy
+</td>
+<td style="text-align:left;">
+7/284
+</td>
+<td style="text-align:left;">
+77/8102
+</td>
+<td style="text-align:right;">
+0.0179232
+</td>
+<td style="text-align:right;">
+0.1711978
+</td>
+<td style="text-align:right;">
+0.1548359
+</td>
+<td style="text-align:left;">
+284217/8515/785/4000/782/1824/3728
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04640
+</td>
+<td style="text-align:left;">
+Hematopoietic cell lineage
+</td>
+<td style="text-align:left;">
+8/284
+</td>
+<td style="text-align:left;">
+99/8102
+</td>
+<td style="text-align:right;">
+0.0225321
+</td>
+<td style="text-align:right;">
+0.2080461
+</td>
+<td style="text-align:right;">
+0.1881625
+</td>
+<td style="text-align:left;">
+3569/3553/3552/1437/3570/1440/1604/3563
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cki-tri-vs-cki" class="section level4">
+<h4>CKI-Tri vs CKI</h4>
+<pre class="r"><code>enrichKEGG_treat_sig[[&quot;CKI-Tri vs CKI&quot;]][1:30,] %&gt;% as.data.frame() %&gt;% dplyr::select(-c(&quot;ID&quot;)) %&gt;% kable() %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;% scroll_box(height=&quot;600px&quot;)</code></pre>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:600px; ">
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Description
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+GeneRatio
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+BgRatio
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+pvalue
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+p.adjust
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+qvalue
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+geneID
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+hsa04657
+</td>
+<td style="text-align:left;">
+IL-17 signaling pathway
+</td>
+<td style="text-align:left;">
+13/170
+</td>
+<td style="text-align:left;">
+94/8102
+</td>
+<td style="text-align:right;">
+0.0000001
+</td>
+<td style="text-align:right;">
+0.0000176
+</td>
+<td style="text-align:right;">
+0.0000148
+</td>
+<td style="text-align:left;">
+3569/5743/2921/2919/3553/3576/2920/3934/7184/6364/4314/1437/1440
+</td>
+<td style="text-align:right;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05417
+</td>
+<td style="text-align:left;">
+Lipid and atherosclerosis
+</td>
+<td style="text-align:left;">
+17/170
+</td>
+<td style="text-align:left;">
+215/8102
+</td>
+<td style="text-align:right;">
+0.0000024
+</td>
+<td style="text-align:right;">
+0.0002334
+</td>
+<td style="text-align:right;">
+0.0001973
+</td>
+<td style="text-align:left;">
+3569/1543/2921/2919/19/3553/3576/2920/7184/4688/6648/4314/3309/1649/929/5608/3310
+</td>
+<td style="text-align:right;">
+17
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05323
+</td>
+<td style="text-align:left;">
+Rheumatoid arthritis
+</td>
+<td style="text-align:left;">
+11/170
+</td>
+<td style="text-align:left;">
+93/8102
+</td>
+<td style="text-align:right;">
+0.0000035
+</td>
+<td style="text-align:right;">
+0.0002334
+</td>
+<td style="text-align:right;">
+0.0001973
+</td>
+<td style="text-align:left;">
+3569/2921/2919/3552/3553/3576/2920/245972/6364/4314/1437
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04668
+</td>
+<td style="text-align:left;">
+TNF signaling pathway
+</td>
+<td style="text-align:left;">
+12/170
+</td>
+<td style="text-align:left;">
+112/8102
+</td>
+<td style="text-align:right;">
+0.0000035
+</td>
+<td style="text-align:right;">
+0.0002334
+</td>
+<td style="text-align:right;">
+0.0001973
+</td>
+<td style="text-align:left;">
+3569/5743/2921/2919/3553/2920/6364/4314/1437/9586/9021/5608
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05146
+</td>
+<td style="text-align:left;">
+Amoebiasis
+</td>
+<td style="text-align:left;">
+11/170
+</td>
+<td style="text-align:left;">
+102/8102
+</td>
+<td style="text-align:right;">
+0.0000086
+</td>
+<td style="text-align:right;">
+0.0004526
+</td>
+<td style="text-align:right;">
+0.0003826
+</td>
+<td style="text-align:left;">
+3569/2921/2919/3553/3576/2920/284217/3911/1437/2774/929
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05134
+</td>
+<td style="text-align:left;">
+Legionellosis
+</td>
+<td style="text-align:left;">
+8/170
+</td>
+<td style="text-align:left;">
+57/8102
+</td>
+<td style="text-align:right;">
+0.0000219
+</td>
+<td style="text-align:right;">
+0.0008384
+</td>
+<td style="text-align:right;">
+0.0007087
+</td>
+<td style="text-align:left;">
+3569/2921/2919/3553/3576/2920/929/3310
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04218
+</td>
+<td style="text-align:left;">
+Cellular senescence
+</td>
+<td style="text-align:left;">
+13/170
+</td>
+<td style="text-align:left;">
+156/8102
+</td>
+<td style="text-align:right;">
+0.0000222
+</td>
+<td style="text-align:right;">
+0.0008384
+</td>
+<td style="text-align:right;">
+0.0007087
+</td>
+<td style="text-align:left;">
+3569/3552/3576/1869/896/1870/894/2113/677/9134/3486/5608/5054
+</td>
+<td style="text-align:right;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04060
+</td>
+<td style="text-align:left;">
+Cytokine-cytokine receptor interaction
+</td>
+<td style="text-align:left;">
+17/170
+</td>
+<td style="text-align:left;">
+295/8102
+</td>
+<td style="text-align:right;">
+0.0001444
+</td>
+<td style="text-align:right;">
+0.0047640
+</td>
+<td style="text-align:right;">
+0.0040270
+</td>
+<td style="text-align:left;">
+3569/2921/2919/3552/3553/3576/2920/652/9966/11009/6364/1437/26525/1440/8794/3570/4803
+</td>
+<td style="text-align:right;">
+17
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05202
+</td>
+<td style="text-align:left;">
+Transcriptional misregulation in cancer
+</td>
+<td style="text-align:left;">
+13/170
+</td>
+<td style="text-align:left;">
+192/8102
+</td>
+<td style="text-align:right;">
+0.0001896
+</td>
+<td style="text-align:right;">
+0.0050128
+</td>
+<td style="text-align:right;">
+0.0042373
+</td>
+<td style="text-align:left;">
+3569/3576/8464/4314/1437/64332/894/7490/1649/3486/929/1031/26471
+</td>
+<td style="text-align:right;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05165
+</td>
+<td style="text-align:left;">
+Human papillomavirus infection
+</td>
+<td style="text-align:left;">
+18/170
+</td>
+<td style="text-align:left;">
+331/8102
+</td>
+<td style="text-align:right;">
+0.0001899
+</td>
+<td style="text-align:right;">
+0.0050128
+</td>
+<td style="text-align:right;">
+0.0042373
+</td>
+<td style="text-align:left;">
+5743/1869/8515/896/3693/245972/3371/284217/3911/1950/7477/9586/894/5649/3955/4242/9134/4854
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04061
+</td>
+<td style="text-align:left;">
+Viral protein interaction with cytokine and cytokine receptor
+</td>
+<td style="text-align:left;">
+9/170
+</td>
+<td style="text-align:left;">
+100/8102
+</td>
+<td style="text-align:right;">
+0.0002362
+</td>
+<td style="text-align:right;">
+0.0056691
+</td>
+<td style="text-align:right;">
+0.0047921
+</td>
+<td style="text-align:left;">
+3569/2921/2919/3576/2920/11009/6364/8794/3570
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04151
+</td>
+<td style="text-align:left;">
+PI3K-Akt signaling pathway
+</td>
+<td style="text-align:left;">
+17/170
+</td>
+<td style="text-align:left;">
+354/8102
+</td>
+<td style="text-align:right;">
+0.0011822
+</td>
+<td style="text-align:right;">
+0.0260094
+</td>
+<td style="text-align:right;">
+0.0219856
+</td>
+<td style="text-align:left;">
+3569/7184/8515/896/3693/3371/284217/3911/1950/9586/894/1440/5649/2261/3570/4803/9134
+</td>
+<td style="text-align:right;">
+17
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04064
+</td>
+<td style="text-align:left;">
+NF-kappa B signaling pathway
+</td>
+<td style="text-align:left;">
+8/170
+</td>
+<td style="text-align:left;">
+104/8102
+</td>
+<td style="text-align:right;">
+0.0014836
+</td>
+<td style="text-align:right;">
+0.0294031
+</td>
+<td style="text-align:right;">
+0.0248543
+</td>
+<td style="text-align:left;">
+5743/2921/2919/3553/3576/2920/29775/929
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05219
+</td>
+<td style="text-align:left;">
+Bladder cancer
+</td>
+<td style="text-align:left;">
+5/170
+</td>
+<td style="text-align:left;">
+41/8102
+</td>
+<td style="text-align:right;">
+0.0015593
+</td>
+<td style="text-align:right;">
+0.0294031
+</td>
+<td style="text-align:right;">
+0.0248543
+</td>
+<td style="text-align:left;">
+3576/1869/1870/1950/2261
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04630
+</td>
+<td style="text-align:left;">
+JAK-STAT signaling pathway
+</td>
+<td style="text-align:left;">
+10/170
+</td>
+<td style="text-align:left;">
+162/8102
+</td>
+<td style="text-align:right;">
+0.0021123
+</td>
+<td style="text-align:right;">
+0.0371764
+</td>
+<td style="text-align:right;">
+0.0314250
+</td>
+<td style="text-align:left;">
+3569/11009/896/1950/1437/894/1440/9021/3570/8835
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04512
+</td>
+<td style="text-align:left;">
+ECM-receptor interaction
+</td>
+<td style="text-align:left;">
+7/170
+</td>
+<td style="text-align:left;">
+88/8102
+</td>
+<td style="text-align:right;">
+0.0024114
+</td>
+<td style="text-align:right;">
+0.0389856
+</td>
+<td style="text-align:right;">
+0.0329544
+</td>
+<td style="text-align:left;">
+8515/3693/3371/284217/3911/5649/1605
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05167
+</td>
+<td style="text-align:left;">
+Kaposi sarcoma-associated herpesvirus infection
+</td>
+<td style="text-align:left;">
+11/170
+</td>
+<td style="text-align:left;">
+194/8102
+</td>
+<td style="text-align:right;">
+0.0025104
+</td>
+<td style="text-align:right;">
+0.0389856
+</td>
+<td style="text-align:right;">
+0.0329544
+</td>
+<td style="text-align:left;">
+3569/5743/2921/2919/3576/2920/1869/1827/1870/1437/5608
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04936
+</td>
+<td style="text-align:left;">
+Alcoholic liver disease
+</td>
+<td style="text-align:left;">
+9/170
+</td>
+<td style="text-align:left;">
+142/8102
+</td>
+<td style="text-align:right;">
+0.0029311
+</td>
+<td style="text-align:right;">
+0.0429901
+</td>
+<td style="text-align:right;">
+0.0363393
+</td>
+<td style="text-align:left;">
+3569/2921/2919/3553/3576/2920/929/5608/224
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa01523
+</td>
+<td style="text-align:left;">
+Antifolate resistance
+</td>
+<td style="text-align:left;">
+4/170
+</td>
+<td style="text-align:left;">
+31/8102
+</td>
+<td style="text-align:right;">
+0.0037828
+</td>
+<td style="text-align:right;">
+0.0524340
+</td>
+<td style="text-align:right;">
+0.0443222
+</td>
+<td style="text-align:left;">
+3569/3553/2352/2348
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04115
+</td>
+<td style="text-align:left;">
+p53 signaling pathway
+</td>
+<td style="text-align:left;">
+6/170
+</td>
+<td style="text-align:left;">
+73/8102
+</td>
+<td style="text-align:right;">
+0.0041643
+</td>
+<td style="text-align:right;">
+0.0524340
+</td>
+<td style="text-align:right;">
+0.0443222
+</td>
+<td style="text-align:left;">
+896/894/83667/9134/3486/5054
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05215
+</td>
+<td style="text-align:left;">
+Prostate cancer
+</td>
+<td style="text-align:left;">
+7/170
+</td>
+<td style="text-align:left;">
+97/8102
+</td>
+<td style="text-align:right;">
+0.0041709
+</td>
+<td style="text-align:right;">
+0.0524340
+</td>
+<td style="text-align:right;">
+0.0443222
+</td>
+<td style="text-align:left;">
+7184/1869/1870/4314/1950/9586/9134
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04640
+</td>
+<td style="text-align:left;">
+Hematopoietic cell lineage
+</td>
+<td style="text-align:left;">
+7/170
+</td>
+<td style="text-align:left;">
+99/8102
+</td>
+<td style="text-align:right;">
+0.0046681
+</td>
+<td style="text-align:right;">
+0.0560171
+</td>
+<td style="text-align:right;">
+0.0473510
+</td>
+<td style="text-align:left;">
+3569/3552/3553/1437/1440/3570/929
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04110
+</td>
+<td style="text-align:left;">
+Cell cycle
+</td>
+<td style="text-align:left;">
+8/170
+</td>
+<td style="text-align:left;">
+126/8102
+</td>
+<td style="text-align:right;">
+0.0049072
+</td>
+<td style="text-align:right;">
+0.0563261
+</td>
+<td style="text-align:right;">
+0.0476122
+</td>
+<td style="text-align:left;">
+1869/896/1870/894/4998/9134/1031/5347
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04010
+</td>
+<td style="text-align:left;">
+MAPK signaling pathway
+</td>
+<td style="text-align:left;">
+13/170
+</td>
+<td style="text-align:left;">
+294/8102
+</td>
+<td style="text-align:right;">
+0.0087914
+</td>
+<td style="text-align:right;">
+0.0967050
+</td>
+<td style="text-align:right;">
+0.0817443
+</td>
+<td style="text-align:left;">
+3552/3553/1850/1950/25780/2261/4803/5801/1649/929/5608/3310/785
+</td>
+<td style="text-align:right;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa00340
+</td>
+<td style="text-align:left;">
+Histidine metabolism
+</td>
+<td style="text-align:left;">
+3/170
+</td>
+<td style="text-align:left;">
+22/8102
+</td>
+<td style="text-align:right;">
+0.0104250
+</td>
+<td style="text-align:right;">
+0.1100882
+</td>
+<td style="text-align:right;">
+0.0930570
+</td>
+<td style="text-align:left;">
+218/4129/224
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05410
+</td>
+<td style="text-align:left;">
+Hypertrophic cardiomyopathy
+</td>
+<td style="text-align:left;">
+6/170
+</td>
+<td style="text-align:left;">
+90/8102
+</td>
+<td style="text-align:right;">
+0.0113894
+</td>
+<td style="text-align:right;">
+0.1156462
+</td>
+<td style="text-align:right;">
+0.0977551
+</td>
+<td style="text-align:left;">
+3569/8515/3693/284217/1605/785
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05222
+</td>
+<td style="text-align:left;">
+Small cell lung cancer
+</td>
+<td style="text-align:left;">
+6/170
+</td>
+<td style="text-align:left;">
+92/8102
+</td>
+<td style="text-align:right;">
+0.0126072
+</td>
+<td style="text-align:right;">
+0.1232706
+</td>
+<td style="text-align:right;">
+0.1042000
+</td>
+<td style="text-align:left;">
+5743/1869/284217/3911/1870/9134
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04145
+</td>
+<td style="text-align:left;">
+Phagosome
+</td>
+<td style="text-align:left;">
+8/170
+</td>
+<td style="text-align:left;">
+152/8102
+</td>
+<td style="text-align:right;">
+0.0145110
+</td>
+<td style="text-align:right;">
+0.1368181
+</td>
+<td style="text-align:right;">
+0.1156516
+</td>
+<td style="text-align:left;">
+81035/4688/3693/245972/9902/929/10381/7277
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa05120
+</td>
+<td style="text-align:left;">
+Epithelial cell signaling in Helicobacter pylori infection
+</td>
+<td style="text-align:left;">
+5/170
+</td>
+<td style="text-align:left;">
+70/8102
+</td>
+<td style="text-align:right;">
+0.0154943
+</td>
+<td style="text-align:right;">
+0.1410518
+</td>
+<td style="text-align:right;">
+0.1192304
+</td>
+<td style="text-align:left;">
+2921/2919/3576/2920/245972
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hsa04934
+</td>
+<td style="text-align:left;">
+Cushing syndrome
+</td>
+<td style="text-align:left;">
+8/170
+</td>
+<td style="text-align:left;">
+155/8102
+</td>
+<td style="text-align:right;">
+0.0161598
+</td>
+<td style="text-align:right;">
+0.1422062
+</td>
+<td style="text-align:right;">
+0.1202062
+</td>
+<td style="text-align:left;">
+1869/1870/7477/9586/3777/1583/9134/1031
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- #### QLF -->
+<!-- not working -->
+<pre class="r"><code>#why is CKI vs Omt not significant at all?
+comparison_group=colnames(contrast) %&gt;% as.data.frame()
+
+# Create list object
+enrichKEGG_qlf=list()
+enrichKEGG_qlf_sig=list()
+for (i in 1:ncol(contrast)){
+  #at each iteration, let x = name of each contrast group
+  x=comparison_group[i,]
+  
+  #populate the enrichGo list with all KEGG terms
+  KEGGresults &lt;- clusterProfiler::enrichKEGG(gene = qlf_filtered[[x]]$entrezid,
+                        organism = &quot;hsa&quot;,
+                        pAdjustMethod = &quot;fdr&quot;) 
+  
+  enrichKEGG_qlf[[x]] &lt;- KEGGresults@result %&gt;% as.data.frame()
+ 
+  #filter only significant KEGG terms
+  enrichKEGG_qlf_sig[[x]] &lt;- enrichKEGG_qlf[[x]] %&gt;% filter(pvalue &lt;= 0.05)
+} 
+# save rds object for use in downstream GO and KEGG analysis
+enrichKEGG_qlf %&gt;% saveRDS(file = &quot;../0_data/rds_object/enrichKEGG_qlf_unfiltered.rds&quot;)
+enrichKEGG_qlf_sig %&gt;% saveRDS(file = &quot;../0_data/rds_object/enrichKEGG_qlf_filtered.rds&quot;)
+
+#save each unfiltered comparison group in the output directory
+writexl::write_xlsx(x = enrichKEGG_qlf,
+                    path = &quot;../3_output/enrichKEGG_qlf_unfiltered.xlsx&quot;)</code></pre>
+<!-- ### Using the `edgeR::keggaLRT` package -->
+<!-- #### TREAT -->
+<pre class="r"><code># Create list object
+kegga_treat=list()
+kegga_treat_sig=list()
+for (i in 1:ncol(contrast)){
+  #at each iteration, let x = name of each contrast group
+  x=comparison_group[i,]
+  
+  #populate the kegga list with all KEGG terms
+  kegga_treat[[x]] &lt;- edgeR::kegga.DGELRT(de = treat[[x]], 
+                                          geneid = treat[[x]]$genes$entrezid, 
+                                          species = &quot;Hs&quot;,
+                                          trend = TRUE,
+                                          FDR = 0.05)
+  
+  #filter only significant KEGG terms
+  kegga_treat_sig[[x]] &lt;- topKEGG(results = kegga_treat[[x]], number = 30)
+} 
+
+# save rds object for use in downstream GO and KEGG analysis
+kegga_treat %&gt;% saveRDS(file = &quot;../0_data/rds_object/kegga_treat_unfiltered.rds&quot;)
+kegga_treat_sig %&gt;% saveRDS(file = &quot;../0_data/rds_object/kegga_treat_filtered.rds&quot;)
+
+#save each unfiltered comparison group in the output directory
+writexl::write_xlsx(x = kegga_treat,
+                    path = &quot;../3_output/kegga_treat_unfiltered.xlsx&quot;)</code></pre>
+<!-- #### QLF -->
+<pre class="r"><code># Create list object
+kegga_qlf=list()
+kegga_qlf_sig=list()
+for (i in 1:ncol(contrast)){
+  #at each iteration, let x = name of each contrast group
+  x=comparison_group[i,]
+  
+  #populate the kegga list with all KEGG terms
+  kegga_qlf[[x]] &lt;- edgeR::kegga.DGELRT(de = qlf[[x]], 
+                                          geneid = qlf[[x]]$genes$entrezid, 
+                                          species = &quot;Hs&quot;,
+                                          trend = TRUE,
+                                          FDR = 0.05)
+  
+  #filter only significant KEGG terms
+  kegga_qlf_sig[[x]] &lt;- topKEGG(results = kegga_qlf[[x]], number = 30)
+} 
+
+# save rds object for use in downstream GO and KEGG analysis
+kegga_qlf %&gt;% saveRDS(file = &quot;../0_data/rds_object/kegga_qlf_unfiltered.rds&quot;)
+kegga_qlf_sig %&gt;% saveRDS(file = &quot;../0_data/rds_object/kegga_qlf_filtered.rds&quot;)
+
+#save each unfiltered comparison group in the output directory
+writexl::write_xlsx(x = kegga_qlf,
+                    path = &quot;../3_output/kegga_qlf_unfiltered.xlsx&quot;)</code></pre>
+</div>
+</div>
+</div>
+<div id="visualisation" class="section level1">
+<h1>Visualisation</h1>
+<div id="heatmap" class="section level2">
+<h2>Heatmap</h2>
+<pre class="r"><code>kegg_id &lt;- &quot;hsa04657&quot;
+kegg_pathway &lt;- KEGGREST::keggGet(kegg_id)
+kegg_pathway_name &lt;- kegg_pathway[[1]]$NAME
+
+entrezID=list()
+matrix=list()
+
+for (i in 1:ncol(contrast)){
+  #at each iteration, let x = name of each contrast group
+  x=comparison_group[i,]
+  
+  entrezID[[x]] &lt;- enrichKEGG_treat_sig[[x]][,c(&quot;ID&quot;, &quot;geneID&quot;)] %&gt;% as.data.frame()
+  entrezID[[x]] &lt;- entrezID[[x]][kegg_id,&quot;geneID&quot;] %&gt;% as.data.frame()
+  entrezID[[x]] &lt;- separate_rows(entrezID[[x]],.,sep = &quot;/&quot;)
+  colnames(entrezID[[x]]) &lt;- &quot;entrezid&quot;
+  
+  match &lt;- treat_filtered[[x]]$entrezid %in% entrezID[[x]]$entrezid
+
+  matrix[[x]] &lt;- treat_filtered[[x]][match, c(&quot;gene_name&quot;, &quot;logFC&quot;)]
+}
+
+matrix_merged &lt;- matrix$`UT vs CKI` %&gt;% 
+  left_join(matrix$`CKI-Mac vs CKI`, by = &quot;gene_name&quot;) %&gt;% 
+  left_join(matrix$`CKI-Nme vs CKI`, by = &quot;gene_name&quot;) %&gt;% 
+  left_join(matrix$`CKI-Omt vs CKI`, by = &quot;gene_name&quot;) %&gt;% 
+  left_join(matrix$`CKI-Tri vs CKI`, by = &quot;gene_name&quot;) %&gt;% 
+  column_to_rownames(&quot;gene_name&quot;)
+
+colnames(matrix_merged) &lt;- c(&quot;UT\nvs\nCKI&quot;, &quot;CKI-Mac\nvs\nCKI&quot;, &quot;CKI-Nme\nvs\nCKI&quot;, &quot;CKI-Omt\nvs\nCKI&quot;, &quot;CKI-Tri\nvs\nCKI&quot;)
+
+
+
+my_palette &lt;- colorRampPalette(c(&quot;dodgerblue3&quot;, &quot;white&quot;, &quot;firebrick3&quot;))(n = 201)
+
+pheatmap(mat = matrix_merged,
+         clustering_distance_rows = &quot;euclidean&quot;,
+         treeheight_row = 100,
+         legend_labels = &quot;logFC&quot;,
+         main = paste0(&quot;Heatmap of &quot;, kegg_pathway_name),
+         fontsize = 16,
+         fontsize_row = 14,
+         fontsize_number = 10,
+         fontsize_col = 14,
+         angle_col = 0,
+         border_color = &quot;gray60&quot;,
+         color = my_palette)</code></pre>
+<p><img src="figure/kegg.Rmd/unnamed-chunk-6-1.png" width="1056" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="setup" class="section level1">
+<h1>Setup</h1>
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.1.0 (2021-05-18)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 10 x64 (build 19043)
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=English_Australia.1252  LC_CTYPE=English_Australia.1252   
+[3] LC_MONETARY=English_Australia.1252 LC_NUMERIC=C                      
+[5] LC_TIME=English_Australia.1252    
+
+attached base packages:
+ [1] parallel  stats4    grid      stats     graphics  grDevices utils    
+ [8] datasets  methods   base     
+
+other attached packages:
+ [1] enrichplot_1.12.3     KEGGREST_1.32.0       biomaRt_2.48.3       
+ [4] org.Hs.eg.db_3.13.0   AnnotationDbi_1.54.1  IRanges_2.26.0       
+ [7] S4Vectors_0.30.0      Biobase_2.52.0        BiocGenerics_0.38.0  
+[10] clusterProfiler_4.0.5 Glimma_2.2.0          edgeR_3.34.0         
+[13] limma_3.48.1          ggrepel_0.9.1         ggbiplot_0.55        
+[16] scales_1.1.1          plyr_1.8.6            ggpubr_0.4.0         
+[19] pheatmap_1.0.12       cowplot_1.1.1         pander_0.6.4         
+[22] kableExtra_1.3.4      forcats_0.5.1         stringr_1.4.0        
+[25] purrr_0.3.4           tidyr_1.1.3           ggplot2_3.3.5        
+[28] tidyverse_1.3.1       reshape2_1.4.4        tibble_3.1.2         
+[31] readr_2.0.0           magrittr_2.0.1        dplyr_1.0.7          
+
+loaded via a namespace (and not attached):
+  [1] utf8_1.2.1                  tidyselect_1.1.1           
+  [3] RSQLite_2.2.7               htmlwidgets_1.5.4          
+  [5] BiocParallel_1.26.1         scatterpie_0.1.7           
+  [7] munsell_0.5.0               statmod_1.4.36             
+  [9] withr_2.4.2                 colorspace_2.0-2           
+ [11] GOSemSim_2.18.1             filelock_1.0.2             
+ [13] highr_0.9                   knitr_1.36                 
+ [15] rstudioapi_0.13             ggsignif_0.6.3             
+ [17] DOSE_3.18.3                 MatrixGenerics_1.4.3       
+ [19] labeling_0.4.2              git2r_0.28.0               
+ [21] GenomeInfoDbData_1.2.6      polyclip_1.10-0            
+ [23] bit64_4.0.5                 farver_2.1.0               
+ [25] rprojroot_2.0.2             downloader_0.4             
+ [27] treeio_1.16.2               vctrs_0.3.8                
+ [29] generics_0.1.0              xfun_0.24                  
+ [31] BiocFileCache_2.0.0         R6_2.5.1                   
+ [33] GenomeInfoDb_1.28.4         graphlayouts_0.7.1         
+ [35] locfit_1.5-9.4              gridGraphics_0.5-1         
+ [37] bitops_1.0-7                cachem_1.0.5               
+ [39] fgsea_1.18.0                DelayedArray_0.18.0        
+ [41] assertthat_0.2.1            promises_1.2.0.1           
+ [43] ggraph_2.0.5                gtable_0.3.0               
+ [45] tidygraph_1.2.0             workflowr_1.6.2            
+ [47] rlang_0.4.11                genefilter_1.74.0          
+ [49] systemfonts_1.0.2           splines_4.1.0              
+ [51] lazyeval_0.2.2              rstatix_0.7.0              
+ [53] broom_0.7.9                 yaml_2.2.1                 
+ [55] abind_1.4-5                 modelr_0.1.8               
+ [57] backports_1.2.1             httpuv_1.6.1               
+ [59] qvalue_2.24.0               tools_4.1.0                
+ [61] ggplotify_0.1.0             ellipsis_0.3.2             
+ [63] jquerylib_0.1.4             RColorBrewer_1.1-2         
+ [65] Rcpp_1.0.6                  progress_1.2.2             
+ [67] zlibbioc_1.38.0             RCurl_1.98-1.3             
+ [69] prettyunits_1.1.1           viridis_0.6.2              
+ [71] SummarizedExperiment_1.22.0 haven_2.4.3                
+ [73] fs_1.5.0                    data.table_1.14.0          
+ [75] DO.db_2.9                   openxlsx_4.2.4             
+ [77] reprex_2.0.1                whisker_0.4                
+ [79] matrixStats_0.60.1          patchwork_1.1.1            
+ [81] hms_1.1.1                   evaluate_0.14              
+ [83] xtable_1.8-4                XML_3.99-0.6               
+ [85] rio_0.5.27                  readxl_1.3.1               
+ [87] gridExtra_2.3               compiler_4.1.0             
+ [89] shadowtext_0.0.9            writexl_1.4.0              
+ [91] crayon_1.4.1                htmltools_0.5.2            
+ [93] ggfun_0.0.4                 later_1.2.0                
+ [95] tzdb_0.1.2                  aplot_0.1.1                
+ [97] geneplotter_1.70.0          lubridate_1.7.10           
+ [99] DBI_1.1.1                   tweenr_1.0.2               
+[101] dbplyr_2.1.1                rappdirs_0.3.3             
+[103] MASS_7.3-54                 Matrix_1.3-3               
+[105] car_3.0-11                  cli_3.0.1                  
+[107] igraph_1.2.6                GenomicRanges_1.44.0       
+[109] pkgconfig_2.0.3             foreign_0.8-81             
+[111] xml2_1.3.2                  ggtree_3.0.4               
+[113] svglite_2.0.0               annotate_1.70.0            
+[115] bslib_0.3.1                 webshot_0.5.2              
+[117] XVector_0.32.0              rvest_1.0.2                
+[119] yulab.utils_0.0.4           digest_0.6.27              
+[121] Biostrings_2.60.1           rmarkdown_2.11             
+[123] cellranger_1.1.0            fastmatch_1.1-3            
+[125] tidytree_0.3.5              curl_4.3.2                 
+[127] lifecycle_1.0.1             nlme_3.1-152               
+[129] jsonlite_1.7.2              carData_3.0-4              
+[131] viridisLite_0.4.0           fansi_0.5.0                
+[133] pillar_1.6.4                lattice_0.20-44            
+[135] fastmap_1.1.0               httr_1.4.2                 
+[137] survival_3.2-11             GO.db_3.13.0               
+[139] glue_1.4.2                  zip_2.2.0                  
+[141] png_0.1-7                   bit_4.0.4                  
+[143] ggforce_0.3.3               stringi_1.6.2              
+[145] sass_0.4.0                  blob_1.2.2                 
+[147] DESeq2_1.32.0               memoise_2.0.0              
+[149] ape_5.5                    </code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.1.0 (2021-05-18)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 10 x64 (build 19043)
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=English_Australia.1252  LC_CTYPE=English_Australia.1252   
+[3] LC_MONETARY=English_Australia.1252 LC_NUMERIC=C                      
+[5] LC_TIME=English_Australia.1252    
+
+attached base packages:
+ [1] parallel  stats4    grid      stats     graphics  grDevices utils    
+ [8] datasets  methods   base     
+
+other attached packages:
+ [1] enrichplot_1.12.3     KEGGREST_1.32.0       biomaRt_2.48.3       
+ [4] org.Hs.eg.db_3.13.0   AnnotationDbi_1.54.1  IRanges_2.26.0       
+ [7] S4Vectors_0.30.0      Biobase_2.52.0        BiocGenerics_0.38.0  
+[10] clusterProfiler_4.0.5 Glimma_2.2.0          edgeR_3.34.0         
+[13] limma_3.48.1          ggrepel_0.9.1         ggbiplot_0.55        
+[16] scales_1.1.1          plyr_1.8.6            ggpubr_0.4.0         
+[19] pheatmap_1.0.12       cowplot_1.1.1         pander_0.6.4         
+[22] kableExtra_1.3.4      forcats_0.5.1         stringr_1.4.0        
+[25] purrr_0.3.4           tidyr_1.1.3           ggplot2_3.3.5        
+[28] tidyverse_1.3.1       reshape2_1.4.4        tibble_3.1.2         
+[31] readr_2.0.0           magrittr_2.0.1        dplyr_1.0.7          
+
+loaded via a namespace (and not attached):
+  [1] utf8_1.2.1                  tidyselect_1.1.1           
+  [3] RSQLite_2.2.7               htmlwidgets_1.5.4          
+  [5] BiocParallel_1.26.1         scatterpie_0.1.7           
+  [7] munsell_0.5.0               statmod_1.4.36             
+  [9] withr_2.4.2                 colorspace_2.0-2           
+ [11] GOSemSim_2.18.1             filelock_1.0.2             
+ [13] highr_0.9                   knitr_1.36                 
+ [15] rstudioapi_0.13             ggsignif_0.6.3             
+ [17] DOSE_3.18.3                 MatrixGenerics_1.4.3       
+ [19] labeling_0.4.2              git2r_0.28.0               
+ [21] GenomeInfoDbData_1.2.6      polyclip_1.10-0            
+ [23] bit64_4.0.5                 farver_2.1.0               
+ [25] rprojroot_2.0.2             downloader_0.4             
+ [27] treeio_1.16.2               vctrs_0.3.8                
+ [29] generics_0.1.0              xfun_0.24                  
+ [31] BiocFileCache_2.0.0         R6_2.5.1                   
+ [33] GenomeInfoDb_1.28.4         graphlayouts_0.7.1         
+ [35] locfit_1.5-9.4              gridGraphics_0.5-1         
+ [37] bitops_1.0-7                cachem_1.0.5               
+ [39] fgsea_1.18.0                DelayedArray_0.18.0        
+ [41] assertthat_0.2.1            promises_1.2.0.1           
+ [43] ggraph_2.0.5                gtable_0.3.0               
+ [45] tidygraph_1.2.0             workflowr_1.6.2            
+ [47] rlang_0.4.11                genefilter_1.74.0          
+ [49] systemfonts_1.0.2           splines_4.1.0              
+ [51] lazyeval_0.2.2              rstatix_0.7.0              
+ [53] broom_0.7.9                 yaml_2.2.1                 
+ [55] abind_1.4-5                 modelr_0.1.8               
+ [57] backports_1.2.1             httpuv_1.6.1               
+ [59] qvalue_2.24.0               tools_4.1.0                
+ [61] ggplotify_0.1.0             ellipsis_0.3.2             
+ [63] jquerylib_0.1.4             RColorBrewer_1.1-2         
+ [65] Rcpp_1.0.6                  progress_1.2.2             
+ [67] zlibbioc_1.38.0             RCurl_1.98-1.3             
+ [69] prettyunits_1.1.1           viridis_0.6.2              
+ [71] SummarizedExperiment_1.22.0 haven_2.4.3                
+ [73] fs_1.5.0                    data.table_1.14.0          
+ [75] DO.db_2.9                   openxlsx_4.2.4             
+ [77] reprex_2.0.1                whisker_0.4                
+ [79] matrixStats_0.60.1          patchwork_1.1.1            
+ [81] hms_1.1.1                   evaluate_0.14              
+ [83] xtable_1.8-4                XML_3.99-0.6               
+ [85] rio_0.5.27                  readxl_1.3.1               
+ [87] gridExtra_2.3               compiler_4.1.0             
+ [89] shadowtext_0.0.9            writexl_1.4.0              
+ [91] crayon_1.4.1                htmltools_0.5.2            
+ [93] ggfun_0.0.4                 later_1.2.0                
+ [95] tzdb_0.1.2                  aplot_0.1.1                
+ [97] geneplotter_1.70.0          lubridate_1.7.10           
+ [99] DBI_1.1.1                   tweenr_1.0.2               
+[101] dbplyr_2.1.1                rappdirs_0.3.3             
+[103] MASS_7.3-54                 Matrix_1.3-3               
+[105] car_3.0-11                  cli_3.0.1                  
+[107] igraph_1.2.6                GenomicRanges_1.44.0       
+[109] pkgconfig_2.0.3             foreign_0.8-81             
+[111] xml2_1.3.2                  ggtree_3.0.4               
+[113] svglite_2.0.0               annotate_1.70.0            
+[115] bslib_0.3.1                 webshot_0.5.2              
+[117] XVector_0.32.0              rvest_1.0.2                
+[119] yulab.utils_0.0.4           digest_0.6.27              
+[121] Biostrings_2.60.1           rmarkdown_2.11             
+[123] cellranger_1.1.0            fastmatch_1.1-3            
+[125] tidytree_0.3.5              curl_4.3.2                 
+[127] lifecycle_1.0.1             nlme_3.1-152               
+[129] jsonlite_1.7.2              carData_3.0-4              
+[131] viridisLite_0.4.0           fansi_0.5.0                
+[133] pillar_1.6.4                lattice_0.20-44            
+[135] fastmap_1.1.0               httr_1.4.2                 
+[137] survival_3.2-11             GO.db_3.13.0               
+[139] glue_1.4.2                  zip_2.2.0                  
+[141] png_0.1-7                   bit_4.0.4                  
+[143] ggforce_0.3.3               stringi_1.6.2              
+[145] sass_0.4.0                  blob_1.2.2                 
+[147] DESeq2_1.32.0               memoise_2.0.0              
+[149] ape_5.5                    </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -36,12 +36,26 @@ library(pheatmap)
 library(ggpubr)
 library(ggbiplot)
 library(ggrepel)
-theme_set(theme_bw())
 
 # Bioconductor packages:
 library(edgeR)
 library(limma)
 library(Glimma)
+
+# Set ggplot theme
+theme_set(theme_bw())
+
+theme_update(legend.background = element_rect(fill = "transparent", colour = NA),
+      legend.box.background = element_rect(fill = "transparent", colour = NA),
+      
+      panel.background = element_rect(fill = "transparent",colour = NA),
+      plot.background = element_rect(fill = "transparent", colour = NA),
+      
+      plot.title = element_text(color = "gray20", size = 22, angle = 0, hjust = 0, vjust = .5, face = "bold"),
+      axis.text.x = element_text(color = "gray30", size = 12, angle = 0, hjust = .5, vjust = .5, face = "plain"),
+      axis.text.y = element_text(color = "gray30", size = 12, angle = 0, hjust = 1, vjust = 0, face = "plain"),  
+      axis.title.x = element_text(color = "gray30", size = 12, angle = 0, hjust = .5, vjust = 0, face = "plain"),
+      axis.title.y = element_text(color = "gray30", size = 12, angle = 90, hjust = .5, vjust = .5, face = "plain"))
 ```
 
 
@@ -163,43 +177,43 @@ invisible(dev.print(pdf, "../2_plots/2_dge/qlf_dispersion.svg"))
 ### Apply QLF test
 ```{r applyQLF}
 # Create list object
-apply_qlf=list()
-dge_qlf_decideTest=list()
-dge_qlf_unfiltered=list()
-dge_qlf_filtered=list()
+qlf=list()
+qlf_decideTest=list()
+qlf_unfiltered=list()
+qlf_filtered=list()
 
 for (i in 1:ncol(contrast)){
   #at each iteration, let x = name of each contrast group
   x=comparison_group[i,]
 
   #populate list with DGELRT object for every comparison
-  apply_qlf[[x]] <-
+  qlf[[x]] <-
     edgeR::glmQLFTest(glmfit = fit_GLM_qlf, contrast = contrast[,x])
 
   #populate significant list with decide test
-  dge_qlf_decideTest[[x]] <-
-    decideTests(apply_qlf[[x]], p.value = 0.05, adjust.method = "fdr") %>% summary()
+  qlf_decideTest[[x]] <-
+    decideTests(qlf[[x]], p.value = 0.05, adjust.method = "fdr") %>% summary()
 
   #populate unfiltered list with list of all DE genes
-  dge_qlf_unfiltered[[x]] <-
-    edgeR::topTags(object = apply_qlf[[x]], n = Inf) %>% as.data.frame()
+  qlf_unfiltered[[x]] <-
+    edgeR::topTags(object = qlf[[x]], n = Inf) %>% as.data.frame()
 
   #populate filtered list with list of significant DE genes
-  dge_qlf_filtered[[x]] <-
-    edgeR::topTags(object = apply_qlf[[x]], n = Inf, adjust.method = "fdr", p.value = 0.05, sort.by = "PValue") %>% as.data.frame()
+  qlf_filtered[[x]] <-
+    edgeR::topTags(object = qlf[[x]], n = Inf, adjust.method = "fdr", p.value = 0.05, sort.by = "PValue") %>% as.data.frame()
 }
 
 # save rds object for use in downstream GO and KEGG analysis
-apply_qlf%>% saveRDS(file = "../0_data/rds_object/qlf.rds")
-# dge_qlf_unfiltered %>% saveRDS(file = "../0_data/rds_object/qlf_unfiltered.rds")
-dge_qlf_filtered %>% saveRDS(file = "../0_data/rds_object/qlf_filtered.rds")
+qlf%>% saveRDS(file = "../0_data/rds_object/qlf.rds")
+# qlf_unfiltered %>% saveRDS(file = "../0_data/rds_object/qlf_unfiltered.rds")
+qlf_filtered %>% saveRDS(file = "../0_data/rds_object/qlf_filtered.rds")
 
 #save each unfiltered comparison group in the output directory
 
 # dont need this
-# writexl::write_xlsx(x = dge_qlf_unfiltered,
+# writexl::write_xlsx(x = qlf_unfiltered,
                     # path = "../3_output/qlf_unfiltered.xlsx")
-writexl::write_xlsx(x = dge_qlf_filtered,
+writexl::write_xlsx(x = qlf_filtered,
                     path = "../3_output/qlf_filtered.xlsx")
 ```
 
@@ -208,16 +222,16 @@ writexl::write_xlsx(x = dge_qlf_filtered,
 
 ##### P Value histogram
 ```{r pValueHistogram_qlf}
-lapply(1:length(apply_qlf),
+lapply(1:length(qlf),
        function(x){
-         hist(x = apply_qlf[[x]]$table$PValue,
+         hist(x = qlf[[x]]$table$PValue,
               breaks = 50,
-              main = paste0("P-Values qlf ", names(apply_qlf[x])),
+              main = paste0("P-Values qlf ", names(qlf[x])),
               xlab = "P-Value",
               col = "gray50")
 
 invisible(dev.print(pdf,
-                    paste0("../2_plots/2_dge/qlf_pValue_histogram_", names(apply_qlf[x]), ".svg")))
+                    paste0("../2_plots/2_dge/qlf_pValue_histogram_", names(qlf[x]), ".svg")))
 })
 ```
 
@@ -227,11 +241,11 @@ The differential expression can initial visualised through `plotMD` function, wh
 **NOTE: this does not account for minimal `logFC` value**
 
 ```{r MAplotCustom_qlf}
-lapply(1:length(dge_qlf_unfiltered),
+lapply(1:length(qlf_filtered),
        function(x) {
 
          #create data.frame specific for the custome MA plot
-         MAplotData_qlf <- dplyr::select(as.data.frame(dge_qlf_unfiltered[[x]]), logCPM, logFC, FDR)
+         MAplotData_qlf <- dplyr::select(as.data.frame(qlf_filtered[[x]]), logCPM, logFC, FDR)
          colnames(MAplotData_qlf) <- c("baseMeanLog2", "log2FoldChange", "padj")
 
          #create custom MA plot
@@ -248,7 +262,7 @@ lapply(1:length(dge_qlf_unfiltered),
            select.top.method = c("padj", "fc"),
            main = "MA Plot from GLM-QLF ",
            legend = "bottom",
-           submain = names(dge_qlf_unfiltered[x]),
+           submain = names(qlf_filtered[x]),
            xlab = expression("log"[2]*"CPM"),
            ylab = expression("log"[2]*"FC"),
            ylim = c(-8, 8),
@@ -260,7 +274,7 @@ lapply(1:length(dge_qlf_unfiltered),
            font.y = c(13, "plain", "black"))
 
          #save MA plot
-         # ggsave(paste0("MA_plot_qlf_", names(dge_qlf_unfiltered[x]), ".svg"),
+         # ggsave(paste0("MA_plot_qlf_", names(qlf_filtered[x]), ".svg"),
          #        plot = MAplot_qlf,
          #        path = "../2_plots/2_dge/")
 
@@ -274,11 +288,11 @@ lapply(1:length(dge_qlf_unfiltered),
 Here the `ggplot` function can also be used to illustrate the DE genes significant `pValue` and `logFC`. In this instance, the significance is determined as genes with `PValue < 0.05` **and** `abs(logFC)>log(2)`.
 
 ```{r volcanoPlot_qlf}
-lapply(1:length(dge_qlf_unfiltered),
+lapply(1:length(qlf_filtered),
        function(x) {
 
          #add an extra column and determine whether the DE genes are significant
-         dge_qlf_unfiltered[[x]] <- dge_qlf_unfiltered[[x]] %>% as.data.frame() %>%
+         qlf_filtered[[x]] <- qlf_filtered[[x]] %>% as.data.frame() %>%
            dplyr::mutate(Expression = case_when
                          (FDR <= 0.05 & logFC >= 1.5 ~ "Up-regulated",
                           FDR <= 0.05 & logFC <= -1.5 ~ "Down-regulated",
@@ -287,11 +301,11 @@ lapply(1:length(dge_qlf_unfiltered),
          #adding labels to top genes
          top <- 5
          top_genes_qlf <- bind_rows(
-           dge_qlf_unfiltered[[x]] %>%
+           qlf_filtered[[x]] %>%
              filter(Expression == 'Up-regulated') %>%
              arrange(FDR, desc(abs(logFC))) %>%
              head(top),
-           dge_qlf_unfiltered[[x]] %>%
+           qlf_filtered[[x]] %>%
              filter(Expression == 'Down-regulated') %>%
              arrange(FDR, desc(abs(logFC))) %>%
              head(top)
@@ -299,7 +313,7 @@ lapply(1:length(dge_qlf_unfiltered),
          invisible(top_genes_qlf %>% as.data.frame())
 
          #generate volcano plot with the allDEgene data.frame
-         volcano_plot_qlf <- dge_qlf_unfiltered[[x]] %>%
+         volcano_plot_qlf <- qlf_filtered[[x]] %>%
            ggplot(aes(x = logFC,
                       y = -log(FDR, 10))) +
            geom_point(aes(colour = Expression),
@@ -316,11 +330,11 @@ lapply(1:length(dge_qlf_unfiltered),
            scale_color_manual(values = c("dodgerblue3", "gray50", "firebrick3")) +
            guides(colour = guide_legend(override.aes = list(size=1.5))) +
            labs(title = "Volcano Plot: GLM-QLF",
-                subtitle = paste0(names(dge_qlf_unfiltered[x])),
+                subtitle = paste0(names(qlf_filtered[x])),
                 colour = "Expression")
 
          #save to directory
-         # ggsave(paste0("volcano_plot_qlf_", names(dge_qlf_unfiltered[x]), ".svg"),
+         # ggsave(paste0("volcano_plot_qlf_", names(qlf_filtered[x]), ".svg"),
          #        plot = volcano_plot_qlf,
          #        path = "../2_plots/2_dge/")
 
@@ -334,41 +348,41 @@ lapply(1:length(dge_qlf_unfiltered),
 
 ```{r}
 # Create list object
-apply_treat=list()
-dge_treat_decideTest=list()
-dge_treat_unfiltered=list()
-dge_treat_filtered=list()
+treat=list()
+treat_decideTest=list()
+treat_unfiltered=list()
+treat_filtered=list()
 
 for (i in 1:ncol(contrast)){
   #at each iteration, let x = name of each contrast group
   x=comparison_group[i,]
 
   #populate list with DGELRT object for every comparison
-  apply_treat[[x]] <-
+  treat[[x]] <-
     edgeR::glmTreat(glmfit =  fit_GLM_qlf, contrast = contrast[,x], lfc = 1.5)
 
   #populate significant list with decide test
-  dge_treat_decideTest[[x]] <- decideTests(apply_treat[[x]], p.value = 0.05, adjust.method = "fdr") %>% summary()
+  treat_decideTest[[x]] <- decideTests(treat[[x]], p.value = 0.05, adjust.method = "fdr") %>% summary()
 
 
   #populate unfiltered list with list of all DE genes
-  dge_treat_unfiltered[[x]] <-
-    edgeR::topTags(object = apply_treat[[x]], n = Inf) %>% as.data.frame()
+  treat_unfiltered[[x]] <-
+    edgeR::topTags(object = treat[[x]], n = Inf) %>% as.data.frame()
 
   #populate filtered list with list of significant DE genes
-  dge_treat_filtered[[x]] <-
-    edgeR::topTags(object = apply_treat[[x]], n = Inf, adjust.method = "fdr", p.value = 0.05, sort.by = "PValue") %>% as.data.frame()
+  treat_filtered[[x]] <-
+    edgeR::topTags(object = treat[[x]], n = Inf, adjust.method = "fdr", p.value = 0.05, sort.by = "PValue") %>% as.data.frame()
 }
 
 # save rds object for use in downstream GO and KEGG analysis
-apply_treat %>% saveRDS(file = "../0_data/rds_object/apply_treat.rds")
-# dge_treat_unfiltered %>% saveRDS(file = "../0_data/rds_object/dge_treat_unfiltered.rds")
-dge_treat_filtered %>% saveRDS(file = "../0_data/rds_object/dge_treat_filtered.rds")
+treat %>% saveRDS(file = "../0_data/rds_object/treat.rds")
+treat_unfiltered %>% saveRDS(file = "../0_data/rds_object/treat_unfiltered.rds")
+treat_filtered %>% saveRDS(file = "../0_data/rds_object/treat_filtered.rds")
 
 #save each unfiltered comparison group in the output directory
-# writexl::write_xlsx(x = dge_treat_unfiltered,
+# writexl::write_xlsx(x = treat_unfiltered,
                     # path = "../3_output/treat_unfiltered.xlsx")
-writexl::write_xlsx(x = dge_treat_filtered,
+writexl::write_xlsx(x = treat_filtered,
                     path = "../3_output/treat_filtered.xlsx")
 ```
 
@@ -376,15 +390,15 @@ writexl::write_xlsx(x = dge_treat_filtered,
 
 ##### P Value histogram
 ```{r pValueHistogram_treat}
-lapply(1:length(apply_treat),
+lapply(1:length(treat),
        function(x){
-         hist(x = apply_treat[[x]]$table$PValue,
+         hist(x = treat[[x]]$table$PValue,
               breaks = 50,
-              main = paste0("P-Values treat ", names(apply_treat[x])),
+              main = paste0("P-Values treat ", names(treat[x])),
               xlab = "P-Value",
               col = "gray50")
 
-invisible(dev.print(pdf, paste0("../2_plots/2_dge/treat_pValue_histogram_", names(apply_treat[x]), ".svg")))
+invisible(dev.print(pdf, paste0("../2_plots/2_dge/treat_pValue_histogram_", names(treat[x]), ".svg")))
 })
 ```
 
@@ -394,11 +408,11 @@ The differential expression can initial visualised through `plotMD` function, wh
 **NOTE: this does not account for minimal `logFC` value**
 
 ```{r MAplotCustom_treat}
-lapply(1:length(dge_treat_unfiltered),
+lapply(1:length(treat_unfiltered),
        function(x) {
 
          #create data.frame specific for the custome MA plot
-         MAplotData_treat <- dplyr::select(as.data.frame(dge_treat_unfiltered[[x]]), logCPM, logFC, FDR)
+         MAplotData_treat <- dplyr::select(as.data.frame(treat_unfiltered[[x]]), logCPM, logFC, FDR)
          colnames(MAplotData_treat) <- c("baseMeanLog2", "log2FoldChange", "padj")
 
          #create custom MA plot
@@ -415,7 +429,7 @@ lapply(1:length(dge_treat_unfiltered),
            ylim = c(-8, 8),
            select.top.method = c("padj", "fc"),
            main = "MA Plot from GLM-TREAT",
-           submain = names(dge_treat_unfiltered[x]),
+           submain = names(treat_unfiltered[x]),
            legend = "bottom",
            legend.title = "Expression",
            xlab = expression("log"[2]*"CPM"),
@@ -429,7 +443,7 @@ lapply(1:length(dge_treat_unfiltered),
            ggtheme = ggplot2::theme_minimal())
 
          #save MA plot
-         ggsave(paste0("MA_plot_treat_", names(dge_treat_unfiltered[x]), ".svg"),
+         ggsave(paste0("MA_plot_treat_", names(treat_unfiltered[x]), ".svg"),
                 plot = MAplot_treat,
                 path = "../2_plots/2_dge/")
 
@@ -443,11 +457,11 @@ lapply(1:length(dge_treat_unfiltered),
 Here the `ggplot` function can also be used to illustrate the DE genes significant `pValue` and `logFC`. In this instance, the significance is determined as genes with `PValue < 0.05` **and** `abs(logFC)>log(2)`.
 
 ```{r volcanoPlot_treat}
-lapply(1:length(dge_treat_unfiltered),
+lapply(1:length(treat_unfiltered),
        function(x) {
 
          #add an extra column and determine whether the DE genes are significant
-         dge_treat_unfiltered[[x]] <- dge_treat_unfiltered[[x]] %>% as.data.frame() %>%
+         treat_unfiltered[[x]] <- treat_unfiltered[[x]] %>% as.data.frame() %>%
            dplyr::mutate(Expression = case_when
                          (FDR <= 0.05 & logFC >= 1.5 ~ "Up-regulated",
                           FDR <= 0.05 & logFC <= -1.5 ~ "Down-regulated",
@@ -456,11 +470,11 @@ lapply(1:length(dge_treat_unfiltered),
          #adding labels to top genes
          top <- 5
          top_genes_treat <- bind_rows(
-           dge_treat_unfiltered[[x]] %>%
+           treat_unfiltered[[x]] %>%
              filter(Expression == 'Up-regulated') %>%
              arrange(FDR, desc(abs(logFC))) %>%
              head(top),
-           dge_treat_unfiltered[[x]] %>%
+           treat_unfiltered[[x]] %>%
              filter(Expression == 'Down-regulated') %>%
              arrange(FDR, desc(abs(logFC))) %>%
              head(top)
@@ -468,7 +482,7 @@ lapply(1:length(dge_treat_unfiltered),
          invisible(top_genes_treat %>% as.data.frame())
 
          #generate volcano plot with the allDEgene data.frame
-         volcano_plot_treat <- dge_treat_unfiltered[[x]] %>%
+         volcano_plot_treat <- treat_unfiltered[[x]] %>%
            ggplot(aes(x = logFC,
                       y = -log(FDR, 10))) +
            geom_point(aes(colour = Expression),
@@ -485,11 +499,11 @@ lapply(1:length(dge_treat_unfiltered),
            scale_color_manual(values = c("dodgerblue3", "gray50", "firebrick3")) +
            guides(colour = guide_legend(override.aes = list(size=1.5))) +
            labs(title = "Volcano Plot: GLM-TREAT",
-                subtitle = paste0(names(dge_treat_unfiltered[x])),
+                subtitle = paste0(names(treat_unfiltered[x])),
                 colour = "Expression")
 
          #save to directory
-         ggsave(paste0("volcano_plot_treat_", names(dge_treat_unfiltered[x]), ".svg"),
+         ggsave(paste0("volcano_plot_treat_", names(treat_unfiltered[x]), ".svg"),
                 plot = volcano_plot_treat,
                 path = "../2_plots/2_dge/")
 

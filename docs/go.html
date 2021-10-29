@@ -1,0 +1,6276 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Ha Tran" />
+
+<meta name="date" content="2021-08-09" />
+
+<title>GO Analysis</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">CKI_DGE</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Setting Up
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="obtainData.html">Obtaining Data</a>
+    </li>
+    <li>
+      <a href="setUp.html">QC and Pre-processing</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Analysis
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="dge.html">DE Analysis</a>
+    </li>
+    <li class="dropdown-header">GO Term Enrichment Analysis</li>
+    <li class="dropdown-header">KEGG Pathway Enrichment Analysis</li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">GO Analysis</h1>
+<h4 class="author">Ha Tran</h4>
+<h4 class="date">08/09/2021</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2021-10-30
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 2
+</p>
+<p>
+<strong>Knit directory:</strong> <code>01_CKI_DGE/1_analysis/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The R Markdown is untracked by Git. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongobjectspresent"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>Environment:</strong> objects present </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongobjectspresent" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+The global environment had objects present when the code in the R Markdown file was run. These objects can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment. Use <code>wflow_publish</code> or <code>wflow_build</code> to ensure that the code is always run in an empty environment.
+</p>
+<p>
+The following objects were defined in the global environment when these results were created:
+</p>
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th style="text-align:left;">
+Name
+</th>
+<th style="text-align:left;">
+Class
+</th>
+<th style="text-align:left;">
+Size
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+comparison_group
+</td>
+<td style="text-align:left;">
+data.frame
+</td>
+<td style="text-align:left;">
+1.1 Kb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+contrast
+</td>
+<td style="text-align:left;">
+matrix;array
+</td>
+<td style="text-align:left;">
+1.7 Kb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+designMatrix
+</td>
+<td style="text-align:left;">
+matrix;array
+</td>
+<td style="text-align:left;">
+3.5 Kb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dge
+</td>
+<td style="text-align:left;">
+DGEList
+</td>
+<td style="text-align:left;">
+12 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+estimateDispersion
+</td>
+<td style="text-align:left;">
+DGEList
+</td>
+<td style="text-align:left;">
+12.5 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+fit_GLM_qlf
+</td>
+<td style="text-align:left;">
+DGEGLM
+</td>
+<td style="text-align:left;">
+20.6 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+i
+</td>
+<td style="text-align:left;">
+integer
+</td>
+<td style="text-align:left;">
+56 bytes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+qlf
+</td>
+<td style="text-align:left;">
+list
+</td>
+<td style="text-align:left;">
+101 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+qlf_decideTest
+</td>
+<td style="text-align:left;">
+list
+</td>
+<td style="text-align:left;">
+5.6 Kb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+qlf_filtered
+</td>
+<td style="text-align:left;">
+list
+</td>
+<td style="text-align:left;">
+37.5 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+qlf_unfiltered
+</td>
+<td style="text-align:left;">
+list
+</td>
+<td style="text-align:left;">
+49.2 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+treat
+</td>
+<td style="text-align:left;">
+list
+</td>
+<td style="text-align:left;">
+96.1 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+treat_decideTest
+</td>
+<td style="text-align:left;">
+list
+</td>
+<td style="text-align:left;">
+5.6 Kb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+treat_filtered
+</td>
+<td style="text-align:left;">
+list
+</td>
+<td style="text-align:left;">
+1.7 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+treat_unfiltered
+</td>
+<td style="text-align:left;">
+list
+</td>
+<td style="text-align:left;">
+49.2 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+x
+</td>
+<td style="text-align:left;">
+character
+</td>
+<td style="text-align:left;">
+120 bytes
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed12345code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(12345)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed12345code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(12345)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree67e2d670268223ebb4a53e199040aa1830496a7ftargetblank67e2d67a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/67e2d670268223ebb4a53e199040aa1830496a7f" target="_blank">67e2d67</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree67e2d670268223ebb4a53e199040aa1830496a7ftargetblank67e2d67a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/67e2d670268223ebb4a53e199040aa1830496a7f" target="_blank">67e2d67</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    2_plots/3_go/
+    Ignored:    2_plots/4_kegg/
+
+Untracked files:
+    Untracked:  0_data/rds_object/dge_treat_unfiltered.rds
+    Untracked:  0_data/rds_object/enrichGO_treat.rds
+    Untracked:  0_data/rds_object/enrichKEGG_treat_filtered.rds
+    Untracked:  0_data/rds_object/treat.rds
+    Untracked:  0_data/rds_object/treat_filtered.rds
+    Untracked:  0_data/rds_object/treat_unfiltered.rds
+    Untracked:  1_analysis/about.Rmd
+    Untracked:  1_analysis/about.html
+    Untracked:  1_analysis/dge.html
+    Untracked:  1_analysis/go.Rmd
+    Untracked:  1_analysis/kegg.Rmd
+    Untracked:  1_analysis/obtainData.Rmd
+    Untracked:  1_analysis/setUp_files/
+    Untracked:  1_analysis/site_libs/
+    Untracked:  3_output/enrichGO_treat.xlsx
+    Untracked:  3_output/enrichKEGG_treat_unfiltered.xlsx
+
+Unstaged changes:
+    Deleted:    0_data/rds_object/apply_treat.rds
+    Deleted:    0_data/rds_object/dge_treat_filtered.rds
+    Modified:   1_analysis/_site.yml
+    Modified:   1_analysis/dge.Rmd
+    Modified:   1_analysis/figure/dge.Rmd/MAplotCustom_qlf-1.png
+    Modified:   1_analysis/figure/dge.Rmd/MAplotCustom_qlf-2.png
+    Modified:   1_analysis/figure/dge.Rmd/MAplotCustom_qlf-3.png
+    Modified:   1_analysis/figure/dge.Rmd/MAplotCustom_qlf-4.png
+    Modified:   1_analysis/figure/dge.Rmd/MAplotCustom_qlf-5.png
+    Modified:   1_analysis/figure/dge.Rmd/volcanoPlot_qlf-1.png
+    Modified:   1_analysis/figure/dge.Rmd/volcanoPlot_qlf-2.png
+    Modified:   1_analysis/figure/dge.Rmd/volcanoPlot_qlf-3.png
+    Modified:   1_analysis/figure/dge.Rmd/volcanoPlot_qlf-4.png
+    Modified:   1_analysis/figure/dge.Rmd/volcanoPlot_qlf-5.png
+    Modified:   1_analysis/figure/dge.Rmd/volcanoPlot_treat-1.png
+    Modified:   1_analysis/figure/dge.Rmd/volcanoPlot_treat-2.png
+    Modified:   1_analysis/figure/dge.Rmd/volcanoPlot_treat-3.png
+    Modified:   1_analysis/figure/dge.Rmd/volcanoPlot_treat-4.png
+    Modified:   1_analysis/figure/dge.Rmd/volcanoPlot_treat-5.png
+    Deleted:    1_analysis/figure/setUp.Rmd/MDSplot-1.png
+    Deleted:    1_analysis/figure/setUp.Rmd/afterFiltering-1.png
+    Deleted:    1_analysis/figure/setUp.Rmd/libraryChecks-1.png
+    Deleted:    1_analysis/figure/setUp.Rmd/pcaSampleGroup-1.png
+    Deleted:    1_analysis/figure/setUp.Rmd/pcaSampleType-1.png
+    Deleted:    1_analysis/figure/setUp.Rmd/visualisingNormalisation-1.png
+    Modified:   2_plots/2_dge/estimate_dispersion.svg
+    Modified:   2_plots/2_dge/qlf_dispersion.svg
+    Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Mac vs CKI.svg
+    Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Nme vs CKI.svg
+    Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Omt vs CKI.svg
+    Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Tri vs CKI.svg
+    Modified:   2_plots/2_dge/qlf_pValue_histogram_UT vs CKI.svg
+    Modified:   2_plots/2_dge/treat_pValue_histogram_CKI-Mac vs CKI.svg
+    Modified:   2_plots/2_dge/treat_pValue_histogram_CKI-Nme vs CKI.svg
+    Modified:   2_plots/2_dge/treat_pValue_histogram_CKI-Omt vs CKI.svg
+    Modified:   2_plots/2_dge/treat_pValue_histogram_CKI-Tri vs CKI.svg
+    Modified:   2_plots/2_dge/treat_pValue_histogram_UT vs CKI.svg
+    Modified:   2_plots/2_dge/volcano_plot_treat_CKI-Mac vs CKI.svg
+    Modified:   2_plots/2_dge/volcano_plot_treat_CKI-Nme vs CKI.svg
+    Modified:   2_plots/2_dge/volcano_plot_treat_CKI-Omt vs CKI.svg
+    Modified:   2_plots/2_dge/volcano_plot_treat_CKI-Tri vs CKI.svg
+    Modified:   2_plots/2_dge/volcano_plot_treat_UT vs CKI.svg
+    Modified:   3_output/qlf_filtered.xlsx
+    Modified:   3_output/treat_filtered.xlsx
+    Deleted:    CKI_DGE.Rproj
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+<p>
+There are no past versions. Publish this analysis with <code>wflow_publish()</code> to start tracking its development.
+</p>
+<hr>
+</div>
+</div>
+</div>
+<div id="data-setup" class="section level1">
+<h1>Data Setup</h1>
+<div id="load-library" class="section level3">
+<h3>Load Library</h3>
+<pre class="r"><code># working with data
+library(dplyr)
+library(magrittr)
+library(readr)
+library(tibble)
+library(reshape2)
+library(tidyverse)
+
+# Visualisation:
+library(kableExtra)
+library(ggplot2)
+library(grid)
+library(pander)
+library(cowplot)
+
+# Custom ggplot 
+library(ggbiplot)
+library(ggrepel)
+
+# Bioconductor packages:
+library(edgeR)
+library(limma)
+library(Glimma)
+library(clusterProfiler)
+library(org.Hs.eg.db)
+# library(enrichplot)
+library(biomaRt)</code></pre>
+</div>
+<div id="import-rds-data" class="section level3">
+<h3>Import RDS Data</h3>
+<p>DGElist object containing the raw feature count, sample metadata, and gene metadata, created in the Set Up stage.</p>
+<pre class="r"><code># load DGElist previously created in the set up
+dge &lt;- readRDS(&quot;../0_data/rds_object/dge.rds&quot;)
+designMatrix &lt;- readRDS(&quot;../0_data/rds_object/designMatrix.rds&quot;)
+contrast &lt;- readRDS(&quot;../0_data/rds_object/contrastMatrix.rds&quot;)
+
+treat &lt;- readRDS(&quot;../0_data/rds_object/treat.rds&quot;)
+treat_filtered &lt;- readRDS(&quot;../0_data/rds_object/treat_filtered.rds&quot;)
+
+qlf &lt;- readRDS(&quot;../0_data/rds_object/qlf.rds&quot;)
+qlf_filtered &lt;- readRDS(&quot;../0_data/rds_object/qlf_filtered.rds&quot;)</code></pre>
+</div>
+</div>
+<div id="gene-ontology-go-enrichment-analysis" class="section level1">
+<h1>Gene Ontology (GO) Enrichment Analysis</h1>
+<div id="using-the-clusterprofilerenrichgo-package" class="section level3 tabset">
+<h3 class="tabset">Using the <code>clusterProfiler::enrichGO</code> package</h3>
+<p>GO enrichment analysis is performed using the DGE obtained from GLM:QLF + TREAT.</p>
+<p>The top 30 most significant GO terms are displayed in relation to their respective comparison</p>
+<pre class="r"><code>comparison_group=colnames(contrast) %&gt;% as.data.frame()
+goSummaries &lt;- url(&quot;https://uofabioinformaticshub.github.io/summaries2GO/data/goSummaries.RDS&quot;) %&gt;%
+  readRDS() 
+minPath &lt;- 3
+
+# Create list object
+enrichGO_treat=list()
+for (i in 1:ncol(contrast)){
+  #at each iteration, let x = name of each contrast group
+  x=comparison_group[i,]
+  
+  #populate the enrichGo list with all GO terms
+  GOresults &lt;- enrichGO(gene = treat_filtered[[x]]$entrezid,
+                        keyType = &quot;ENTREZID&quot;,
+                        ont = &quot;ALL&quot;,
+                        OrgDb = org.Hs.eg.db,
+                        pAdjustMethod = &quot;fdr&quot;)
+
+  enrichGO_treat[[x]] &lt;- GOresults@result
+  
+  enrichGO_treat[[x]] &lt;- enrichGO_treat[[x]] %&gt;% rownames_to_column(&quot;id&quot;) %&gt;%
+  left_join(goSummaries) %&gt;%
+  dplyr::filter(shortest_path &gt;= minPath) %&gt;%
+  column_to_rownames(&quot;id&quot;)
+
+  #filter only significant GO terms
+  # enrichGO_treat_sig[[x]] &lt;- enrichGO_treat[[x]] %&gt;% filter(pvalue &lt;= 0.05)
+  
+}
+
+# save rds object for use in downstream GO and KEGG analysis
+enrichGO_treat %&gt;% saveRDS(file = &quot;../0_data/rds_object/enrichGO_treat.rds&quot;)
+# enrichGO_treat_sig %&gt;% saveRDS(file = &quot;../0_data/rds_object/enrichGO_treat_filtered.rds&quot;)
+
+#save each unfiltered comparison group in the output directory
+writexl::write_xlsx(x = enrichGO_treat,
+                    path = &quot;../3_output/enrichGO_treat.xlsx&quot;)
+  
+
+# GOnetwork_plot &lt;- enrichGO_treat[[&quot;CKI-Omt vs CKI&quot;]] %&gt;% as.data.frame() %&gt;%
+#   cnetplot(cex_label_gene = 0.4,
+#            showCategory = nrow(enrichGO_treat))
+# GOnetwork_plot</code></pre>
+<div id="untreated-vs-cki" class="section level4">
+<h4>Untreated vs CKI</h4>
+<pre class="r"><code>enrichGO_treat[[&quot;UT vs CKI&quot;]][1:30,] %&gt;% as.data.frame() %&gt;% dplyr::select(-c(&quot;ID&quot;, &quot;shortest_path&quot;, &quot;longest_path&quot;, &quot;terminal_node&quot;, &quot;ontology&quot;)) %&gt;% kable() %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;% scroll_box(height=&quot;600px&quot;)</code></pre>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:600px; ">
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+ONTOLOGY
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Description
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+GeneRatio
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+BgRatio
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+pvalue
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+p.adjust
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+qvalue
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+geneID
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0060284" class="uri">GO:0060284</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+regulation of cell development
+</td>
+<td style="text-align:left;">
+18/171
+</td>
+<td style="text-align:left;">
+485/18862
+</td>
+<td style="text-align:right;">
+0.0000005
+</td>
+<td style="text-align:right;">
+0.0005387
+</td>
+<td style="text-align:right;">
+0.0004290
+</td>
+<td style="text-align:left;">
+6696/3569/7157/6790/1959/2335/3148/223117/3037/6692/10371/5744/2039/55179/84667/7133/5649/9856
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0030198" class="uri">GO:0030198</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+extracellular matrix organization
+</td>
+<td style="text-align:left;">
+16/171
+</td>
+<td style="text-align:left;">
+393/18862
+</td>
+<td style="text-align:right;">
+0.0000006
+</td>
+<td style="text-align:right;">
+0.0005387
+</td>
+<td style="text-align:right;">
+0.0004290
+</td>
+<td style="text-align:left;">
+1545/7042/4312/3371/6696/55612/3569/9510/63827/2335/857/3037/6692/4148/79625/7133
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0043062" class="uri">GO:0043062</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+extracellular structure organization
+</td>
+<td style="text-align:left;">
+16/171
+</td>
+<td style="text-align:left;">
+394/18862
+</td>
+<td style="text-align:right;">
+0.0000006
+</td>
+<td style="text-align:right;">
+0.0005387
+</td>
+<td style="text-align:right;">
+0.0004290
+</td>
+<td style="text-align:left;">
+1545/7042/4312/3371/6696/55612/3569/9510/63827/2335/857/3037/6692/4148/79625/7133
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0045229" class="uri">GO:0045229</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+external encapsulating structure organization
+</td>
+<td style="text-align:left;">
+16/171
+</td>
+<td style="text-align:left;">
+396/18862
+</td>
+<td style="text-align:right;">
+0.0000007
+</td>
+<td style="text-align:right;">
+0.0005387
+</td>
+<td style="text-align:right;">
+0.0004290
+</td>
+<td style="text-align:left;">
+1545/7042/4312/3371/6696/55612/3569/9510/63827/2335/857/3037/6692/4148/79625/7133
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0036293" class="uri">GO:0036293</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+response to decreased oxygen levels
+</td>
+<td style="text-align:left;">
+15/171
+</td>
+<td style="text-align:left;">
+360/18862
+</td>
+<td style="text-align:right;">
+0.0000010
+</td>
+<td style="text-align:right;">
+0.0006667
+</td>
+<td style="text-align:right;">
+0.0005310
+</td>
+<td style="text-align:left;">
+1543/51129/7042/3777/218/7157/891/768/5021/857/6781/79625/360/1958/406992
+</td>
+<td style="text-align:right;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0030647" class="uri">GO:0030647</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+aminoglycoside antibiotic metabolic process
+</td>
+<td style="text-align:left;">
+4/171
+</td>
+<td style="text-align:left;">
+10/18862
+</td>
+<td style="text-align:right;">
+0.0000013
+</td>
+<td style="text-align:right;">
+0.0006992
+</td>
+<td style="text-align:right;">
+0.0005568
+</td>
+<td style="text-align:left;">
+8644/57016/1645/1646
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0070482" class="uri">GO:0070482</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+response to oxygen levels
+</td>
+<td style="text-align:left;">
+15/171
+</td>
+<td style="text-align:left;">
+385/18862
+</td>
+<td style="text-align:right;">
+0.0000024
+</td>
+<td style="text-align:right;">
+0.0009258
+</td>
+<td style="text-align:right;">
+0.0007373
+</td>
+<td style="text-align:left;">
+1543/51129/7042/3777/218/7157/891/768/5021/857/6781/79625/360/1958/406992
+</td>
+<td style="text-align:right;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0060337" class="uri">GO:0060337</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+type I interferon signaling pathway
+</td>
+<td style="text-align:left;">
+8/171
+</td>
+<td style="text-align:left;">
+95/18862
+</td>
+<td style="text-align:right;">
+0.0000024
+</td>
+<td style="text-align:right;">
+0.0009258
+</td>
+<td style="text-align:right;">
+0.0007373
+</td>
+<td style="text-align:left;">
+3433/3437/91543/8638/4940/3434/4938/1958
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0071357" class="uri">GO:0071357</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+cellular response to type I interferon
+</td>
+<td style="text-align:left;">
+8/171
+</td>
+<td style="text-align:left;">
+96/18862
+</td>
+<td style="text-align:right;">
+0.0000026
+</td>
+<td style="text-align:right;">
+0.0009258
+</td>
+<td style="text-align:right;">
+0.0007373
+</td>
+<td style="text-align:left;">
+3433/3437/91543/8638/4940/3434/4938/1958
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0001666" class="uri">GO:0001666</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+response to hypoxia
+</td>
+<td style="text-align:left;">
+14/171
+</td>
+<td style="text-align:left;">
+348/18862
+</td>
+<td style="text-align:right;">
+0.0000036
+</td>
+<td style="text-align:right;">
+0.0010184
+</td>
+<td style="text-align:right;">
+0.0008110
+</td>
+<td style="text-align:left;">
+1543/51129/7042/3777/218/7157/891/768/857/6781/79625/360/1958/406992
+</td>
+<td style="text-align:right;">
+14
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0050767" class="uri">GO:0050767</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+regulation of neurogenesis
+</td>
+<td style="text-align:left;">
+14/171
+</td>
+<td style="text-align:left;">
+348/18862
+</td>
+<td style="text-align:right;">
+0.0000036
+</td>
+<td style="text-align:right;">
+0.0010184
+</td>
+<td style="text-align:right;">
+0.0008110
+</td>
+<td style="text-align:left;">
+6696/3569/7157/1959/2335/3148/223117/6692/10371/55179/84667/7133/5649/9856
+</td>
+<td style="text-align:right;">
+14
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0034340" class="uri">GO:0034340</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+response to type I interferon
+</td>
+<td style="text-align:left;">
+8/171
+</td>
+<td style="text-align:left;">
+101/18862
+</td>
+<td style="text-align:right;">
+0.0000038
+</td>
+<td style="text-align:right;">
+0.0010184
+</td>
+<td style="text-align:right;">
+0.0008110
+</td>
+<td style="text-align:left;">
+3433/3437/91543/8638/4940/3434/4938/1958
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0034754" class="uri">GO:0034754</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+cellular hormone metabolic process
+</td>
+<td style="text-align:left;">
+9/171
+</td>
+<td style="text-align:left;">
+136/18862
+</td>
+<td style="text-align:right;">
+0.0000042
+</td>
+<td style="text-align:right;">
+0.0010294
+</td>
+<td style="text-align:right;">
+0.0008198
+</td>
+<td style="text-align:left;">
+1543/1545/8644/57016/1645/1646/6696/25976/1958
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0002931" class="uri">GO:0002931</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+response to ischemia
+</td>
+<td style="text-align:left;">
+6/171
+</td>
+<td style="text-align:left;">
+50/18862
+</td>
+<td style="text-align:right;">
+0.0000058
+</td>
+<td style="text-align:right;">
+0.0013256
+</td>
+<td style="text-align:right;">
+0.0010557
+</td>
+<td style="text-align:left;">
+56666/7157/857/79625/3767/1958
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0051960" class="uri">GO:0051960</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+regulation of nervous system development
+</td>
+<td style="text-align:left;">
+15/171
+</td>
+<td style="text-align:left;">
+422/18862
+</td>
+<td style="text-align:right;">
+0.0000073
+</td>
+<td style="text-align:right;">
+0.0015498
+</td>
+<td style="text-align:right;">
+0.0012343
+</td>
+<td style="text-align:left;">
+6696/3569/7157/1959/2335/5021/3148/223117/6692/10371/55179/84667/7133/5649/9856
+</td>
+<td style="text-align:right;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0042448" class="uri">GO:0042448</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+progesterone metabolic process
+</td>
+<td style="text-align:left;">
+4/171
+</td>
+<td style="text-align:left;">
+15/18862
+</td>
+<td style="text-align:right;">
+0.0000082
+</td>
+<td style="text-align:right;">
+0.0016448
+</td>
+<td style="text-align:right;">
+0.0013099
+</td>
+<td style="text-align:left;">
+8644/1645/1646/1958
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0008202" class="uri">GO:0008202</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+steroid metabolic process
+</td>
+<td style="text-align:left;">
+13/171
+</td>
+<td style="text-align:left;">
+329/18862
+</td>
+<td style="text-align:right;">
+0.0000099
+</td>
+<td style="text-align:right;">
+0.0018665
+</td>
+<td style="text-align:right;">
+0.0014865
+</td>
+<td style="text-align:left;">
+1543/1545/19/8644/1645/7108/3290/1646/6696/25976/9619/6615/1958
+</td>
+<td style="text-align:right;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0051797" class="uri">GO:0051797</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+regulation of hair follicle development
+</td>
+<td style="text-align:left;">
+4/171
+</td>
+<td style="text-align:left;">
+17/18862
+</td>
+<td style="text-align:right;">
+0.0000142
+</td>
+<td style="text-align:right;">
+0.0023811
+</td>
+<td style="text-align:right;">
+0.0018963
+</td>
+<td style="text-align:left;">
+7042/10468/55612/3872
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0071398" class="uri">GO:0071398</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+cellular response to fatty acid
+</td>
+<td style="text-align:left;">
+5/171
+</td>
+<td style="text-align:left;">
+38/18862
+</td>
+<td style="text-align:right;">
+0.0000228
+</td>
+<td style="text-align:right;">
+0.0035741
+</td>
+<td style="text-align:right;">
+0.0028464
+</td>
+<td style="text-align:left;">
+8644/1645/1646/5166/891
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0034308" class="uri">GO:0034308</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+primary alcohol metabolic process
+</td>
+<td style="text-align:left;">
+7/171
+</td>
+<td style="text-align:left;">
+94/18862
+</td>
+<td style="text-align:right;">
+0.0000235
+</td>
+<td style="text-align:right;">
+0.0035741
+</td>
+<td style="text-align:right;">
+0.0028464
+</td>
+<td style="text-align:left;">
+1543/1545/8644/57016/1645/1646/224
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:1902644" class="uri">GO:1902644</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+tertiary alcohol metabolic process
+</td>
+<td style="text-align:left;">
+4/171
+</td>
+<td style="text-align:left;">
+20/18862
+</td>
+<td style="text-align:right;">
+0.0000282
+</td>
+<td style="text-align:right;">
+0.0040982
+</td>
+<td style="text-align:right;">
+0.0032638
+</td>
+<td style="text-align:left;">
+8644/57016/1645/1646
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0016137" class="uri">GO:0016137</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+glycoside metabolic process
+</td>
+<td style="text-align:left;">
+4/171
+</td>
+<td style="text-align:left;">
+21/18862
+</td>
+<td style="text-align:right;">
+0.0000346
+</td>
+<td style="text-align:right;">
+0.0048083
+</td>
+<td style="text-align:right;">
+0.0038293
+</td>
+<td style="text-align:left;">
+8644/57016/1645/1646
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0032069" class="uri">GO:0032069</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+regulation of nuclease activity
+</td>
+<td style="text-align:left;">
+4/171
+</td>
+<td style="text-align:left;">
+22/18862
+</td>
+<td style="text-align:right;">
+0.0000420
+</td>
+<td style="text-align:right;">
+0.0055922
+</td>
+<td style="text-align:right;">
+0.0044536
+</td>
+<td style="text-align:left;">
+8638/4940/3148/4938
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0071453" class="uri">GO:0071453</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+cellular response to oxygen levels
+</td>
+<td style="text-align:left;">
+10/171
+</td>
+<td style="text-align:left;">
+231/18862
+</td>
+<td style="text-align:right;">
+0.0000505
+</td>
+<td style="text-align:right;">
+0.0064527
+</td>
+<td style="text-align:right;">
+0.0051389
+</td>
+<td style="text-align:left;">
+3777/7157/891/768/857/6781/79625/360/1958/406992
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:1901654" class="uri">GO:1901654</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+response to ketone
+</td>
+<td style="text-align:left;">
+9/171
+</td>
+<td style="text-align:left;">
+193/18862
+</td>
+<td style="text-align:right;">
+0.0000683
+</td>
+<td style="text-align:right;">
+0.0083933
+</td>
+<td style="text-align:right;">
+0.0066843
+</td>
+<td style="text-align:left;">
+8644/7042/1646/3371/6696/768/5021/857/3767
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0042634" class="uri">GO:0042634</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+regulation of hair cycle
+</td>
+<td style="text-align:left;">
+4/171
+</td>
+<td style="text-align:left;">
+26/18862
+</td>
+<td style="text-align:right;">
+0.0000834
+</td>
+<td style="text-align:right;">
+0.0096612
+</td>
+<td style="text-align:right;">
+0.0076941
+</td>
+<td style="text-align:left;">
+7042/10468/55612/3872
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0008544" class="uri">GO:0008544</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+epidermis development
+</td>
+<td style="text-align:left;">
+14/171
+</td>
+<td style="text-align:left;">
+463/18862
+</td>
+<td style="text-align:right;">
+0.0000861
+</td>
+<td style="text-align:right;">
+0.0096612
+</td>
+<td style="text-align:right;">
+0.0076941
+</td>
+<td style="text-align:left;">
+8644/7042/10468/55612/10626/3866/3872/3855/29841/5744/6615/360/3885/224
+</td>
+<td style="text-align:right;">
+14
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0001558" class="uri">GO:0001558</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+regulation of cell growth
+</td>
+<td style="text-align:left;">
+13/171
+</td>
+<td style="text-align:left;">
+406/18862
+</td>
+<td style="text-align:right;">
+0.0000877
+</td>
+<td style="text-align:right;">
+0.0096612
+</td>
+<td style="text-align:right;">
+0.0076941
+</td>
+<td style="text-align:left;">
+7042/6696/147906/3484/7157/2335/4881/3872/223117/8877/10371/8835/9856
+</td>
+<td style="text-align:right;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0031069" class="uri">GO:0031069</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+hair follicle morphogenesis
+</td>
+<td style="text-align:left;">
+4/171
+</td>
+<td style="text-align:left;">
+27/18862
+</td>
+<td style="text-align:right;">
+0.0000972
+</td>
+<td style="text-align:right;">
+0.0101664
+</td>
+<td style="text-align:right;">
+0.0080964
+</td>
+<td style="text-align:left;">
+7042/10468/3872/6615
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0045069" class="uri">GO:0045069</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+regulation of viral genome replication
+</td>
+<td style="text-align:left;">
+6/171
+</td>
+<td style="text-align:left;">
+83/18862
+</td>
+<td style="text-align:right;">
+0.0001078
+</td>
+<td style="text-align:right;">
+0.0101664
+</td>
+<td style="text-align:right;">
+0.0080964
+</td>
+<td style="text-align:left;">
+91543/8638/4940/3434/4938/3576
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cki-mac-vs-cki" class="section level4">
+<h4>CKI-Mac vs CKI</h4>
+<pre class="r"><code>enrichGO_treat[[&quot;CKI-Mac vs CKI&quot;]][1:30,] %&gt;% as.data.frame() %&gt;% dplyr::select(-c(&quot;ID&quot;, &quot;shortest_path&quot;, &quot;longest_path&quot;, &quot;terminal_node&quot;, &quot;ontology&quot;)) %&gt;% kable() %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;% scroll_box(height=&quot;600px&quot;)</code></pre>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:600px; ">
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+ONTOLOGY
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Description
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+GeneRatio
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+BgRatio
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+pvalue
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+p.adjust
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+qvalue
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+geneID
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0071216" class="uri">GO:0071216</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+cellular response to biotic stimulus
+</td>
+<td style="text-align:left;">
+21/287
+</td>
+<td style="text-align:left;">
+233/18862
+</td>
+<td style="text-align:right;">
+0.00e+00
+</td>
+<td style="text-align:right;">
+0.0000002
+</td>
+<td style="text-align:right;">
+0.0000002
+</td>
+<td style="text-align:left;">
+3569/2919/3553/2921/1437/1440/3552/2920/3576/4057/5054/26525/7128/11009/3656/3309/445/1649/929/114548/26191
+</td>
+<td style="text-align:right;">
+21
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0002237" class="uri">GO:0002237</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+response to molecule of bacterial origin
+</td>
+<td style="text-align:left;">
+25/287
+</td>
+<td style="text-align:left;">
+346/18862
+</td>
+<td style="text-align:right;">
+0.00e+00
+</td>
+<td style="text-align:right;">
+0.0000002
+</td>
+<td style="text-align:right;">
+0.0000002
+</td>
+<td style="text-align:left;">
+3569/2919/3553/9076/2921/6648/1437/1440/3552/1543/2920/3576/4057/5054/26525/7128/11009/3656/445/929/114548/210/4091/1755/26191
+</td>
+<td style="text-align:right;">
+25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0071222" class="uri">GO:0071222</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+cellular response to lipopolysaccharide
+</td>
+<td style="text-align:left;">
+19/287
+</td>
+<td style="text-align:left;">
+197/18862
+</td>
+<td style="text-align:right;">
+0.00e+00
+</td>
+<td style="text-align:right;">
+0.0000002
+</td>
+<td style="text-align:right;">
+0.0000002
+</td>
+<td style="text-align:left;">
+3569/2919/3553/2921/1437/1440/3552/2920/3576/4057/5054/26525/7128/11009/3656/445/929/114548/26191
+</td>
+<td style="text-align:right;">
+19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0032496" class="uri">GO:0032496</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+response to lipopolysaccharide
+</td>
+<td style="text-align:left;">
+24/287
+</td>
+<td style="text-align:left;">
+326/18862
+</td>
+<td style="text-align:right;">
+0.00e+00
+</td>
+<td style="text-align:right;">
+0.0000002
+</td>
+<td style="text-align:right;">
+0.0000002
+</td>
+<td style="text-align:left;">
+3569/2919/3553/9076/2921/6648/1437/1440/3552/1543/2920/3576/4057/5054/26525/7128/11009/3656/445/929/114548/210/4091/26191
+</td>
+<td style="text-align:right;">
+24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0071219" class="uri">GO:0071219</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+cellular response to molecule of bacterial origin
+</td>
+<td style="text-align:left;">
+19/287
+</td>
+<td style="text-align:left;">
+209/18862
+</td>
+<td style="text-align:right;">
+0.00e+00
+</td>
+<td style="text-align:right;">
+0.0000004
+</td>
+<td style="text-align:right;">
+0.0000003
+</td>
+<td style="text-align:left;">
+3569/2919/3553/2921/1437/1440/3552/2920/3576/4057/5054/26525/7128/11009/3656/445/929/114548/26191
+</td>
+<td style="text-align:right;">
+19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0048732" class="uri">GO:0048732</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+gland development
+</td>
+<td style="text-align:left;">
+22/287
+</td>
+<td style="text-align:left;">
+413/18862
+</td>
+<td style="text-align:right;">
+4.00e-07
+</td>
+<td style="text-align:right;">
+0.0002525
+</td>
+<td style="text-align:right;">
+0.0002087
+</td>
+<td style="text-align:left;">
+3569/9076/4041/1543/5361/652/7128/3911/3371/284217/255738/7477/2194/445/3219/1950/1054/7490/79152/8835/80139/8862
+</td>
+<td style="text-align:right;">
+22
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0030198" class="uri">GO:0030198</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+extracellular matrix organization
+</td>
+<td style="text-align:left;">
+21/287
+</td>
+<td style="text-align:left;">
+393/18862
+</td>
+<td style="text-align:right;">
+7.00e-07
+</td>
+<td style="text-align:right;">
+0.0003348
+</td>
+<td style="text-align:right;">
+0.0002767
+</td>
+<td style="text-align:left;">
+3569/11174/4319/5054/3911/84830/170689/333/4054/3371/8515/284217/4314/64856/1294/5806/83716/7076/7490/3693/375790
+</td>
+<td style="text-align:right;">
+21
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0043062" class="uri">GO:0043062</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+extracellular structure organization
+</td>
+<td style="text-align:left;">
+21/287
+</td>
+<td style="text-align:left;">
+394/18862
+</td>
+<td style="text-align:right;">
+7.00e-07
+</td>
+<td style="text-align:right;">
+0.0003348
+</td>
+<td style="text-align:right;">
+0.0002767
+</td>
+<td style="text-align:left;">
+3569/11174/4319/5054/3911/84830/170689/333/4054/3371/8515/284217/4314/64856/1294/5806/83716/7076/7490/3693/375790
+</td>
+<td style="text-align:right;">
+21
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0045229" class="uri">GO:0045229</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+external encapsulating structure organization
+</td>
+<td style="text-align:left;">
+21/287
+</td>
+<td style="text-align:left;">
+396/18862
+</td>
+<td style="text-align:right;">
+8.00e-07
+</td>
+<td style="text-align:right;">
+0.0003348
+</td>
+<td style="text-align:right;">
+0.0002767
+</td>
+<td style="text-align:left;">
+3569/11174/4319/5054/3911/84830/170689/333/4054/3371/8515/284217/4314/64856/1294/5806/83716/7076/7490/3693/375790
+</td>
+<td style="text-align:right;">
+21
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0036499" class="uri">GO:0036499</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+PERK-mediated unfolded protein response
+</td>
+<td style="text-align:left;">
+6/287
+</td>
+<td style="text-align:left;">
+23/18862
+</td>
+<td style="text-align:right;">
+1.00e-06
+</td>
+<td style="text-align:right;">
+0.0003633
+</td>
+<td style="text-align:right;">
+0.0003003
+</td>
+<td style="text-align:left;">
+3576/467/3309/1649/3484/9709
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0097191" class="uri">GO:0097191</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+extrinsic apoptotic signaling pathway
+</td>
+<td style="text-align:left;">
+15/287
+</td>
+<td style="text-align:left;">
+217/18862
+</td>
+<td style="text-align:right;">
+1.20e-06
+</td>
+<td style="text-align:right;">
+0.0004316
+</td>
+<td style="text-align:right;">
+0.0003567
+</td>
+<td style="text-align:left;">
+3553/1437/3552/652/5054/7128/2852/2537/467/3570/4803/7185/2261/3624/8794
+</td>
+<td style="text-align:right;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:1901653" class="uri">GO:1901653</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+cellular response to peptide
+</td>
+<td style="text-align:left;">
+20/287
+</td>
+<td style="text-align:left;">
+391/18862
+</td>
+<td style="text-align:right;">
+2.50e-06
+</td>
+<td style="text-align:right;">
+0.0007786
+</td>
+<td style="text-align:right;">
+0.0006435
+</td>
+<td style="text-align:left;">
+3553/5919/2852/245972/896/23371/3397/255738/9734/1583/445/9021/490/80339/6653/837/54206/3484/8835/26191
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0042326" class="uri">GO:0042326</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+negative regulation of phosphorylation
+</td>
+<td style="text-align:left;">
+20/287
+</td>
+<td style="text-align:left;">
+407/18862
+</td>
+<td style="text-align:right;">
+4.60e-06
+</td>
+<td style="text-align:right;">
+0.0012578
+</td>
+<td style="text-align:right;">
+0.0010396
+</td>
+<td style="text-align:left;">
+3553/4041/652/7128/135228/6690/3486/1850/9021/5570/5787/3624/6653/26471/2629/4091/54206/406992/203228/26191
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0002526" class="uri">GO:0002526</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+acute inflammatory response
+</td>
+<td style="text-align:left;">
+10/287
+</td>
+<td style="text-align:left;">
+107/18862
+</td>
+<td style="text-align:right;">
+5.40e-06
+</td>
+<td style="text-align:right;">
+0.0013422
+</td>
+<td style="text-align:right;">
+0.0011094
+</td>
+<td style="text-align:left;">
+3569/3553/5743/3552/3570/445/2152/114548/26471/3700
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0006953" class="uri">GO:0006953</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+acute-phase response
+</td>
+<td style="text-align:left;">
+7/287
+</td>
+<td style="text-align:left;">
+46/18862
+</td>
+<td style="text-align:right;">
+5.70e-06
+</td>
+<td style="text-align:right;">
+0.0013422
+</td>
+<td style="text-align:right;">
+0.0011094
+</td>
+<td style="text-align:left;">
+3569/3553/5743/3552/3570/445/3700
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0010466" class="uri">GO:0010466</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+negative regulation of peptidase activity
+</td>
+<td style="text-align:left;">
+15/287
+</td>
+<td style="text-align:left;">
+257/18862
+</td>
+<td style="text-align:right;">
+9.90e-06
+</td>
+<td style="text-align:right;">
+0.0022202
+</td>
+<td style="text-align:right;">
+0.0018351
+</td>
+<td style="text-align:left;">
+4057/5054/135228/6690/2537/27290/4803/1294/27151/6653/280664/7076/3700/221476/9709
+</td>
+<td style="text-align:right;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0071375" class="uri">GO:0071375</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+cellular response to peptide hormone stimulus
+</td>
+<td style="text-align:left;">
+17/287
+</td>
+<td style="text-align:left;">
+325/18862
+</td>
+<td style="text-align:right;">
+1.09e-05
+</td>
+<td style="text-align:right;">
+0.0022924
+</td>
+<td style="text-align:right;">
+0.0018947
+</td>
+<td style="text-align:left;">
+3553/5919/2852/245972/896/23371/255738/9734/1583/445/9021/490/80339/6653/54206/3484/8835
+</td>
+<td style="text-align:right;">
+17
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0001667" class="uri">GO:0001667</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+ameboidal-type cell migration
+</td>
+<td style="text-align:left;">
+21/287
+</td>
+<td style="text-align:left;">
+473/18862
+</td>
+<td style="text-align:right;">
+1.27e-05
+</td>
+<td style="text-align:right;">
+0.0025307
+</td>
+<td style="text-align:right;">
+0.0020917
+</td>
+<td style="text-align:left;">
+5743/4070/4041/652/3911/29775/84830/2896/5801/6286/3397/284361/9734/25959/1950/85329/340719/10500/7076/406992/10501
+</td>
+<td style="text-align:right;">
+21
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0006984" class="uri">GO:0006984</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+ER-nucleus signaling pathway
+</td>
+<td style="text-align:left;">
+7/287
+</td>
+<td style="text-align:left;">
+53/18862
+</td>
+<td style="text-align:right;">
+1.49e-05
+</td>
+<td style="text-align:right;">
+0.0028236
+</td>
+<td style="text-align:right;">
+0.0023338
+</td>
+<td style="text-align:left;">
+3576/467/3309/1649/7184/3484/9709
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0008203" class="uri">GO:0008203</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+cholesterol metabolic process
+</td>
+<td style="text-align:left;">
+11/287
+</td>
+<td style="text-align:left;">
+149/18862
+</td>
+<td style="text-align:right;">
+1.80e-05
+</td>
+<td style="text-align:right;">
+0.0032559
+</td>
+<td style="text-align:right;">
+0.0026911
+</td>
+<td style="text-align:left;">
+4041/19/7108/4598/255738/1583/2194/8542/2629/84649/9023
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0031667" class="uri">GO:0031667</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+response to nutrient levels
+</td>
+<td style="text-align:left;">
+20/287
+</td>
+<td style="text-align:left;">
+451/18862
+</td>
+<td style="text-align:right;">
+2.08e-05
+</td>
+<td style="text-align:right;">
+0.0034990
+</td>
+<td style="text-align:right;">
+0.0028920
+</td>
+<td style="text-align:left;">
+6648/1543/5919/10634/3371/218/467/255738/25959/3309/445/1649/7378/490/360/6566/6653/210/2629/80763
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0031960" class="uri">GO:0031960</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+response to corticosteroid
+</td>
+<td style="text-align:left;">
+11/287
+</td>
+<td style="text-align:left;">
+152/18862
+</td>
+<td style="text-align:right;">
+2.17e-05
+</td>
+<td style="text-align:right;">
+0.0034990
+</td>
+<td style="text-align:right;">
+0.0028920
+</td>
+<td style="text-align:left;">
+3569/9076/3490/2852/218/445/490/210/6446/2629/54206
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0052547" class="uri">GO:0052547</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+regulation of peptidase activity
+</td>
+<td style="text-align:left;">
+20/287
+</td>
+<td style="text-align:left;">
+455/18862
+</td>
+<td style="text-align:right;">
+2.36e-05
+</td>
+<td style="text-align:right;">
+0.0034990
+</td>
+<td style="text-align:right;">
+0.0028920
+</td>
+<td style="text-align:left;">
+9966/4057/5054/2852/135228/2896/6690/2537/27290/4803/1294/27151/2152/114548/6653/280664/7076/3700/221476/9709
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0051346" class="uri">GO:0051346</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+negative regulation of hydrolase activity
+</td>
+<td style="text-align:left;">
+20/287
+</td>
+<td style="text-align:left;">
+456/18862
+</td>
+<td style="text-align:right;">
+2.43e-05
+</td>
+<td style="text-align:right;">
+0.0034990
+</td>
+<td style="text-align:right;">
+0.0028920
+</td>
+<td style="text-align:left;">
+4057/5054/135228/114794/6690/2537/27290/9734/4803/1294/27151/5806/9088/6653/280664/7076/3700/221476/9709/51129
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:2001236" class="uri">GO:2001236</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+regulation of extrinsic apoptotic signaling pathway
+</td>
+<td style="text-align:left;">
+11/287
+</td>
+<td style="text-align:left;">
+154/18862
+</td>
+<td style="text-align:right;">
+2.45e-05
+</td>
+<td style="text-align:right;">
+0.0034990
+</td>
+<td style="text-align:right;">
+0.0028920
+</td>
+<td style="text-align:left;">
+3553/1437/3552/652/5054/7128/2852/2537/467/7185/3624
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0010951" class="uri">GO:0010951</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+negative regulation of endopeptidase activity
+</td>
+<td style="text-align:left;">
+14/287
+</td>
+<td style="text-align:left;">
+245/18862
+</td>
+<td style="text-align:right;">
+2.49e-05
+</td>
+<td style="text-align:right;">
+0.0034990
+</td>
+<td style="text-align:right;">
+0.0028920
+</td>
+<td style="text-align:left;">
+4057/5054/135228/6690/2537/27290/4803/1294/27151/6653/280664/7076/3700/9709
+</td>
+<td style="text-align:right;">
+14
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0150077" class="uri">GO:0150077</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+regulation of neuroinflammatory response
+</td>
+<td style="text-align:left;">
+6/287
+</td>
+<td style="text-align:left;">
+40/18862
+</td>
+<td style="text-align:right;">
+2.93e-05
+</td>
+<td style="text-align:right;">
+0.0039370
+</td>
+<td style="text-align:right;">
+0.0032541
+</td>
+<td style="text-align:left;">
+3569/3553/5743/2896/4314/26471
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0046683" class="uri">GO:0046683</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+response to organophosphorus
+</td>
+<td style="text-align:left;">
+10/287
+</td>
+<td style="text-align:left;">
+130/18862
+</td>
+<td style="text-align:right;">
+3.04e-05
+</td>
+<td style="text-align:right;">
+0.0039370
+</td>
+<td style="text-align:right;">
+0.0032541
+</td>
+<td style="text-align:left;">
+1645/5031/218/3309/445/5029/9127/7184/7490/10060
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:1902652" class="uri">GO:1902652</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+secondary alcohol metabolic process
+</td>
+<td style="text-align:left;">
+11/287
+</td>
+<td style="text-align:left;">
+158/18862
+</td>
+<td style="text-align:right;">
+3.11e-05
+</td>
+<td style="text-align:right;">
+0.0039370
+</td>
+<td style="text-align:right;">
+0.0032541
+</td>
+<td style="text-align:left;">
+4041/19/7108/4598/255738/1583/2194/8542/2629/84649/9023
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0006024" class="uri">GO:0006024</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+glycosaminoglycan biosynthetic process
+</td>
+<td style="text-align:left;">
+9/287
+</td>
+<td style="text-align:left;">
+107/18862
+</td>
+<td style="text-align:right;">
+3.76e-05
+</td>
+<td style="text-align:right;">
+0.0044630
+</td>
+<td style="text-align:right;">
+0.0036888
+</td>
+<td style="text-align:left;">
+3553/2817/56548/9394/57214/1950/54480/55501/375790
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cki-nme-vs-cki" class="section level4">
+<h4>CKI-Nme vs CKI</h4>
+<pre class="r"><code>enrichGO_treat[[&quot;CKI-Nme vs CKI&quot;]][1:30,] %&gt;% as.data.frame() %&gt;% dplyr::select(-c(&quot;ID&quot;, &quot;shortest_path&quot;, &quot;longest_path&quot;, &quot;terminal_node&quot;, &quot;ontology&quot;)) %&gt;% kable() %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;% scroll_box(height=&quot;600px&quot;)</code></pre>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:600px; ">
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+ONTOLOGY
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Description
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+GeneRatio
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+BgRatio
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+pvalue
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+p.adjust
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+qvalue
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+geneID
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0030198" class="uri">GO:0030198</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+extracellular matrix organization
+</td>
+<td style="text-align:left;">
+29/324
+</td>
+<td style="text-align:left;">
+393/18862
+</td>
+<td style="text-align:right;">
+0.00e+00
+</td>
+<td style="text-align:right;">
+0.0000001
+</td>
+<td style="text-align:right;">
+0.0000001
+</td>
+<td style="text-align:left;">
+3569/11174/333/1294/83716/169611/170689/3693/4324/4319/84830/4054/3911/7076/8515/4314/3386/2621/7490/140766/3371/284217/4312/64856/55612/1999/5045/2264/1605
+</td>
+<td style="text-align:right;">
+29
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0043062" class="uri">GO:0043062</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+extracellular structure organization
+</td>
+<td style="text-align:left;">
+29/324
+</td>
+<td style="text-align:left;">
+394/18862
+</td>
+<td style="text-align:right;">
+0.00e+00
+</td>
+<td style="text-align:right;">
+0.0000001
+</td>
+<td style="text-align:right;">
+0.0000001
+</td>
+<td style="text-align:left;">
+3569/11174/333/1294/83716/169611/170689/3693/4324/4319/84830/4054/3911/7076/8515/4314/3386/2621/7490/140766/3371/284217/4312/64856/55612/1999/5045/2264/1605
+</td>
+<td style="text-align:right;">
+29
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0045229" class="uri">GO:0045229</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+external encapsulating structure organization
+</td>
+<td style="text-align:left;">
+29/324
+</td>
+<td style="text-align:left;">
+396/18862
+</td>
+<td style="text-align:right;">
+0.00e+00
+</td>
+<td style="text-align:right;">
+0.0000001
+</td>
+<td style="text-align:right;">
+0.0000001
+</td>
+<td style="text-align:left;">
+3569/11174/333/1294/83716/169611/170689/3693/4324/4319/84830/4054/3911/7076/8515/4314/3386/2621/7490/140766/3371/284217/4312/64856/55612/1999/5045/2264/1605
+</td>
+<td style="text-align:right;">
+29
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0006953" class="uri">GO:0006953</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+acute-phase response
+</td>
+<td style="text-align:left;">
+9/324
+</td>
+<td style="text-align:left;">
+46/18862
+</td>
+<td style="text-align:right;">
+1.00e-07
+</td>
+<td style="text-align:right;">
+0.0000703
+</td>
+<td style="text-align:right;">
+0.0000589
+</td>
+<td style="text-align:left;">
+5743/3569/3552/6288/6289/5265/59307/3700/3553
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0010466" class="uri">GO:0010466</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+negative regulation of peptidase activity
+</td>
+<td style="text-align:left;">
+19/324
+</td>
+<td style="text-align:left;">
+257/18862
+</td>
+<td style="text-align:right;">
+1.00e-07
+</td>
+<td style="text-align:right;">
+0.0000838
+</td>
+<td style="text-align:right;">
+0.0000702
+</td>
+<td style="text-align:left;">
+1294/27290/7076/2537/2621/27151/1469/221476/1472/5265/6690/4804/135228/9709/4057/1718/5045/6653/3700
+</td>
+<td style="text-align:right;">
+19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0010951" class="uri">GO:0010951</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+negative regulation of endopeptidase activity
+</td>
+<td style="text-align:left;">
+18/324
+</td>
+<td style="text-align:left;">
+245/18862
+</td>
+<td style="text-align:right;">
+3.00e-07
+</td>
+<td style="text-align:right;">
+0.0001664
+</td>
+<td style="text-align:right;">
+0.0001395
+</td>
+<td style="text-align:left;">
+1294/27290/7076/2537/2621/27151/1469/1472/5265/6690/4804/135228/9709/4057/1718/5045/6653/3700
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0001667" class="uri">GO:0001667</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+ameboidal-type cell migration
+</td>
+<td style="text-align:left;">
+25/324
+</td>
+<td style="text-align:left;">
+473/18862
+</td>
+<td style="text-align:right;">
+7.00e-07
+</td>
+<td style="text-align:right;">
+0.0003473
+</td>
+<td style="text-align:right;">
+0.0002912
+</td>
+<td style="text-align:left;">
+5743/4070/4041/2896/652/84830/29775/3911/3397/7076/340719/6286/25959/2348/85329/5801/1950/284361/406992/9734/55612/10501/23616/306/10500
+</td>
+<td style="text-align:right;">
+25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0043687" class="uri">GO:0043687</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+post-translational protein modification
+</td>
+<td style="text-align:left;">
+21/324
+</td>
+<td style="text-align:left;">
+361/18862
+</td>
+<td style="text-align:right;">
+1.30e-06
+</td>
+<td style="text-align:right;">
+0.0005406
+</td>
+<td style="text-align:right;">
+0.0004532
+</td>
+<td style="text-align:left;">
+7184/3490/3569/51676/10618/652/255738/5589/3487/7076/9021/2621/3371/56975/5265/64856/26232/3484/8542/140462/3486
+</td>
+<td style="text-align:right;">
+21
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0036499" class="uri">GO:0036499</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+PERK-mediated unfolded protein response
+</td>
+<td style="text-align:left;">
+6/324
+</td>
+<td style="text-align:left;">
+23/18862
+</td>
+<td style="text-align:right;">
+1.90e-06
+</td>
+<td style="text-align:right;">
+0.0007411
+</td>
+<td style="text-align:right;">
+0.0006212
+</td>
+<td style="text-align:left;">
+3576/3309/467/1649/3484/9709
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0002576" class="uri">GO:0002576</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+platelet degranulation
+</td>
+<td style="text-align:left;">
+12/324
+</td>
+<td style="text-align:left;">
+128/18862
+</td>
+<td style="text-align:right;">
+2.20e-06
+</td>
+<td style="text-align:right;">
+0.0007502
+</td>
+<td style="text-align:right;">
+0.0006288
+</td>
+<td style="text-align:left;">
+5919/7076/1191/23052/2621/1521/7277/1950/5265/135228/7873/3700
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0045861" class="uri">GO:0045861</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+negative regulation of proteolysis
+</td>
+<td style="text-align:left;">
+20/324
+</td>
+<td style="text-align:left;">
+346/18862
+</td>
+<td style="text-align:right;">
+2.50e-06
+</td>
+<td style="text-align:right;">
+0.0008025
+</td>
+<td style="text-align:right;">
+0.0006727
+</td>
+<td style="text-align:left;">
+1294/27290/7076/2537/2621/27151/1469/221476/1472/5265/6690/4804/135228/9709/4057/1718/5045/6653/3700/4130
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0051346" class="uri">GO:0051346</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+negative regulation of hydrolase activity
+</td>
+<td style="text-align:left;">
+23/324
+</td>
+<td style="text-align:left;">
+456/18862
+</td>
+<td style="text-align:right;">
+4.50e-06
+</td>
+<td style="text-align:right;">
+0.0013112
+</td>
+<td style="text-align:right;">
+0.0010991
+</td>
+<td style="text-align:left;">
+1294/114794/27290/51129/7076/2537/2621/27151/1469/221476/1472/5265/6690/4804/135228/9709/2644/4057/9734/1718/5045/6653/3700
+</td>
+<td style="text-align:right;">
+23
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0060976" class="uri">GO:0060976</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+coronary vasculature development
+</td>
+<td style="text-align:left;">
+7/324
+</td>
+<td style="text-align:left;">
+44/18862
+</td>
+<td style="text-align:right;">
+9.20e-06
+</td>
+<td style="text-align:right;">
+0.0022399
+</td>
+<td style="text-align:right;">
+0.0018776
+</td>
+<td style="text-align:left;">
+11174/652/2852/4091/8862/5754/5159
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0002237" class="uri">GO:0002237</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+response to molecule of bacterial origin
+</td>
+<td style="text-align:left;">
+19/324
+</td>
+<td style="text-align:left;">
+346/18862
+</td>
+<td style="text-align:right;">
+9.40e-06
+</td>
+<td style="text-align:right;">
+0.0022399
+</td>
+<td style="text-align:right;">
+0.0018776
+</td>
+<td style="text-align:left;">
+1543/9076/3569/2921/2919/3576/3552/2920/11009/929/4091/26525/1755/2353/59307/1440/4129/4057/3553
+</td>
+<td style="text-align:right;">
+19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0071216" class="uri">GO:0071216</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+cellular response to biotic stimulus
+</td>
+<td style="text-align:left;">
+15/324
+</td>
+<td style="text-align:left;">
+233/18862
+</td>
+<td style="text-align:right;">
+1.30e-05
+</td>
+<td style="text-align:right;">
+0.0027189
+</td>
+<td style="text-align:right;">
+0.0022792
+</td>
+<td style="text-align:left;">
+3569/2921/2919/3576/3552/2920/11009/3309/929/26525/1649/59307/1440/4057/3553
+</td>
+<td style="text-align:right;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0031668" class="uri">GO:0031668</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+cellular response to extracellular stimulus
+</td>
+<td style="text-align:left;">
+15/324
+</td>
+<td style="text-align:left;">
+235/18862
+</td>
+<td style="text-align:right;">
+1.44e-05
+</td>
+<td style="text-align:right;">
+0.0027189
+</td>
+<td style="text-align:right;">
+0.0022792
+</td>
+<td style="text-align:left;">
+255738/360/3309/2629/10634/2621/3371/25959/2348/467/490/7378/2353/83667/168620
+</td>
+<td style="text-align:right;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0030574" class="uri">GO:0030574</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+collagen catabolic process
+</td>
+<td style="text-align:left;">
+7/324
+</td>
+<td style="text-align:left;">
+47/18862
+</td>
+<td style="text-align:right;">
+1.44e-05
+</td>
+<td style="text-align:right;">
+0.0027189
+</td>
+<td style="text-align:right;">
+0.0022792
+</td>
+<td style="text-align:left;">
+9902/4324/4319/4314/140766/4312/5045
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0010631" class="uri">GO:0010631</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+epithelial cell migration
+</td>
+<td style="text-align:left;">
+19/324
+</td>
+<td style="text-align:left;">
+357/18862
+</td>
+<td style="text-align:right;">
+1.45e-05
+</td>
+<td style="text-align:right;">
+0.0027189
+</td>
+<td style="text-align:right;">
+0.0022792
+</td>
+<td style="text-align:left;">
+5743/4070/2896/652/84830/29775/3397/340719/6286/25959/85329/5801/1950/284361/406992/9734/55612/23616/306
+</td>
+<td style="text-align:right;">
+19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0032496" class="uri">GO:0032496</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+response to lipopolysaccharide
+</td>
+<td style="text-align:left;">
+18/324
+</td>
+<td style="text-align:left;">
+326/18862
+</td>
+<td style="text-align:right;">
+1.49e-05
+</td>
+<td style="text-align:right;">
+0.0027189
+</td>
+<td style="text-align:right;">
+0.0022792
+</td>
+<td style="text-align:left;">
+1543/9076/3569/2921/2919/3576/3552/2920/11009/929/4091/26525/2353/59307/1440/4129/4057/3553
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0002526" class="uri">GO:0002526</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+acute inflammatory response
+</td>
+<td style="text-align:left;">
+10/324
+</td>
+<td style="text-align:left;">
+107/18862
+</td>
+<td style="text-align:right;">
+1.57e-05
+</td>
+<td style="text-align:right;">
+0.0027189
+</td>
+<td style="text-align:right;">
+0.0022792
+</td>
+<td style="text-align:left;">
+5743/3569/3552/6288/6289/5265/59307/26471/3700/3553
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0090132" class="uri">GO:0090132</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+epithelium migration
+</td>
+<td style="text-align:left;">
+19/324
+</td>
+<td style="text-align:left;">
+360/18862
+</td>
+<td style="text-align:right;">
+1.63e-05
+</td>
+<td style="text-align:right;">
+0.0027189
+</td>
+<td style="text-align:right;">
+0.0022792
+</td>
+<td style="text-align:left;">
+5743/4070/2896/652/84830/29775/3397/340719/6286/25959/85329/5801/1950/284361/406992/9734/55612/23616/306
+</td>
+<td style="text-align:right;">
+19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0031669" class="uri">GO:0031669</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+cellular response to nutrient levels
+</td>
+<td style="text-align:left;">
+14/324
+</td>
+<td style="text-align:left;">
+210/18862
+</td>
+<td style="text-align:right;">
+1.71e-05
+</td>
+<td style="text-align:right;">
+0.0027295
+</td>
+<td style="text-align:right;">
+0.0022881
+</td>
+<td style="text-align:left;">
+255738/360/3309/2629/10634/2621/3371/25959/2348/467/490/7378/83667/168620
+</td>
+<td style="text-align:right;">
+14
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0071496" class="uri">GO:0071496</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+cellular response to external stimulus
+</td>
+<td style="text-align:left;">
+17/324
+</td>
+<td style="text-align:left;">
+303/18862
+</td>
+<td style="text-align:right;">
+2.10e-05
+</td>
+<td style="text-align:right;">
+0.0030723
+</td>
+<td style="text-align:right;">
+0.0025754
+</td>
+<td style="text-align:left;">
+255738/360/3309/2629/10634/2621/3371/25959/2348/467/490/7378/2353/83667/168620/1605/3553
+</td>
+<td style="text-align:right;">
+17
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0022612" class="uri">GO:0022612</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+gland morphogenesis
+</td>
+<td style="text-align:left;">
+10/324
+</td>
+<td style="text-align:left;">
+111/18862
+</td>
+<td style="text-align:right;">
+2.17e-05
+</td>
+<td style="text-align:right;">
+0.0030723
+</td>
+<td style="text-align:right;">
+0.0025754
+</td>
+<td style="text-align:left;">
+4041/3569/652/5361/3911/3371/284217/1436/1999/1605
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0019216" class="uri">GO:0019216</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+regulation of lipid metabolic process
+</td>
+<td style="text-align:left;">
+20/324
+</td>
+<td style="text-align:left;">
+402/18862
+</td>
+<td style="text-align:right;">
+2.30e-05
+</td>
+<td style="text-align:right;">
+0.0031393
+</td>
+<td style="text-align:right;">
+0.0026315
+</td>
+<td style="text-align:left;">
+1543/5743/5919/19/3490/7108/4598/51129/2852/2261/123/85329/5159/84649/6615/6653/79888/2264/57761/3553
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0032868" class="uri">GO:0032868</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+response to insulin
+</td>
+<td style="text-align:left;">
+16/324
+</td>
+<td style="text-align:left;">
+278/18862
+</td>
+<td style="text-align:right;">
+2.70e-05
+</td>
+<td style="text-align:right;">
+0.0035632
+</td>
+<td style="text-align:right;">
+0.0029868
+</td>
+<td style="text-align:left;">
+5919/896/255738/245972/80339/9021/23371/490/3484/9734/83667/6653/57761/54206/3553/3795
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0009991" class="uri">GO:0009991</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+response to extracellular stimulus
+</td>
+<td style="text-align:left;">
+22/324
+</td>
+<td style="text-align:left;">
+477/18862
+</td>
+<td style="text-align:right;">
+2.87e-05
+</td>
+<td style="text-align:right;">
+0.0036632
+</td>
+<td style="text-align:right;">
+0.0030707
+</td>
+<td style="text-align:left;">
+1543/5919/255738/360/218/3309/2629/10634/2621/6566/80763/3371/25959/2348/467/490/7378/2353/1649/83667/6653/168620
+</td>
+<td style="text-align:right;">
+22
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0006984" class="uri">GO:0006984</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+ER-nucleus signaling pathway
+</td>
+<td style="text-align:left;">
+7/324
+</td>
+<td style="text-align:left;">
+53/18862
+</td>
+<td style="text-align:right;">
+3.24e-05
+</td>
+<td style="text-align:right;">
+0.0039983
+</td>
+<td style="text-align:right;">
+0.0033516
+</td>
+<td style="text-align:left;">
+7184/3576/3309/467/1649/3484/9709
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0048732" class="uri">GO:0048732</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+gland development
+</td>
+<td style="text-align:left;">
+20/324
+</td>
+<td style="text-align:left;">
+413/18862
+</td>
+<td style="text-align:right;">
+3.36e-05
+</td>
+<td style="text-align:right;">
+0.0040265
+</td>
+<td style="text-align:right;">
+0.0033753
+</td>
+<td style="text-align:left;">
+1543/4041/9076/3569/652/255738/7477/5361/5589/3911/7490/3371/284217/8862/1950/1054/1436/2049/1999/1605
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0071222" class="uri">GO:0071222</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+cellular response to lipopolysaccharide
+</td>
+<td style="text-align:left;">
+13/324
+</td>
+<td style="text-align:left;">
+197/18862
+</td>
+<td style="text-align:right;">
+3.80e-05
+</td>
+<td style="text-align:right;">
+0.0042255
+</td>
+<td style="text-align:right;">
+0.0035421
+</td>
+<td style="text-align:left;">
+3569/2921/2919/3576/3552/2920/11009/929/26525/59307/1440/4057/3553
+</td>
+<td style="text-align:right;">
+13
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cki-omt-vs-cki" class="section level4">
+<h4>CKI-Omt vs CKI</h4>
+<pre class="r"><code>enrichGO_treat[[&quot;CKI-Omt vs CKI&quot;]][1:30,] %&gt;% as.data.frame() %&gt;% dplyr::select(-c(&quot;ID&quot;, &quot;shortest_path&quot;, &quot;longest_path&quot;, &quot;terminal_node&quot;, &quot;ontology&quot;)) %&gt;% kable() %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;% scroll_box(height=&quot;600px&quot;)</code></pre>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:600px; ">
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+ONTOLOGY
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Description
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+GeneRatio
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+BgRatio
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+pvalue
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+p.adjust
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+qvalue
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+geneID
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0000280" class="uri">GO:0000280</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+nuclear division
+</td>
+<td style="text-align:left;">
+78/580
+</td>
+<td style="text-align:left;">
+436/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+4288/3553/146909/3833/64151/4041/9088/7153/24137/11130/4751/113130/699/3552/11004/23310/983/23397/3832/1062/83990/8438/10635/701/9134/10615/9585/10403/10460/5347/995/54443/9787/4605/7272/151648/51203/84722/9700/81620/9319/83540/2177/79075/9735/57820/4085/5888/990/55143/9133/891/83903/652/151246/348654/3209/11065/25788/54892/9212/1950/1063/29781/1843/5155/9055/4000/3619/29988/286151/3835/2175/84250/55124/64105/3976/84861
+</td>
+<td style="text-align:right;">
+78
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0140014" class="uri">GO:0140014</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+mitotic nuclear division
+</td>
+<td style="text-align:left;">
+65/580
+</td>
+<td style="text-align:left;">
+296/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+4288/3553/146909/3833/64151/4041/9088/24137/11130/4751/113130/699/3552/11004/23310/983/23397/3832/1062/701/10615/9585/10403/10460/5347/995/54443/9787/4605/7272/151648/51203/84722/9700/81620/9319/83540/79075/9735/4085/990/55143/9133/891/83903/652/151246/348654/3209/11065/54892/9212/1950/1063/29781/1843/5155/9055/4000/3619/286151/3835/84250/64105/84861
+</td>
+<td style="text-align:right;">
+65
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0048285" class="uri">GO:0048285</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+organelle fission
+</td>
+<td style="text-align:left;">
+80/580
+</td>
+<td style="text-align:left;">
+486/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+4288/3553/146909/3833/64151/4041/9088/7153/24137/11130/4751/113130/699/3552/11004/23310/983/23397/3832/1062/83990/8438/10635/701/9134/10615/9585/10403/10460/5347/995/54443/9787/4605/7272/151648/51203/84722/9700/81620/9319/83540/2177/79075/9735/57820/4085/5888/990/55143/9133/891/83903/8799/652/151246/348654/3209/11065/25788/54892/9212/1950/1063/26052/29781/1843/5155/9055/4000/3619/29988/286151/3835/2175/84250/55124/64105/3976/84861
+</td>
+<td style="text-align:right;">
+80
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0000819" class="uri">GO:0000819</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+sister chromatid segregation
+</td>
+<td style="text-align:left;">
+51/580
+</td>
+<td style="text-align:left;">
+199/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+146909/3833/64151/7153/24137/11130/4751/113130/699/157570/11004/23310/23397/1062/701/10615/10403/10460/5347/9787/7272/151648/51203/84722/9700/81620/9319/83540/79075/9735/4085/2237/990/55143/891/83903/151246/348654/11065/54892/9212/1063/29781/1843/9055/3619/3835/116028/84250/64105/84861
+</td>
+<td style="text-align:right;">
+51
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0000070" class="uri">GO:0000070</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+mitotic sister chromatid segregation
+</td>
+<td style="text-align:left;">
+47/580
+</td>
+<td style="text-align:left;">
+164/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+146909/3833/64151/24137/11130/4751/113130/699/11004/23310/23397/1062/701/10615/10403/10460/5347/9787/7272/151648/51203/84722/9700/81620/9319/83540/79075/9735/4085/990/55143/891/83903/151246/348654/11065/54892/9212/1063/29781/1843/9055/3619/3835/84250/64105/84861
+</td>
+<td style="text-align:right;">
+47
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0098813" class="uri">GO:0098813</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+nuclear chromosome segregation
+</td>
+<td style="text-align:left;">
+58/580
+</td>
+<td style="text-align:left;">
+273/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+146909/3833/64151/7153/24137/11130/4751/113130/699/157570/11004/23310/23397/1062/83990/701/9134/10615/10403/10460/5347/9787/7272/151648/51203/84722/9700/81620/57082/9319/83540/2177/79075/9735/57820/4085/2237/990/55143/891/83903/151246/348654/11065/54892/9212/1063/81610/29781/1843/9055/3619/3835/116028/84250/64105/84861/55166
+</td>
+<td style="text-align:right;">
+58
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0051783" class="uri">GO:0051783</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+regulation of nuclear division
+</td>
+<td style="text-align:left;">
+35/580
+</td>
+<td style="text-align:left;">
+135/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+4288/3553/4041/9088/11130/4751/699/3552/10635/701/9585/10403/5347/995/9787/7272/51203/9700/81620/9319/9735/4085/891/652/348654/3209/9212/1950/1063/1843/5155/286151/55124/3976/84861
+</td>
+<td style="text-align:right;">
+35
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0007088" class="uri">GO:0007088</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+regulation of mitotic nuclear division
+</td>
+<td style="text-align:left;">
+32/580
+</td>
+<td style="text-align:left;">
+109/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+4288/3553/4041/9088/11130/4751/699/3552/701/9585/10403/5347/995/9787/7272/51203/9700/81620/9319/9735/4085/891/652/348654/3209/9212/1950/1063/1843/5155/286151/84861
+</td>
+<td style="text-align:right;">
+32
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0006260" class="uri">GO:0006260</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+DNA replication
+</td>
+<td style="text-align:left;">
+48/580
+</td>
+<td style="text-align:left;">
+280/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+6241/55388/890/672/157570/983/9156/641/83990/10036/9134/9768/8318/51659/63967/84296/51514/9837/63922/79733/374393/5557/81620/79075/5888/9401/10721/2237/990/8208/90381/348654/5427/55345/80119/10293/4174/1950/4796/4175/63901/79915/4998/5983/6240/11169/580/116028
+</td>
+<td style="text-align:right;">
+48
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0051306" class="uri">GO:0051306</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+mitotic sister chromatid separation
+</td>
+<td style="text-align:left;">
+23/580
+</td>
+<td style="text-align:left;">
+66/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+11130/699/1062/701/10403/10460/5347/9787/7272/9700/81620/9319/9735/4085/990/891/348654/11065/9212/1063/29781/1843/84861
+</td>
+<td style="text-align:right;">
+23
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0007091" class="uri">GO:0007091</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+metaphase/anaphase transition of mitotic cell cycle
+</td>
+<td style="text-align:left;">
+22/580
+</td>
+<td style="text-align:left;">
+61/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+11130/699/1062/701/10403/10460/5347/9787/7272/9700/81620/9319/9735/4085/990/891/348654/11065/9212/1063/1843/84861
+</td>
+<td style="text-align:right;">
+22
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0033045" class="uri">GO:0033045</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+regulation of sister chromatid segregation
+</td>
+<td style="text-align:left;">
+23/580
+</td>
+<td style="text-align:left;">
+71/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+11130/699/1062/701/10403/10460/5347/9787/7272/9700/81620/9319/9735/4085/990/891/348654/11065/9212/1063/1843/116028/84861
+</td>
+<td style="text-align:right;">
+23
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0010965" class="uri">GO:0010965</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+regulation of mitotic sister chromatid separation
+</td>
+<td style="text-align:left;">
+22/580
+</td>
+<td style="text-align:left;">
+64/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+11130/699/1062/701/10403/10460/5347/9787/7272/9700/81620/9319/9735/4085/990/891/348654/11065/9212/1063/1843/84861
+</td>
+<td style="text-align:right;">
+22
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0044784" class="uri">GO:0044784</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+metaphase/anaphase transition of cell cycle
+</td>
+<td style="text-align:left;">
+22/580
+</td>
+<td style="text-align:left;">
+64/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+11130/699/1062/701/10403/10460/5347/9787/7272/9700/81620/9319/9735/4085/990/891/348654/11065/9212/1063/1843/84861
+</td>
+<td style="text-align:right;">
+22
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0051983" class="uri">GO:0051983</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+regulation of chromosome segregation
+</td>
+<td style="text-align:left;">
+25/580
+</td>
+<td style="text-align:left;">
+89/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+4288/11130/699/11004/1062/701/10403/10460/5347/9787/7272/9700/81620/9319/9735/4085/990/891/348654/11065/9212/1063/1843/116028/84861
+</td>
+<td style="text-align:right;">
+25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0030071" class="uri">GO:0030071</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+regulation of mitotic metaphase/anaphase transition
+</td>
+<td style="text-align:left;">
+21/580
+</td>
+<td style="text-align:left;">
+59/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+11130/699/1062/701/10403/5347/9787/7272/9700/81620/9319/9735/4085/990/891/348654/11065/9212/1063/1843/84861
+</td>
+<td style="text-align:right;">
+21
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:1902099" class="uri">GO:1902099</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+regulation of metaphase/anaphase transition of cell cycle
+</td>
+<td style="text-align:left;">
+21/580
+</td>
+<td style="text-align:left;">
+62/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+11130/699/1062/701/10403/5347/9787/7272/9700/81620/9319/9735/4085/990/891/348654/11065/9212/1063/1843/84861
+</td>
+<td style="text-align:right;">
+21
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:1905818" class="uri">GO:1905818</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+regulation of chromosome separation
+</td>
+<td style="text-align:left;">
+22/580
+</td>
+<td style="text-align:left;">
+71/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+11130/699/1062/701/10403/10460/5347/9787/7272/9700/81620/9319/9735/4085/990/891/348654/11065/9212/1063/1843/84861
+</td>
+<td style="text-align:right;">
+22
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0051304" class="uri">GO:0051304</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+chromosome separation
+</td>
+<td style="text-align:left;">
+24/580
+</td>
+<td style="text-align:left;">
+95/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+7153/11130/699/1062/701/10403/10460/5347/9787/7272/9700/81620/9319/9735/4085/990/891/348654/11065/9212/1063/29781/1843/84861
+</td>
+<td style="text-align:right;">
+24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0051784" class="uri">GO:0051784</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+negative regulation of nuclear division
+</td>
+<td style="text-align:left;">
+19/580
+</td>
+<td style="text-align:left;">
+54/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+11130/699/701/10403/5347/7272/81620/9319/9735/4085/891/652/348654/9212/1063/1843/286151/3976/84861
+</td>
+<td style="text-align:right;">
+19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0090068" class="uri">GO:0090068</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+positive regulation of cell cycle process
+</td>
+<td style="text-align:left;">
+41/580
+</td>
+<td style="text-align:left;">
+303/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+3553/4041/672/11113/113130/3552/10733/983/10635/894/10615/9585/1543/10403/995/9787/51514/993/79733/51203/9700/81620/4085/2237/990/891/896/348654/3209/11065/9212/1950/1869/3398/79915/81610/1647/5155/7161/84250/55124
+</td>
+<td style="text-align:right;">
+41
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0007094" class="uri">GO:0007094</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+mitotic spindle assembly checkpoint
+</td>
+<td style="text-align:left;">
+16/580
+</td>
+<td style="text-align:left;">
+37/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+11130/699/701/10403/5347/7272/81620/9319/9735/4085/891/348654/9212/1063/1843/84861
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0071173" class="uri">GO:0071173</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+spindle assembly checkpoint
+</td>
+<td style="text-align:left;">
+16/580
+</td>
+<td style="text-align:left;">
+37/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+11130/699/701/10403/5347/7272/81620/9319/9735/4085/891/348654/9212/1063/1843/84861
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0071174" class="uri">GO:0071174</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+mitotic spindle checkpoint
+</td>
+<td style="text-align:left;">
+16/580
+</td>
+<td style="text-align:left;">
+37/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+11130/699/701/10403/5347/7272/81620/9319/9735/4085/891/348654/9212/1063/1843/84861
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0006261" class="uri">GO:0006261</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+DNA-dependent DNA replication
+</td>
+<td style="text-align:left;">
+29/580
+</td>
+<td style="text-align:left;">
+157/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+55388/641/9134/8318/51659/84296/9837/63922/79733/5557/81620/79075/5888/9401/10721/2237/990/90381/348654/5427/55345/10293/4174/4796/4175/63901/4998/5983/11169
+</td>
+<td style="text-align:right;">
+29
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0031577" class="uri">GO:0031577</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+spindle checkpoint
+</td>
+<td style="text-align:left;">
+16/580
+</td>
+<td style="text-align:left;">
+38/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+11130/699/701/10403/5347/7272/81620/9319/9735/4085/891/348654/9212/1063/1843/84861
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0045841" class="uri">GO:0045841</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+negative regulation of mitotic metaphase/anaphase transition
+</td>
+<td style="text-align:left;">
+16/580
+</td>
+<td style="text-align:left;">
+39/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+11130/699/701/10403/5347/7272/81620/9319/9735/4085/891/348654/9212/1063/1843/84861
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0045839" class="uri">GO:0045839</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+negative regulation of mitotic nuclear division
+</td>
+<td style="text-align:left;">
+17/580
+</td>
+<td style="text-align:left;">
+47/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+11130/699/701/10403/5347/7272/81620/9319/9735/4085/891/652/348654/9212/1063/1843/84861
+</td>
+<td style="text-align:right;">
+17
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:1901990" class="uri">GO:1901990</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+regulation of mitotic cell cycle phase transition
+</td>
+<td style="text-align:left;">
+48/580
+</td>
+<td style="text-align:left;">
+439/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+672/11130/4751/113130/699/10733/983/641/1062/894/701/1543/10403/63967/5347/995/54443/9787/51514/993/7272/79733/9700/22994/81620/9319/9735/4085/990/90381/891/896/348654/5933/11065/3161/9212/1063/1869/3398/9314/4998/1647/1843/25959/10217/23354/84861
+</td>
+<td style="text-align:right;">
+48
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:1902100" class="uri">GO:1902100</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+negative regulation of metaphase/anaphase transition of cell cycle
+</td>
+<td style="text-align:left;">
+16/580
+</td>
+<td style="text-align:left;">
+41/18862
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+11130/699/701/10403/5347/7272/81620/9319/9735/4085/891/348654/9212/1063/1843/84861
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="cki-tri-vs-cki" class="section level4">
+<h4>CKI-Tri vs CKI</h4>
+<pre class="r"><code>enrichGO_treat[[&quot;CKI-Tri vs CKI&quot;]][1:30,] %&gt;% as.data.frame() %&gt;% dplyr::select(-c(&quot;ID&quot;, &quot;shortest_path&quot;, &quot;longest_path&quot;, &quot;terminal_node&quot;, &quot;ontology&quot;)) %&gt;% kable() %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;% scroll_box(height=&quot;600px&quot;)</code></pre>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:600px; ">
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+ONTOLOGY
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Description
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+GeneRatio
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+BgRatio
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+pvalue
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+p.adjust
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+qvalue
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+geneID
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+Count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0030198" class="uri">GO:0030198</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+extracellular matrix organization
+</td>
+<td style="text-align:left;">
+25/306
+</td>
+<td style="text-align:left;">
+393/18862
+</td>
+<td style="text-align:right;">
+0.00e+00
+</td>
+<td style="text-align:right;">
+0.0000101
+</td>
+<td style="text-align:right;">
+0.0000084
+</td>
+<td style="text-align:left;">
+3569/11174/333/83716/8515/170689/4319/169611/3693/3371/284217/3911/84830/4314/7076/2113/3386/1294/7490/4015/140766/1605/64856/55612/5054
+</td>
+<td style="text-align:right;">
+25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0043062" class="uri">GO:0043062</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+extracellular structure organization
+</td>
+<td style="text-align:left;">
+25/306
+</td>
+<td style="text-align:left;">
+394/18862
+</td>
+<td style="text-align:right;">
+0.00e+00
+</td>
+<td style="text-align:right;">
+0.0000101
+</td>
+<td style="text-align:right;">
+0.0000084
+</td>
+<td style="text-align:left;">
+3569/11174/333/83716/8515/170689/4319/169611/3693/3371/284217/3911/84830/4314/7076/2113/3386/1294/7490/4015/140766/1605/64856/55612/5054
+</td>
+<td style="text-align:right;">
+25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0045229" class="uri">GO:0045229</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+external encapsulating structure organization
+</td>
+<td style="text-align:left;">
+25/306
+</td>
+<td style="text-align:left;">
+396/18862
+</td>
+<td style="text-align:right;">
+0.00e+00
+</td>
+<td style="text-align:right;">
+0.0000101
+</td>
+<td style="text-align:right;">
+0.0000084
+</td>
+<td style="text-align:left;">
+3569/11174/333/83716/8515/170689/4319/169611/3693/3371/284217/3911/84830/4314/7076/2113/3386/1294/7490/4015/140766/1605/64856/55612/5054
+</td>
+<td style="text-align:right;">
+25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0006953" class="uri">GO:0006953</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+acute-phase response
+</td>
+<td style="text-align:left;">
+9/306
+</td>
+<td style="text-align:left;">
+46/18862
+</td>
+<td style="text-align:right;">
+0.00e+00
+</td>
+<td style="text-align:right;">
+0.0000430
+</td>
+<td style="text-align:right;">
+0.0000360
+</td>
+<td style="text-align:left;">
+3569/5743/3552/3553/6288/6289/3570/5265/3700
+</td>
+<td style="text-align:right;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0002237" class="uri">GO:0002237</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+response to molecule of bacterial origin
+</td>
+<td style="text-align:left;">
+22/306
+</td>
+<td style="text-align:left;">
+346/18862
+</td>
+<td style="text-align:right;">
+1.00e-07
+</td>
+<td style="text-align:right;">
+0.0000435
+</td>
+<td style="text-align:right;">
+0.0000364
+</td>
+<td style="text-align:left;">
+3569/1543/2921/2919/9076/3552/3553/3576/2920/11009/6648/1437/26525/1440/4057/4091/210/26191/1755/4129/929/5054
+</td>
+<td style="text-align:right;">
+22
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0032496" class="uri">GO:0032496</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+response to lipopolysaccharide
+</td>
+<td style="text-align:left;">
+21/306
+</td>
+<td style="text-align:left;">
+326/18862
+</td>
+<td style="text-align:right;">
+1.00e-07
+</td>
+<td style="text-align:right;">
+0.0000587
+</td>
+<td style="text-align:right;">
+0.0000491
+</td>
+<td style="text-align:left;">
+3569/1543/2921/2919/9076/3552/3553/3576/2920/11009/6648/1437/26525/1440/4057/4091/210/26191/4129/929/5054
+</td>
+<td style="text-align:right;">
+21
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0071216" class="uri">GO:0071216</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+cellular response to biotic stimulus
+</td>
+<td style="text-align:left;">
+17/306
+</td>
+<td style="text-align:left;">
+233/18862
+</td>
+<td style="text-align:right;">
+3.00e-07
+</td>
+<td style="text-align:right;">
+0.0001519
+</td>
+<td style="text-align:right;">
+0.0001271
+</td>
+<td style="text-align:left;">
+3569/2921/2919/3552/3553/3576/2920/11009/1437/3309/26525/1440/4057/26191/1649/929/5054
+</td>
+<td style="text-align:right;">
+17
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0071222" class="uri">GO:0071222</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+cellular response to lipopolysaccharide
+</td>
+<td style="text-align:left;">
+15/306
+</td>
+<td style="text-align:left;">
+197/18862
+</td>
+<td style="text-align:right;">
+8.00e-07
+</td>
+<td style="text-align:right;">
+0.0003927
+</td>
+<td style="text-align:right;">
+0.0003287
+</td>
+<td style="text-align:left;">
+3569/2921/2919/3552/3553/3576/2920/11009/1437/26525/1440/4057/26191/929/5054
+</td>
+<td style="text-align:right;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0002576" class="uri">GO:0002576</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+platelet degranulation
+</td>
+<td style="text-align:left;">
+12/306
+</td>
+<td style="text-align:left;">
+128/18862
+</td>
+<td style="text-align:right;">
+1.20e-06
+</td>
+<td style="text-align:right;">
+0.0005042
+</td>
+<td style="text-align:right;">
+0.0004220
+</td>
+<td style="text-align:left;">
+5919/1521/1950/7076/1191/23052/135228/5099/5265/5054/3700/7277
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0071219" class="uri">GO:0071219</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+cellular response to molecule of bacterial origin
+</td>
+<td style="text-align:left;">
+15/306
+</td>
+<td style="text-align:left;">
+209/18862
+</td>
+<td style="text-align:right;">
+1.70e-06
+</td>
+<td style="text-align:right;">
+0.0006145
+</td>
+<td style="text-align:right;">
+0.0005143
+</td>
+<td style="text-align:left;">
+3569/2921/2919/3552/3553/3576/2920/11009/1437/26525/1440/4057/26191/929/5054
+</td>
+<td style="text-align:right;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:1901653" class="uri">GO:1901653</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+cellular response to peptide
+</td>
+<td style="text-align:left;">
+21/306
+</td>
+<td style="text-align:left;">
+391/18862
+</td>
+<td style="text-align:right;">
+1.80e-06
+</td>
+<td style="text-align:right;">
+0.0006145
+</td>
+<td style="text-align:right;">
+0.0005143
+</td>
+<td style="text-align:left;">
+5919/3553/2852/896/245972/23371/255738/3397/80339/490/9734/54206/9021/26191/3484/8835/6653/677/1583/837/57761
+</td>
+<td style="text-align:right;">
+21
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0043687" class="uri">GO:0043687</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+post-translational protein modification
+</td>
+<td style="text-align:left;">
+20/306
+</td>
+<td style="text-align:left;">
+361/18862
+</td>
+<td style="text-align:right;">
+2.00e-06
+</td>
+<td style="text-align:right;">
+0.0006145
+</td>
+<td style="text-align:right;">
+0.0005143
+</td>
+<td style="text-align:left;">
+3569/3490/10618/652/51676/7184/8542/3371/3487/255738/7076/9021/56975/5589/3484/8835/140462/3486/64856/5265
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0001933" class="uri">GO:0001933</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+negative regulation of protein phosphorylation
+</td>
+<td style="text-align:left;">
+20/306
+</td>
+<td style="text-align:left;">
+362/18862
+</td>
+<td style="text-align:right;">
+2.10e-06
+</td>
+<td style="text-align:right;">
+0.0006145
+</td>
+<td style="text-align:right;">
+0.0005143
+</td>
+<td style="text-align:left;">
+4041/3553/652/1850/2629/5999/54206/9021/4091/26191/135228/203228/6653/5787/6690/3486/1031/5347/5570/57761
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0043434" class="uri">GO:0043434</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+response to peptide hormone
+</td>
+<td style="text-align:left;">
+22/306
+</td>
+<td style="text-align:left;">
+435/18862
+</td>
+<td style="text-align:right;">
+2.80e-06
+</td>
+<td style="text-align:right;">
+0.0007506
+</td>
+<td style="text-align:right;">
+0.0006282
+</td>
+<td style="text-align:left;">
+5919/4041/3553/2852/896/245972/23371/255738/7076/80339/490/9734/54206/9021/3484/8835/6653/677/83667/1583/1605/57761
+</td>
+<td style="text-align:right;">
+22
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0001667" class="uri">GO:0001667</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+ameboidal-type cell migration
+</td>
+<td style="text-align:left;">
+23/306
+</td>
+<td style="text-align:left;">
+473/18862
+</td>
+<td style="text-align:right;">
+3.10e-06
+</td>
+<td style="text-align:right;">
+0.0008002
+</td>
+<td style="text-align:right;">
+0.0006697
+</td>
+<td style="text-align:left;">
+5743/4070/4041/652/25959/3911/84830/2896/29775/1950/7076/6286/3397/2113/9734/85329/306/2348/284361/5801/55612/340719/23616
+</td>
+<td style="text-align:right;">
+23
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0042326" class="uri">GO:0042326</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+negative regulation of phosphorylation
+</td>
+<td style="text-align:left;">
+21/306
+</td>
+<td style="text-align:left;">
+407/18862
+</td>
+<td style="text-align:right;">
+3.40e-06
+</td>
+<td style="text-align:right;">
+0.0008146
+</td>
+<td style="text-align:right;">
+0.0006817
+</td>
+<td style="text-align:left;">
+4041/3553/652/1850/2629/5999/54206/9021/4091/26191/135228/203228/6653/5787/6690/3486/1031/26471/5347/5570/57761
+</td>
+<td style="text-align:right;">
+21
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0032869" class="uri">GO:0032869</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+cellular response to insulin stimulus
+</td>
+<td style="text-align:left;">
+15/306
+</td>
+<td style="text-align:left;">
+226/18862
+</td>
+<td style="text-align:right;">
+4.50e-06
+</td>
+<td style="text-align:right;">
+0.0010222
+</td>
+<td style="text-align:right;">
+0.0008555
+</td>
+<td style="text-align:left;">
+5919/3553/896/245972/23371/255738/80339/490/9734/54206/9021/3484/6653/677/57761
+</td>
+<td style="text-align:right;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0010466" class="uri">GO:0010466</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+negative regulation of peptidase activity
+</td>
+<td style="text-align:left;">
+16/306
+</td>
+<td style="text-align:left;">
+257/18862
+</td>
+<td style="text-align:right;">
+5.00e-06
+</td>
+<td style="text-align:right;">
+0.0010579
+</td>
+<td style="text-align:right;">
+0.0008853
+</td>
+<td style="text-align:left;">
+27290/7076/27151/2537/1294/4057/1472/135228/221476/1469/4803/6653/6690/5265/5054/3700
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0010631" class="uri">GO:0010631</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+epithelial cell migration
+</td>
+<td style="text-align:left;">
+19/306
+</td>
+<td style="text-align:left;">
+357/18862
+</td>
+<td style="text-align:right;">
+6.50e-06
+</td>
+<td style="text-align:right;">
+0.0012579
+</td>
+<td style="text-align:right;">
+0.0010527
+</td>
+<td style="text-align:left;">
+5743/4070/652/25959/84830/2896/29775/1950/6286/3397/2113/9734/85329/306/284361/5801/55612/340719/23616
+</td>
+<td style="text-align:right;">
+19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0071375" class="uri">GO:0071375</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+cellular response to peptide hormone stimulus
+</td>
+<td style="text-align:left;">
+18/306
+</td>
+<td style="text-align:left;">
+325/18862
+</td>
+<td style="text-align:right;">
+6.60e-06
+</td>
+<td style="text-align:right;">
+0.0012579
+</td>
+<td style="text-align:right;">
+0.0010527
+</td>
+<td style="text-align:left;">
+5919/3553/2852/896/245972/23371/255738/80339/490/9734/54206/9021/3484/8835/6653/677/1583/57761
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0031960" class="uri">GO:0031960</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+response to corticosteroid
+</td>
+<td style="text-align:left;">
+12/306
+</td>
+<td style="text-align:left;">
+152/18862
+</td>
+<td style="text-align:right;">
+7.20e-06
+</td>
+<td style="text-align:right;">
+0.0012652
+</td>
+<td style="text-align:right;">
+0.0010588
+</td>
+<td style="text-align:left;">
+3569/9076/3490/2852/218/2629/490/54206/306/210/677/4129
+</td>
+<td style="text-align:right;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0090132" class="uri">GO:0090132</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+epithelium migration
+</td>
+<td style="text-align:left;">
+19/306
+</td>
+<td style="text-align:left;">
+360/18862
+</td>
+<td style="text-align:right;">
+7.30e-06
+</td>
+<td style="text-align:right;">
+0.0012652
+</td>
+<td style="text-align:right;">
+0.0010588
+</td>
+<td style="text-align:left;">
+5743/4070/652/25959/84830/2896/29775/1950/6286/3397/2113/9734/85329/306/284361/5801/55612/340719/23616
+</td>
+<td style="text-align:right;">
+19
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0043409" class="uri">GO:0043409</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+negative regulation of MAPK cascade
+</td>
+<td style="text-align:left;">
+13/306
+</td>
+<td style="text-align:left;">
+181/18862
+</td>
+<td style="text-align:right;">
+8.50e-06
+</td>
+<td style="text-align:right;">
+0.0014054
+</td>
+<td style="text-align:right;">
+0.0011761
+</td>
+<td style="text-align:left;">
+3553/652/1850/2852/2629/5999/57447/54206/467/26191/6653/5801/1605
+</td>
+<td style="text-align:right;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0002526" class="uri">GO:0002526</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+acute inflammatory response
+</td>
+<td style="text-align:left;">
+10/306
+</td>
+<td style="text-align:left;">
+107/18862
+</td>
+<td style="text-align:right;">
+9.60e-06
+</td>
+<td style="text-align:right;">
+0.0014604
+</td>
+<td style="text-align:right;">
+0.0012221
+</td>
+<td style="text-align:left;">
+3569/5743/3552/3553/6288/6289/3570/5265/26471/3700
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0006469" class="uri">GO:0006469</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+negative regulation of protein kinase activity
+</td>
+<td style="text-align:left;">
+15/306
+</td>
+<td style="text-align:left;">
+243/18862
+</td>
+<td style="text-align:right;">
+1.09e-05
+</td>
+<td style="text-align:right;">
+0.0016035
+</td>
+<td style="text-align:right;">
+0.0013419
+</td>
+<td style="text-align:left;">
+4041/3553/652/1850/2629/5999/54206/9021/26191/6653/5787/1031/5347/5570/57761
+</td>
+<td style="text-align:right;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0010951" class="uri">GO:0010951</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+negative regulation of endopeptidase activity
+</td>
+<td style="text-align:left;">
+15/306
+</td>
+<td style="text-align:left;">
+245/18862
+</td>
+<td style="text-align:right;">
+1.20e-05
+</td>
+<td style="text-align:right;">
+0.0017024
+</td>
+<td style="text-align:right;">
+0.0014247
+</td>
+<td style="text-align:left;">
+27290/7076/27151/2537/1294/4057/1472/135228/1469/4803/6653/6690/5265/5054/3700
+</td>
+<td style="text-align:right;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0051384" class="uri">GO:0051384</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+response to glucocorticoid
+</td>
+<td style="text-align:left;">
+11/306
+</td>
+<td style="text-align:left;">
+135/18862
+</td>
+<td style="text-align:right;">
+1.29e-05
+</td>
+<td style="text-align:right;">
+0.0017554
+</td>
+<td style="text-align:right;">
+0.0014691
+</td>
+<td style="text-align:left;">
+3569/9076/3490/218/2629/490/54206/306/210/677/4129
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0032868" class="uri">GO:0032868</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+response to insulin
+</td>
+<td style="text-align:left;">
+16/306
+</td>
+<td style="text-align:left;">
+278/18862
+</td>
+<td style="text-align:right;">
+1.34e-05
+</td>
+<td style="text-align:right;">
+0.0017637
+</td>
+<td style="text-align:right;">
+0.0014760
+</td>
+<td style="text-align:left;">
+5919/3553/896/245972/23371/255738/80339/490/9734/54206/9021/3484/6653/677/83667/57761
+</td>
+<td style="text-align:right;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0048732" class="uri">GO:0048732</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+gland development
+</td>
+<td style="text-align:left;">
+20/306
+</td>
+<td style="text-align:left;">
+413/18862
+</td>
+<td style="text-align:right;">
+1.48e-05
+</td>
+<td style="text-align:right;">
+0.0018881
+</td>
+<td style="text-align:right;">
+0.0015801
+</td>
+<td style="text-align:left;">
+3569/1543/9076/4041/652/5361/3371/284217/3911/255738/1950/7477/2113/3219/7490/5589/8835/1054/8862/1605
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<a href="GO:0045861" class="uri">GO:0045861</a>
+</td>
+<td style="text-align:left;">
+BP
+</td>
+<td style="text-align:left;">
+negative regulation of proteolysis
+</td>
+<td style="text-align:left;">
+18/306
+</td>
+<td style="text-align:left;">
+346/18862
+</td>
+<td style="text-align:right;">
+1.54e-05
+</td>
+<td style="text-align:right;">
+0.0018999
+</td>
+<td style="text-align:right;">
+0.0015900
+</td>
+<td style="text-align:left;">
+27290/7076/27151/2537/1294/4057/1472/210/135228/4130/221476/1469/4803/6653/6690/5265/5054/3700
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- ### Using the `edgeR::goanaLRT` package -->
+<!-- #### TREAT -->
+<pre class="r"><code># Create list object
+goana_treat=list()
+goana_treat_sig=list()
+for (i in 1:ncol(contrast)){
+  #at each iteration, let x = name of each contrast group
+  x=comparison_group[i,]
+  
+  #populate the goana list with all GO terms
+  goana_treat[[x]] &lt;- edgeR::goana.DGELRT(de = apply_treat[[x]], 
+                                          geneid = apply_treat[[x]]$genes$entrezid, 
+                                          species = &quot;Hs&quot;,
+                                          FDR = 0.05, 
+                                          ont = &quot;GOTERM_BP_8&quot;)
+  
+  
+  #filter only significant GO terms
+  goana_treat_sig[[x]] &lt;- topGO(results = goana_treat[[x]], number = 30)
+} 
+
+# save rds object for use in downstream GO and KEGG analysis
+goana_treat %&gt;% saveRDS(file = &quot;../0_data/rds_object/goana_treat_unfiltered.rds&quot;)
+goana_treat_sig %&gt;% saveRDS(file = &quot;../0_data/rds_object/goana_treat_filtered.rds&quot;)
+
+#save each unfiltered comparison group in the output directory
+writexl::write_xlsx(x = goana_treat,
+                    path = &quot;../6_output/3_GO/treat/goana_treat_unfiltered.xlsx&quot;)</code></pre>
+</div>
+</div>
+</div>
+<div id="setup" class="section level1">
+<h1>Setup</h1>
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.1.0 (2021-05-18)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 10 x64 (build 19043)
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=English_Australia.1252  LC_CTYPE=English_Australia.1252   
+[3] LC_MONETARY=English_Australia.1252 LC_NUMERIC=C                      
+[5] LC_TIME=English_Australia.1252    
+
+attached base packages:
+ [1] parallel  stats4    grid      stats     graphics  grDevices utils    
+ [8] datasets  methods   base     
+
+other attached packages:
+ [1] biomaRt_2.48.3        org.Hs.eg.db_3.13.0   AnnotationDbi_1.54.1 
+ [4] IRanges_2.26.0        S4Vectors_0.30.0      Biobase_2.52.0       
+ [7] BiocGenerics_0.38.0   clusterProfiler_4.0.5 Glimma_2.2.0         
+[10] edgeR_3.34.0          limma_3.48.1          ggrepel_0.9.1        
+[13] ggbiplot_0.55         scales_1.1.1          plyr_1.8.6           
+[16] ggpubr_0.4.0          pheatmap_1.0.12       cowplot_1.1.1        
+[19] pander_0.6.4          kableExtra_1.3.4      forcats_0.5.1        
+[22] stringr_1.4.0         purrr_0.3.4           tidyr_1.1.3          
+[25] ggplot2_3.3.5         tidyverse_1.3.1       reshape2_1.4.4       
+[28] tibble_3.1.2          readr_2.0.0           magrittr_2.0.1       
+[31] dplyr_1.0.7          
+
+loaded via a namespace (and not attached):
+  [1] utf8_1.2.1                  tidyselect_1.1.1           
+  [3] RSQLite_2.2.7               htmlwidgets_1.5.4          
+  [5] BiocParallel_1.26.1         scatterpie_0.1.7           
+  [7] munsell_0.5.0               statmod_1.4.36             
+  [9] withr_2.4.2                 colorspace_2.0-2           
+ [11] GOSemSim_2.18.1             filelock_1.0.2             
+ [13] highr_0.9                   knitr_1.36                 
+ [15] rstudioapi_0.13             ggsignif_0.6.3             
+ [17] DOSE_3.18.3                 MatrixGenerics_1.4.3       
+ [19] labeling_0.4.2              git2r_0.28.0               
+ [21] GenomeInfoDbData_1.2.6      polyclip_1.10-0            
+ [23] bit64_4.0.5                 farver_2.1.0               
+ [25] rprojroot_2.0.2             downloader_0.4             
+ [27] treeio_1.16.2               vctrs_0.3.8                
+ [29] generics_0.1.0              xfun_0.24                  
+ [31] BiocFileCache_2.0.0         R6_2.5.1                   
+ [33] GenomeInfoDb_1.28.4         graphlayouts_0.7.1         
+ [35] locfit_1.5-9.4              gridGraphics_0.5-1         
+ [37] bitops_1.0-7                cachem_1.0.5               
+ [39] fgsea_1.18.0                DelayedArray_0.18.0        
+ [41] assertthat_0.2.1            promises_1.2.0.1           
+ [43] ggraph_2.0.5                enrichplot_1.12.3          
+ [45] gtable_0.3.0                tidygraph_1.2.0            
+ [47] workflowr_1.6.2             rlang_0.4.11               
+ [49] genefilter_1.74.0           systemfonts_1.0.2          
+ [51] splines_4.1.0               lazyeval_0.2.2             
+ [53] rstatix_0.7.0               broom_0.7.9                
+ [55] yaml_2.2.1                  abind_1.4-5                
+ [57] modelr_0.1.8                backports_1.2.1            
+ [59] httpuv_1.6.1                qvalue_2.24.0              
+ [61] tools_4.1.0                 ggplotify_0.1.0            
+ [63] ellipsis_0.3.2              jquerylib_0.1.4            
+ [65] RColorBrewer_1.1-2          Rcpp_1.0.6                 
+ [67] progress_1.2.2              zlibbioc_1.38.0            
+ [69] RCurl_1.98-1.3              prettyunits_1.1.1          
+ [71] viridis_0.6.2               SummarizedExperiment_1.22.0
+ [73] haven_2.4.3                 fs_1.5.0                   
+ [75] data.table_1.14.0           DO.db_2.9                  
+ [77] openxlsx_4.2.4              reprex_2.0.1               
+ [79] whisker_0.4                 matrixStats_0.60.1         
+ [81] patchwork_1.1.1             hms_1.1.1                  
+ [83] evaluate_0.14               xtable_1.8-4               
+ [85] XML_3.99-0.6                rio_0.5.27                 
+ [87] readxl_1.3.1                gridExtra_2.3              
+ [89] compiler_4.1.0              shadowtext_0.0.9           
+ [91] writexl_1.4.0               crayon_1.4.1               
+ [93] htmltools_0.5.2             ggfun_0.0.4                
+ [95] later_1.2.0                 tzdb_0.1.2                 
+ [97] aplot_0.1.1                 geneplotter_1.70.0         
+ [99] lubridate_1.7.10            DBI_1.1.1                  
+[101] tweenr_1.0.2                dbplyr_2.1.1               
+[103] rappdirs_0.3.3              MASS_7.3-54                
+[105] Matrix_1.3-3                car_3.0-11                 
+[107] cli_3.0.1                   igraph_1.2.6               
+[109] GenomicRanges_1.44.0        pkgconfig_2.0.3            
+[111] foreign_0.8-81              xml2_1.3.2                 
+[113] ggtree_3.0.4                svglite_2.0.0              
+[115] annotate_1.70.0             bslib_0.3.1                
+[117] webshot_0.5.2               XVector_0.32.0             
+[119] rvest_1.0.2                 yulab.utils_0.0.4          
+[121] digest_0.6.27               Biostrings_2.60.1          
+[123] rmarkdown_2.11              cellranger_1.1.0           
+[125] fastmatch_1.1-3             tidytree_0.3.5             
+[127] curl_4.3.2                  lifecycle_1.0.1            
+[129] nlme_3.1-152                jsonlite_1.7.2             
+[131] carData_3.0-4               viridisLite_0.4.0          
+[133] fansi_0.5.0                 pillar_1.6.4               
+[135] lattice_0.20-44             KEGGREST_1.32.0            
+[137] fastmap_1.1.0               httr_1.4.2                 
+[139] survival_3.2-11             GO.db_3.13.0               
+[141] glue_1.4.2                  zip_2.2.0                  
+[143] png_0.1-7                   bit_4.0.4                  
+[145] ggforce_0.3.3               stringi_1.6.2              
+[147] sass_0.4.0                  blob_1.2.2                 
+[149] DESeq2_1.32.0               memoise_2.0.0              
+[151] ape_5.5                    </code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.1.0 (2021-05-18)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 10 x64 (build 19043)
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=English_Australia.1252  LC_CTYPE=English_Australia.1252   
+[3] LC_MONETARY=English_Australia.1252 LC_NUMERIC=C                      
+[5] LC_TIME=English_Australia.1252    
+
+attached base packages:
+ [1] parallel  stats4    grid      stats     graphics  grDevices utils    
+ [8] datasets  methods   base     
+
+other attached packages:
+ [1] biomaRt_2.48.3        org.Hs.eg.db_3.13.0   AnnotationDbi_1.54.1 
+ [4] IRanges_2.26.0        S4Vectors_0.30.0      Biobase_2.52.0       
+ [7] BiocGenerics_0.38.0   clusterProfiler_4.0.5 Glimma_2.2.0         
+[10] edgeR_3.34.0          limma_3.48.1          ggrepel_0.9.1        
+[13] ggbiplot_0.55         scales_1.1.1          plyr_1.8.6           
+[16] ggpubr_0.4.0          pheatmap_1.0.12       cowplot_1.1.1        
+[19] pander_0.6.4          kableExtra_1.3.4      forcats_0.5.1        
+[22] stringr_1.4.0         purrr_0.3.4           tidyr_1.1.3          
+[25] ggplot2_3.3.5         tidyverse_1.3.1       reshape2_1.4.4       
+[28] tibble_3.1.2          readr_2.0.0           magrittr_2.0.1       
+[31] dplyr_1.0.7          
+
+loaded via a namespace (and not attached):
+  [1] utf8_1.2.1                  tidyselect_1.1.1           
+  [3] RSQLite_2.2.7               htmlwidgets_1.5.4          
+  [5] BiocParallel_1.26.1         scatterpie_0.1.7           
+  [7] munsell_0.5.0               statmod_1.4.36             
+  [9] withr_2.4.2                 colorspace_2.0-2           
+ [11] GOSemSim_2.18.1             filelock_1.0.2             
+ [13] highr_0.9                   knitr_1.36                 
+ [15] rstudioapi_0.13             ggsignif_0.6.3             
+ [17] DOSE_3.18.3                 MatrixGenerics_1.4.3       
+ [19] labeling_0.4.2              git2r_0.28.0               
+ [21] GenomeInfoDbData_1.2.6      polyclip_1.10-0            
+ [23] bit64_4.0.5                 farver_2.1.0               
+ [25] rprojroot_2.0.2             downloader_0.4             
+ [27] treeio_1.16.2               vctrs_0.3.8                
+ [29] generics_0.1.0              xfun_0.24                  
+ [31] BiocFileCache_2.0.0         R6_2.5.1                   
+ [33] GenomeInfoDb_1.28.4         graphlayouts_0.7.1         
+ [35] locfit_1.5-9.4              gridGraphics_0.5-1         
+ [37] bitops_1.0-7                cachem_1.0.5               
+ [39] fgsea_1.18.0                DelayedArray_0.18.0        
+ [41] assertthat_0.2.1            promises_1.2.0.1           
+ [43] ggraph_2.0.5                enrichplot_1.12.3          
+ [45] gtable_0.3.0                tidygraph_1.2.0            
+ [47] workflowr_1.6.2             rlang_0.4.11               
+ [49] genefilter_1.74.0           systemfonts_1.0.2          
+ [51] splines_4.1.0               lazyeval_0.2.2             
+ [53] rstatix_0.7.0               broom_0.7.9                
+ [55] yaml_2.2.1                  abind_1.4-5                
+ [57] modelr_0.1.8                backports_1.2.1            
+ [59] httpuv_1.6.1                qvalue_2.24.0              
+ [61] tools_4.1.0                 ggplotify_0.1.0            
+ [63] ellipsis_0.3.2              jquerylib_0.1.4            
+ [65] RColorBrewer_1.1-2          Rcpp_1.0.6                 
+ [67] progress_1.2.2              zlibbioc_1.38.0            
+ [69] RCurl_1.98-1.3              prettyunits_1.1.1          
+ [71] viridis_0.6.2               SummarizedExperiment_1.22.0
+ [73] haven_2.4.3                 fs_1.5.0                   
+ [75] data.table_1.14.0           DO.db_2.9                  
+ [77] openxlsx_4.2.4              reprex_2.0.1               
+ [79] whisker_0.4                 matrixStats_0.60.1         
+ [81] patchwork_1.1.1             hms_1.1.1                  
+ [83] evaluate_0.14               xtable_1.8-4               
+ [85] XML_3.99-0.6                rio_0.5.27                 
+ [87] readxl_1.3.1                gridExtra_2.3              
+ [89] compiler_4.1.0              shadowtext_0.0.9           
+ [91] writexl_1.4.0               crayon_1.4.1               
+ [93] htmltools_0.5.2             ggfun_0.0.4                
+ [95] later_1.2.0                 tzdb_0.1.2                 
+ [97] aplot_0.1.1                 geneplotter_1.70.0         
+ [99] lubridate_1.7.10            DBI_1.1.1                  
+[101] tweenr_1.0.2                dbplyr_2.1.1               
+[103] rappdirs_0.3.3              MASS_7.3-54                
+[105] Matrix_1.3-3                car_3.0-11                 
+[107] cli_3.0.1                   igraph_1.2.6               
+[109] GenomicRanges_1.44.0        pkgconfig_2.0.3            
+[111] foreign_0.8-81              xml2_1.3.2                 
+[113] ggtree_3.0.4                svglite_2.0.0              
+[115] annotate_1.70.0             bslib_0.3.1                
+[117] webshot_0.5.2               XVector_0.32.0             
+[119] rvest_1.0.2                 yulab.utils_0.0.4          
+[121] digest_0.6.27               Biostrings_2.60.1          
+[123] rmarkdown_2.11              cellranger_1.1.0           
+[125] fastmatch_1.1-3             tidytree_0.3.5             
+[127] curl_4.3.2                  lifecycle_1.0.1            
+[129] nlme_3.1-152                jsonlite_1.7.2             
+[131] carData_3.0-4               viridisLite_0.4.0          
+[133] fansi_0.5.0                 pillar_1.6.4               
+[135] lattice_0.20-44             KEGGREST_1.32.0            
+[137] fastmap_1.1.0               httr_1.4.2                 
+[139] survival_3.2-11             GO.db_3.13.0               
+[141] glue_1.4.2                  zip_2.2.0                  
+[143] png_0.1-7                   bit_4.0.4                  
+[145] ggforce_0.3.3               stringi_1.6.2              
+[147] sass_0.4.0                  blob_1.2.2                 
+[149] DESeq2_1.32.0               memoise_2.0.0              
+[151] ape_5.5                    </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -3,12 +3,24 @@ output_dir: ../docs
 navbar:
   title: "CKI_DGE"
   left:
-  - text: "Introduction"
+  - text: Home
     href: index.html
-  - text: "Setting Up"
-    href: setUp.html
-  - text: "Differential Gene Expression Analysis"
-    href: dge.html
+  - text: About
+    href: about.html
+  - text: Setting Up
+    menu:
+    - text: Obtaining Data
+      href: obtainData.html
+    - text: QC and Pre-processing
+      href: setUp.html
+  - text: Analysis
+    menu:
+    - text: DE Analysis
+      href: dge.html
+    - text: GO Term Enrichment Analysis
+      hred: go.html
+    - text: KEGG Pathway Enrichment Analysis
+      hred: kegg.html
 output:
   workflowr::wflow_html:
     toc: yes
