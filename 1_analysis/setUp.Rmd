@@ -431,8 +431,4 @@ saveRDS(object = dge, file = "../0_data/rds_object/dge.rds")
 # workflowr::wflow_build()
 # ```
 
-# Setup
-```{r sessionInfo}
-sessionInfo()
-```
 

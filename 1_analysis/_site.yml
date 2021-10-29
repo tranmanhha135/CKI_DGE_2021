@@ -18,9 +18,9 @@ navbar:
     - text: "DE Analysis"
       href: dge.html
     - text: "GO Term Enrichment Analysis"
-      hred: go.html
+      href: go.html
     - text: "KEGG Pathway Enrichment Analysis"
-      hred: kegg.html
+      href: kegg.html
 output:
   workflowr::wflow_html:
     toc: yes
