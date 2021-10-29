@@ -505,7 +505,7 @@ lapply(1:length(treat_unfiltered),
          #save to directory
          ggsave(paste0("volcano_plot_treat_", names(treat_unfiltered[x]), ".svg"),
                 plot = volcano_plot_treat,
-                path = "../2_plots/2_dge")
+                path = "../2_plots/2_dge/")
 
          #display
          volcano_plot_treat

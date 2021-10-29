@@ -3,23 +3,23 @@ output_dir: ../docs
 navbar:
   title: "CKI_DGE"
   left:
-  - text: Home
+  - text: "Home"
     href: index.html
-  - text: About
+  - text: "About"
     href: about.html
-  - text: Setting Up
+  - text: "Setting Up"
     menu:
-    - text: Obtaining Data
+    - text: "Obtaining Data"
       href: obtainData.html
-    - text: QC and Pre-processing
+    - text: "QC and Pre-processing"
       href: setUp.html
-  - text: Analysis
+  - text: "Analysis"
     menu:
-    - text: DE Analysis
+    - text: "DE Analysis"
       href: dge.html
-    - text: GO Term Enrichment Analysis
+    - text: "GO Term Enrichment Analysis"
       hred: go.html
-    - text: KEGG Pathway Enrichment Analysis
+    - text: "KEGG Pathway Enrichment Analysis"
       hred: kegg.html
 output:
   workflowr::wflow_html:
