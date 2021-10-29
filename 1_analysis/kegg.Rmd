@@ -67,7 +67,7 @@ theme_update(legend.background = element_rect(fill = "transparent", colour = NA)
 
 DGElist object containing the raw feature count, sample metadata, and gene metadata, created in the Set Up stage. 
 
-```{r importData, eval=FALSE}
+```{r importData}
 # load DGElist previously created in the set up
 dge <- readRDS("../0_data/rds_object/dge.rds")
 designMatrix <- readRDS("../0_data/rds_object/designMatrix.rds")
@@ -319,10 +319,4 @@ pheatmap(mat = matrix_merged,
 ```
 
 
-
-# Setup
-```{r sessionInfo}
-sessionInfo()
-
-```
 
