@@ -1,0 +1,20 @@
+name: "CKI_DGE"
+output_dir: ../docs
+navbar:
+  title: "CKI_DGE"
+  left:
+  - text: "Introduction"
+    href: index.html
+  - text: "Setting Up"
+    href: setUp.html
+  - text: "Differential Gene Expression Analysis"
+    href: dge.html
+output:
+  workflowr::wflow_html:
+    toc: yes
+    toc_float: yes
+    theme: cosmo
+    highlight: textmate
+    code_folding: hide
+    df_print: paged
+

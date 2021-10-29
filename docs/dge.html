@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Ha Tran" />
+
+
+<title>DE Analysis</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">CKI_DGE</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Introduction</a>
+</li>
+<li>
+  <a href="setUp.html">Setting Up</a>
+</li>
+<li>
+  <a href="dge.html">Differential Gene Expression Analysis</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">DE Analysis</h1>
+<h4 class="author">Ha Tran</h4>
+<h4 class="date">22/08/2021</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2021-10-29
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>01_CKI_DGE/1_analysis/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed12345code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(12345)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed12345code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(12345)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree27a88ea13aa27f2c5061ad9dd9d8ee9dfe969cb5targetblank27a88eaa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/27a88ea13aa27f2c5061ad9dd9d8ee9dfe969cb5" target="_blank">27a88ea</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree27a88ea13aa27f2c5061ad9dd9d8ee9dfe969cb5targetblank27a88eaa" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/27a88ea13aa27f2c5061ad9dd9d8ee9dfe969cb5" target="_blank">27a88ea</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+
+Untracked files:
+    Untracked:  01_CKI_DGE.Rproj
+    Untracked:  0_data/rds_object/apply_treat.rds
+    Untracked:  0_data/rds_object/contrastMatrix.rds
+    Untracked:  0_data/rds_object/designMatrix.rds
+    Untracked:  0_data/rds_object/dge.rds
+    Untracked:  0_data/rds_object/dge_treat_filtered.rds
+    Untracked:  0_data/rds_object/qlf.rds
+    Untracked:  0_data/rds_object/qlf_filtered.rds
+    Untracked:  1_analysis/
+    Untracked:  2_plots/
+    Untracked:  3_output/
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+<p>
+There are no past versions. Publish this analysis with <code>wflow_publish()</code> to start tracking its development.
+</p>
+<hr>
+</div>
+</div>
+</div>
+<div id="data-setup" class="section level1">
+<h1>Data Setup</h1>
+<div id="load-library" class="section level3">
+<h3>Load Library</h3>
+<pre class="r"><code># working with data
+library(dplyr)
+library(magrittr)
+library(readr)
+library(tibble)
+library(reshape2)
+library(tidyverse)
+
+# Visualisation:
+library(kableExtra)
+library(ggplot2)
+library(grid)
+library(pander)
+library(cowplot)
+library(pheatmap)
+
+# Custom ggplot 
+library(ggpubr)
+library(ggbiplot)
+library(ggrepel)
+theme_set(theme_bw())
+
+# Bioconductor packages:
+library(edgeR)
+library(limma)
+library(Glimma)</code></pre>
+</div>
+<div id="import-dgelist-data" class="section level3">
+<h3>Import DGElist Data</h3>
+<p>DGElist object containing the raw feature count, sample metadata, and gene metadata, created in the Set Up stage.</p>
+<pre class="r"><code># load DGElist previously created in the set up
+dge &lt;- readRDS(&quot;../0_data/rds_object/dge.rds&quot;)</code></pre>
+</div>
+</div>
+<div id="differential-gene-expression-analysis" class="section level1">
+<h1>Differential Gene Expression Analysis</h1>
+<p>Here multiple methods of identifying differential expression will be compared. These methods include</p>
+<ol style="list-style-type: decimal">
+<li>Generalised Linear Model (GLM) with Likelihood Ratio Test (LRT),</li>
+<li>Generalised Linear Model (GLM) with Quasi-likelihood F-tests (QLF), and</li>
+<li>Limma-voom</li>
+</ol>
+<p><strong>These methods have been internally assessed and only the GLM:QLF + TREAT method will be run</strong></p>
+<div id="initial-parameterisation" class="section level2">
+<h2>Initial Parameterisation</h2>
+<p>The varying methods used to identify differential expression all rely on similar initial parameters. These include:</p>
+<ol style="list-style-type: decimal">
+<li>The Design Matrix,</li>
+<li>Estimation of Dispersion, and</li>
+<li>Contrast Matrix</li>
+</ol>
+<div id="design-matrix" class="section level3">
+<h3>Design Matrix</h3>
+<p>The experimental design can be parameterised in a one-way layout where one coefficient is assigned to each group. The design matrix formulated below contains the predictors of each sample</p>
+<pre class="r"><code>#setup desgin matrix with sample_group
+designMatrix &lt;- model.matrix(~ 0 + sample_group,
+                             data = dge$samples)
+
+#remove &quot;sample_group&quot; from each column names
+colnames(designMatrix) &lt;- gsub(&quot;sample_group&quot;,
+                               &quot;&quot;,
+                               colnames(designMatrix))
+
+#remove &quot;S48h_&quot; from row names
+rownames(designMatrix) &lt;- gsub(&quot;S48h_&quot;,
+                               &quot;&quot;,
+                               rownames(designMatrix))
+
+designMatrix %&gt;% saveRDS(&quot;../0_data/rds_object/designMatrix.rds&quot;)
+#display the design matrix
+designMatrix %&gt;% as.data.frame()</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["CKI"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Mac"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Nme"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["Omt"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Tri"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["UT"],"name":[6],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"0","3":"0","4":"0","5":"0","6":"0","_rn_":"CKI1"},{"1":"1","2":"0","3":"0","4":"0","5":"0","6":"0","_rn_":"CKI2"},{"1":"1","2":"0","3":"0","4":"0","5":"0","6":"0","_rn_":"CKI3"},{"1":"0","2":"1","3":"0","4":"0","5":"0","6":"0","_rn_":"Mac1"},{"1":"0","2":"1","3":"0","4":"0","5":"0","6":"0","_rn_":"Mac2"},{"1":"0","2":"1","3":"0","4":"0","5":"0","6":"0","_rn_":"Mac3"},{"1":"0","2":"0","3":"1","4":"0","5":"0","6":"0","_rn_":"Nme1"},{"1":"0","2":"0","3":"1","4":"0","5":"0","6":"0","_rn_":"Nme2"},{"1":"0","2":"0","3":"1","4":"0","5":"0","6":"0","_rn_":"Nme3"},{"1":"0","2":"0","3":"0","4":"1","5":"0","6":"0","_rn_":"OMT1"},{"1":"0","2":"0","3":"0","4":"1","5":"0","6":"0","_rn_":"OMT2"},{"1":"0","2":"0","3":"0","4":"1","5":"0","6":"0","_rn_":"OMT3"},{"1":"0","2":"0","3":"0","4":"0","5":"1","6":"0","_rn_":"Tri1"},{"1":"0","2":"0","3":"0","4":"0","5":"1","6":"0","_rn_":"Tri2"},{"1":"0","2":"0","3":"0","4":"0","5":"1","6":"0","_rn_":"Tri3"},{"1":"0","2":"0","3":"0","4":"0","5":"0","6":"1","_rn_":"UT1"},{"1":"0","2":"0","3":"0","4":"0","5":"0","6":"1","_rn_":"UT2"},{"1":"0","2":"0","3":"0","4":"0","5":"0","6":"1","_rn_":"UT3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+<div id="estimating-dispersion" class="section level3">
+<h3>Estimating Dispersion</h3>
+<p>The negative binomial dispersion is calculated using the <code>bioConductor</code> recommended method of using the <code>estimateDisp</code> function. This method calculates the common dispersion, trended dispersion and tagwise dispersions in one run. This function also returns the formal <code>DGEList</code> object but with additional entries for the negative binomial dispersion for all genes.</p>
+<p>The dispersion can then be visualised through the <code>plotBCV</code> function which shows the biological coefficient of variance (BCV) of each gene</p>
+<pre class="r"><code>estimateDispersion &lt;- estimateDisp(y = dge,
+                                   design = designMatrix,
+                                   robust = TRUE)
+
+# estimateDispersion$common.dispersion
+
+#visualisation of dispersion estimate
+edgeR::plotBCV(estimateDispersion)</code></pre>
+<p><img src="figure/dge.Rmd/estimateDispersion-1.png" width="1056" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>invisible(dev.print(pdf, &quot;../2_plots/2_dge/estimate_dispersion.svg&quot;))</code></pre>
+</div>
+<div id="contrast-matrix" class="section level3">
+<h3>Contrast Matrix</h3>
+<p>The contrast matrix is required to provide a coefficient to each comparison and later used to test for significant differential expression with each comparison group</p>
+<pre class="r"><code># make specific contrast
+contrast &lt;- limma::makeContrasts(
+  Mac_vs_CKI = Mac - CKI,
+  Nme_vs_CKI = Nme - CKI,
+  Omt_vs_CKI = Omt - CKI,
+  Tri_vs_CKI = Tri - CKI,
+  UT_vs_CKI = UT - CKI,
+  levels = designMatrix)
+
+colnames(contrast) &lt;- c(&quot;CKI-Mac vs CKI&quot;, &quot;CKI-Nme vs CKI&quot;, &quot;CKI-Omt vs CKI&quot;, &quot;CKI-Tri vs CKI&quot;, &quot;UT vs CKI&quot;)
+
+contrast %&gt;% saveRDS(&quot;../0_data/rds_object/contrastMatrix.rds&quot;)
+
+contrast %&gt;% as.data.frame()</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["CKI-Mac vs CKI"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["CKI-Nme vs CKI"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["CKI-Omt vs CKI"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["CKI-Tri vs CKI"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["UT vs CKI"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"-1","2":"-1","3":"-1","4":"-1","5":"-1","_rn_":"CKI"},{"1":"1","2":"0","3":"0","4":"0","5":"0","_rn_":"Mac"},{"1":"0","2":"1","3":"0","4":"0","5":"0","_rn_":"Nme"},{"1":"0","2":"0","3":"1","4":"0","5":"0","_rn_":"Omt"},{"1":"0","2":"0","3":"0","4":"1","5":"0","_rn_":"Tri"},{"1":"0","2":"0","3":"0","4":"0","5":"1","_rn_":"UT"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<pre class="r"><code>#generate data frame of contrast colname for downstream analysis
+comparison_group=colnames(contrast) %&gt;% as.data.frame()</code></pre>
+</div>
+</div>
+<div id="generalised-linear-model-glm-with-quasi-likelihood-f-test-qlf" class="section level2">
+<h2>Generalised Linear Model (GLM) with Quasi-likelihood F-Test (QLF)</h2>
+<p>The negative binomial model can be extended with quasi-likelihood methods to account for gene specific variablility from both biological and technical sources.</p>
+<p><em>While the likelihood ratio test is a more obvious choice for inferences with GLMs, the QL F-test is preferred as it reflects the uncertainty in estimating the dispersion for each gene. It provides more robust and reliable error rate control when the number of replicates is small. The QL dispersion estimation and hypothesis testing can be done by using the functions <code>glmQLFit()</code> and <code>glmQLFTest()</code>.</em></p>
+<div id="fit-glm-qlf-model" class="section level3">
+<h3>Fit GLM QLF model</h3>
+<p><em>For the QL dispersions, estimation can be performed using the <code>glmQLFit</code> function. This returns a DGEGLM object containing the estimated values of the GLM coefficients for each gene, as well as the fitted mean-QL dispersion trend, the squeezed QL estimates and the prior degrees of freedom (df). These can be visualized with the <code>plotQLDisp</code> function.</em></p>
+<pre class="r"><code>#fit NB GLMQLF model to estimatedDespersion DGElist
+fit_GLM_qlf &lt;- edgeR::glmQLFit(y = estimateDispersion,
+                               design = designMatrix,
+                               robust = TRUE)
+#view gene coefficients
+# head(fit_GLM_qlf$coefficients)
+
+#visualise
+plotQLDisp(glmfit = fit_GLM_qlf)</code></pre>
+<p><img src="figure/dge.Rmd/fitGLMqlf-1.png" width="1056" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>invisible(dev.print(pdf, &quot;../2_plots/2_dge/qlf_dispersion.svg&quot;))</code></pre>
+</div>
+<div id="apply-qlf-test" class="section level3">
+<h3>Apply QLF test</h3>
+<pre class="r"><code># Create list object
+apply_qlf=list()
+dge_qlf_decideTest=list()
+dge_qlf_unfiltered=list()
+dge_qlf_filtered=list()
+
+for (i in 1:ncol(contrast)){
+  #at each iteration, let x = name of each contrast group
+  x=comparison_group[i,]
+
+  #populate list with DGELRT object for every comparison
+  apply_qlf[[x]] &lt;-
+    edgeR::glmQLFTest(glmfit = fit_GLM_qlf, contrast = contrast[,x])
+
+  #populate significant list with decide test
+  dge_qlf_decideTest[[x]] &lt;-
+    decideTests(apply_qlf[[x]], p.value = 0.05, adjust.method = &quot;fdr&quot;) %&gt;% summary()
+
+  #populate unfiltered list with list of all DE genes
+  dge_qlf_unfiltered[[x]] &lt;-
+    edgeR::topTags(object = apply_qlf[[x]], n = Inf) %&gt;% as.data.frame()
+
+  #populate filtered list with list of significant DE genes
+  dge_qlf_filtered[[x]] &lt;-
+    edgeR::topTags(object = apply_qlf[[x]], n = Inf, adjust.method = &quot;fdr&quot;, p.value = 0.05, sort.by = &quot;PValue&quot;) %&gt;% as.data.frame()
+}
+
+# save rds object for use in downstream GO and KEGG analysis
+apply_qlf%&gt;% saveRDS(file = &quot;../0_data/rds_object/qlf.rds&quot;)
+# dge_qlf_unfiltered %&gt;% saveRDS(file = &quot;../0_data/rds_object/qlf_unfiltered.rds&quot;)
+dge_qlf_filtered %&gt;% saveRDS(file = &quot;../0_data/rds_object/qlf_filtered.rds&quot;)
+
+#save each unfiltered comparison group in the output directory
+
+# dont need this
+# writexl::write_xlsx(x = dge_qlf_unfiltered,
+                    # path = &quot;../3_output/qlf_unfiltered.xlsx&quot;)
+writexl::write_xlsx(x = dge_qlf_filtered,
+                    path = &quot;../3_output/qlf_filtered.xlsx&quot;)</code></pre>
+<div id="visualisation" class="section level4 tabset">
+<h4 class="tabset">Visualisation</h4>
+<div id="p-value-histogram" class="section level5">
+<h5>P Value histogram</h5>
+<pre class="r"><code>lapply(1:length(apply_qlf),
+       function(x){
+         hist(x = apply_qlf[[x]]$table$PValue,
+              breaks = 50,
+              main = paste0(&quot;P-Values qlf &quot;, names(apply_qlf[x])),
+              xlab = &quot;P-Value&quot;,
+              col = &quot;gray50&quot;)
+
+invisible(dev.print(pdf,
+                    paste0(&quot;../2_plots/2_dge/qlf_pValue_histogram_&quot;, names(apply_qlf[x]), &quot;.svg&quot;)))
+})</code></pre>
+<p><img src="figure/dge.Rmd/pValueHistogram_qlf-1.png" width="1056" style="display: block; margin: auto;" /><img src="figure/dge.Rmd/pValueHistogram_qlf-2.png" width="1056" style="display: block; margin: auto;" /><img src="figure/dge.Rmd/pValueHistogram_qlf-3.png" width="1056" style="display: block; margin: auto;" /><img src="figure/dge.Rmd/pValueHistogram_qlf-4.png" width="1056" style="display: block; margin: auto;" /><img src="figure/dge.Rmd/pValueHistogram_qlf-5.png" width="1056" style="display: block; margin: auto;" /></p>
+<pre><code>[[1]]
+png 
+  2 
+
+[[2]]
+png 
+  2 
+
+[[3]]
+png 
+  2 
+
+[[4]]
+png 
+  2 
+
+[[5]]
+png 
+  2 </code></pre>
+</div>
+<div id="mean-difference-plot" class="section level5">
+<h5>Mean-Difference plot</h5>
+<p>The differential expression can initial visualised through <code>plotMD</code> function, where the <code>logFC</code> is plotted against the relative abundance of the gene <code>logCPM</code>. Significant genes with FDR of 0.05 or less are highlighted.</p>
+<p><strong>NOTE: this does not account for minimal <code>logFC</code> value</strong></p>
+<pre class="r"><code>lapply(1:length(dge_qlf_unfiltered),
+       function(x) {
+
+         #create data.frame specific for the custome MA plot
+         MAplotData_qlf &lt;- dplyr::select(as.data.frame(dge_qlf_unfiltered[[x]]), logCPM, logFC, FDR)
+         colnames(MAplotData_qlf) &lt;- c(&quot;baseMeanLog2&quot;, &quot;log2FoldChange&quot;, &quot;padj&quot;)
+
+         #create custom MA plot
+         MAplot_qlf &lt;- ggpubr::ggmaplot(
+           data = MAplotData_qlf,
+           fdr = 0.05,
+           fc = 1.5,
+           genenames = as.vector(rownames(MAplotData_qlf)),
+           size = 1.5,
+           alpha = 0.8,
+           label.rectangle = TRUE,
+           palette = c(&quot;firebrick3&quot;, &quot;dodgerblue3&quot;, &quot;gray50&quot;),
+           top = 5,
+           select.top.method = c(&quot;padj&quot;, &quot;fc&quot;),
+           main = &quot;MA Plot from GLM-QLF &quot;,
+           legend = &quot;bottom&quot;,
+           submain = names(dge_qlf_unfiltered[x]),
+           xlab = expression(&quot;log&quot;[2]*&quot;CPM&quot;),
+           ylab = expression(&quot;log&quot;[2]*&quot;FC&quot;),
+           ylim = c(-8, 8),
+           font.label = c(10, &quot;italic&quot;, &quot;black&quot;),
+           font.main = c(14, &quot;bold&quot;, &quot;black&quot;),
+           font.submain = c(12, &quot;plain&quot;, &quot;black&quot;),
+           font.legend = c(10, &quot;plain&quot;, &quot;black&quot;),
+           font.x = c(13, &quot;plain&quot;, &quot;black&quot;),
+           font.y = c(13, &quot;plain&quot;, &quot;black&quot;))
+
+         #save MA plot
+         # ggsave(paste0(&quot;MA_plot_qlf_&quot;, names(dge_qlf_unfiltered[x]), &quot;.svg&quot;),
+         #        plot = MAplot_qlf,
+         #        path = &quot;../2_plots/2_dge/&quot;)
+
+         #display plot
+         MAplot_qlf
+         })</code></pre>
+<pre><code>[[1]]</code></pre>
+<p><img src="figure/dge.Rmd/MAplotCustom_qlf-1.png" width="1056" style="display: block; margin: auto;" /></p>
+<pre><code>
+[[2]]</code></pre>
+<p><img src="figure/dge.Rmd/MAplotCustom_qlf-2.png" width="1056" style="display: block; margin: auto;" /></p>
+<pre><code>
+[[3]]</code></pre>
+<p><img src="figure/dge.Rmd/MAplotCustom_qlf-3.png" width="1056" style="display: block; margin: auto;" /></p>
+<pre><code>
+[[4]]</code></pre>
+<p><img src="figure/dge.Rmd/MAplotCustom_qlf-4.png" width="1056" style="display: block; margin: auto;" /></p>
+<pre><code>
+[[5]]</code></pre>
+<p><img src="figure/dge.Rmd/MAplotCustom_qlf-5.png" width="1056" style="display: block; margin: auto;" /></p>
+</div>
+<div id="volcano-plot" class="section level5">
+<h5>Volcano Plot</h5>
+<p>Here the <code>ggplot</code> function can also be used to illustrate the DE genes significant <code>pValue</code> and <code>logFC</code>. In this instance, the significance is determined as genes with <code>PValue &lt; 0.05</code> <strong>and</strong> <code>abs(logFC)&gt;log(2)</code>.</p>
+<pre class="r"><code>lapply(1:length(dge_qlf_unfiltered),
+       function(x) {
+
+         #add an extra column and determine whether the DE genes are significant
+         dge_qlf_unfiltered[[x]] &lt;- dge_qlf_unfiltered[[x]] %&gt;% as.data.frame() %&gt;%
+           dplyr::mutate(Expression = case_when
+                         (FDR &lt;= 0.05 &amp; logFC &gt;= 1.5 ~ &quot;Up-regulated&quot;,
+                          FDR &lt;= 0.05 &amp; logFC &lt;= -1.5 ~ &quot;Down-regulated&quot;,
+                          TRUE ~ &quot;Insignificant&quot;))
+
+         #adding labels to top genes
+         top &lt;- 5
+         top_genes_qlf &lt;- bind_rows(
+           dge_qlf_unfiltered[[x]] %&gt;%
+             filter(Expression == &#39;Up-regulated&#39;) %&gt;%
+             arrange(FDR, desc(abs(logFC))) %&gt;%
+             head(top),
+           dge_qlf_unfiltered[[x]] %&gt;%
+             filter(Expression == &#39;Down-regulated&#39;) %&gt;%
+             arrange(FDR, desc(abs(logFC))) %&gt;%
+             head(top)
+           )
+         invisible(top_genes_qlf %&gt;% as.data.frame())
+
+         #generate volcano plot with the allDEgene data.frame
+         volcano_plot_qlf &lt;- dge_qlf_unfiltered[[x]] %&gt;%
+           ggplot(aes(x = logFC,
+                      y = -log(FDR, 10))) +
+           geom_point(aes(colour = Expression),
+                      size = 1.5,
+                      alpha = 0.8,
+                      show.legend = FALSE) +
+           geom_label_repel(data = top_genes_qlf,
+                            mapping = aes(logFC, -log(FDR,10), label = gene),
+                            size = 2) +
+           xlab(expression(&quot;log&quot;[2]*&quot;FC&quot;)) +
+           ylab(expression(&quot;-log&quot;[10]*&quot;FDR&quot;)) +
+           xlim(-8,8)+
+           ylim(0,30)+
+           scale_color_manual(values = c(&quot;dodgerblue3&quot;, &quot;gray50&quot;, &quot;firebrick3&quot;)) +
+           guides(colour = guide_legend(override.aes = list(size=1.5))) +
+           labs(title = &quot;Volcano Plot: GLM-QLF&quot;,
+                subtitle = paste0(names(dge_qlf_unfiltered[x])),
+                colour = &quot;Expression&quot;)
+
+         #save to directory
+         # ggsave(paste0(&quot;volcano_plot_qlf_&quot;, names(dge_qlf_unfiltered[x]), &quot;.svg&quot;),
+         #        plot = volcano_plot_qlf,
+         #        path = &quot;../2_plots/2_dge/&quot;)
+
+         #display
+         volcano_plot_qlf
+         })</code></pre>
+<pre><code>[[1]]</code></pre>
+<p><img src="figure/dge.Rmd/volcanoPlot_qlf-1.png" width="1056" style="display: block; margin: auto;" /></p>
+<pre><code>
+[[2]]</code></pre>
+<p><img src="figure/dge.Rmd/volcanoPlot_qlf-2.png" width="1056" style="display: block; margin: auto;" /></p>
+<pre><code>
+[[3]]</code></pre>
+<p><img src="figure/dge.Rmd/volcanoPlot_qlf-3.png" width="1056" style="display: block; margin: auto;" /></p>
+<pre><code>
+[[4]]</code></pre>
+<p><img src="figure/dge.Rmd/volcanoPlot_qlf-4.png" width="1056" style="display: block; margin: auto;" /></p>
+<pre><code>
+[[5]]</code></pre>
+<p><img src="figure/dge.Rmd/volcanoPlot_qlf-5.png" width="1056" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+<div id="apply-treat" class="section level3">
+<h3>Apply TREAT</h3>
+<pre class="r"><code># Create list object
+apply_treat=list()
+dge_treat_decideTest=list()
+dge_treat_unfiltered=list()
+dge_treat_filtered=list()
+
+for (i in 1:ncol(contrast)){
+  #at each iteration, let x = name of each contrast group
+  x=comparison_group[i,]
+
+  #populate list with DGELRT object for every comparison
+  apply_treat[[x]] &lt;-
+    edgeR::glmTreat(glmfit =  fit_GLM_qlf, contrast = contrast[,x], lfc = 1.5)
+
+  #populate significant list with decide test
+  dge_treat_decideTest[[x]] &lt;- decideTests(apply_treat[[x]], p.value = 0.05, adjust.method = &quot;fdr&quot;) %&gt;% summary()
+
+
+  #populate unfiltered list with list of all DE genes
+  dge_treat_unfiltered[[x]] &lt;-
+    edgeR::topTags(object = apply_treat[[x]], n = Inf) %&gt;% as.data.frame()
+
+  #populate filtered list with list of significant DE genes
+  dge_treat_filtered[[x]] &lt;-
+    edgeR::topTags(object = apply_treat[[x]], n = Inf, adjust.method = &quot;fdr&quot;, p.value = 0.05, sort.by = &quot;PValue&quot;) %&gt;% as.data.frame()
+}
+
+# save rds object for use in downstream GO and KEGG analysis
+apply_treat %&gt;% saveRDS(file = &quot;../0_data/rds_object/apply_treat.rds&quot;)
+# dge_treat_unfiltered %&gt;% saveRDS(file = &quot;../0_data/rds_object/dge_treat_unfiltered.rds&quot;)
+dge_treat_filtered %&gt;% saveRDS(file = &quot;../0_data/rds_object/dge_treat_filtered.rds&quot;)
+
+#save each unfiltered comparison group in the output directory
+# writexl::write_xlsx(x = dge_treat_unfiltered,
+                    # path = &quot;../3_output/treat_unfiltered.xlsx&quot;)
+writexl::write_xlsx(x = dge_treat_filtered,
+                    path = &quot;../3_output/treat_filtered.xlsx&quot;)</code></pre>
+<div id="visualisation-1" class="section level4 tabset">
+<h4 class="tabset">Visualisation</h4>
+<div id="p-value-histogram-1" class="section level5">
+<h5>P Value histogram</h5>
+<pre class="r"><code>lapply(1:length(apply_treat),
+       function(x){
+         hist(x = apply_treat[[x]]$table$PValue,
+              breaks = 50,
+              main = paste0(&quot;P-Values treat &quot;, names(apply_treat[x])),
+              xlab = &quot;P-Value&quot;,
+              col = &quot;gray50&quot;)
+
+invisible(dev.print(pdf, paste0(&quot;../2_plots/2_dge/treat_pValue_histogram_&quot;, names(apply_treat[x]), &quot;.svg&quot;)))
+})</code></pre>
+<p><img src="figure/dge.Rmd/pValueHistogram_treat-1.png" width="1056" style="display: block; margin: auto;" /><img src="figure/dge.Rmd/pValueHistogram_treat-2.png" width="1056" style="display: block; margin: auto;" /><img src="figure/dge.Rmd/pValueHistogram_treat-3.png" width="1056" style="display: block; margin: auto;" /><img src="figure/dge.Rmd/pValueHistogram_treat-4.png" width="1056" style="display: block; margin: auto;" /><img src="figure/dge.Rmd/pValueHistogram_treat-5.png" width="1056" style="display: block; margin: auto;" /></p>
+<pre><code>[[1]]
+png 
+  2 
+
+[[2]]
+png 
+  2 
+
+[[3]]
+png 
+  2 
+
+[[4]]
+png 
+  2 
+
+[[5]]
+png 
+  2 </code></pre>
+</div>
+<div id="mean-difference-plot-1" class="section level5">
+<h5>Mean-Difference plot</h5>
+<p>The differential expression can initial visualised through <code>plotMD</code> function, where the <code>logFC</code> is plotted against the relative abundance of the gene <code>logCPM</code>. Significant genes with FDR of 0.05 or less are highlighted.</p>
+<p><strong>NOTE: this does not account for minimal <code>logFC</code> value</strong></p>
+<pre class="r"><code>lapply(1:length(dge_treat_unfiltered),
+       function(x) {
+
+         #create data.frame specific for the custome MA plot
+         MAplotData_treat &lt;- dplyr::select(as.data.frame(dge_treat_unfiltered[[x]]), logCPM, logFC, FDR)
+         colnames(MAplotData_treat) &lt;- c(&quot;baseMeanLog2&quot;, &quot;log2FoldChange&quot;, &quot;padj&quot;)
+
+         #create custom MA plot
+         MAplot_treat &lt;- ggpubr::ggmaplot(
+           data = MAplotData_treat,
+           fdr = 0.05,
+           fc = 1.5,
+           genenames = as.vector(rownames(MAplotData_treat)),
+           size = 1.5,
+           alpha = 0.8,
+           label.rectangle = TRUE,
+           palette = c(&quot;firebrick3&quot;, &quot;dodgerblue3&quot;, &quot;gray50&quot;),
+           top = 5,
+           ylim = c(-8, 8),
+           select.top.method = c(&quot;padj&quot;, &quot;fc&quot;),
+           main = &quot;MA Plot from GLM-TREAT&quot;,
+           submain = names(dge_treat_unfiltered[x]),
+           legend = &quot;bottom&quot;,
+           legend.title = &quot;Expression&quot;,
+           xlab = expression(&quot;log&quot;[2]*&quot;CPM&quot;),
+           ylab = expression(&quot;log&quot;[2]*&quot;FC&quot;),
+           font.label = c(10, &quot;italic&quot;, &quot;black&quot;),
+           font.main = c(14, &quot;bold&quot;, &quot;black&quot;),
+           font.submain = c(12, &quot;plain&quot;, &quot;black&quot;),
+           font.legend = c(10, &quot;plain&quot;, &quot;black&quot;),
+           font.x = c(13, &quot;plain&quot;, &quot;black&quot;),
+           font.y = c(13, &quot;plain&quot;, &quot;black&quot;),
+           ggtheme = ggplot2::theme_minimal())
+
+         #save MA plot
+         ggsave(paste0(&quot;MA_plot_treat_&quot;, names(dge_treat_unfiltered[x]), &quot;.svg&quot;),
+                plot = MAplot_treat,
+                path = &quot;../2_plots/2_dge/&quot;)
+
+         #display plot
+         MAplot_treat
+         })</code></pre>
+<pre><code>[[1]]</code></pre>
+<p><img src="figure/dge.Rmd/MAplotCustom_treat-1.png" width="1056" style="display: block; margin: auto;" /></p>
+<pre><code>
+[[2]]</code></pre>
+<p><img src="figure/dge.Rmd/MAplotCustom_treat-2.png" width="1056" style="display: block; margin: auto;" /></p>
+<pre><code>
+[[3]]</code></pre>
+<p><img src="figure/dge.Rmd/MAplotCustom_treat-3.png" width="1056" style="display: block; margin: auto;" /></p>
+<pre><code>
+[[4]]</code></pre>
+<p><img src="figure/dge.Rmd/MAplotCustom_treat-4.png" width="1056" style="display: block; margin: auto;" /></p>
+<pre><code>
+[[5]]</code></pre>
+<p><img src="figure/dge.Rmd/MAplotCustom_treat-5.png" width="1056" style="display: block; margin: auto;" /></p>
+</div>
+<div id="volcano-plot-1" class="section level5">
+<h5>Volcano Plot</h5>
+<p>Here the <code>ggplot</code> function can also be used to illustrate the DE genes significant <code>pValue</code> and <code>logFC</code>. In this instance, the significance is determined as genes with <code>PValue &lt; 0.05</code> <strong>and</strong> <code>abs(logFC)&gt;log(2)</code>.</p>
+<pre class="r"><code>lapply(1:length(dge_treat_unfiltered),
+       function(x) {
+
+         #add an extra column and determine whether the DE genes are significant
+         dge_treat_unfiltered[[x]] &lt;- dge_treat_unfiltered[[x]] %&gt;% as.data.frame() %&gt;%
+           dplyr::mutate(Expression = case_when
+                         (FDR &lt;= 0.05 &amp; logFC &gt;= 1.5 ~ &quot;Up-regulated&quot;,
+                          FDR &lt;= 0.05 &amp; logFC &lt;= -1.5 ~ &quot;Down-regulated&quot;,
+                          TRUE ~ &quot;Insignificant&quot;))
+
+         #adding labels to top genes
+         top &lt;- 5
+         top_genes_treat &lt;- bind_rows(
+           dge_treat_unfiltered[[x]] %&gt;%
+             filter(Expression == &#39;Up-regulated&#39;) %&gt;%
+             arrange(FDR, desc(abs(logFC))) %&gt;%
+             head(top),
+           dge_treat_unfiltered[[x]] %&gt;%
+             filter(Expression == &#39;Down-regulated&#39;) %&gt;%
+             arrange(FDR, desc(abs(logFC))) %&gt;%
+             head(top)
+           )
+         invisible(top_genes_treat %&gt;% as.data.frame())
+
+         #generate volcano plot with the allDEgene data.frame
+         volcano_plot_treat &lt;- dge_treat_unfiltered[[x]] %&gt;%
+           ggplot(aes(x = logFC,
+                      y = -log(FDR, 10))) +
+           geom_point(aes(colour = Expression),
+                      size = 1.5,
+                      alpha = 0.8,
+                      show.legend = FALSE) +
+           geom_label_repel(data = top_genes_treat,
+                            mapping = aes(logFC, -log(FDR,10), label = gene),
+                            size = 2) +
+           xlab(expression(&quot;log&quot;[2]*&quot;FC&quot;)) +
+           ylab(expression(&quot;-log&quot;[10]*&quot;FDR&quot;)) +
+           xlim(-8,8)+
+           ylim(0,30)+
+           scale_color_manual(values = c(&quot;dodgerblue3&quot;, &quot;gray50&quot;, &quot;firebrick3&quot;)) +
+           guides(colour = guide_legend(override.aes = list(size=1.5))) +
+           labs(title = &quot;Volcano Plot: GLM-TREAT&quot;,
+                subtitle = paste0(names(dge_treat_unfiltered[x])),
+                colour = &quot;Expression&quot;)
+
+         #save to directory
+         ggsave(paste0(&quot;volcano_plot_treat_&quot;, names(dge_treat_unfiltered[x]), &quot;.svg&quot;),
+                plot = volcano_plot_treat,
+                path = &quot;../2_plots/2_dge/&quot;)
+
+         #display
+         volcano_plot_treat
+         })</code></pre>
+<pre><code>[[1]]</code></pre>
+<p><img src="figure/dge.Rmd/volcanoPlot_treat-1.png" width="1056" style="display: block; margin: auto;" /></p>
+<pre><code>
+[[2]]</code></pre>
+<p><img src="figure/dge.Rmd/volcanoPlot_treat-2.png" width="1056" style="display: block; margin: auto;" /></p>
+<pre><code>
+[[3]]</code></pre>
+<p><img src="figure/dge.Rmd/volcanoPlot_treat-3.png" width="1056" style="display: block; margin: auto;" /></p>
+<pre><code>
+[[4]]</code></pre>
+<p><img src="figure/dge.Rmd/volcanoPlot_treat-4.png" width="1056" style="display: block; margin: auto;" /></p>
+<pre><code>
+[[5]]</code></pre>
+<p><img src="figure/dge.Rmd/volcanoPlot_treat-5.png" width="1056" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="heatmap" class="section level1">
+<h1>Heatmap</h1>
+<pre class="r"><code>p53_treat_UTvsCKI &lt;-
+  treat_unfiltered$UTvsCKI$table[treat_unfiltered$UTvsCKI$table$gene_id %in% p53_ensembl_id$ENSEMBL_GENE_ID,c(&quot;gene_name&quot;, &quot;logFC&quot;)]
+p53_treat_CKIvsMAC &lt;-
+  treat_unfiltered$CKIvsMac$table[treat_unfiltered$CKIvsMac$table$gene_id %in% p53_ensembl_id$ENSEMBL_GENE_ID,
+                                  &quot;logFC&quot;] %&gt;% as.data.frame()
+
+p53_treat &lt;- c(p53_treat_UTvsCKI, p53_treat_CKIvsMAC)
+remove_rownames() %&gt;%
+  column_to_rownames(&quot;gene_name&quot;)
+
+colnames(p53_treat_UTvsCKI_test) &lt;- &quot;UT vs CKI&quot;
+
+
+my_palette &lt;- colorRampPalette(c(&quot;dodgerblue3&quot;, &quot;white&quot;, &quot;firebrick3&quot;))(n = 201)
+
+pheatmap(mat = logCPM, cluster_rows = TRUE, cluster_cols = FALSE, color = my_palette, border_color = NA)
+
+coolmap(x = logCPM,
+        margins=c(7,7), lhei=c(1,5), lwid=c(1,3))</code></pre>
+</div>
+<div id="setup" class="section level1">
+<h1>Setup</h1>
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.1.0 (2021-05-18)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 10 x64 (build 19043)
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=English_Australia.1252  LC_CTYPE=English_Australia.1252   
+[3] LC_MONETARY=English_Australia.1252 LC_NUMERIC=C                      
+[5] LC_TIME=English_Australia.1252    
+
+attached base packages:
+[1] grid      stats     graphics  grDevices utils     datasets  methods  
+[8] base     
+
+other attached packages:
+ [1] Glimma_2.2.0     edgeR_3.34.0     limma_3.48.1     ggrepel_0.9.1   
+ [5] ggbiplot_0.55    scales_1.1.1     plyr_1.8.6       ggpubr_0.4.0    
+ [9] pheatmap_1.0.12  cowplot_1.1.1    pander_0.6.4     kableExtra_1.3.4
+[13] forcats_0.5.1    stringr_1.4.0    purrr_0.3.4      tidyr_1.1.3     
+[17] ggplot2_3.3.5    tidyverse_1.3.1  reshape2_1.4.4   tibble_3.1.2    
+[21] readr_2.0.0      magrittr_2.0.1   dplyr_1.0.7     
+
+loaded via a namespace (and not attached):
+  [1] readxl_1.3.1                backports_1.2.1            
+  [3] workflowr_1.6.2             systemfonts_1.0.2          
+  [5] splines_4.1.0               BiocParallel_1.26.1        
+  [7] GenomeInfoDb_1.28.4         digest_0.6.27              
+  [9] htmltools_0.5.2             fansi_0.5.0                
+ [11] memoise_2.0.0               tzdb_0.1.2                 
+ [13] openxlsx_4.2.4              Biostrings_2.60.1          
+ [15] annotate_1.70.0             modelr_0.1.8               
+ [17] matrixStats_0.60.1          svglite_2.0.0              
+ [19] colorspace_2.0-2            blob_1.2.2                 
+ [21] rvest_1.0.2                 haven_2.4.3                
+ [23] xfun_0.24                   crayon_1.4.1               
+ [25] RCurl_1.98-1.3              jsonlite_1.7.2             
+ [27] genefilter_1.74.0           survival_3.2-11            
+ [29] glue_1.4.2                  gtable_0.3.0               
+ [31] zlibbioc_1.38.0             XVector_0.32.0             
+ [33] webshot_0.5.2               DelayedArray_0.18.0        
+ [35] car_3.0-11                  BiocGenerics_0.38.0        
+ [37] abind_1.4-5                 DBI_1.1.1                  
+ [39] rstatix_0.7.0               Rcpp_1.0.6                 
+ [41] viridisLite_0.4.0           xtable_1.8-4               
+ [43] foreign_0.8-81              bit_4.0.4                  
+ [45] stats4_4.1.0                htmlwidgets_1.5.4          
+ [47] httr_1.4.2                  RColorBrewer_1.1-2         
+ [49] ellipsis_0.3.2              farver_2.1.0               
+ [51] pkgconfig_2.0.3             XML_3.99-0.6               
+ [53] sass_0.4.0                  dbplyr_2.1.1               
+ [55] locfit_1.5-9.4              utf8_1.2.1                 
+ [57] labeling_0.4.2              tidyselect_1.1.1           
+ [59] rlang_0.4.11                later_1.2.0                
+ [61] AnnotationDbi_1.54.1        munsell_0.5.0              
+ [63] cellranger_1.1.0            tools_4.1.0                
+ [65] cachem_1.0.5                cli_3.0.1                  
+ [67] generics_0.1.0              RSQLite_2.2.7              
+ [69] broom_0.7.9                 evaluate_0.14              
+ [71] fastmap_1.1.0               yaml_2.2.1                 
+ [73] knitr_1.36                  bit64_4.0.5                
+ [75] fs_1.5.0                    zip_2.2.0                  
+ [77] KEGGREST_1.32.0             xml2_1.3.2                 
+ [79] compiler_4.1.0              rstudioapi_0.13            
+ [81] curl_4.3.2                  png_0.1-7                  
+ [83] ggsignif_0.6.3              reprex_2.0.1               
+ [85] statmod_1.4.36              geneplotter_1.70.0         
+ [87] bslib_0.3.1                 stringi_1.6.2              
+ [89] highr_0.9                   lattice_0.20-44            
+ [91] Matrix_1.3-3                vctrs_0.3.8                
+ [93] pillar_1.6.4                lifecycle_1.0.1            
+ [95] jquerylib_0.1.4             data.table_1.14.0          
+ [97] bitops_1.0-7                httpuv_1.6.1               
+ [99] GenomicRanges_1.44.0        R6_2.5.1                   
+[101] promises_1.2.0.1            rio_0.5.27                 
+[103] writexl_1.4.0               IRanges_2.26.0             
+[105] assertthat_0.2.1            SummarizedExperiment_1.22.0
+[107] DESeq2_1.32.0               rprojroot_2.0.2            
+[109] withr_2.4.2                 S4Vectors_0.30.0           
+[111] GenomeInfoDbData_1.2.6      parallel_4.1.0             
+[113] hms_1.1.1                   rmarkdown_2.11             
+[115] MatrixGenerics_1.4.3        carData_3.0-4              
+[117] git2r_0.28.0                Biobase_2.52.0             
+[119] lubridate_1.7.10           </code></pre>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.1.0 (2021-05-18)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 10 x64 (build 19043)
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=English_Australia.1252  LC_CTYPE=English_Australia.1252   
+[3] LC_MONETARY=English_Australia.1252 LC_NUMERIC=C                      
+[5] LC_TIME=English_Australia.1252    
+
+attached base packages:
+[1] grid      stats     graphics  grDevices utils     datasets  methods  
+[8] base     
+
+other attached packages:
+ [1] Glimma_2.2.0     edgeR_3.34.0     limma_3.48.1     ggrepel_0.9.1   
+ [5] ggbiplot_0.55    scales_1.1.1     plyr_1.8.6       ggpubr_0.4.0    
+ [9] pheatmap_1.0.12  cowplot_1.1.1    pander_0.6.4     kableExtra_1.3.4
+[13] forcats_0.5.1    stringr_1.4.0    purrr_0.3.4      tidyr_1.1.3     
+[17] ggplot2_3.3.5    tidyverse_1.3.1  reshape2_1.4.4   tibble_3.1.2    
+[21] readr_2.0.0      magrittr_2.0.1   dplyr_1.0.7     
+
+loaded via a namespace (and not attached):
+  [1] readxl_1.3.1                backports_1.2.1            
+  [3] workflowr_1.6.2             systemfonts_1.0.2          
+  [5] splines_4.1.0               BiocParallel_1.26.1        
+  [7] GenomeInfoDb_1.28.4         digest_0.6.27              
+  [9] htmltools_0.5.2             fansi_0.5.0                
+ [11] memoise_2.0.0               tzdb_0.1.2                 
+ [13] openxlsx_4.2.4              Biostrings_2.60.1          
+ [15] annotate_1.70.0             modelr_0.1.8               
+ [17] matrixStats_0.60.1          svglite_2.0.0              
+ [19] colorspace_2.0-2            blob_1.2.2                 
+ [21] rvest_1.0.2                 haven_2.4.3                
+ [23] xfun_0.24                   crayon_1.4.1               
+ [25] RCurl_1.98-1.3              jsonlite_1.7.2             
+ [27] genefilter_1.74.0           survival_3.2-11            
+ [29] glue_1.4.2                  gtable_0.3.0               
+ [31] zlibbioc_1.38.0             XVector_0.32.0             
+ [33] webshot_0.5.2               DelayedArray_0.18.0        
+ [35] car_3.0-11                  BiocGenerics_0.38.0        
+ [37] abind_1.4-5                 DBI_1.1.1                  
+ [39] rstatix_0.7.0               Rcpp_1.0.6                 
+ [41] viridisLite_0.4.0           xtable_1.8-4               
+ [43] foreign_0.8-81              bit_4.0.4                  
+ [45] stats4_4.1.0                htmlwidgets_1.5.4          
+ [47] httr_1.4.2                  RColorBrewer_1.1-2         
+ [49] ellipsis_0.3.2              farver_2.1.0               
+ [51] pkgconfig_2.0.3             XML_3.99-0.6               
+ [53] sass_0.4.0                  dbplyr_2.1.1               
+ [55] locfit_1.5-9.4              utf8_1.2.1                 
+ [57] labeling_0.4.2              tidyselect_1.1.1           
+ [59] rlang_0.4.11                later_1.2.0                
+ [61] AnnotationDbi_1.54.1        munsell_0.5.0              
+ [63] cellranger_1.1.0            tools_4.1.0                
+ [65] cachem_1.0.5                cli_3.0.1                  
+ [67] generics_0.1.0              RSQLite_2.2.7              
+ [69] broom_0.7.9                 evaluate_0.14              
+ [71] fastmap_1.1.0               yaml_2.2.1                 
+ [73] knitr_1.36                  bit64_4.0.5                
+ [75] fs_1.5.0                    zip_2.2.0                  
+ [77] KEGGREST_1.32.0             xml2_1.3.2                 
+ [79] compiler_4.1.0              rstudioapi_0.13            
+ [81] curl_4.3.2                  png_0.1-7                  
+ [83] ggsignif_0.6.3              reprex_2.0.1               
+ [85] statmod_1.4.36              geneplotter_1.70.0         
+ [87] bslib_0.3.1                 stringi_1.6.2              
+ [89] highr_0.9                   lattice_0.20-44            
+ [91] Matrix_1.3-3                vctrs_0.3.8                
+ [93] pillar_1.6.4                lifecycle_1.0.1            
+ [95] jquerylib_0.1.4             data.table_1.14.0          
+ [97] bitops_1.0-7                httpuv_1.6.1               
+ [99] GenomicRanges_1.44.0        R6_2.5.1                   
+[101] promises_1.2.0.1            rio_0.5.27                 
+[103] writexl_1.4.0               IRanges_2.26.0             
+[105] assertthat_0.2.1            SummarizedExperiment_1.22.0
+[107] DESeq2_1.32.0               rprojroot_2.0.2            
+[109] withr_2.4.2                 S4Vectors_0.30.0           
+[111] GenomeInfoDbData_1.2.6      parallel_4.1.0             
+[113] hms_1.1.1                   rmarkdown_2.11             
+[115] MatrixGenerics_1.4.3        carData_3.0-4              
+[117] git2r_0.28.0                Biobase_2.52.0             
+[119] lubridate_1.7.10           </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

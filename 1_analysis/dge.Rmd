@@ -1,0 +1,543 @@
+---
+title: "DE Analysis"
+author: "Ha Tran"
+date: "22/08/2021"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE,
+                      eval = TRUE,
+                      fig.width = 11)
+```
+
+# Data Setup
+
+### Load Library
+```{r load libraries}
+# working with data
+library(dplyr)
+library(magrittr)
+library(readr)
+library(tibble)
+library(reshape2)
+library(tidyverse)
+
+# Visualisation:
+library(kableExtra)
+library(ggplot2)
+library(grid)
+library(pander)
+library(cowplot)
+library(pheatmap)
+
+# Custom ggplot 
+library(ggpubr)
+library(ggbiplot)
+library(ggrepel)
+theme_set(theme_bw())
+
+# Bioconductor packages:
+library(edgeR)
+library(limma)
+library(Glimma)
+```
+
+
+### Import DGElist Data
+
+DGElist object containing the raw feature count, sample metadata, and gene metadata, created in the Set Up stage. 
+
+```{r importData}
+# load DGElist previously created in the set up
+dge <- readRDS("../0_data/rds_object/dge.rds")
+```
+
+
+# Differential Gene Expression Analysis
+
+Here multiple methods of identifying differential expression will be compared. These methods include
+
+1. Generalised Linear Model (GLM) with Likelihood Ratio Test (LRT),
+2. Generalised Linear Model (GLM) with Quasi-likelihood F-tests (QLF), and
+3. Limma-voom 
+
+**These methods have been internally assessed and only the GLM:QLF + TREAT method will be run**
+
+## Initial Parameterisation
+
+The varying methods used to identify differential expression all rely on similar initial parameters. These include:
+
+1. The Design Matrix,
+2. Estimation of Dispersion, and
+3. Contrast Matrix
+
+### Design Matrix
+
+The experimental design can be parameterised in a one-way layout where one coefficient is assigned to each group. The design matrix formulated below contains the predictors of each sample
+
+```{r designMatrix}
+#setup desgin matrix with sample_group
+designMatrix <- model.matrix(~ 0 + sample_group,
+                             data = dge$samples)
+
+#remove "sample_group" from each column names
+colnames(designMatrix) <- gsub("sample_group",
+                               "",
+                               colnames(designMatrix))
+
+#remove "S48h_" from row names
+rownames(designMatrix) <- gsub("S48h_",
+                               "",
+                               rownames(designMatrix))
+
+designMatrix %>% saveRDS("../0_data/rds_object/designMatrix.rds")
+#display the design matrix
+designMatrix %>% as.data.frame()
+```
+
+### Estimating Dispersion
+The negative binomial dispersion is calculated using the `bioConductor` recommended method of using the `estimateDisp` function. This method calculates the common dispersion, trended dispersion and tagwise dispersions in one run. This function also returns the formal `DGEList` object but with additional entries for the negative binomial dispersion for all genes.
+
+The dispersion can then be visualised through the `plotBCV` function which shows the biological coefficient of variance (BCV) of each gene
+
+```{r estimateDispersion}
+estimateDispersion <- estimateDisp(y = dge,
+                                   design = designMatrix,
+                                   robust = TRUE)
+
+# estimateDispersion$common.dispersion
+
+#visualisation of dispersion estimate
+edgeR::plotBCV(estimateDispersion)
+invisible(dev.print(pdf, "../2_plots/2_dge/estimate_dispersion.svg"))
+```
+
+### Contrast Matrix
+The contrast matrix is required to provide a coefficient to each comparison and later used to test for significant differential expression with each comparison group
+
+```{r constrastMatrix}
+# make specific contrast
+contrast <- limma::makeContrasts(
+  Mac_vs_CKI = Mac - CKI,
+  Nme_vs_CKI = Nme - CKI,
+  Omt_vs_CKI = Omt - CKI,
+  Tri_vs_CKI = Tri - CKI,
+  UT_vs_CKI = UT - CKI,
+  levels = designMatrix)
+
+colnames(contrast) <- c("CKI-Mac vs CKI", "CKI-Nme vs CKI", "CKI-Omt vs CKI", "CKI-Tri vs CKI", "UT vs CKI")
+
+contrast %>% saveRDS("../0_data/rds_object/contrastMatrix.rds")
+
+contrast %>% as.data.frame()
+
+#generate data frame of contrast colname for downstream analysis
+comparison_group=colnames(contrast) %>% as.data.frame()
+```
+
+## Generalised Linear Model (GLM) with Quasi-likelihood F-Test (QLF)
+
+The negative binomial model can be extended with quasi-likelihood methods to account for gene specific variablility from both biological and technical sources.
+
+*While the likelihood ratio test is a more obvious choice for inferences with GLMs, the QL F-test is preferred as it reflects the uncertainty in estimating the dispersion for each gene. It provides more robust and reliable error rate control when the number of replicates is small. The QL dispersion estimation and hypothesis testing can be done by using the functions `glmQLFit()` and `glmQLFTest()`.*
+
+### Fit GLM QLF model
+
+*For the QL dispersions, estimation can be performed using the `glmQLFit` function. This returns a DGEGLM object containing the estimated values of the GLM coefficients for each gene, as well as the fitted mean-QL dispersion trend, the squeezed QL estimates and the prior degrees of freedom (df). These can be visualized with the `plotQLDisp` function.*
+
+```{r fitGLMqlf}
+#fit NB GLMQLF model to estimatedDespersion DGElist
+fit_GLM_qlf <- edgeR::glmQLFit(y = estimateDispersion,
+                               design = designMatrix,
+                               robust = TRUE)
+#view gene coefficients
+# head(fit_GLM_qlf$coefficients)
+
+#visualise
+plotQLDisp(glmfit = fit_GLM_qlf)
+invisible(dev.print(pdf, "../2_plots/2_dge/qlf_dispersion.svg"))
+```
+
+### Apply QLF test
+```{r applyQLF}
+# Create list object
+apply_qlf=list()
+dge_qlf_decideTest=list()
+dge_qlf_unfiltered=list()
+dge_qlf_filtered=list()
+
+for (i in 1:ncol(contrast)){
+  #at each iteration, let x = name of each contrast group
+  x=comparison_group[i,]
+
+  #populate list with DGELRT object for every comparison
+  apply_qlf[[x]] <-
+    edgeR::glmQLFTest(glmfit = fit_GLM_qlf, contrast = contrast[,x])
+
+  #populate significant list with decide test
+  dge_qlf_decideTest[[x]] <-
+    decideTests(apply_qlf[[x]], p.value = 0.05, adjust.method = "fdr") %>% summary()
+
+  #populate unfiltered list with list of all DE genes
+  dge_qlf_unfiltered[[x]] <-
+    edgeR::topTags(object = apply_qlf[[x]], n = Inf) %>% as.data.frame()
+
+  #populate filtered list with list of significant DE genes
+  dge_qlf_filtered[[x]] <-
+    edgeR::topTags(object = apply_qlf[[x]], n = Inf, adjust.method = "fdr", p.value = 0.05, sort.by = "PValue") %>% as.data.frame()
+}
+
+# save rds object for use in downstream GO and KEGG analysis
+apply_qlf%>% saveRDS(file = "../0_data/rds_object/qlf.rds")
+# dge_qlf_unfiltered %>% saveRDS(file = "../0_data/rds_object/qlf_unfiltered.rds")
+dge_qlf_filtered %>% saveRDS(file = "../0_data/rds_object/qlf_filtered.rds")
+
+#save each unfiltered comparison group in the output directory
+
+# dont need this
+# writexl::write_xlsx(x = dge_qlf_unfiltered,
+                    # path = "../3_output/qlf_unfiltered.xlsx")
+writexl::write_xlsx(x = dge_qlf_filtered,
+                    path = "../3_output/qlf_filtered.xlsx")
+```
+
+
+#### Visualisation {.tabset}
+
+##### P Value histogram
+```{r pValueHistogram_qlf}
+lapply(1:length(apply_qlf),
+       function(x){
+         hist(x = apply_qlf[[x]]$table$PValue,
+              breaks = 50,
+              main = paste0("P-Values qlf ", names(apply_qlf[x])),
+              xlab = "P-Value",
+              col = "gray50")
+
+invisible(dev.print(pdf,
+                    paste0("../2_plots/2_dge/qlf_pValue_histogram_", names(apply_qlf[x]), ".svg")))
+})
+```
+
+##### Mean-Difference plot
+The differential expression can initial visualised through `plotMD` function, where the `logFC` is plotted against the relative abundance of the gene `logCPM`. Significant genes with FDR of 0.05 or less are highlighted.
+
+**NOTE: this does not account for minimal `logFC` value**
+
+```{r MAplotCustom_qlf}
+lapply(1:length(dge_qlf_unfiltered),
+       function(x) {
+
+         #create data.frame specific for the custome MA plot
+         MAplotData_qlf <- dplyr::select(as.data.frame(dge_qlf_unfiltered[[x]]), logCPM, logFC, FDR)
+         colnames(MAplotData_qlf) <- c("baseMeanLog2", "log2FoldChange", "padj")
+
+         #create custom MA plot
+         MAplot_qlf <- ggpubr::ggmaplot(
+           data = MAplotData_qlf,
+           fdr = 0.05,
+           fc = 1.5,
+           genenames = as.vector(rownames(MAplotData_qlf)),
+           size = 1.5,
+           alpha = 0.8,
+           label.rectangle = TRUE,
+           palette = c("firebrick3", "dodgerblue3", "gray50"),
+           top = 5,
+           select.top.method = c("padj", "fc"),
+           main = "MA Plot from GLM-QLF ",
+           legend = "bottom",
+           submain = names(dge_qlf_unfiltered[x]),
+           xlab = expression("log"[2]*"CPM"),
+           ylab = expression("log"[2]*"FC"),
+           ylim = c(-8, 8),
+           font.label = c(10, "italic", "black"),
+           font.main = c(14, "bold", "black"),
+           font.submain = c(12, "plain", "black"),
+           font.legend = c(10, "plain", "black"),
+           font.x = c(13, "plain", "black"),
+           font.y = c(13, "plain", "black"))
+
+         #save MA plot
+         # ggsave(paste0("MA_plot_qlf_", names(dge_qlf_unfiltered[x]), ".svg"),
+         #        plot = MAplot_qlf,
+         #        path = "../2_plots/2_dge/")
+
+         #display plot
+         MAplot_qlf
+         })
+```
+
+##### Volcano Plot
+
+Here the `ggplot` function can also be used to illustrate the DE genes significant `pValue` and `logFC`. In this instance, the significance is determined as genes with `PValue < 0.05` **and** `abs(logFC)>log(2)`.
+
+```{r volcanoPlot_qlf}
+lapply(1:length(dge_qlf_unfiltered),
+       function(x) {
+
+         #add an extra column and determine whether the DE genes are significant
+         dge_qlf_unfiltered[[x]] <- dge_qlf_unfiltered[[x]] %>% as.data.frame() %>%
+           dplyr::mutate(Expression = case_when
+                         (FDR <= 0.05 & logFC >= 1.5 ~ "Up-regulated",
+                          FDR <= 0.05 & logFC <= -1.5 ~ "Down-regulated",
+                          TRUE ~ "Insignificant"))
+
+         #adding labels to top genes
+         top <- 5
+         top_genes_qlf <- bind_rows(
+           dge_qlf_unfiltered[[x]] %>%
+             filter(Expression == 'Up-regulated') %>%
+             arrange(FDR, desc(abs(logFC))) %>%
+             head(top),
+           dge_qlf_unfiltered[[x]] %>%
+             filter(Expression == 'Down-regulated') %>%
+             arrange(FDR, desc(abs(logFC))) %>%
+             head(top)
+           )
+         invisible(top_genes_qlf %>% as.data.frame())
+
+         #generate volcano plot with the allDEgene data.frame
+         volcano_plot_qlf <- dge_qlf_unfiltered[[x]] %>%
+           ggplot(aes(x = logFC,
+                      y = -log(FDR, 10))) +
+           geom_point(aes(colour = Expression),
+                      size = 1.5,
+                      alpha = 0.8,
+                      show.legend = FALSE) +
+           geom_label_repel(data = top_genes_qlf,
+                            mapping = aes(logFC, -log(FDR,10), label = gene),
+                            size = 2) +
+           xlab(expression("log"[2]*"FC")) +
+           ylab(expression("-log"[10]*"FDR")) +
+           xlim(-8,8)+
+           ylim(0,30)+
+           scale_color_manual(values = c("dodgerblue3", "gray50", "firebrick3")) +
+           guides(colour = guide_legend(override.aes = list(size=1.5))) +
+           labs(title = "Volcano Plot: GLM-QLF",
+                subtitle = paste0(names(dge_qlf_unfiltered[x])),
+                colour = "Expression")
+
+         #save to directory
+         # ggsave(paste0("volcano_plot_qlf_", names(dge_qlf_unfiltered[x]), ".svg"),
+         #        plot = volcano_plot_qlf,
+         #        path = "../2_plots/2_dge/")
+
+         #display
+         volcano_plot_qlf
+         })
+```
+
+
+### Apply TREAT
+
+```{r}
+# Create list object
+apply_treat=list()
+dge_treat_decideTest=list()
+dge_treat_unfiltered=list()
+dge_treat_filtered=list()
+
+for (i in 1:ncol(contrast)){
+  #at each iteration, let x = name of each contrast group
+  x=comparison_group[i,]
+
+  #populate list with DGELRT object for every comparison
+  apply_treat[[x]] <-
+    edgeR::glmTreat(glmfit =  fit_GLM_qlf, contrast = contrast[,x], lfc = 1.5)
+
+  #populate significant list with decide test
+  dge_treat_decideTest[[x]] <- decideTests(apply_treat[[x]], p.value = 0.05, adjust.method = "fdr") %>% summary()
+
+
+  #populate unfiltered list with list of all DE genes
+  dge_treat_unfiltered[[x]] <-
+    edgeR::topTags(object = apply_treat[[x]], n = Inf) %>% as.data.frame()
+
+  #populate filtered list with list of significant DE genes
+  dge_treat_filtered[[x]] <-
+    edgeR::topTags(object = apply_treat[[x]], n = Inf, adjust.method = "fdr", p.value = 0.05, sort.by = "PValue") %>% as.data.frame()
+}
+
+# save rds object for use in downstream GO and KEGG analysis
+apply_treat %>% saveRDS(file = "../0_data/rds_object/apply_treat.rds")
+# dge_treat_unfiltered %>% saveRDS(file = "../0_data/rds_object/dge_treat_unfiltered.rds")
+dge_treat_filtered %>% saveRDS(file = "../0_data/rds_object/dge_treat_filtered.rds")
+
+#save each unfiltered comparison group in the output directory
+# writexl::write_xlsx(x = dge_treat_unfiltered,
+                    # path = "../3_output/treat_unfiltered.xlsx")
+writexl::write_xlsx(x = dge_treat_filtered,
+                    path = "../3_output/treat_filtered.xlsx")
+```
+
+#### Visualisation {.tabset}
+
+##### P Value histogram
+```{r pValueHistogram_treat}
+lapply(1:length(apply_treat),
+       function(x){
+         hist(x = apply_treat[[x]]$table$PValue,
+              breaks = 50,
+              main = paste0("P-Values treat ", names(apply_treat[x])),
+              xlab = "P-Value",
+              col = "gray50")
+
+invisible(dev.print(pdf, paste0("../2_plots/2_dge/treat_pValue_histogram_", names(apply_treat[x]), ".svg")))
+})
+```
+
+##### Mean-Difference plot
+The differential expression can initial visualised through `plotMD` function, where the `logFC` is plotted against the relative abundance of the gene `logCPM`. Significant genes with FDR of 0.05 or less are highlighted.
+
+**NOTE: this does not account for minimal `logFC` value**
+
+```{r MAplotCustom_treat}
+lapply(1:length(dge_treat_unfiltered),
+       function(x) {
+
+         #create data.frame specific for the custome MA plot
+         MAplotData_treat <- dplyr::select(as.data.frame(dge_treat_unfiltered[[x]]), logCPM, logFC, FDR)
+         colnames(MAplotData_treat) <- c("baseMeanLog2", "log2FoldChange", "padj")
+
+         #create custom MA plot
+         MAplot_treat <- ggpubr::ggmaplot(
+           data = MAplotData_treat,
+           fdr = 0.05,
+           fc = 1.5,
+           genenames = as.vector(rownames(MAplotData_treat)),
+           size = 1.5,
+           alpha = 0.8,
+           label.rectangle = TRUE,
+           palette = c("firebrick3", "dodgerblue3", "gray50"),
+           top = 5,
+           ylim = c(-8, 8),
+           select.top.method = c("padj", "fc"),
+           main = "MA Plot from GLM-TREAT",
+           submain = names(dge_treat_unfiltered[x]),
+           legend = "bottom",
+           legend.title = "Expression",
+           xlab = expression("log"[2]*"CPM"),
+           ylab = expression("log"[2]*"FC"),
+           font.label = c(10, "italic", "black"),
+           font.main = c(14, "bold", "black"),
+           font.submain = c(12, "plain", "black"),
+           font.legend = c(10, "plain", "black"),
+           font.x = c(13, "plain", "black"),
+           font.y = c(13, "plain", "black"),
+           ggtheme = ggplot2::theme_minimal())
+
+         #save MA plot
+         ggsave(paste0("MA_plot_treat_", names(dge_treat_unfiltered[x]), ".svg"),
+                plot = MAplot_treat,
+                path = "../2_plots/2_dge/")
+
+         #display plot
+         MAplot_treat
+         })
+```
+
+##### Volcano Plot
+
+Here the `ggplot` function can also be used to illustrate the DE genes significant `pValue` and `logFC`. In this instance, the significance is determined as genes with `PValue < 0.05` **and** `abs(logFC)>log(2)`.
+
+```{r volcanoPlot_treat}
+lapply(1:length(dge_treat_unfiltered),
+       function(x) {
+
+         #add an extra column and determine whether the DE genes are significant
+         dge_treat_unfiltered[[x]] <- dge_treat_unfiltered[[x]] %>% as.data.frame() %>%
+           dplyr::mutate(Expression = case_when
+                         (FDR <= 0.05 & logFC >= 1.5 ~ "Up-regulated",
+                          FDR <= 0.05 & logFC <= -1.5 ~ "Down-regulated",
+                          TRUE ~ "Insignificant"))
+
+         #adding labels to top genes
+         top <- 5
+         top_genes_treat <- bind_rows(
+           dge_treat_unfiltered[[x]] %>%
+             filter(Expression == 'Up-regulated') %>%
+             arrange(FDR, desc(abs(logFC))) %>%
+             head(top),
+           dge_treat_unfiltered[[x]] %>%
+             filter(Expression == 'Down-regulated') %>%
+             arrange(FDR, desc(abs(logFC))) %>%
+             head(top)
+           )
+         invisible(top_genes_treat %>% as.data.frame())
+
+         #generate volcano plot with the allDEgene data.frame
+         volcano_plot_treat <- dge_treat_unfiltered[[x]] %>%
+           ggplot(aes(x = logFC,
+                      y = -log(FDR, 10))) +
+           geom_point(aes(colour = Expression),
+                      size = 1.5,
+                      alpha = 0.8,
+                      show.legend = FALSE) +
+           geom_label_repel(data = top_genes_treat,
+                            mapping = aes(logFC, -log(FDR,10), label = gene),
+                            size = 2) +
+           xlab(expression("log"[2]*"FC")) +
+           ylab(expression("-log"[10]*"FDR")) +
+           xlim(-8,8)+
+           ylim(0,30)+
+           scale_color_manual(values = c("dodgerblue3", "gray50", "firebrick3")) +
+           guides(colour = guide_legend(override.aes = list(size=1.5))) +
+           labs(title = "Volcano Plot: GLM-TREAT",
+                subtitle = paste0(names(dge_treat_unfiltered[x])),
+                colour = "Expression")
+
+         #save to directory
+         ggsave(paste0("volcano_plot_treat_", names(dge_treat_unfiltered[x]), ".svg"),
+                plot = volcano_plot_treat,
+                path = "../2_plots/2_dge/")
+
+         #display
+         volcano_plot_treat
+         })
+```
+
+
+
+# Heatmap
+```{r coolmap, eval=FALSE, include=FALSE}
+logCPM <- cpm(dge, prior.count=2, log=TRUE)
+rownames(logCPM) <- dge$genes$gene
+colnames(logCPM) <- paste(dge$samples$sample_group, 1:3, sep="-")
+
+o <- order(treat$CKIvsOMT$table$PValue)
+logCPM <- logCPM[o[1:30],]
+
+coolmap(x = p53_treat_UTvsCKI_test,
+        margins=c(7,7), lhei=c(1,5), lwid=c(1,3))
+```
+
+```{r, eval=FALSE}
+p53_treat_UTvsCKI <-
+  treat_unfiltered$UTvsCKI$table[treat_unfiltered$UTvsCKI$table$gene_id %in% p53_ensembl_id$ENSEMBL_GENE_ID,c("gene_name", "logFC")]
+p53_treat_CKIvsMAC <-
+  treat_unfiltered$CKIvsMac$table[treat_unfiltered$CKIvsMac$table$gene_id %in% p53_ensembl_id$ENSEMBL_GENE_ID,
+                                  "logFC"] %>% as.data.frame()
+
+p53_treat <- c(p53_treat_UTvsCKI, p53_treat_CKIvsMAC)
+remove_rownames() %>%
+  column_to_rownames("gene_name")
+
+colnames(p53_treat_UTvsCKI_test) <- "UT vs CKI"
+
+
+my_palette <- colorRampPalette(c("dodgerblue3", "white", "firebrick3"))(n = 201)
+
+pheatmap(mat = logCPM, cluster_rows = TRUE, cluster_cols = FALSE, color = my_palette, border_color = NA)
+
+coolmap(x = logCPM,
+        margins=c(7,7), lhei=c(1,5), lwid=c(1,3))
+
+```
+
+# Setup
+```{r sessioninfo}
+sessionInfo()
+```
+
