@@ -367,8 +367,12 @@ div.tocify {
     <li>
       <a href="dge.html">DE Analysis</a>
     </li>
-    <li class="dropdown-header">GO Term Enrichment Analysis</li>
-    <li class="dropdown-header">KEGG Pathway Enrichment Analysis</li>
+    <li>
+      <a href="go.html">GO Term Enrichment Analysis</a>
+    </li>
+    <li>
+      <a href="kegg.html">KEGG Pathway Enrichment Analysis</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -421,7 +425,7 @@ div.tocify {
 <strong>Last updated:</strong> 2021-10-30
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 2
 </p>
 <p>
 <strong>Knit directory:</strong> <code>01_CKI_DGE/1_analysis/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -437,12 +441,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -872,16 +876,16 @@ character
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree606132d9e3fb64d1cac80b36717889fa59cf3f9btargetblank606132da"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/606132d9e3fb64d1cac80b36717889fa59cf3f9b" target="_blank">606132d</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtreef94a382136e6b166de00c046a8ac9df415ff15e0targetblankf94a382a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/f94a382136e6b166de00c046a8ac9df415ff15e0" target="_blank">f94a382</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree606132d9e3fb64d1cac80b36717889fa59cf3f9btargetblank606132da" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtreef94a382136e6b166de00c046a8ac9df415ff15e0targetblankf94a382a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/606132d9e3fb64d1cac80b36717889fa59cf3f9b" target="_blank">606132d</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/f94a382136e6b166de00c046a8ac9df415ff15e0" target="_blank">f94a382</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -897,14 +901,15 @@ Untracked files:
     Untracked:  1_analysis/about.html
     Untracked:  1_analysis/dge.html
     Untracked:  1_analysis/go.html
-    Untracked:  1_analysis/index.html
     Untracked:  1_analysis/kegg.html
     Untracked:  1_analysis/obtainData.html
     Untracked:  1_analysis/site_libs/
 
 Unstaged changes:
     Modified:   1_analysis/_site.yml
-    Modified:   1_analysis/dge.Rmd
+    Modified:   1_analysis/index.html
+    Modified:   1_analysis/setUp.Rmd
+    Deleted:    1_analysis/setUp.html
     Modified:   2_plots/2_dge/estimate_dispersion.svg
     Modified:   2_plots/2_dge/qlf_dispersion.svg
     Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Mac vs CKI.svg
@@ -959,6 +964,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/tranmanhha135/01_CKI_DGE/f94a382136e6b166de00c046a8ac9df415ff15e0/docs/setUp.html" target="_blank">f94a382</a>
+</td>
+<td>
+Ha Tran
+</td>
+<td>
+2021-10-30
+</td>
+<td>
+rerun website building to no avail. will it still work on github?
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1650,117 +1672,6 @@ pcaSampleGroup</code></pre>
 </div>
 <div id="r-workflowrwflow_build" class="section level1">
 <h1><code>{r} # workflowr::wflow_build() #</code></h1>
-</div>
-<div id="setup" class="section level1">
-<h1>Setup</h1>
-<pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 4.1.0 (2021-05-18)
-Platform: x86_64-w64-mingw32/x64 (64-bit)
-Running under: Windows 10 x64 (build 19043)
-
-Matrix products: default
-
-locale:
-[1] LC_COLLATE=English_Australia.1252  LC_CTYPE=English_Australia.1252   
-[3] LC_MONETARY=English_Australia.1252 LC_NUMERIC=C                      
-[5] LC_TIME=English_Australia.1252    
-
-attached base packages:
- [1] parallel  stats4    grid      stats     graphics  grDevices utils    
- [8] datasets  methods   base     
-
-other attached packages:
- [1] AnnotationHub_3.0.2   BiocFileCache_2.0.0   dbplyr_2.1.1         
- [4] enrichplot_1.12.3     KEGGREST_1.32.0       biomaRt_2.48.3       
- [7] org.Hs.eg.db_3.13.0   AnnotationDbi_1.54.1  IRanges_2.26.0       
-[10] S4Vectors_0.30.0      Biobase_2.52.0        BiocGenerics_0.38.0  
-[13] clusterProfiler_4.0.5 Glimma_2.2.0          edgeR_3.34.0         
-[16] limma_3.48.1          ggrepel_0.9.1         ggbiplot_0.55        
-[19] scales_1.1.1          plyr_1.8.6            ggpubr_0.4.0         
-[22] pheatmap_1.0.12       cowplot_1.1.1         pander_0.6.4         
-[25] kableExtra_1.3.4      forcats_0.5.1         stringr_1.4.0        
-[28] purrr_0.3.4           tidyr_1.1.3           ggplot2_3.3.5        
-[31] tidyverse_1.3.1       reshape2_1.4.4        tibble_3.1.2         
-[34] readr_2.0.0           magrittr_2.0.1        dplyr_1.0.7          
-
-loaded via a namespace (and not attached):
-  [1] utf8_1.2.1                    tidyselect_1.1.1             
-  [3] RSQLite_2.2.7                 htmlwidgets_1.5.4            
-  [5] BiocParallel_1.26.1           scatterpie_0.1.7             
-  [7] munsell_0.5.0                 statmod_1.4.36               
-  [9] withr_2.4.2                   colorspace_2.0-2             
- [11] GOSemSim_2.18.1               filelock_1.0.2               
- [13] highr_0.9                     knitr_1.36                   
- [15] rstudioapi_0.13               ggsignif_0.6.3               
- [17] DOSE_3.18.3                   MatrixGenerics_1.4.3         
- [19] labeling_0.4.2                git2r_0.28.0                 
- [21] GenomeInfoDbData_1.2.6        polyclip_1.10-0              
- [23] bit64_4.0.5                   farver_2.1.0                 
- [25] rprojroot_2.0.2               downloader_0.4               
- [27] treeio_1.16.2                 vctrs_0.3.8                  
- [29] generics_0.1.0                xfun_0.24                    
- [31] R6_2.5.1                      GenomeInfoDb_1.28.4          
- [33] graphlayouts_0.7.1            locfit_1.5-9.4               
- [35] gridGraphics_0.5-1            bitops_1.0-7                 
- [37] cachem_1.0.5                  fgsea_1.18.0                 
- [39] DelayedArray_0.18.0           assertthat_0.2.1             
- [41] vroom_1.5.5                   promises_1.2.0.1             
- [43] ggraph_2.0.5                  gtable_0.3.0                 
- [45] tidygraph_1.2.0               workflowr_1.6.2              
- [47] rlang_0.4.11                  genefilter_1.74.0            
- [49] systemfonts_1.0.2             splines_4.1.0                
- [51] lazyeval_0.2.2                rstatix_0.7.0                
- [53] broom_0.7.9                   BiocManager_1.30.16          
- [55] yaml_2.2.1                    abind_1.4-5                  
- [57] modelr_0.1.8                  backports_1.2.1              
- [59] httpuv_1.6.1                  qvalue_2.24.0                
- [61] tools_4.1.0                   ggplotify_0.1.0              
- [63] ellipsis_0.3.2                jquerylib_0.1.4              
- [65] RColorBrewer_1.1-2            Rcpp_1.0.6                   
- [67] progress_1.2.2                zlibbioc_1.38.0              
- [69] RCurl_1.98-1.3                prettyunits_1.1.1            
- [71] viridis_0.6.2                 SummarizedExperiment_1.22.0  
- [73] haven_2.4.3                   fs_1.5.0                     
- [75] data.table_1.14.0             DO.db_2.9                    
- [77] openxlsx_4.2.4                reprex_2.0.1                 
- [79] whisker_0.4                   matrixStats_0.60.1           
- [81] mime_0.11                     patchwork_1.1.1              
- [83] hms_1.1.1                     evaluate_0.14                
- [85] xtable_1.8-4                  XML_3.99-0.6                 
- [87] rio_0.5.27                    readxl_1.3.1                 
- [89] gridExtra_2.3                 compiler_4.1.0               
- [91] shadowtext_0.0.9              writexl_1.4.0                
- [93] crayon_1.4.1                  htmltools_0.5.2              
- [95] ggfun_0.0.4                   later_1.2.0                  
- [97] tzdb_0.1.2                    aplot_0.1.1                  
- [99] geneplotter_1.70.0            lubridate_1.7.10             
-[101] DBI_1.1.1                     tweenr_1.0.2                 
-[103] rappdirs_0.3.3                MASS_7.3-54                  
-[105] Matrix_1.3-3                  car_3.0-11                   
-[107] cli_3.0.1                     igraph_1.2.6                 
-[109] GenomicRanges_1.44.0          pkgconfig_2.0.3              
-[111] foreign_0.8-81                xml2_1.3.2                   
-[113] ggtree_3.0.4                  svglite_2.0.0                
-[115] annotate_1.70.0               bslib_0.3.1                  
-[117] webshot_0.5.2                 XVector_0.32.0               
-[119] rvest_1.0.2                   yulab.utils_0.0.4            
-[121] digest_0.6.27                 Biostrings_2.60.1            
-[123] rmarkdown_2.11                cellranger_1.1.0             
-[125] fastmatch_1.1-3               tidytree_0.3.5               
-[127] curl_4.3.2                    shiny_1.7.1                  
-[129] lifecycle_1.0.1               nlme_3.1-152                 
-[131] jsonlite_1.7.2                carData_3.0-4                
-[133] viridisLite_0.4.0             fansi_0.5.0                  
-[135] pillar_1.6.4                  lattice_0.20-44              
-[137] fastmap_1.1.0                 httr_1.4.2                   
-[139] survival_3.2-11               GO.db_3.13.0                 
-[141] interactiveDisplayBase_1.30.0 glue_1.4.2                   
-[143] zip_2.2.0                     png_0.1-7                    
-[145] BiocVersion_3.13.1            bit_4.0.4                    
-[147] ggforce_0.3.3                 stringi_1.6.2                
-[149] sass_0.4.0                    blob_1.2.2                   
-[151] DESeq2_1.32.0                 memoise_2.0.0                
-[153] ape_5.5                      </code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
