@@ -314,7 +314,8 @@ pheatmap(mat = matrix_merged,
          border_color = "gray60",
          color = my_palette)
 
-
+invisible(dev.print(svg, "../2_plots/4_kegg/heatmap.svg"))
+         
 
 ```
 

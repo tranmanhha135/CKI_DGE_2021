@@ -186,9 +186,4 @@ writexl::write_xlsx(x = goana_treat,
 ```
 
 
-# Setup
-```{r sessionInfo}
-sessionInfo()
-
-```
 

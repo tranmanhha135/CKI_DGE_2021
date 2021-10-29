@@ -267,11 +267,15 @@ lapply(1:length(qlf_filtered),
            ylab = expression("log"[2]*"FC"),
            ylim = c(-8, 8),
            font.label = c(10, "italic", "black"),
-           font.main = c(14, "bold", "black"),
-           font.submain = c(12, "plain", "black"),
-           font.legend = c(10, "plain", "black"),
-           font.x = c(13, "plain", "black"),
-           font.y = c(13, "plain", "black"))
+           font.main = c(22, "bold", "black"),
+           font.submain = c(16, "plain", "black"),
+           font.legend = c(12, "plain", "black"),
+           font.x = c(12, "plain", "black"),
+           font.y = c(12, "plain", "black"),
+           ggtheme = ggplot2::theme_bw())
+         
+         
+         
 
          #save MA plot
          # ggsave(paste0("MA_plot_qlf_", names(qlf_filtered[x]), ".svg"),
@@ -434,13 +438,13 @@ lapply(1:length(treat_unfiltered),
            legend.title = "Expression",
            xlab = expression("log"[2]*"CPM"),
            ylab = expression("log"[2]*"FC"),
-           font.label = c(10, "italic", "black"),
-           font.main = c(14, "bold", "black"),
-           font.submain = c(12, "plain", "black"),
-           font.legend = c(10, "plain", "black"),
-           font.x = c(13, "plain", "black"),
-           font.y = c(13, "plain", "black"),
-           ggtheme = ggplot2::theme_minimal())
+           font.label = c(12, "italic", "black"),
+           font.main = c(22, "bold", "black"),
+           font.submain = c(16, "plain", "black"),
+           font.legend = c(12, "plain", "black"),
+           font.x = c(12, "plain", "black"),
+           font.y = c(12, "plain", "black"),
+           ggtheme = ggplot2::theme_bw())
 
          #save MA plot
          ggsave(paste0("MA_plot_treat_", names(treat_unfiltered[x]), ".svg"),
@@ -550,8 +554,4 @@ coolmap(x = logCPM,
 
 ```
 
-# Setup
-```{r sessioninfo}
-sessionInfo()
-```
 

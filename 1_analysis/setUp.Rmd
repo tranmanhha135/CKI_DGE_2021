@@ -427,8 +427,5 @@ The clustering of sample replicates and separation of sample groups indicates th
 saveRDS(object = dge, file = "../0_data/rds_object/dge.rds")
 ```
 
-# ```{r}
-# workflowr::wflow_build()
-# ```
 
 
