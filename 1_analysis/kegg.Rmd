@@ -47,7 +47,7 @@ library(enrichplot)
 library(biomaRt)
 
 # Set ggplot theme
-theme_set(theme_bw())
+theme_set(theme_minimal())
 
 theme_update(legend.background = element_rect(fill = "transparent", colour = NA),
       legend.box.background = element_rect(fill = "transparent", colour = NA),

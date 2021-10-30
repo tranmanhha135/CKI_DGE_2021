@@ -41,19 +41,23 @@ library(Glimma)
 library(enrichplot)
 
 # Set ggplot theme
-theme_set(theme_bw())
+theme_set(theme_minimal())
 
-theme_update(legend.background = element_rect(fill = "transparent", colour = NA),
-      legend.box.background = element_rect(fill = "transparent", colour = NA),
-      
-      panel.background = element_rect(fill = "transparent",colour = NA),
-      plot.background = element_rect(fill = "transparent", colour = NA),
-      
-      plot.title = element_text(color = "gray20", size = 22, angle = 0, hjust = 0, vjust = .5, face = "bold"),
-      axis.text.x = element_text(color = "gray30", size = 12, angle = 0, hjust = .5, vjust = .5, face = "plain"),
-      axis.text.y = element_text(color = "gray30", size = 12, angle = 0, hjust = 1, vjust = 0, face = "plain"),  
-      axis.title.x = element_text(color = "gray30", size = 12, angle = 0, hjust = .5, vjust = 0, face = "plain"),
-      axis.title.y = element_text(color = "gray30", size = 12, angle = 90, hjust = .5, vjust = .5, face = "plain"))
+theme_update(
+  legend.background = element_rect(fill = "transparent", colour = NA),
+  legend.box.background = element_rect(fill = "transparent", colour = NA),
+  
+  panel.background = element_rect(fill = "transparent",colour = NA),
+  plot.background = element_rect(fill = "transparent", colour = NA),
+  
+  plot.title = element_text(color = "gray20", size = 24, angle = 0, hjust = 0, vjust = .5, face = "bold"),
+  plot.subtitle = element_text(color = "gray25", size = 20, angle = 0, hjust = 0, vjust = .5, face = "plain"),
+  legend.title = element_text(color = "gray25", size = 16, angle = 0, hjust = 0, vjust = .5, face = "plain"),
+  legend.text = element_text(color = "gray25", size = 12, angle = 0, hjust = 0, vjust = .5, face = "plain"),
+  axis.text.x = element_text(color = "gray30", size = 12, angle = 0, hjust = .5, vjust = .5, face = "plain"),
+  axis.text.y = element_text(color = "gray30", size = 12, angle = 0, hjust = 1, vjust = 0, face = "plain"),  
+  axis.title.x = element_text(color = "gray30", size = 14, angle = 0, hjust = .5, vjust = 0, face = "plain"),
+  axis.title.y = element_text(color = "gray30", size = 14, angle = 90, hjust = .5, vjust = .5, face = "plain"))
 ```
 
 ## Data Import
@@ -256,7 +260,7 @@ Ideally, the filtering the low-expressed genes should remove the large peak with
 
 A common guideline is to keep all genes that have > 1 cpm in the smallest group on a treatment. In this case, the smallest group is 3 as each treatment condition had three replicates. Therefore any genes that is **more than 1 CPM in at least 3 samples** is kept. Mathematically this would be identifying genes (rows) with CPM `> 1`; and identifying total row sum that is `>= 3`.
 
-```{r afterFiltering, fig.width=18}
+```{r afterFiltering, fig.width=20}
 #kept genes old method
 # keep <- edgeR::filterByExpr(y = dge,)
 
@@ -295,6 +299,7 @@ afterFiltering <- dge %>%
     colour = "Sample Groups"
   )
 
+afterFiltering
 #save plot
 # ggsave("counts_after_filtering.svg", 
 #        plot = afterFiltering,
@@ -306,7 +311,8 @@ beforeAfterFiltering <- cowplot::plot_grid(beforeFiltering, afterFiltering)
 
 #save plot
 ggsave("counts_before_and_after_filtering.svg",
-       width = 18, 
+       width = 14.3,
+       height = 6.8,
        plot = beforeAfterFiltering,
        path = "../2_plots/1_setup/")
 
@@ -387,13 +393,18 @@ summary(pcaAnalysis)$importance %>% as.data.frame()
 
 #### PCA of Sample Type
 ```{r pcaSampleType}
+
 # Create the plot:
 pcaSampleType <- ggbiplot(pcaAnalysis,
                               groups = dge$samples$sample_type,
                               ellipse = TRUE,
                               var.axes = FALSE) +
-  labs(title = "PCA of CKI Sample Type") +
-  theme(legend.position = "bottom")
+  labs(title = "Principle Component Analysis", color = "Sample Type") +
+  
+  geom_point(aes(colour = dge$samples$sample_type), size = 3) +
+  
+  theme(legend.direction ='horizontal', 
+        legend.position = "bottom")
 
 ggsave(filename = "sample_type_PCA_plot.svg", width = 20,
        plot = pcaSampleType,
@@ -408,9 +419,15 @@ pcaSampleType
 pcaSampleGroup <- ggbiplot(pcaAnalysis,
                            groups = dge$samples$sample_group,
                            ellipse = TRUE,
-                           var.axes = FALSE) +
-  labs(title = "PCA of CKI Sample Group") +
-  theme(legend.position = "bottom")
+                           ellipse.prob = 0.98,
+                           var.axes = FALSE, alpha = 0.8) +
+  
+  labs(title = "Principle Component Analysis", color = "Sample Group") +
+  
+  geom_point(aes(colour = dge$samples$sample_group), size = 3) +
+  
+  theme(legend.direction ='horizontal', 
+        legend.position = "bottom")
         
 
 ggsave(filename = "sample_group_PCA_plot.svg", width = 20,

@@ -43,19 +43,21 @@ library(limma)
 library(Glimma)
 
 # Set ggplot theme
-theme_set(theme_bw())
+theme_set(theme_minimal())
 
-theme_update(legend.background = element_rect(fill = "transparent", colour = NA),
-      legend.box.background = element_rect(fill = "transparent", colour = NA),
-      
-      panel.background = element_rect(fill = "transparent",colour = NA),
-      plot.background = element_rect(fill = "transparent", colour = NA),
-      
-      plot.title = element_text(color = "gray20", size = 22, angle = 0, hjust = 0, vjust = .5, face = "bold"),
-      axis.text.x = element_text(color = "gray30", size = 12, angle = 0, hjust = .5, vjust = .5, face = "plain"),
-      axis.text.y = element_text(color = "gray30", size = 12, angle = 0, hjust = 1, vjust = 0, face = "plain"),  
-      axis.title.x = element_text(color = "gray30", size = 12, angle = 0, hjust = .5, vjust = 0, face = "plain"),
-      axis.title.y = element_text(color = "gray30", size = 12, angle = 90, hjust = .5, vjust = .5, face = "plain"))
+theme_update(
+  # legend.background = element_rect(fill = "transparent", colour = NA),
+  # legend.box.background = element_rect(fill = "transparent", colour = NA),
+  # 
+  # panel.background = element_rect(fill = "transparent",colour = NA),
+  # plot.background = element_rect(fill = "transparent", colour = NA),
+  
+  plot.title = element_text(color = "gray20", size = 28, angle = 0, hjust = 0, vjust = .5, face = "bold"),
+  plot.subtitle = element_text(color = "gray25", size = 24, angle = 0, hjust = 0, vjust = .5, face = "plain"),
+  axis.text.x = element_text(color = "gray30", size = 14, angle = 0, hjust = .5, vjust = .5, face = "plain"),
+  axis.text.y = element_text(color = "gray30", size = 14, angle = 0, hjust = 1, vjust = 0, face = "plain"),  
+  axis.title.x = element_text(color = "gray30", size = 20, angle = 0, hjust = .5, vjust = 0, face = "plain"),
+  axis.title.y = element_text(color = "gray30", size = 20, angle = 90, hjust = .5, vjust = .5, face = "plain"))
 ```
 
 
@@ -240,7 +242,7 @@ The differential expression can initial visualised through `plotMD` function, wh
 
 **NOTE: this does not account for minimal `logFC` value**
 
-```{r MAplotCustom_qlf}
+```{r MAplotCustom_qlf, fig.height=7}
 lapply(1:length(qlf_filtered),
        function(x) {
 
@@ -266,17 +268,20 @@ lapply(1:length(qlf_filtered),
            xlab = expression("log"[2]*"CPM"),
            ylab = expression("log"[2]*"FC"),
            ylim = c(-8, 8),
-           font.label = c(10, "italic", "black"),
-           font.main = c(22, "bold", "black"),
-           font.submain = c(16, "plain", "black"),
-           font.legend = c(12, "plain", "black"),
-           font.x = c(12, "plain", "black"),
-           font.y = c(12, "plain", "black"),
-           ggtheme = ggplot2::theme_bw())
+           font.label = c(13, "italic", "gray30"),
+           
+           ggtheme = ggplot2::theme_update(
+             plot.title = element_text(color = "gray20", size = 24, angle = 0, hjust = 0, vjust = .5, face = "bold"),
+             plot.subtitle = element_text(color = "gray25", size = 20, angle = 0, hjust = 0, vjust = .5, face = "plain"),
+             legend.title = element_text(color = "gray25", size = 16, angle = 0, hjust = 0, vjust = .5, face = "plain"),
+             legend.text = element_text(color = "gray25", size = 12, angle = 0, hjust = 0, vjust = .5, face = "plain"),
+             axis.text.x = element_text(color = "gray30", size = 12, angle = 0, hjust = .5, vjust = .5, face = "plain"),
+             axis.text.y = element_text(color = "gray30", size = 12, angle = 0, hjust = 1, vjust = 0, face = "plain"),
+             axis.title.x = element_text(color = "gray30", size = 14, angle = 0, hjust = .5, vjust = 0, face = "plain"),
+             axis.title.y = element_text(color = "gray30", size = 14, angle = 90, hjust = .5, vjust = .5, face = "plain")))
          
          
-         
-
+        
          #save MA plot
          # ggsave(paste0("MA_plot_qlf_", names(qlf_filtered[x]), ".svg"),
          #        plot = MAplot_qlf,
@@ -326,7 +331,7 @@ lapply(1:length(qlf_filtered),
                       show.legend = FALSE) +
            geom_label_repel(data = top_genes_qlf,
                             mapping = aes(logFC, -log(FDR,10), label = gene),
-                            size = 2) +
+                            size = 3) +
            xlab(expression("log"[2]*"FC")) +
            ylab(expression("-log"[10]*"FDR")) +
            xlim(-8,8)+
@@ -411,7 +416,7 @@ The differential expression can initial visualised through `plotMD` function, wh
 
 **NOTE: this does not account for minimal `logFC` value**
 
-```{r MAplotCustom_treat}
+```{r MAplotCustom_treat, fig.height=7}
 lapply(1:length(treat_unfiltered),
        function(x) {
 
@@ -438,18 +443,24 @@ lapply(1:length(treat_unfiltered),
            legend.title = "Expression",
            xlab = expression("log"[2]*"CPM"),
            ylab = expression("log"[2]*"FC"),
-           font.label = c(12, "italic", "black"),
-           font.main = c(22, "bold", "black"),
-           font.submain = c(16, "plain", "black"),
-           font.legend = c(12, "plain", "black"),
-           font.x = c(12, "plain", "black"),
-           font.y = c(12, "plain", "black"),
-           ggtheme = ggplot2::theme_bw())
-
+           font.label = c(13, "italic", "gray30"),
+           
+           ggtheme = ggplot2::theme_update(
+             plot.title = element_text(color = "gray20", size = 24, angle = 0, hjust = 0, vjust = .5, face = "bold"),
+             plot.subtitle = element_text(color = "gray25", size = 20, angle = 0, hjust = 0, vjust = .5, face = "plain"),
+             legend.title = element_text(color = "gray25", size = 16, angle = 0, hjust = 0, vjust = .5, face = "plain"),
+             legend.text = element_text(color = "gray25", size = 12, angle = 0, hjust = 0, vjust = .5, face = "plain"),
+             axis.text.x = element_text(color = "gray30", size = 12, angle = 0, hjust = .5, vjust = .5, face = "plain"),
+             axis.text.y = element_text(color = "gray30", size = 12, angle = 0, hjust = 1, vjust = 0, face = "plain"),
+             axis.title.x = element_text(color = "gray30", size = 14, angle = 0, hjust = .5, vjust = 0, face = "plain"),
+             axis.title.y = element_text(color = "gray30", size = 14, angle = 90, hjust = .5, vjust = .5, face = "plain")))
+         
          #save MA plot
-         ggsave(paste0("MA_plot_treat_", names(treat_unfiltered[x]), ".svg"),
+         ggsave(filename = paste0("MA_plot_treat_", names(treat_unfiltered[x]), ".svg"),
                 plot = MAplot_treat,
-                path = "../2_plots/2_dge/")
+                width = 11,
+                height = 7,
+                path = "../2_plots/2_dge")
 
          #display plot
          MAplot_treat
@@ -495,7 +506,7 @@ lapply(1:length(treat_unfiltered),
                       show.legend = FALSE) +
            geom_label_repel(data = top_genes_treat,
                             mapping = aes(logFC, -log(FDR,10), label = gene),
-                            size = 2) +
+                            size = 3) +
            xlab(expression("log"[2]*"FC")) +
            ylab(expression("-log"[10]*"FDR")) +
            xlim(-8,8)+
@@ -509,6 +520,8 @@ lapply(1:length(treat_unfiltered),
          #save to directory
          ggsave(paste0("volcano_plot_treat_", names(treat_unfiltered[x]), ".svg"),
                 plot = volcano_plot_treat,
+                width = 11,
+                height = 7,
                 path = "../2_plots/2_dge/")
 
          #display
