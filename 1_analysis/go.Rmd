@@ -53,15 +53,15 @@ DGElist object containing the raw feature count, sample metadata, and gene metad
 
 ```{r importData}
 # load DGElist previously created in the set up
-dge <- readRDS("../0_data/rds_object/dge.rds")
-designMatrix <- readRDS("../0_data/rds_object/designMatrix.rds")
-contrast <- readRDS("../0_data/rds_object/contrastMatrix.rds")
+dge <- readRDS(here::here("0_data/rds_object/dge.rds"))
+designMatrix <- readRDS(here::here("0_data/rds_object/designMatrix.rds"))
+contrast <- readRDS(here::here("0_data/rds_object/contrastMatrix.rds"))
 
-treat <- readRDS("../0_data/rds_object/treat.rds")
-treat_filtered <- readRDS("../0_data/rds_object/treat_filtered.rds")
+treat <- readRDS(here::here("0_data/rds_object/treat.rds"))
+treat_filtered <- readRDS(here::here("0_data/rds_object/treat_filtered.rds"))
 
-qlf <- readRDS("../0_data/rds_object/qlf.rds")
-qlf_filtered <- readRDS("../0_data/rds_object/qlf_filtered.rds")
+# qlf <- readRDS(here::here("0_data/rds_object/qlf.rds"))
+# qlf_filtered <- readRDS(here::here("0_data/rds_object/qlf_filtered.rds"))
 ```
 
 # Gene Ontology (GO) Enrichment Analysis
@@ -104,12 +104,12 @@ for (i in 1:ncol(contrast)){
 }
 
 # save rds object for use in downstream GO and KEGG analysis
-enrichGO_treat %>% saveRDS(file = "../0_data/rds_object/enrichGO_treat.rds")
-# enrichGO_treat_sig %>% saveRDS(file = "../0_data/rds_object/enrichGO_treat_filtered.rds")
+enrichGO_treat %>% saveRDS(file = here::here("0_data/rds_object/enrichGO_treat.rds"))
+# enrichGO_treat_sig %>% saveRDS(file = here::here("0_data/rds_object/enrichGO_treat_filtered.rds"))
 
 #save each unfiltered comparison group in the output directory
 writexl::write_xlsx(x = enrichGO_treat,
-                    path = "../3_output/enrichGO_treat.xlsx")
+                    path = here::here("3_output/enrichGO_treat.xlsx"))
   
 
 # GOnetwork_plot <- enrichGO_treat[["CKI-Omt vs CKI"]] %>% as.data.frame() %>%
@@ -149,41 +149,6 @@ enrichGO_treat[["CKI-Omt vs CKI"]][1:30,] %>% as.data.frame() %>% dplyr::select(
 enrichGO_treat[["CKI-Tri vs CKI"]][1:30,] %>% as.data.frame() %>% dplyr::select(-c("ID", "shortest_path", "longest_path", "terminal_node", "ontology")) %>% kable() %>% kable_styling(bootstrap_options = c("striped", "hover")) %>% scroll_box(height="600px")
 ```
 
-
-
-<!-- ### Using the `edgeR::goanaLRT` package -->
-
-<!-- #### TREAT -->
-
-```{r treatGOana, eval=FALSE}
-# Create list object
-goana_treat=list()
-goana_treat_sig=list()
-for (i in 1:ncol(contrast)){
-  #at each iteration, let x = name of each contrast group
-  x=comparison_group[i,]
-  
-  #populate the goana list with all GO terms
-  goana_treat[[x]] <- edgeR::goana.DGELRT(de = apply_treat[[x]], 
-                                          geneid = apply_treat[[x]]$genes$entrezid, 
-                                          species = "Hs",
-                                          FDR = 0.05, 
-                                          ont = "GOTERM_BP_8")
-  
-  
-  #filter only significant GO terms
-  goana_treat_sig[[x]] <- topGO(results = goana_treat[[x]], number = 30)
-} 
-
-# save rds object for use in downstream GO and KEGG analysis
-goana_treat %>% saveRDS(file = "../0_data/rds_object/goana_treat_unfiltered.rds")
-goana_treat_sig %>% saveRDS(file = "../0_data/rds_object/goana_treat_filtered.rds")
-
-#save each unfiltered comparison group in the output directory
-writexl::write_xlsx(x = goana_treat,
-                    path = "../6_output/3_GO/treat/goana_treat_unfiltered.xlsx")
-
-```
 
 
 

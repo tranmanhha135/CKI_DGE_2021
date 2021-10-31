@@ -65,7 +65,7 @@ theme_update(
 ### Import Raw Count Data
 ```{r importRawCountData}
 # raw count data was altered prior to import into R. alterations made were removing number column, removing unnecessary columns, and substituting ws delim to tab delim
-rawCount <- read_tsv("../0_data/raw_data/GSE125743_raw_count.tsv",
+rawCount <- read_tsv(here::here("0_data/raw_data/GSE125743_raw_count.tsv"),
                        col_names = TRUE) %>% 
   column_to_rownames("Geneid") %>% 
   as.data.frame
@@ -91,7 +91,7 @@ Due to these unresolved issues, the sample metadata will be manually generated a
 
 
 ```{r sampleMetaData}
-sampleMetadata <- read_tsv("../0_data/raw_data/sample_metadata.tsv",
+sampleMetadata <- read_tsv(here::here("0_data/raw_data/sample_metadata.tsv"),
                            col_names = TRUE) %>% 
   column_to_rownames("treatment") %>% 
   as.data.frame
@@ -118,13 +118,13 @@ genes <- genes(ensDb) %>%
   as.data.frame()
 
 #the annotated genes are saved into a RDS object to save computational time in subsequent run of the setUp.Rmd
-genes %>% saveRDS("../0_data/rds_object/genes_metadata.rds")
+genes %>% saveRDS(here::here("0_data/rds_object/genes_metadata.rds"))
 ```
 
 Using the annotated gene list through AnnotationHub(), load into object called `geneMetadata`. Filter out all genes that are present in the rawCount and display the number of unique gene_biotypes present in the rawCount and geneMetadata
 
 ```{r geneAnnotation}
-genesMetadata <- read_rds("../0_data/rds_object/genes_metadata.rds")
+genesMetadata <- read_rds(here::here("0_data/rds_object/genes_metadata.rds"))
 
 #prepare the gene data frame to contain the genes listed in the rownames of 'rawCount' data
 genesMetadata <- data.frame(gene = rownames(rawCount)) %>% 
@@ -208,7 +208,7 @@ dge$samples %>%
 #save the plot to .svg
 ggsave(filename = "library_size.svg",
        plot = last_plot(),
-       path = "../2_plots/1_setup/")
+       path = here::here("2_plots/1_setup/"))
 ```
 
 It appears that `CKI-Tri` treatment group 
@@ -220,7 +220,7 @@ Filtering out low-expressed genes is a standard pre-processing step in DGE analy
 
 The threshold of removal is arbitrary and is often determined after visualisation of the count distribution. The count distribution can be illustrated in a density plot through `ggplot`. A common metric used to display the count distribution if *log Counts per Million* (logCPM)
 
-```{r beforeFiltering, fig.width=11}
+```{r beforeFiltering}
 beforeFiltering <- dge %>% 
   
   #transform the raw count to logCPM 
@@ -253,14 +253,14 @@ beforeFiltering <- dge %>%
 #save plot
 # ggsave(filename = "counts_before_filtering.svg", 
 #        plot = beforeFiltering, 
-#        path = "../2_plots/1_setup/")
+#        path = here::here("2_plots/1_setup/"))
 ```
 
 Ideally, the filtering the low-expressed genes should remove the large peak with `logCPM < 0`, i.e., remove any genes which have less than one count per million.
 
 A common guideline is to keep all genes that have > 1 cpm in the smallest group on a treatment. In this case, the smallest group is 3 as each treatment condition had three replicates. Therefore any genes that is **more than 1 CPM in at least 3 samples** is kept. Mathematically this would be identifying genes (rows) with CPM `> 1`; and identifying total row sum that is `>= 3`.
 
-```{r afterFiltering, fig.width=20}
+```{r afterFiltering}
 #kept genes old method
 # keep <- edgeR::filterByExpr(y = dge,)
 
@@ -299,11 +299,11 @@ afterFiltering <- dge %>%
     colour = "Sample Groups"
   )
 
-afterFiltering
+# afterFiltering
 #save plot
 # ggsave("counts_after_filtering.svg", 
 #        plot = afterFiltering,
-#        path = "../2_plots/1_setup/")
+#        path = here::here("2_plots/1_setup/"))
 
 
 #display plot side by side
@@ -314,7 +314,7 @@ ggsave("counts_before_and_after_filtering.svg",
        width = 14.3,
        height = 6.8,
        plot = beforeAfterFiltering,
-       path = "../2_plots/1_setup/")
+       path = here::here("2_plots/1_setup/"))
 
 #display side by side figure
 beforeAfterFiltering
@@ -408,7 +408,7 @@ pcaSampleType <- ggbiplot(pcaAnalysis,
 
 ggsave(filename = "sample_type_PCA_plot.svg", width = 20,
        plot = pcaSampleType,
-       path = "../2_plots/1_setup/")
+       path = here::here("2_plots/1_setup/"))
 
 pcaSampleType
 ```
@@ -432,7 +432,7 @@ pcaSampleGroup <- ggbiplot(pcaAnalysis,
 
 ggsave(filename = "sample_group_PCA_plot.svg", width = 20,
        plot = pcaSampleGroup,
-       path = "../2_plots/1_setup/")
+       path = here::here("2_plots/1_setup/"))
 
 pcaSampleGroup
 ```
@@ -441,7 +441,7 @@ The clustering of sample replicates and separation of sample groups indicates th
 
 ## Save DGElist object
 ```{r savingDGElist}
-saveRDS(object = dge, file = "../0_data/rds_object/dge.rds")
+saveRDS(object = dge, here::here("0_data/rds_object/dge.rds"))
 ```
 
 

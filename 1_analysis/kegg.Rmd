@@ -49,17 +49,21 @@ library(biomaRt)
 # Set ggplot theme
 theme_set(theme_minimal())
 
-theme_update(legend.background = element_rect(fill = "transparent", colour = NA),
-      legend.box.background = element_rect(fill = "transparent", colour = NA),
-      
-      panel.background = element_rect(fill = "transparent",colour = NA),
-      plot.background = element_rect(fill = "transparent", colour = NA),
-      
-      plot.title = element_text(color = "gray20", size = 22, angle = 0, hjust = 0, vjust = .5, face = "bold"),
-      axis.text.x = element_text(color = "gray30", size = 12, angle = 0, hjust = .5, vjust = .5, face = "plain"),
-      axis.text.y = element_text(color = "gray30", size = 12, angle = 0, hjust = 1, vjust = 0, face = "plain"),  
-      axis.title.x = element_text(color = "gray30", size = 12, angle = 0, hjust = .5, vjust = 0, face = "plain"),
-      axis.title.y = element_text(color = "gray30", size = 12, angle = 90, hjust = .5, vjust = .5, face = "plain"))
+theme_update(
+  legend.background = element_rect(fill = "transparent", colour = NA),
+  legend.box.background = element_rect(fill = "transparent", colour = NA),
+  
+  panel.background = element_rect(fill = "transparent",colour = NA),
+  plot.background = element_rect(fill = "transparent", colour = NA),
+  
+  plot.title = element_text(color = "gray20", size = 24, angle = 0, hjust = 0, vjust = .5, face = "bold"),
+  plot.subtitle = element_text(color = "gray25", size = 20, angle = 0, hjust = 0, vjust = .5, face = "plain"),
+  legend.title = element_text(color = "gray25", size = 16, angle = 0, hjust = 0, vjust = .5, face = "plain"),
+  legend.text = element_text(color = "gray25", size = 12, angle = 0, hjust = 0, vjust = .5, face = "plain"),
+  axis.text.x = element_text(color = "gray30", size = 12, angle = 0, hjust = .5, vjust = .5, face = "plain"),
+  axis.text.y = element_text(color = "gray30", size = 12, angle = 0, hjust = 1, vjust = 0, face = "plain"),  
+  axis.title.x = element_text(color = "gray30", size = 14, angle = 0, hjust = .5, vjust = 0, face = "plain"),
+  axis.title.y = element_text(color = "gray30", size = 14, angle = 90, hjust = .5, vjust = .5, face = "plain"))
 ```
 
 
@@ -67,18 +71,16 @@ theme_update(legend.background = element_rect(fill = "transparent", colour = NA)
 
 DGElist object containing the raw feature count, sample metadata, and gene metadata, created in the Set Up stage. 
 
-```{r importData}
+```{r importData, eval=TRUE}
 # load DGElist previously created in the set up
-dge <- readRDS("../0_data/rds_object/dge.rds")
-designMatrix <- readRDS("../0_data/rds_object/designMatrix.rds")
-contrast <- readRDS("../0_data/rds_object/contrastMatrix.rds")
+dge <- readRDS(here::here("0_data/rds_object/dge.rds"))
+designMatrix <- readRDS(here::here("0_data/rds_object/designMatrix.rds"))
+contrast <- readRDS(here::here("0_data/rds_object/contrastMatrix.rds"))
 
-treat <- readRDS("../0_data/rds_object/treat.rds")
-# treat <- readRDS("../0_data/rds_object/treat_unfiltered")
-treat_filtered <- readRDS("../0_data/rds_object/treat_filtered.rds")
+treat <- readRDS(here::here("0_data/rds_object/treat.rds"))
+treat_unfiltered <- readRDS(here::here("0_data/rds_object/treat_unfiltered.rds"))
+treat_filtered <- readRDS(here::here("0_data/rds_object/treat_filtered.rds"))
 
-qlf <- readRDS("../0_data/rds_object/qlf.rds")
-qlf_filtered <- readRDS("../0_data/rds_object/qlf_filtered.rds")
 ```
 
 
@@ -112,12 +114,12 @@ for (i in 1:ncol(contrast)){
   enrichKEGG_treat_sig[[x]] <- enrichKEGG_treat[[x]] %>% dplyr::filter(qvalue <= 0.2)
 } 
 # save rds object for use in downstream GO and KEGG analysis
-# enrichKEGG_treat %>% saveRDS(file = "../0_data/rds_object/enrichKEGG_treat_unfiltered.rds")
-enrichKEGG_treat_sig %>% saveRDS(file = "../0_data/rds_object/enrichKEGG_treat_filtered.rds")
+# enrichKEGG_treat %>% saveRDS(file = here::here("0_data/rds_object/enrichKEGG_treat_unfiltered.rds"))
+enrichKEGG_treat_sig %>% saveRDS(file = here::here("0_data/rds_object/enrichKEGG_treat_filtered.rds"))
 
 #save each unfiltered comparison group in the output directory
 writexl::write_xlsx(x = enrichKEGG_treat,
-                    path = "../3_output/enrichKEGG_treat_unfiltered.xlsx")
+                    path = here::here("3_output/enrichKEGG_treat_unfiltered.xlsx"))
 
 ```
 
@@ -151,125 +153,22 @@ enrichKEGG_treat_sig[["CKI-Omt vs CKI"]][1:30,] %>% as.data.frame() %>% dplyr::s
 enrichKEGG_treat_sig[["CKI-Tri vs CKI"]][1:30,] %>% as.data.frame() %>% dplyr::select(-c("ID")) %>% kable() %>% kable_styling(bootstrap_options = c("striped", "hover")) %>% scroll_box(height="600px")
 ```
 
-<!-- #### QLF -->
-
-<!-- not working -->
-
-```{r qlfKEGGanalysis, eval=FALSE}
-#why is CKI vs Omt not significant at all?
-comparison_group=colnames(contrast) %>% as.data.frame()
-
-# Create list object
-enrichKEGG_qlf=list()
-enrichKEGG_qlf_sig=list()
-for (i in 1:ncol(contrast)){
-  #at each iteration, let x = name of each contrast group
-  x=comparison_group[i,]
-  
-  #populate the enrichGo list with all KEGG terms
-  KEGGresults <- clusterProfiler::enrichKEGG(gene = qlf_filtered[[x]]$entrezid,
-                        organism = "hsa",
-                        pAdjustMethod = "fdr") 
-  
-  enrichKEGG_qlf[[x]] <- KEGGresults@result %>% as.data.frame()
- 
-  #filter only significant KEGG terms
-  enrichKEGG_qlf_sig[[x]] <- enrichKEGG_qlf[[x]] %>% filter(pvalue <= 0.05)
-} 
-# save rds object for use in downstream GO and KEGG analysis
-enrichKEGG_qlf %>% saveRDS(file = "../0_data/rds_object/enrichKEGG_qlf_unfiltered.rds")
-enrichKEGG_qlf_sig %>% saveRDS(file = "../0_data/rds_object/enrichKEGG_qlf_filtered.rds")
-
-#save each unfiltered comparison group in the output directory
-writexl::write_xlsx(x = enrichKEGG_qlf,
-                    path = "../3_output/enrichKEGG_qlf_unfiltered.xlsx")
-
-```
-
-<!-- ### Using the `edgeR::keggaLRT` package -->
-
-<!-- #### TREAT -->
-
-```{r treatKEGGA, eval=FALSE}
-# Create list object
-kegga_treat=list()
-kegga_treat_sig=list()
-for (i in 1:ncol(contrast)){
-  #at each iteration, let x = name of each contrast group
-  x=comparison_group[i,]
-  
-  #populate the kegga list with all KEGG terms
-  kegga_treat[[x]] <- edgeR::kegga.DGELRT(de = treat[[x]], 
-                                          geneid = treat[[x]]$genes$entrezid, 
-                                          species = "Hs",
-                                          trend = TRUE,
-                                          FDR = 0.05)
-  
-  #filter only significant KEGG terms
-  kegga_treat_sig[[x]] <- topKEGG(results = kegga_treat[[x]], number = 30)
-} 
-
-# save rds object for use in downstream GO and KEGG analysis
-kegga_treat %>% saveRDS(file = "../0_data/rds_object/kegga_treat_unfiltered.rds")
-kegga_treat_sig %>% saveRDS(file = "../0_data/rds_object/kegga_treat_filtered.rds")
-
-#save each unfiltered comparison group in the output directory
-writexl::write_xlsx(x = kegga_treat,
-                    path = "../3_output/kegga_treat_unfiltered.xlsx")
-
-```
-
-<!-- #### QLF -->
-
-```{r qlfKegga, eval=FALSE}
-# Create list object
-kegga_qlf=list()
-kegga_qlf_sig=list()
-for (i in 1:ncol(contrast)){
-  #at each iteration, let x = name of each contrast group
-  x=comparison_group[i,]
-  
-  #populate the kegga list with all KEGG terms
-  kegga_qlf[[x]] <- edgeR::kegga.DGELRT(de = qlf[[x]], 
-                                          geneid = qlf[[x]]$genes$entrezid, 
-                                          species = "Hs",
-                                          trend = TRUE,
-                                          FDR = 0.05)
-  
-  #filter only significant KEGG terms
-  kegga_qlf_sig[[x]] <- topKEGG(results = kegga_qlf[[x]], number = 30)
-} 
-
-# save rds object for use in downstream GO and KEGG analysis
-kegga_qlf %>% saveRDS(file = "../0_data/rds_object/kegga_qlf_unfiltered.rds")
-kegga_qlf_sig %>% saveRDS(file = "../0_data/rds_object/kegga_qlf_filtered.rds")
-
-#save each unfiltered comparison group in the output directory
-writexl::write_xlsx(x = kegga_qlf,
-                    path = "../3_output/kegga_qlf_unfiltered.xlsx")
-```
-
 # Visualisation
 
-## Heatmap
-
-```{r coolmap, eval=FALSE, include=FALSE}
-logCPM <- cpm(dge, prior.count=2, log=TRUE)
-rownames(logCPM) <- dge$genes$gene
-colnames(logCPM) <- paste(dge$samples$sample_group, 1:3, sep="-")
-
-o <- order(treat$CKIvsOMT$table$PValue)
-logCPM <- logCPM[o[1:30],]
-
-coolmap(x = p53_treat_UTvsCKI_test, 
-        margins=c(7,7), lhei=c(1,5), lwid=c(1,3))
-```
-
-
-```{r}
+```{r pathwayName}
 kegg_id <- "hsa04657"
 kegg_pathway <- KEGGREST::keggGet(kegg_id)
 kegg_pathway_name <- kegg_pathway[[1]]$NAME
+```
+
+## Heatmap of `r kegg_pathway_name` {.tabset}
+
+### Partial 
+
+```{r partialPathway, fig.width=8}
+# kegg_id <- "hsa04657"
+# kegg_pathway <- KEGGREST::keggGet(kegg_id)
+# kegg_pathway_name <- kegg_pathway[[1]]$NAME
 
 entrezID=list()
 matrix=list()
@@ -298,26 +197,94 @@ matrix_merged <- matrix$`UT vs CKI` %>%
 colnames(matrix_merged) <- c("UT\nvs\nCKI", "CKI-Mac\nvs\nCKI", "CKI-Nme\nvs\nCKI", "CKI-Omt\nvs\nCKI", "CKI-Tri\nvs\nCKI")
 
 
+my_palette <- colorRampPalette(c(
+  rgb(32,121,226, maxColorValue = 255),
+  # rgb(144,203,180, maxColorValue = 255), 
+  rgb(254,238,229, maxColorValue = 255), 
+  # rgb(251,192,52, maxColorValue = 255), 
+  rgb(226,46,45, maxColorValue = 255)))(n = 201)
 
-my_palette <- colorRampPalette(c("dodgerblue3", "white", "firebrick3"))(n = 201)
 
 pheatmap(mat = matrix_merged,
          clustering_distance_rows = "euclidean",
-         treeheight_row = 100,
+         treeheight_row = 70,
          legend_labels = "logFC",
          main = paste0("Heatmap of ", kegg_pathway_name),
-         fontsize = 16,
-         fontsize_row = 14,
+         fontsize = 14,
+         fontsize_row = 12,
          fontsize_number = 10,
-         fontsize_col = 14,
-         angle_col = 0,
-         border_color = "gray60",
+         fontsize_col = 18,
+         angle_col =0,
+         border_color = "gray70",
          color = my_palette)
 
-invisible(dev.print(svg, "../2_plots/4_kegg/heatmap.svg"))
+invisible(dev.print(svg, here::here("2_plots/4_kegg/heatmap_partial.svg")))
+        
+```
+
+### Complete
+
+```{r completePathway, fig.height=12, fig.width=8}
+# kegg_id <- "hsa04657"
+# kegg_pathway <- KEGGREST::keggGet(kegg_id)
+# kegg_pathway_name <- kegg_pathway[[1]]$NAME
+
+entrezID=list()
+matrix_all=list()
+
+for (i in 1:ncol(contrast)){
+  #at each iteration, let x = name of each contrast group
+  x=comparison_group[i,]
+  
+  entrezID[[x]] <- kegg_pathway[[1]]$GENE %>% as.data.frame()
+  entrezID[[x]] <- entrezID[[x]][seq(1, nrow(entrezID[[x]]), 2),] %>% as.data.frame()
+
+  colnames(entrezID[[x]]) <- "entrezid"
+  
+  match <- treat_unfiltered[[x]]$entrezid %in% entrezID[[x]]$entrezid
+
+  matrix_all[[x]] <- treat_unfiltered[[x]][match, c("gene_name", "logFC")]
+}
+
+matrix_all_merged <- matrix_all$`UT vs CKI` %>% 
+  left_join(matrix_all$`CKI-Mac vs CKI`, by = "gene_name") %>% 
+  left_join(matrix_all$`CKI-Nme vs CKI`, by = "gene_name") %>% 
+  left_join(matrix_all$`CKI-Omt vs CKI`, by = "gene_name") %>% 
+  left_join(matrix_all$`CKI-Tri vs CKI`, by = "gene_name") %>% 
+  column_to_rownames("gene_name")
+
+colnames(matrix_all_merged) <- c("UT vs CKI", "CKI-Mac vs CKI", "CKI-Nme vs CKI", "CKI-Omt vs CKI", "CKI-Tri vs CKI")
+
+p <- pheatmap(mat = matrix_all_merged,
+         cluster_cols = F,
+         clustering_distance_rows = "euclidean",
+         treeheight_row = 70,
+         treeheight_col = 50,
+         cutree_rows = 4,
+         
+         # legend_labels = "logFC",
+         main = paste0("Heatmap of ", kegg_pathway_name),
+         # cellwidth = 65,
+         # cellheight = 25,
+         
+         fontsize = 14,
+         fontsize_row = 12,
+         fontsize_number = 10,
+         fontsize_col = 18,
+         angle_col =90,
+         
+         scale = "row",
+         # legend_breaks = c(seq(-2, 8, by = 2), max(matrix_all_merged)),
+         # legend_labels = c(seq(-2, 8, by = 2), "logCPM\n"),
+         # border_color = F,
+         border_color = "gray70",
+         color = my_palette,
+         )
+
+# ggsave(filename = "heatmap_all.svg",plot = last_plot(), path = here::here("2_plots/4_kegg/"))
+invisible(dev.print(width = 8.5, height = 18, device = svg, here::here("2_plots/4_kegg/heatmap_complete.svg")))
          
 
 ```
-
 
 

@@ -67,7 +67,7 @@ DGElist object containing the raw feature count, sample metadata, and gene metad
 
 ```{r importData}
 # load DGElist previously created in the set up
-dge <- readRDS("../0_data/rds_object/dge.rds")
+dge <- readRDS(here::here("0_data/rds_object/dge.rds"))
 ```
 
 
@@ -108,7 +108,7 @@ rownames(designMatrix) <- gsub("S48h_",
                                "",
                                rownames(designMatrix))
 
-designMatrix %>% saveRDS("../0_data/rds_object/designMatrix.rds")
+designMatrix %>% saveRDS(here::here("0_data/rds_object/designMatrix.rds"))
 #display the design matrix
 designMatrix %>% as.data.frame()
 ```
@@ -127,7 +127,7 @@ estimateDispersion <- estimateDisp(y = dge,
 
 #visualisation of dispersion estimate
 edgeR::plotBCV(estimateDispersion)
-invisible(dev.print(pdf, "../2_plots/2_dge/estimate_dispersion.svg"))
+invisible(dev.print(svg, here::here("2_plots/2_dge/estimate_dispersion.svg")))
 ```
 
 ### Contrast Matrix
@@ -145,7 +145,7 @@ contrast <- limma::makeContrasts(
 
 colnames(contrast) <- c("CKI-Mac vs CKI", "CKI-Nme vs CKI", "CKI-Omt vs CKI", "CKI-Tri vs CKI", "UT vs CKI")
 
-contrast %>% saveRDS("../0_data/rds_object/contrastMatrix.rds")
+contrast %>% saveRDS(here::here("0_data/rds_object/contrastMatrix.rds"))
 
 contrast %>% as.data.frame()
 
@@ -173,7 +173,7 @@ fit_GLM_qlf <- edgeR::glmQLFit(y = estimateDispersion,
 
 #visualise
 plotQLDisp(glmfit = fit_GLM_qlf)
-invisible(dev.print(pdf, "../2_plots/2_dge/qlf_dispersion.svg"))
+invisible(dev.print(svg, here::here("2_plots/2_dge/qlf_dispersion.svg")))
 ```
 
 ### Apply QLF test
@@ -206,17 +206,16 @@ for (i in 1:ncol(contrast)){
 }
 
 # save rds object for use in downstream GO and KEGG analysis
-qlf%>% saveRDS(file = "../0_data/rds_object/qlf.rds")
-# qlf_unfiltered %>% saveRDS(file = "../0_data/rds_object/qlf_unfiltered.rds")
-qlf_filtered %>% saveRDS(file = "../0_data/rds_object/qlf_filtered.rds")
+qlf %>% saveRDS(here::here("0_data/rds_object/qlf.rds"))
+# qlf_unfiltered %>% saveRDS(file = "0_data/rds_object/qlf_unfiltered.rds")
+qlf_filtered %>% saveRDS(here::here("0_data/rds_object/qlf_filtered.rds"))
 
 #save each unfiltered comparison group in the output directory
 
 # dont need this
 # writexl::write_xlsx(x = qlf_unfiltered,
-                    # path = "../3_output/qlf_unfiltered.xlsx")
-writexl::write_xlsx(x = qlf_filtered,
-                    path = "../3_output/qlf_filtered.xlsx")
+                    # path = here:here("3_output/qlf_unfiltered.xlsx"))
+writexl::write_xlsx(x = qlf_filtered, here::here("3_output/qlf_filtered.xlsx"))
 ```
 
 
@@ -232,9 +231,9 @@ lapply(1:length(qlf),
               xlab = "P-Value",
               col = "gray50")
 
-invisible(dev.print(pdf,
-                    paste0("../2_plots/2_dge/qlf_pValue_histogram_", names(qlf[x]), ".svg")))
+invisible(dev.print(pdf, here::here(paste0("2_plots/2_dge/qlf_pValue_histogram_", names(qlf[x]), ".svg"))))
 })
+
 ```
 
 ##### Mean-Difference plot
@@ -285,7 +284,7 @@ lapply(1:length(qlf_filtered),
          #save MA plot
          # ggsave(paste0("MA_plot_qlf_", names(qlf_filtered[x]), ".svg"),
          #        plot = MAplot_qlf,
-         #        path = "../2_plots/2_dge/")
+         #        path = "2_plots/2_dge/")
 
          #display plot
          MAplot_qlf
@@ -345,7 +344,7 @@ lapply(1:length(qlf_filtered),
          #save to directory
          # ggsave(paste0("volcano_plot_qlf_", names(qlf_filtered[x]), ".svg"),
          #        plot = volcano_plot_qlf,
-         #        path = "../2_plots/2_dge/")
+         #        path = "2_plots/2_dge/")
 
          #display
          volcano_plot_qlf
@@ -355,7 +354,7 @@ lapply(1:length(qlf_filtered),
 
 ### Apply TREAT
 
-```{r}
+```{r applyTreat}
 # Create list object
 treat=list()
 treat_decideTest=list()
@@ -384,15 +383,15 @@ for (i in 1:ncol(contrast)){
 }
 
 # save rds object for use in downstream GO and KEGG analysis
-treat %>% saveRDS(file = "../0_data/rds_object/treat.rds")
-treat_unfiltered %>% saveRDS(file = "../0_data/rds_object/treat_unfiltered.rds")
-treat_filtered %>% saveRDS(file = "../0_data/rds_object/treat_filtered.rds")
+treat %>% saveRDS(file = here::here("0_data/rds_object/treat.rds"))
+treat_unfiltered %>% saveRDS(file = here::here("0_data/rds_object/treat_unfiltered.rds"))
+treat_filtered %>% saveRDS(file = here::here("0_data/rds_object/treat_filtered.rds"))
 
 #save each unfiltered comparison group in the output directory
 # writexl::write_xlsx(x = treat_unfiltered,
-                    # path = "../3_output/treat_unfiltered.xlsx")
+                    # path = here::here("3_output/treat_unfiltered.xlsx"))
 writexl::write_xlsx(x = treat_filtered,
-                    path = "../3_output/treat_filtered.xlsx")
+                    path = here::here("3_output/treat_filtered.xlsx"))
 ```
 
 #### Visualisation {.tabset}
@@ -407,7 +406,7 @@ lapply(1:length(treat),
               xlab = "P-Value",
               col = "gray50")
 
-invisible(dev.print(pdf, paste0("../2_plots/2_dge/treat_pValue_histogram_", names(treat[x]), ".svg")))
+invisible(dev.print(pdf, here::here(paste0("2_plots/2_dge/treat_pValue_histogram_", names(treat[x]), ".svg"))))
 })
 ```
 
@@ -460,7 +459,7 @@ lapply(1:length(treat_unfiltered),
                 plot = MAplot_treat,
                 width = 11,
                 height = 7,
-                path = "../2_plots/2_dge")
+                path = here::here("2_plots/2_dge"))
 
          #display plot
          MAplot_treat
@@ -522,7 +521,7 @@ lapply(1:length(treat_unfiltered),
                 plot = volcano_plot_treat,
                 width = 11,
                 height = 7,
-                path = "../2_plots/2_dge/")
+                path = here::here("2_plots/2_dge/"))
 
          #display
          volcano_plot_treat
