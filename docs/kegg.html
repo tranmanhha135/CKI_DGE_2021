@@ -425,7 +425,7 @@ div.tocify {
 <strong>Last updated:</strong> 2021-10-31
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 2
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>01_CKI_DGE/1_analysis/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -453,254 +453,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongobjectspresent"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>Environment:</strong> objects present </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
 </p>
 </div>
-<div id="strongEnvironmentstrongobjectspresent" class="panel-collapse collapse">
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
 <div class="panel-body">
-<p>
-The global environment had objects present when the code in the R Markdown file was run. These objects can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment. Use <code>wflow_publish</code> or <code>wflow_build</code> to ensure that the code is always run in an empty environment.
-</p>
-<p>
-The following objects were defined in the global environment when these results were created:
-</p>
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th style="text-align:left;">
-Name
-</th>
-<th style="text-align:left;">
-Class
-</th>
-<th style="text-align:left;">
-Size
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-comparison_group
-</td>
-<td style="text-align:left;">
-data.frame
-</td>
-<td style="text-align:left;">
-1.1 Kb
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-contrast
-</td>
-<td style="text-align:left;">
-matrix;array
-</td>
-<td style="text-align:left;">
-1.7 Kb
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-designMatrix
-</td>
-<td style="text-align:left;">
-matrix;array
-</td>
-<td style="text-align:left;">
-3.5 Kb
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-dge
-</td>
-<td style="text-align:left;">
-DGEList
-</td>
-<td style="text-align:left;">
-12 Mb
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-enrichGO_treat
-</td>
-<td style="text-align:left;">
-list
-</td>
-<td style="text-align:left;">
-742 Kb
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-estimateDispersion
-</td>
-<td style="text-align:left;">
-DGEList
-</td>
-<td style="text-align:left;">
-12.5 Mb
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-fit_GLM_qlf
-</td>
-<td style="text-align:left;">
-DGEGLM
-</td>
-<td style="text-align:left;">
-20.6 Mb
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-GOresults
-</td>
-<td style="text-align:left;">
-enrichResult
-</td>
-<td style="text-align:left;">
-123.8 Mb
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-goSummaries
-</td>
-<td style="text-align:left;">
-tbl_df;tbl;data.frame
-</td>
-<td style="text-align:left;">
-13.4 Mb
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-i
-</td>
-<td style="text-align:left;">
-integer
-</td>
-<td style="text-align:left;">
-56 bytes
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-minPath
-</td>
-<td style="text-align:left;">
-numeric
-</td>
-<td style="text-align:left;">
-56 bytes
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-qlf
-</td>
-<td style="text-align:left;">
-list
-</td>
-<td style="text-align:left;">
-101 Mb
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-qlf_decideTest
-</td>
-<td style="text-align:left;">
-list
-</td>
-<td style="text-align:left;">
-5.6 Kb
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-qlf_filtered
-</td>
-<td style="text-align:left;">
-list
-</td>
-<td style="text-align:left;">
-37.5 Mb
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-qlf_unfiltered
-</td>
-<td style="text-align:left;">
-list
-</td>
-<td style="text-align:left;">
-49.2 Mb
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-treat
-</td>
-<td style="text-align:left;">
-list
-</td>
-<td style="text-align:left;">
-96.1 Mb
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-treat_decideTest
-</td>
-<td style="text-align:left;">
-list
-</td>
-<td style="text-align:left;">
-5.6 Kb
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-treat_filtered
-</td>
-<td style="text-align:left;">
-list
-</td>
-<td style="text-align:left;">
-1.7 Mb
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-treat_unfiltered
-</td>
-<td style="text-align:left;">
-list
-</td>
-<td style="text-align:left;">
-49.2 Mb
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-x
-</td>
-<td style="text-align:left;">
-character
-</td>
-<td style="text-align:left;">
-120 bytes
-</td>
-</tr>
-</tbody>
-</table>
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
 </div>
 </div>
 </div>
@@ -755,16 +513,16 @@ character
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree6823b3c881eddd07176bce86153e0543293d7f02targetblank6823b3ca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/6823b3c881eddd07176bce86153e0543293d7f02" target="_blank">6823b3c</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree70049b22b9a79841a2368454293f8825f08980ddtargetblank70049b2a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/70049b22b9a79841a2368454293f8825f08980dd" target="_blank">70049b2</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree6823b3c881eddd07176bce86153e0543293d7f02targetblank6823b3ca" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree70049b22b9a79841a2368454293f8825f08980ddtargetblank70049b2a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/6823b3c881eddd07176bce86153e0543293d7f02" target="_blank">6823b3c</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/70049b22b9a79841a2368454293f8825f08980dd" target="_blank">70049b2</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -776,40 +534,15 @@ Ignored files:
     Ignored:    2_plots/3_go/
 
 Untracked files:
-    Untracked:  1_analysis/about.html
-    Untracked:  1_analysis/dge.html
     Untracked:  1_analysis/figure/kegg.Rmd/completePathway-1.png
     Untracked:  1_analysis/figure/kegg.Rmd/partialPathway-1.png
     Untracked:  1_analysis/figure/setUp.Rmd/afterFiltering-2.png
-    Untracked:  1_analysis/go.html
-    Untracked:  1_analysis/index.html
-    Untracked:  1_analysis/site_libs/
     Untracked:  2_plots/4_kegg/
     Untracked:  Rplot.png
     Untracked:  Rplot01.png
 
 Unstaged changes:
-    Modified:   1_analysis/dge.Rmd
-    Modified:   1_analysis/figure/setUp.Rmd/afterFiltering-1.png
-    Modified:   1_analysis/go.Rmd
     Modified:   1_analysis/kegg.Rmd
-    Modified:   1_analysis/setUp.Rmd
-    Modified:   2_plots/2_dge/estimate_dispersion.svg
-    Modified:   2_plots/2_dge/qlf_dispersion.svg
-    Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Mac vs CKI.svg
-    Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Nme vs CKI.svg
-    Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Omt vs CKI.svg
-    Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Tri vs CKI.svg
-    Modified:   2_plots/2_dge/qlf_pValue_histogram_UT vs CKI.svg
-    Modified:   2_plots/2_dge/treat_pValue_histogram_CKI-Mac vs CKI.svg
-    Modified:   2_plots/2_dge/treat_pValue_histogram_CKI-Nme vs CKI.svg
-    Modified:   2_plots/2_dge/treat_pValue_histogram_CKI-Omt vs CKI.svg
-    Modified:   2_plots/2_dge/treat_pValue_histogram_CKI-Tri vs CKI.svg
-    Modified:   2_plots/2_dge/treat_pValue_histogram_UT vs CKI.svg
-    Modified:   3_output/enrichGO_treat.xlsx
-    Modified:   3_output/enrichKEGG_treat_unfiltered.xlsx
-    Modified:   3_output/qlf_filtered.xlsx
-    Modified:   3_output/treat_filtered.xlsx
 
 </code></pre>
 <p>
@@ -848,6 +581,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/tranmanhha135/01_CKI_DGE/blob/70049b22b9a79841a2368454293f8825f08980dd/1_analysis/kegg.Rmd" target="_blank">70049b2</a>
+</td>
+<td>
+Ha Tran
+</td>
+<td>
+2021-10-31
+</td>
+<td>
+Remove old GO and KEGG code, adjusted directory paths, updated KEGG, minor cosmetic changes
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/tranmanhha135/01_CKI_DGE/70049b22b9a79841a2368454293f8825f08980dd/docs/kegg.html" target="_blank">70049b2</a>
+</td>
+<td>
+Ha Tran
+</td>
+<td>
+2021-10-31
+</td>
+<td>
+Remove old GO and KEGG code, adjusted directory paths, updated KEGG, minor cosmetic changes
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -5197,7 +4964,7 @@ pheatmap(mat = matrix_merged,
          angle_col =0,
          border_color = &quot;gray70&quot;,
          color = my_palette)</code></pre>
-<p><img src="figure/kegg.Rmd/partialPathway-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/kegg.Rmd/partialPathway-1.png" width="1056" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>invisible(dev.print(svg, here::here(&quot;2_plots/4_kegg/heatmap_partial.svg&quot;)))</code></pre>
 </div>
 <div id="complete" class="section level3">
@@ -5257,7 +5024,7 @@ p &lt;- pheatmap(mat = matrix_all_merged,
          border_color = &quot;gray70&quot;,
          color = my_palette,
          )</code></pre>
-<p><img src="figure/kegg.Rmd/completePathway-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/kegg.Rmd/completePathway-1.png" width="1056" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># ggsave(filename = &quot;heatmap_all.svg&quot;,plot = last_plot(), path = here::here(&quot;2_plots/4_kegg/&quot;))
 invisible(dev.print(width = 8.5, height = 18, device = svg, here::here(&quot;2_plots/4_kegg/heatmap_complete.svg&quot;)))</code></pre>
 <br>
@@ -5284,94 +5051,89 @@ attached base packages:
  [8] datasets  methods   base     
 
 other attached packages:
- [1] enrichplot_1.12.3     KEGGREST_1.32.0       biomaRt_2.48.3       
- [4] org.Hs.eg.db_3.13.0   AnnotationDbi_1.54.1  IRanges_2.26.0       
- [7] S4Vectors_0.30.0      Biobase_2.52.0        BiocGenerics_0.38.0  
-[10] clusterProfiler_4.0.5 Glimma_2.2.0          edgeR_3.34.0         
-[13] limma_3.48.1          ggrepel_0.9.1         ggbiplot_0.55        
-[16] scales_1.1.1          plyr_1.8.6            ggpubr_0.4.0         
-[19] pheatmap_1.0.12       cowplot_1.1.1         pander_0.6.4         
-[22] kableExtra_1.3.4      forcats_0.5.1         stringr_1.4.0        
-[25] purrr_0.3.4           tidyr_1.1.3           ggplot2_3.3.5        
-[28] tidyverse_1.3.1       reshape2_1.4.4        tibble_3.1.2         
-[31] readr_2.0.0           magrittr_2.0.1        dplyr_1.0.7          
+ [1] biomaRt_2.48.3        enrichplot_1.12.3     org.Hs.eg.db_3.13.0  
+ [4] AnnotationDbi_1.54.1  IRanges_2.26.0        S4Vectors_0.30.0     
+ [7] Biobase_2.52.0        BiocGenerics_0.38.0   clusterProfiler_4.0.5
+[10] Glimma_2.2.0          edgeR_3.34.0          limma_3.48.1         
+[13] ggrepel_0.9.1         ggbiplot_0.55         scales_1.1.1         
+[16] plyr_1.8.6            pheatmap_1.0.12       cowplot_1.1.1        
+[19] pander_0.6.4          kableExtra_1.3.4      KEGGREST_1.32.0      
+[22] forcats_0.5.1         stringr_1.4.0         purrr_0.3.4          
+[25] tidyr_1.1.3           ggplot2_3.3.5         tidyverse_1.3.1      
+[28] reshape2_1.4.4        tibble_3.1.2          readr_2.0.0          
+[31] magrittr_2.0.1        dplyr_1.0.7          
 
 loaded via a namespace (and not attached):
   [1] utf8_1.2.1                  tidyselect_1.1.1           
   [3] RSQLite_2.2.7               htmlwidgets_1.5.4          
   [5] BiocParallel_1.26.1         scatterpie_0.1.7           
-  [7] munsell_0.5.0               statmod_1.4.36             
-  [9] withr_2.4.2                 colorspace_2.0-2           
- [11] GOSemSim_2.18.1             filelock_1.0.2             
- [13] highr_0.9                   knitr_1.36                 
- [15] rstudioapi_0.13             ggsignif_0.6.3             
- [17] DOSE_3.18.3                 MatrixGenerics_1.4.3       
- [19] labeling_0.4.2              git2r_0.28.0               
- [21] GenomeInfoDbData_1.2.6      polyclip_1.10-0            
- [23] bit64_4.0.5                 farver_2.1.0               
- [25] rprojroot_2.0.2             downloader_0.4             
- [27] treeio_1.16.2               vctrs_0.3.8                
- [29] generics_0.1.0              xfun_0.24                  
- [31] BiocFileCache_2.0.0         R6_2.5.1                   
- [33] GenomeInfoDb_1.28.4         graphlayouts_0.7.1         
- [35] locfit_1.5-9.4              gridGraphics_0.5-1         
- [37] bitops_1.0-7                cachem_1.0.5               
- [39] fgsea_1.18.0                DelayedArray_0.18.0        
- [41] assertthat_0.2.1            promises_1.2.0.1           
- [43] ggraph_2.0.5                gtable_0.3.0               
- [45] tidygraph_1.2.0             workflowr_1.6.2            
- [47] rlang_0.4.11                genefilter_1.74.0          
- [49] systemfonts_1.0.2           splines_4.1.0              
- [51] lazyeval_0.2.2              rstatix_0.7.0              
- [53] broom_0.7.9                 yaml_2.2.1                 
- [55] abind_1.4-5                 modelr_0.1.8               
- [57] backports_1.2.1             httpuv_1.6.1               
- [59] qvalue_2.24.0               tools_4.1.0                
- [61] ggplotify_0.1.0             ellipsis_0.3.2             
- [63] jquerylib_0.1.4             RColorBrewer_1.1-2         
- [65] Rcpp_1.0.6                  progress_1.2.2             
- [67] zlibbioc_1.38.0             RCurl_1.98-1.3             
- [69] prettyunits_1.1.1           viridis_0.6.2              
- [71] SummarizedExperiment_1.22.0 haven_2.4.3                
- [73] fs_1.5.0                    here_1.0.1                 
- [75] data.table_1.14.0           DO.db_2.9                  
- [77] openxlsx_4.2.4              reprex_2.0.1               
- [79] whisker_0.4                 matrixStats_0.60.1         
- [81] patchwork_1.1.1             hms_1.1.1                  
- [83] evaluate_0.14               xtable_1.8-4               
- [85] XML_3.99-0.6                rio_0.5.27                 
- [87] readxl_1.3.1                gridExtra_2.3              
- [89] compiler_4.1.0              shadowtext_0.0.9           
- [91] writexl_1.4.0               crayon_1.4.1               
- [93] htmltools_0.5.2             ggfun_0.0.4                
- [95] later_1.2.0                 tzdb_0.1.2                 
- [97] aplot_0.1.1                 geneplotter_1.70.0         
- [99] lubridate_1.7.10            DBI_1.1.1                  
-[101] tweenr_1.0.2                dbplyr_2.1.1               
-[103] rappdirs_0.3.3              MASS_7.3-54                
-[105] Matrix_1.3-3                car_3.0-11                 
-[107] cli_3.0.1                   igraph_1.2.6               
-[109] GenomicRanges_1.44.0        pkgconfig_2.0.3            
-[111] foreign_0.8-81              xml2_1.3.2                 
-[113] ggtree_3.0.4                svglite_2.0.0              
-[115] annotate_1.70.0             bslib_0.3.1                
-[117] webshot_0.5.2               XVector_0.32.0             
-[119] rvest_1.0.2                 yulab.utils_0.0.4          
-[121] digest_0.6.27               Biostrings_2.60.1          
-[123] rmarkdown_2.11              cellranger_1.1.0           
-[125] fastmatch_1.1-3             tidytree_0.3.5             
-[127] curl_4.3.2                  nlme_3.1-152               
-[129] lifecycle_1.0.1             jsonlite_1.7.2             
-[131] carData_3.0-4               viridisLite_0.4.0          
-[133] fansi_0.5.0                 pillar_1.6.4               
-[135] lattice_0.20-44             fastmap_1.1.0              
-[137] httr_1.4.2                  survival_3.2-11            
-[139] GO.db_3.13.0                glue_1.4.2                 
-[141] zip_2.2.0                   png_0.1-7                  
-[143] bit_4.0.4                   ggforce_0.3.3              
-[145] stringi_1.6.2               sass_0.4.0                 
-[147] blob_1.2.2                  DESeq2_1.32.0              
-[149] memoise_2.0.0               ape_5.5                    </code></pre>
+  [7] munsell_0.5.0               withr_2.4.2                
+  [9] colorspace_2.0-2            GOSemSim_2.18.1            
+ [11] filelock_1.0.2              highr_0.9                  
+ [13] knitr_1.36                  rstudioapi_0.13            
+ [15] DOSE_3.18.3                 MatrixGenerics_1.4.3       
+ [17] git2r_0.28.0                GenomeInfoDbData_1.2.6     
+ [19] polyclip_1.10-0             bit64_4.0.5                
+ [21] farver_2.1.0                rprojroot_2.0.2            
+ [23] downloader_0.4              vctrs_0.3.8                
+ [25] treeio_1.16.2               generics_0.1.0             
+ [27] xfun_0.24                   BiocFileCache_2.0.0        
+ [29] R6_2.5.1                    GenomeInfoDb_1.28.4        
+ [31] graphlayouts_0.7.1          locfit_1.5-9.4             
+ [33] bitops_1.0-7                cachem_1.0.5               
+ [35] fgsea_1.18.0                gridGraphics_0.5-1         
+ [37] DelayedArray_0.18.0         assertthat_0.2.1           
+ [39] promises_1.2.0.1            ggraph_2.0.5               
+ [41] gtable_0.3.0                tidygraph_1.2.0            
+ [43] workflowr_1.6.2             rlang_0.4.11               
+ [45] genefilter_1.74.0           systemfonts_1.0.2          
+ [47] splines_4.1.0               lazyeval_0.2.2             
+ [49] broom_0.7.9                 yaml_2.2.1                 
+ [51] modelr_0.1.8                backports_1.2.1            
+ [53] httpuv_1.6.1                qvalue_2.24.0              
+ [55] tools_4.1.0                 ggplotify_0.1.0            
+ [57] ellipsis_0.3.2              jquerylib_0.1.4            
+ [59] RColorBrewer_1.1-2          Rcpp_1.0.6                 
+ [61] progress_1.2.2              zlibbioc_1.38.0            
+ [63] RCurl_1.98-1.3              prettyunits_1.1.1          
+ [65] viridis_0.6.2               SummarizedExperiment_1.22.0
+ [67] haven_2.4.3                 here_1.0.1                 
+ [69] fs_1.5.0                    data.table_1.14.0          
+ [71] DO.db_2.9                   reprex_2.0.1               
+ [73] whisker_0.4                 matrixStats_0.60.1         
+ [75] hms_1.1.1                   patchwork_1.1.1            
+ [77] evaluate_0.14               xtable_1.8-4               
+ [79] XML_3.99-0.6                readxl_1.3.1               
+ [81] gridExtra_2.3               compiler_4.1.0             
+ [83] writexl_1.4.0               crayon_1.4.1               
+ [85] shadowtext_0.0.9            htmltools_0.5.2            
+ [87] ggfun_0.0.4                 later_1.2.0                
+ [89] tzdb_0.1.2                  geneplotter_1.70.0         
+ [91] aplot_0.1.1                 lubridate_1.7.10           
+ [93] DBI_1.1.1                   tweenr_1.0.2               
+ [95] dbplyr_2.1.1                rappdirs_0.3.3             
+ [97] MASS_7.3-54                 Matrix_1.3-3               
+ [99] cli_3.0.1                   igraph_1.2.6               
+[101] GenomicRanges_1.44.0        pkgconfig_2.0.3            
+[103] xml2_1.3.2                  ggtree_3.0.4               
+[105] svglite_2.0.0               annotate_1.70.0            
+[107] bslib_0.3.1                 webshot_0.5.2              
+[109] XVector_0.32.0              rvest_1.0.2                
+[111] yulab.utils_0.0.4           digest_0.6.27              
+[113] Biostrings_2.60.1           rmarkdown_2.11             
+[115] cellranger_1.1.0            fastmatch_1.1-3            
+[117] tidytree_0.3.5              curl_4.3.2                 
+[119] lifecycle_1.0.1             nlme_3.1-152               
+[121] jsonlite_1.7.2              viridisLite_0.4.0          
+[123] fansi_0.5.0                 pillar_1.6.4               
+[125] lattice_0.20-44             fastmap_1.1.0              
+[127] httr_1.4.2                  survival_3.2-11            
+[129] GO.db_3.13.0                glue_1.4.2                 
+[131] png_0.1-7                   bit_4.0.4                  
+[133] ggforce_0.3.3               stringi_1.6.2              
+[135] sass_0.4.0                  blob_1.2.2                 
+[137] DESeq2_1.32.0               memoise_2.0.0              
+[139] ape_5.5                    </code></pre>
 </div>
 </div>
 </div>

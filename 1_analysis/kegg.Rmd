@@ -71,7 +71,7 @@ theme_update(
 
 DGElist object containing the raw feature count, sample metadata, and gene metadata, created in the Set Up stage. 
 
-```{r importData, eval=TRUE}
+```{r importData}
 # load DGElist previously created in the set up
 dge <- readRDS(here::here("0_data/rds_object/dge.rds"))
 designMatrix <- readRDS(here::here("0_data/rds_object/designMatrix.rds"))
@@ -165,7 +165,7 @@ kegg_pathway_name <- kegg_pathway[[1]]$NAME
 
 ### Partial 
 
-```{r partialPathway, fig.width=8}
+```{r partialPathway}
 # kegg_id <- "hsa04657"
 # kegg_pathway <- KEGGREST::keggGet(kegg_id)
 # kegg_pathway_name <- kegg_pathway[[1]]$NAME
@@ -224,7 +224,7 @@ invisible(dev.print(svg, here::here("2_plots/4_kegg/heatmap_partial.svg")))
 
 ### Complete
 
-```{r completePathway, fig.height=12, fig.width=8}
+```{r completePathway, fig.height=15}
 # kegg_id <- "hsa04657"
 # kegg_pathway <- KEGGREST::keggGet(kegg_id)
 # kegg_pathway_name <- kegg_pathway[[1]]$NAME
