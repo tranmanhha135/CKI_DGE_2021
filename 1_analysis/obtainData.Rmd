@@ -2,6 +2,9 @@
 title: "Obtain Data"
 author: "Ha Tran"
 date: "30/10/2021"
+output: workflowr::wflow_html
+editor_options:
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}

@@ -2,4 +2,4 @@
 title: "About"
 ---
 
-This differential gene expression analysis was performed by Ha Tran, as apart of placement with Proffessor David Adelson
+This differential gene expression analysis was performed by Ha Tran, as apart of placement with Professor David Adelson.

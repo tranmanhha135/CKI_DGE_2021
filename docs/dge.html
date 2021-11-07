@@ -402,7 +402,7 @@ div.tocify {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -411,7 +411,7 @@ div.tocify {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -420,10 +420,10 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-10-31
+<strong>Last updated:</strong> 2021-11-08
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>01_CKI_DGE/1_analysis/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -439,12 +439,12 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguncommittedchanges"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>R Markdown file:</strong> uncommitted changes </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguncommittedchanges" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+<p>The R Markdown file has unstaged changes. To know which version of the R Markdown file created these results, you’ll want to first commit it to the Git repo. If you’re still working on the analysis, you can ignore this warning. When you’re finished, you can run <code>wflow_publish</code> to commit the R Markdown file and build the HTML.</p>
 </div>
 </div>
 </div>
@@ -511,16 +511,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree70049b22b9a79841a2368454293f8825f08980ddtargetblank70049b2a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/70049b22b9a79841a2368454293f8825f08980dd" target="_blank">70049b2</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree1a47b4569a1da246294ec62c8e47e2f6e2638e10targetblank1a47b45a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/1a47b4569a1da246294ec62c8e47e2f6e2638e10" target="_blank">1a47b45</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree70049b22b9a79841a2368454293f8825f08980ddtargetblank70049b2a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree1a47b4569a1da246294ec62c8e47e2f6e2638e10targetblank1a47b45a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/70049b22b9a79841a2368454293f8825f08980dd" target="_blank">70049b2</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/1a47b4569a1da246294ec62c8e47e2f6e2638e10" target="_blank">1a47b45</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -529,21 +529,71 @@ Note that you need to be careful to ensure that all relevant files for the analy
 Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-    Ignored:    2_plots/3_go/
 
 Untracked files:
     Untracked:  1_analysis/about.html
+    Untracked:  1_analysis/figure/dge.Rmd/coolmap-1.png
+    Untracked:  1_analysis/figure/dge.Rmd/volcano_treat-1.png
+    Untracked:  1_analysis/figure/dge.Rmd/volcano_treat-2.png
+    Untracked:  1_analysis/figure/dge.Rmd/volcano_treat-3.png
+    Untracked:  1_analysis/figure/dge.Rmd/volcano_treat-4.png
+    Untracked:  1_analysis/figure/dge.Rmd/volcano_treat-5.png
+    Untracked:  1_analysis/figure/go.Rmd/
     Untracked:  1_analysis/figure/kegg.Rmd/completePathway-1.png
     Untracked:  1_analysis/figure/kegg.Rmd/partialPathway-1.png
     Untracked:  1_analysis/figure/setUp.Rmd/afterFiltering-2.png
-    Untracked:  1_analysis/kegg.html
     Untracked:  1_analysis/site_libs/
+    Untracked:  2_plots/1_setup/counts_after_filtering.svg
+    Untracked:  2_plots/1_setup/counts_before_filtering.svg
+    Untracked:  2_plots/2_dge/logCPM_heatmap.svg
+    Untracked:  2_plots/3_go/
     Untracked:  2_plots/4_kegg/
-    Untracked:  Rplot.png
-    Untracked:  Rplot01.png
 
 Unstaged changes:
+    Modified:   0_data/rds_object/dge.rds
+    Modified:   0_data/rds_object/enrichGO_treat.rds
+    Modified:   0_data/rds_object/enrichKEGG_treat_filtered.rds
+    Modified:   0_data/rds_object/qlf.rds
+    Modified:   0_data/rds_object/qlf_filtered.rds
+    Modified:   0_data/rds_object/treat.rds
+    Modified:   0_data/rds_object/treat_filtered.rds
+    Modified:   0_data/rds_object/treat_unfiltered.rds
+    Modified:   1_analysis/about.Rmd
+    Modified:   1_analysis/dge.Rmd
+    Modified:   1_analysis/figure/dge.Rmd/MAplotCustom_treat-1.png
+    Modified:   1_analysis/figure/dge.Rmd/MAplotCustom_treat-2.png
+    Modified:   1_analysis/figure/dge.Rmd/MAplotCustom_treat-3.png
+    Modified:   1_analysis/figure/dge.Rmd/MAplotCustom_treat-4.png
+    Modified:   1_analysis/figure/dge.Rmd/MAplotCustom_treat-5.png
+    Modified:   1_analysis/figure/dge.Rmd/estimateDispersion-1.png
+    Modified:   1_analysis/figure/dge.Rmd/fitGLMqlf-1.png
+    Modified:   1_analysis/figure/dge.Rmd/pValueHistogram_treat-1.png
+    Modified:   1_analysis/figure/dge.Rmd/pValueHistogram_treat-2.png
+    Modified:   1_analysis/figure/dge.Rmd/pValueHistogram_treat-3.png
+    Modified:   1_analysis/figure/dge.Rmd/pValueHistogram_treat-4.png
+    Modified:   1_analysis/figure/dge.Rmd/pValueHistogram_treat-5.png
+    Modified:   1_analysis/figure/kegg.Rmd/unnamed-chunk-6-1.png
+    Modified:   1_analysis/figure/setUp.Rmd/MDSplot-1.png
+    Modified:   1_analysis/figure/setUp.Rmd/afterFiltering-1.png
+    Modified:   1_analysis/figure/setUp.Rmd/libraryChecks-1.png
+    Modified:   1_analysis/figure/setUp.Rmd/pcaSampleGroup-1.png
+    Modified:   1_analysis/figure/setUp.Rmd/pcaSampleType-1.png
+    Modified:   1_analysis/figure/setUp.Rmd/visualisingNormalisation-1.png
+    Modified:   1_analysis/go.Rmd
     Modified:   1_analysis/kegg.Rmd
+    Modified:   1_analysis/obtainData.Rmd
+    Modified:   1_analysis/setUp.Rmd
+    Modified:   2_plots/1_setup/counts_before_and_after_filtering.svg
+    Modified:   2_plots/1_setup/library_size.svg
+    Modified:   2_plots/1_setup/sample_group_PCA_plot.svg
+    Modified:   2_plots/1_setup/sample_type_PCA_plot.svg
+    Modified:   2_plots/2_dge/MA_plot_treat_CKI-Mac vs CKI.svg
+    Modified:   2_plots/2_dge/MA_plot_treat_CKI-Nme vs CKI.svg
+    Modified:   2_plots/2_dge/MA_plot_treat_CKI-Omt vs CKI.svg
+    Modified:   2_plots/2_dge/MA_plot_treat_CKI-Tri vs CKI.svg
+    Modified:   2_plots/2_dge/MA_plot_treat_UT vs CKI.svg
+    Modified:   2_plots/2_dge/estimate_dispersion.svg
+    Modified:   2_plots/2_dge/qlf_dispersion.svg
     Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Mac vs CKI.svg
     Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Nme vs CKI.svg
     Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Omt vs CKI.svg
@@ -554,6 +604,12 @@ Unstaged changes:
     Modified:   2_plots/2_dge/treat_pValue_histogram_CKI-Omt vs CKI.svg
     Modified:   2_plots/2_dge/treat_pValue_histogram_CKI-Tri vs CKI.svg
     Modified:   2_plots/2_dge/treat_pValue_histogram_UT vs CKI.svg
+    Modified:   2_plots/2_dge/volcano_plot_treat_CKI-Mac vs CKI.svg
+    Modified:   2_plots/2_dge/volcano_plot_treat_CKI-Nme vs CKI.svg
+    Modified:   2_plots/2_dge/volcano_plot_treat_CKI-Omt vs CKI.svg
+    Modified:   2_plots/2_dge/volcano_plot_treat_CKI-Tri vs CKI.svg
+    Modified:   2_plots/2_dge/volcano_plot_treat_UT vs CKI.svg
+    Modified:   3_output/enrichGO_treat.xlsx
     Modified:   3_output/enrichKEGG_treat_unfiltered.xlsx
     Modified:   3_output/qlf_filtered.xlsx
     Modified:   3_output/treat_filtered.xlsx
@@ -595,6 +651,23 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/tranmanhha135/01_CKI_DGE/1a47b4569a1da246294ec62c8e47e2f6e2638e10/docs/dge.html" target="_blank">1a47b45</a>
+</td>
+<td>
+Ha Tran
+</td>
+<td>
+2021-10-31
+</td>
+<td>
+changed heatmap size
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -859,6 +932,8 @@ library(grid)
 library(pander)
 library(cowplot)
 library(pheatmap)
+library(RColorBrewer)
+
 
 # Custom ggplot 
 library(ggpubr)
@@ -871,21 +946,23 @@ library(limma)
 library(Glimma)
 
 # Set ggplot theme
-theme_set(theme_minimal())
+theme_set(theme_bw())
 
 theme_update(
-  # legend.background = element_rect(fill = &quot;transparent&quot;, colour = NA),
-  # legend.box.background = element_rect(fill = &quot;transparent&quot;, colour = NA),
-  # 
-  # panel.background = element_rect(fill = &quot;transparent&quot;,colour = NA),
-  # plot.background = element_rect(fill = &quot;transparent&quot;, colour = NA),
+  legend.background = element_rect(fill = &quot;transparent&quot;, colour = NA),
+  legend.box.background = element_rect(fill = &quot;transparent&quot;, colour = NA),
   
-  plot.title = element_text(color = &quot;gray20&quot;, size = 28, angle = 0, hjust = 0, vjust = .5, face = &quot;bold&quot;),
-  plot.subtitle = element_text(color = &quot;gray25&quot;, size = 24, angle = 0, hjust = 0, vjust = .5, face = &quot;plain&quot;),
-  axis.text.x = element_text(color = &quot;gray30&quot;, size = 14, angle = 0, hjust = .5, vjust = .5, face = &quot;plain&quot;),
-  axis.text.y = element_text(color = &quot;gray30&quot;, size = 14, angle = 0, hjust = 1, vjust = 0, face = &quot;plain&quot;),  
-  axis.title.x = element_text(color = &quot;gray30&quot;, size = 20, angle = 0, hjust = .5, vjust = 0, face = &quot;plain&quot;),
-  axis.title.y = element_text(color = &quot;gray30&quot;, size = 20, angle = 90, hjust = .5, vjust = .5, face = &quot;plain&quot;))</code></pre>
+  panel.background = element_rect(fill = &quot;transparent&quot;,colour = NA),
+  plot.background = element_rect(fill = &quot;transparent&quot;, colour = NA),
+  
+  plot.title = element_text(color = &quot;gray20&quot;, size = 14, angle = 0, hjust = 0, vjust = .5, face = &quot;bold&quot;),
+  plot.subtitle = element_text(color = &quot;gray25&quot;, size = 12, angle = 0, hjust = 0, vjust = .5, face = &quot;plain&quot;),
+  legend.title = element_text(color = &quot;gray25&quot;, size = 11, angle = 0, hjust = 0, vjust = .5, face = &quot;plain&quot;),
+  legend.text = element_text(color = &quot;gray25&quot;, size = 11, angle = 0, hjust = 0, vjust = .5, face = &quot;plain&quot;),
+  axis.text.x = element_text(color = &quot;gray30&quot;, size = 10, angle = 0, hjust = .5, vjust = .5, face = &quot;plain&quot;),
+  axis.text.y = element_text(color = &quot;gray30&quot;, size = 10, angle = 0, hjust = 1, vjust = 0, face = &quot;plain&quot;),  
+  axis.title.x = element_text(color = &quot;gray30&quot;, size = 12, angle = 0, hjust = .5, vjust = 0, face = &quot;plain&quot;),
+  axis.title.y = element_text(color = &quot;gray30&quot;, size = 12, angle = 90, hjust = .5, vjust = .5, face = &quot;plain&quot;))</code></pre>
 </div>
 <div id="import-dgelist-data" class="section level3">
 <h3>Import DGElist Data</h3>
@@ -1051,26 +1128,6 @@ writexl::write_xlsx(x = qlf_filtered, here::here(&quot;3_output/qlf_filtered.xls
 
 invisible(dev.print(pdf, here::here(paste0(&quot;2_plots/2_dge/qlf_pValue_histogram_&quot;, names(qlf[x]), &quot;.svg&quot;))))
 })</code></pre>
-<p><img src="figure/dge.Rmd/pValueHistogram_qlf-1.png" width="1056" style="display: block; margin: auto;" /><img src="figure/dge.Rmd/pValueHistogram_qlf-2.png" width="1056" style="display: block; margin: auto;" /><img src="figure/dge.Rmd/pValueHistogram_qlf-3.png" width="1056" style="display: block; margin: auto;" /><img src="figure/dge.Rmd/pValueHistogram_qlf-4.png" width="1056" style="display: block; margin: auto;" /><img src="figure/dge.Rmd/pValueHistogram_qlf-5.png" width="1056" style="display: block; margin: auto;" /></p>
-<pre><code>[[1]]
-png 
-  2 
-
-[[2]]
-png 
-  2 
-
-[[3]]
-png 
-  2 
-
-[[4]]
-png 
-  2 
-
-[[5]]
-png 
-  2 </code></pre>
 </div>
 <div id="mean-difference-plot" class="section level5">
 <h5>Mean-Difference plot</h5>
@@ -1103,16 +1160,16 @@ png
            ylim = c(-8, 8),
            font.label = c(13, &quot;italic&quot;, &quot;gray30&quot;),
            
-           ggtheme = ggplot2::theme_update(
-             plot.title = element_text(color = &quot;gray20&quot;, size = 24, angle = 0, hjust = 0, vjust = .5, face = &quot;bold&quot;),
-             plot.subtitle = element_text(color = &quot;gray25&quot;, size = 20, angle = 0, hjust = 0, vjust = .5, face = &quot;plain&quot;),
-             legend.title = element_text(color = &quot;gray25&quot;, size = 16, angle = 0, hjust = 0, vjust = .5, face = &quot;plain&quot;),
-             legend.text = element_text(color = &quot;gray25&quot;, size = 12, angle = 0, hjust = 0, vjust = .5, face = &quot;plain&quot;),
-             axis.text.x = element_text(color = &quot;gray30&quot;, size = 12, angle = 0, hjust = .5, vjust = .5, face = &quot;plain&quot;),
-             axis.text.y = element_text(color = &quot;gray30&quot;, size = 12, angle = 0, hjust = 1, vjust = 0, face = &quot;plain&quot;),
-             axis.title.x = element_text(color = &quot;gray30&quot;, size = 14, angle = 0, hjust = .5, vjust = 0, face = &quot;plain&quot;),
-             axis.title.y = element_text(color = &quot;gray30&quot;, size = 14, angle = 90, hjust = .5, vjust = .5, face = &quot;plain&quot;)))
-         
+           # ggtheme = ggplot2::theme_update(
+           #   plot.title = element_text(color = &quot;gray20&quot;, size = 24, angle = 0, hjust = 0, vjust = .5, face = &quot;bold&quot;),
+           #   plot.subtitle = element_text(color = &quot;gray25&quot;, size = 20, angle = 0, hjust = 0, vjust = .5, face = &quot;plain&quot;),
+           #   legend.title = element_text(color = &quot;gray25&quot;, size = 16, angle = 0, hjust = 0, vjust = .5, face = &quot;plain&quot;),
+           #   legend.text = element_text(color = &quot;gray25&quot;, size = 12, angle = 0, hjust = 0, vjust = .5, face = &quot;plain&quot;),
+           #   axis.text.x = element_text(color = &quot;gray30&quot;, size = 12, angle = 0, hjust = .5, vjust = .5, face = &quot;plain&quot;),
+           #   axis.text.y = element_text(color = &quot;gray30&quot;, size = 12, angle = 0, hjust = 1, vjust = 0, face = &quot;plain&quot;),
+           #   axis.title.x = element_text(color = &quot;gray30&quot;, size = 14, angle = 0, hjust = .5, vjust = 0, face = &quot;plain&quot;),
+           #   axis.title.y = element_text(color = &quot;gray30&quot;, size = 14, angle = 90, hjust = .5, vjust = .5, face = &quot;plain&quot;)))
+           # 
          
         
          #save MA plot
@@ -1123,20 +1180,6 @@ png
          #display plot
          MAplot_qlf
          })</code></pre>
-<pre><code>[[1]]</code></pre>
-<p><img src="figure/dge.Rmd/MAplotCustom_qlf-1.png" width="1056" style="display: block; margin: auto;" /></p>
-<pre><code>
-[[2]]</code></pre>
-<p><img src="figure/dge.Rmd/MAplotCustom_qlf-2.png" width="1056" style="display: block; margin: auto;" /></p>
-<pre><code>
-[[3]]</code></pre>
-<p><img src="figure/dge.Rmd/MAplotCustom_qlf-3.png" width="1056" style="display: block; margin: auto;" /></p>
-<pre><code>
-[[4]]</code></pre>
-<p><img src="figure/dge.Rmd/MAplotCustom_qlf-4.png" width="1056" style="display: block; margin: auto;" /></p>
-<pre><code>
-[[5]]</code></pre>
-<p><img src="figure/dge.Rmd/MAplotCustom_qlf-5.png" width="1056" style="display: block; margin: auto;" /></p>
 </div>
 <div id="volcano-plot" class="section level5">
 <h5>Volcano Plot</h5>
@@ -1194,20 +1237,6 @@ png
          #display
          volcano_plot_qlf
          })</code></pre>
-<pre><code>[[1]]</code></pre>
-<p><img src="figure/dge.Rmd/volcanoPlot_qlf-1.png" width="1056" style="display: block; margin: auto;" /></p>
-<pre><code>
-[[2]]</code></pre>
-<p><img src="figure/dge.Rmd/volcanoPlot_qlf-2.png" width="1056" style="display: block; margin: auto;" /></p>
-<pre><code>
-[[3]]</code></pre>
-<p><img src="figure/dge.Rmd/volcanoPlot_qlf-3.png" width="1056" style="display: block; margin: auto;" /></p>
-<pre><code>
-[[4]]</code></pre>
-<p><img src="figure/dge.Rmd/volcanoPlot_qlf-4.png" width="1056" style="display: block; margin: auto;" /></p>
-<pre><code>
-[[5]]</code></pre>
-<p><img src="figure/dge.Rmd/volcanoPlot_qlf-5.png" width="1056" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>
@@ -1309,23 +1338,25 @@ png
            top = 5,
            ylim = c(-8, 8),
            select.top.method = c(&quot;padj&quot;, &quot;fc&quot;),
-           main = &quot;MA Plot from GLM-TREAT&quot;,
+           main = &quot;MA Plot from GLM:QLF-TREAT&quot;,
            submain = names(treat_unfiltered[x]),
            legend = &quot;bottom&quot;,
            legend.title = &quot;Expression&quot;,
            xlab = expression(&quot;log&quot;[2]*&quot;CPM&quot;),
            ylab = expression(&quot;log&quot;[2]*&quot;FC&quot;),
-           font.label = c(13, &quot;italic&quot;, &quot;gray30&quot;),
+           font.label = c(13, &quot;italic&quot;, &quot;gray30&quot;), 
+           ggtheme = theme_bw(),
            
-           ggtheme = ggplot2::theme_update(
-             plot.title = element_text(color = &quot;gray20&quot;, size = 24, angle = 0, hjust = 0, vjust = .5, face = &quot;bold&quot;),
-             plot.subtitle = element_text(color = &quot;gray25&quot;, size = 20, angle = 0, hjust = 0, vjust = .5, face = &quot;plain&quot;),
-             legend.title = element_text(color = &quot;gray25&quot;, size = 16, angle = 0, hjust = 0, vjust = .5, face = &quot;plain&quot;),
-             legend.text = element_text(color = &quot;gray25&quot;, size = 12, angle = 0, hjust = 0, vjust = .5, face = &quot;plain&quot;),
-             axis.text.x = element_text(color = &quot;gray30&quot;, size = 12, angle = 0, hjust = .5, vjust = .5, face = &quot;plain&quot;),
-             axis.text.y = element_text(color = &quot;gray30&quot;, size = 12, angle = 0, hjust = 1, vjust = 0, face = &quot;plain&quot;),
-             axis.title.x = element_text(color = &quot;gray30&quot;, size = 14, angle = 0, hjust = .5, vjust = 0, face = &quot;plain&quot;),
-             axis.title.y = element_text(color = &quot;gray30&quot;, size = 14, angle = 90, hjust = .5, vjust = .5, face = &quot;plain&quot;)))
+           # ggtheme = ggplot2::theme_update(
+           #   plot.title = element_text(color = &quot;gray20&quot;, size = 24, angle = 0, hjust = 0, vjust = .5, face = &quot;bold&quot;),
+           #   plot.subtitle = element_text(color = &quot;gray25&quot;, size = 20, angle = 0, hjust = 0, vjust = .5, face = &quot;plain&quot;),
+           #   legend.title = element_text(color = &quot;gray25&quot;, size = 16, angle = 0, hjust = 0, vjust = .5, face = &quot;plain&quot;),
+           #   legend.text = element_text(color = &quot;gray25&quot;, size = 12, angle = 0, hjust = 0, vjust = .5, face = &quot;plain&quot;),
+           #   axis.text.x = element_text(color = &quot;gray30&quot;, size = 12, angle = 0, hjust = .5, vjust = .5, face = &quot;plain&quot;),
+           #   axis.text.y = element_text(color = &quot;gray30&quot;, size = 12, angle = 0, hjust = 1, vjust = 0, face = &quot;plain&quot;),
+           #   axis.title.x = element_text(color = &quot;gray30&quot;, size = 14, angle = 0, hjust = .5, vjust = 0, face = &quot;plain&quot;),
+           #   axis.title.y = element_text(color = &quot;gray30&quot;, size = 14, angle = 90, hjust = .5, vjust = .5, face = &quot;plain&quot;))
+           )
          
          #save MA plot
          ggsave(filename = paste0(&quot;MA_plot_treat_&quot;, names(treat_unfiltered[x]), &quot;.svg&quot;),
@@ -1386,7 +1417,7 @@ png
            geom_point(aes(colour = Expression),
                       size = 1.5,
                       alpha = 0.8,
-                      show.legend = FALSE) +
+                      show.legend = TRUE) +
            geom_label_repel(data = top_genes_treat,
                             mapping = aes(logFC, -log(FDR,10), label = gene),
                             size = 3) +
@@ -1396,7 +1427,8 @@ png
            ylim(0,30)+
            scale_color_manual(values = c(&quot;dodgerblue3&quot;, &quot;gray50&quot;, &quot;firebrick3&quot;)) +
            guides(colour = guide_legend(override.aes = list(size=1.5))) +
-           labs(title = &quot;Volcano Plot: GLM-TREAT&quot;,
+           labs(
+             title = &quot;Volcano Plot: GLM:QLF-TREAT&quot;,
                 subtitle = paste0(names(treat_unfiltered[x])),
                 colour = &quot;Expression&quot;)
 
@@ -1411,19 +1443,19 @@ png
          volcano_plot_treat
          })</code></pre>
 <pre><code>[[1]]</code></pre>
-<p><img src="figure/dge.Rmd/volcanoPlot_treat-1.png" width="1056" style="display: block; margin: auto;" /></p>
+<p><img src="figure/dge.Rmd/volcano_treat-1.png" width="1056" style="display: block; margin: auto;" /></p>
 <pre><code>
 [[2]]</code></pre>
-<p><img src="figure/dge.Rmd/volcanoPlot_treat-2.png" width="1056" style="display: block; margin: auto;" /></p>
+<p><img src="figure/dge.Rmd/volcano_treat-2.png" width="1056" style="display: block; margin: auto;" /></p>
 <pre><code>
 [[3]]</code></pre>
-<p><img src="figure/dge.Rmd/volcanoPlot_treat-3.png" width="1056" style="display: block; margin: auto;" /></p>
+<p><img src="figure/dge.Rmd/volcano_treat-3.png" width="1056" style="display: block; margin: auto;" /></p>
 <pre><code>
 [[4]]</code></pre>
-<p><img src="figure/dge.Rmd/volcanoPlot_treat-4.png" width="1056" style="display: block; margin: auto;" /></p>
+<p><img src="figure/dge.Rmd/volcano_treat-4.png" width="1056" style="display: block; margin: auto;" /></p>
 <pre><code>
 [[5]]</code></pre>
-<p><img src="figure/dge.Rmd/volcanoPlot_treat-5.png" width="1056" style="display: block; margin: auto;" /></p>
+<p><img src="figure/dge.Rmd/volcano_treat-5.png" width="1056" style="display: block; margin: auto;" /></p>
 </div>
 </div>
 </div>
@@ -1431,25 +1463,70 @@ png
 </div>
 <div id="heatmap" class="section level1">
 <h1>Heatmap</h1>
-<pre class="r"><code>p53_treat_UTvsCKI &lt;-
-  treat_unfiltered$UTvsCKI$table[treat_unfiltered$UTvsCKI$table$gene_id %in% p53_ensembl_id$ENSEMBL_GENE_ID,c(&quot;gene_name&quot;, &quot;logFC&quot;)]
-p53_treat_CKIvsMAC &lt;-
-  treat_unfiltered$CKIvsMac$table[treat_unfiltered$CKIvsMac$table$gene_id %in% p53_ensembl_id$ENSEMBL_GENE_ID,
-                                  &quot;logFC&quot;] %&gt;% as.data.frame()
+<pre class="r"><code>logCPM &lt;- cpm(dge, prior.count=3, log=TRUE)
+rownames(logCPM) &lt;- dge$genes$gene
+colnames(logCPM) &lt;- paste(dge$samples$pretty_name, sep=&quot;-&quot;)
 
-p53_treat &lt;- c(p53_treat_UTvsCKI, p53_treat_CKIvsMAC)
-remove_rownames() %&gt;%
-  column_to_rownames(&quot;gene_name&quot;)
+test3 &lt;- join_all(list(treat_filtered$`UT vs CKI`,
+                       treat_filtered$`CKI-Mac vs CKI`,
+                       treat_filtered$`CKI-Nme vs CKI`,
+                       treat_filtered$`CKI-Omt vs CKI`,
+                       treat_filtered$`CKI-Tri vs CKI`), by = &#39;gene&#39;, type = &#39;inner&#39;)
 
-colnames(p53_treat_UTvsCKI_test) &lt;- &quot;UT vs CKI&quot;
+logCPM &lt;- logCPM[test3$gene[1:30],]
+# colnames(logCPM) &lt;- c(&quot;CKI&quot;)
+
+my_palette &lt;- colorRampPalette(c(
+  rgb(32,121,226, maxColorValue = 255),
+  # rgb(144,203,180, maxColorValue = 255), 
+  rgb(254,238,229, maxColorValue = 255), 
+  # rgb(251,192,52, maxColorValue = 255), 
+  rgb(226,46,45, maxColorValue = 255)))(n = 201)
+
+test &lt;- as.factor(dge$samples$sample_type) %&gt;% as.data.frame 
+colnames(test) &lt;- &quot;Sample Type&quot;
+test$`Sample Type` &lt;-  gsub(&quot;single_deletion&quot;, &quot;Single Deletion&quot;, test$`Sample Type`)
+test$`Sample Type` &lt;-  gsub(&quot;UT&quot;, &quot;Untreated&quot;, test$`Sample Type`)
+rownames(test) &lt;- colnames(logCPM) # check out the row names of annotation
+
+sample_type &lt;- RColorBrewer::brewer.pal(3, &quot;Set1&quot;)
+names(sample_type) &lt;- c(&quot;CKI&quot;, &quot;Single Deletion&quot;, &quot;Untreated&quot;)
+anno_colours &lt;- list(&quot;Sample Type&quot; = sample_type) 
 
 
-my_palette &lt;- colorRampPalette(c(&quot;dodgerblue3&quot;, &quot;white&quot;, &quot;firebrick3&quot;))(n = 201)
-
-pheatmap(mat = logCPM, cluster_rows = TRUE, cluster_cols = FALSE, color = my_palette, border_color = NA)
-
-coolmap(x = logCPM,
-        margins=c(7,7), lhei=c(1,5), lwid=c(1,3))</code></pre>
+pheatmap(mat = logCPM,
+         cluster_cols = T,
+         clustering_distance_rows = &quot;euclidean&quot;,
+         treeheight_row = 70,
+         treeheight_col = 30,
+         cutree_rows = 4,
+         cutree_cols = 3,
+         
+         # legend_labels = &quot;logFC&quot;,
+         main = &quot; &quot; , 
+         
+         # fontsize = 14,
+         # fontsize_row = 12,
+         # fontsize_number = 10,
+         # fontsize_col = 18,
+         angle_col =90,
+         
+         annotation_col = test,
+       
+         annotation_names_col = FALSE,
+         annotation_colors = anno_colours,
+         # annotation_col = dge$samples$sample_type, %&gt;%
+         #   dplyr::select(SampleType = sample_type),
+         scale = &quot;row&quot;,
+         # legend_breaks = c(seq(-2, 10, by = 2), max(logCPM)),
+         # legend_labels = c(seq(-2, 10, by = 2), &quot;logCPM\n&quot;),
+         # border_color = F,
+         
+         border_color = &quot;gray70&quot;,
+         color = my_palette,
+         )</code></pre>
+<p><img src="figure/dge.Rmd/coolmap-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>invisible(dev.print(device = svg, width = 8.5, height = 11, here::here(&quot;2_plots/2_dge/logCPM_heatmap.svg&quot;)))</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1474,12 +1551,12 @@ attached base packages:
 [8] base     
 
 other attached packages:
- [1] Glimma_2.2.0     edgeR_3.34.0     limma_3.48.1     ggrepel_0.9.1   
- [5] ggbiplot_0.55    scales_1.1.1     plyr_1.8.6       ggpubr_0.4.0    
- [9] pheatmap_1.0.12  cowplot_1.1.1    pander_0.6.4     kableExtra_1.3.4
-[13] forcats_0.5.1    stringr_1.4.0    purrr_0.3.4      tidyr_1.1.3     
-[17] ggplot2_3.3.5    tidyverse_1.3.1  reshape2_1.4.4   tibble_3.1.2    
-[21] readr_2.0.0      magrittr_2.0.1   dplyr_1.0.7     
+ [1] Glimma_2.2.0       edgeR_3.34.0       limma_3.48.1       ggrepel_0.9.1     
+ [5] ggbiplot_0.55      scales_1.1.1       plyr_1.8.6         ggpubr_0.4.0      
+ [9] RColorBrewer_1.1-2 pheatmap_1.0.12    cowplot_1.1.1      pander_0.6.4      
+[13] kableExtra_1.3.4   forcats_0.5.1      stringr_1.4.0      purrr_0.3.4       
+[17] tidyr_1.1.3        ggplot2_3.3.5      tidyverse_1.3.1    reshape2_1.4.4    
+[21] tibble_3.1.2       readr_2.0.0        magrittr_2.0.1     dplyr_1.0.7       
 
 loaded via a namespace (and not attached):
   [1] readxl_1.3.1                backports_1.2.1            
@@ -1505,44 +1582,43 @@ loaded via a namespace (and not attached):
  [41] viridisLite_0.4.0           xtable_1.8-4               
  [43] foreign_0.8-81              bit_4.0.4                  
  [45] stats4_4.1.0                htmlwidgets_1.5.4          
- [47] httr_1.4.2                  RColorBrewer_1.1-2         
- [49] ellipsis_0.3.2              farver_2.1.0               
- [51] pkgconfig_2.0.3             XML_3.99-0.6               
- [53] sass_0.4.0                  dbplyr_2.1.1               
- [55] here_1.0.1                  locfit_1.5-9.4             
- [57] utf8_1.2.1                  labeling_0.4.2             
- [59] tidyselect_1.1.1            rlang_0.4.11               
- [61] later_1.2.0                 AnnotationDbi_1.54.1       
- [63] munsell_0.5.0               cellranger_1.1.0           
- [65] tools_4.1.0                 cachem_1.0.5               
- [67] cli_3.0.1                   generics_0.1.0             
- [69] RSQLite_2.2.7               broom_0.7.9                
- [71] evaluate_0.14               fastmap_1.1.0              
- [73] yaml_2.2.1                  knitr_1.36                 
- [75] bit64_4.0.5                 fs_1.5.0                   
- [77] zip_2.2.0                   KEGGREST_1.32.0            
- [79] whisker_0.4                 xml2_1.3.2                 
- [81] compiler_4.1.0              rstudioapi_0.13            
- [83] curl_4.3.2                  png_0.1-7                  
- [85] ggsignif_0.6.3              reprex_2.0.1               
- [87] statmod_1.4.36              geneplotter_1.70.0         
- [89] bslib_0.3.1                 stringi_1.6.2              
- [91] highr_0.9                   lattice_0.20-44            
- [93] Matrix_1.3-3                vctrs_0.3.8                
- [95] pillar_1.6.4                lifecycle_1.0.1            
- [97] jquerylib_0.1.4             data.table_1.14.0          
- [99] bitops_1.0-7                httpuv_1.6.1               
-[101] GenomicRanges_1.44.0        R6_2.5.1                   
-[103] promises_1.2.0.1            rio_0.5.27                 
-[105] writexl_1.4.0               IRanges_2.26.0             
-[107] assertthat_0.2.1            SummarizedExperiment_1.22.0
-[109] DESeq2_1.32.0               rprojroot_2.0.2            
-[111] withr_2.4.2                 S4Vectors_0.30.0           
-[113] GenomeInfoDbData_1.2.6      parallel_4.1.0             
-[115] hms_1.1.1                   rmarkdown_2.11             
-[117] MatrixGenerics_1.4.3        carData_3.0-4              
-[119] git2r_0.28.0                Biobase_2.52.0             
-[121] lubridate_1.7.10           </code></pre>
+ [47] httr_1.4.2                  ellipsis_0.3.2             
+ [49] farver_2.1.0                pkgconfig_2.0.3            
+ [51] XML_3.99-0.6                sass_0.4.0                 
+ [53] dbplyr_2.1.1                here_1.0.1                 
+ [55] locfit_1.5-9.4              utf8_1.2.1                 
+ [57] labeling_0.4.2              tidyselect_1.1.1           
+ [59] rlang_0.4.11                later_1.2.0                
+ [61] AnnotationDbi_1.54.1        munsell_0.5.0              
+ [63] cellranger_1.1.0            tools_4.1.0                
+ [65] cachem_1.0.5                cli_3.0.1                  
+ [67] generics_0.1.0              RSQLite_2.2.7              
+ [69] broom_0.7.9                 evaluate_0.14              
+ [71] fastmap_1.1.0               yaml_2.2.1                 
+ [73] knitr_1.36                  bit64_4.0.5                
+ [75] fs_1.5.0                    zip_2.2.0                  
+ [77] KEGGREST_1.32.0             whisker_0.4                
+ [79] xml2_1.3.2                  compiler_4.1.0             
+ [81] rstudioapi_0.13             curl_4.3.2                 
+ [83] png_0.1-7                   ggsignif_0.6.3             
+ [85] reprex_2.0.1                statmod_1.4.36             
+ [87] geneplotter_1.70.0          bslib_0.3.1                
+ [89] stringi_1.6.2               highr_0.9                  
+ [91] lattice_0.20-44             Matrix_1.3-3               
+ [93] vctrs_0.3.8                 pillar_1.6.4               
+ [95] lifecycle_1.0.1             jquerylib_0.1.4            
+ [97] data.table_1.14.0           bitops_1.0-7               
+ [99] httpuv_1.6.1                GenomicRanges_1.44.0       
+[101] R6_2.5.1                    promises_1.2.0.1           
+[103] rio_0.5.27                  writexl_1.4.0              
+[105] IRanges_2.26.0              assertthat_0.2.1           
+[107] SummarizedExperiment_1.22.0 DESeq2_1.32.0              
+[109] rprojroot_2.0.2             withr_2.4.2                
+[111] S4Vectors_0.30.0            GenomeInfoDbData_1.2.6     
+[113] parallel_4.1.0              hms_1.1.1                  
+[115] rmarkdown_2.11              MatrixGenerics_1.4.3       
+[117] carData_3.0-4               git2r_0.28.0               
+[119] Biobase_2.52.0              lubridate_1.7.10           </code></pre>
 </div>
 </div>
 
