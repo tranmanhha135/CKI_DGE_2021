@@ -422,7 +422,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-11-08
+<strong>Last updated:</strong> 2021-11-13
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 2
@@ -481,6 +481,28 @@ Size
 <tbody>
 <tr>
 <td style="text-align:left;">
+anno
+</td>
+<td style="text-align:left;">
+data.frame
+</td>
+<td style="text-align:left;">
+2.3 Kb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anno_colour
+</td>
+<td style="text-align:left;">
+character
+</td>
+<td style="text-align:left;">
+624 bytes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 anno_colours
 </td>
 <td style="text-align:left;">
@@ -492,13 +514,13 @@ list
 </tr>
 <tr>
 <td style="text-align:left;">
-big_df
+common
 </td>
 <td style="text-align:left;">
-list
+data.frame
 </td>
 <td style="text-align:left;">
-43.9 Kb
+310 Kb
 </td>
 </tr>
 <tr>
@@ -536,17 +558,6 @@ matrix;array
 </tr>
 <tr>
 <td style="text-align:left;">
-df
-</td>
-<td style="text-align:left;">
-data.frame
-</td>
-<td style="text-align:left;">
-9.6 Kb
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 dge
 </td>
 <td style="text-align:left;">
@@ -558,46 +569,24 @@ DGEList
 </tr>
 <tr>
 <td style="text-align:left;">
-enrichGO_treat
+goana_treat
 </td>
 <td style="text-align:left;">
 list
 </td>
 <td style="text-align:left;">
-716.4 Kb
+22.2 Mb
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-estimateDispersion
+goana_treat_sig
 </td>
 <td style="text-align:left;">
-DGEList
+list
 </td>
 <td style="text-align:left;">
-12.5 Mb
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-fit_GLM_qlf
-</td>
-<td style="text-align:left;">
-DGEGLM
-</td>
-<td style="text-align:left;">
-20.7 Mb
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-GOresults
-</td>
-<td style="text-align:left;">
-enrichResult
-</td>
-<td style="text-align:left;">
-123.9 Mb
+546 Kb
 </td>
 </tr>
 <tr>
@@ -641,7 +630,29 @@ logCPM
 matrix;array
 </td>
 <td style="text-align:left;">
-7.8 Kb
+8.4 Kb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MAplot
+</td>
+<td style="text-align:left;">
+list
+</td>
+<td style="text-align:left;">
+48 bytes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+merged_go
+</td>
+<td style="text-align:left;">
+data.frame
+</td>
+<td style="text-align:left;">
+18 Kb
 </td>
 </tr>
 <tr>
@@ -668,13 +679,35 @@ character
 </tr>
 <tr>
 <td style="text-align:left;">
+NB_dispersion
+</td>
+<td style="text-align:left;">
+DGEList
+</td>
+<td style="text-align:left;">
+12.5 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 qlf
 </td>
 <td style="text-align:left;">
 list
 </td>
 <td style="text-align:left;">
-101.1 Mb
+101 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+qlf_all
+</td>
+<td style="text-align:left;">
+list
+</td>
+<td style="text-align:left;">
+49.2 Mb
 </td>
 </tr>
 <tr>
@@ -685,12 +718,23 @@ qlf_decideTest
 list
 </td>
 <td style="text-align:left;">
-5.6 Kb
+10.8 Kb
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-qlf_filtered
+qlf_dispersion
+</td>
+<td style="text-align:left;">
+DGEGLM
+</td>
+<td style="text-align:left;">
+20.6 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+qlf_sig
 </td>
 <td style="text-align:left;">
 list
@@ -701,46 +745,24 @@ list
 </tr>
 <tr>
 <td style="text-align:left;">
-qlf_unfiltered
+top_go
 </td>
 <td style="text-align:left;">
 list
 </td>
 <td style="text-align:left;">
-49.2 Mb
+30.2 Kb
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-sample_type
+top_unique
 </td>
 <td style="text-align:left;">
-character
+list
 </td>
 <td style="text-align:left;">
-624 bytes
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-test
-</td>
-<td style="text-align:left;">
-data.frame
-</td>
-<td style="text-align:left;">
-2.3 Kb
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-test3
-</td>
-<td style="text-align:left;">
-data.frame
-</td>
-<td style="text-align:left;">
-310 Kb
+256.4 Kb
 </td>
 </tr>
 <tr>
@@ -751,7 +773,18 @@ treat
 list
 </td>
 <td style="text-align:left;">
-96.2 Mb
+96.1 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+treat_all
+</td>
+<td style="text-align:left;">
+list
+</td>
+<td style="text-align:left;">
+49.2 Mb
 </td>
 </tr>
 <tr>
@@ -762,12 +795,12 @@ treat_decideTest
 list
 </td>
 <td style="text-align:left;">
-5.6 Kb
+10.8 Kb
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-treat_filtered
+treat_sig
 </td>
 <td style="text-align:left;">
 list
@@ -778,13 +811,13 @@ list
 </tr>
 <tr>
 <td style="text-align:left;">
-treat_unfiltered
+unique
 </td>
 <td style="text-align:left;">
-list
+data.frame
 </td>
 <td style="text-align:left;">
-49.2 Mb
+4.6 Kb
 </td>
 </tr>
 <tr>
@@ -854,16 +887,16 @@ character
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree1a47b4569a1da246294ec62c8e47e2f6e2638e10targetblank1a47b45a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/1a47b4569a1da246294ec62c8e47e2f6e2638e10" target="_blank">1a47b45</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree848e971e9ccbf102898eeb089076953d68a0817ftargetblank848e971a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/848e971e9ccbf102898eeb089076953d68a0817f" target="_blank">848e971</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree1a47b4569a1da246294ec62c8e47e2f6e2638e10targetblank1a47b45a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree848e971e9ccbf102898eeb089076953d68a0817ftargetblank848e971a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/1a47b4569a1da246294ec62c8e47e2f6e2638e10" target="_blank">1a47b45</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/848e971e9ccbf102898eeb089076953d68a0817f" target="_blank">848e971</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -874,9 +907,17 @@ Ignored files:
     Ignored:    .Rproj.user/
 
 Untracked files:
+    Untracked:  0_data/rds_object/qlf_all.rds
+    Untracked:  0_data/rds_object/qlf_sig.rds
+    Untracked:  0_data/rds_object/treat_all.rds
+    Untracked:  0_data/rds_object/treat_sig.rds
     Untracked:  1_analysis/about.html
     Untracked:  1_analysis/dge.html
+    Untracked:  1_analysis/figure/dge.Rmd/NBDispersion-1.png
     Untracked:  1_analysis/figure/dge.Rmd/coolmap-1.png
+    Untracked:  1_analysis/figure/dge.Rmd/heatmap_common-1.png
+    Untracked:  1_analysis/figure/dge.Rmd/heatmap_unique-1.png
+    Untracked:  1_analysis/figure/dge.Rmd/qlf_dispersion-1.png
     Untracked:  1_analysis/figure/dge.Rmd/volcano_treat-1.png
     Untracked:  1_analysis/figure/dge.Rmd/volcano_treat-2.png
     Untracked:  1_analysis/figure/dge.Rmd/volcano_treat-3.png
@@ -884,41 +925,64 @@ Untracked files:
     Untracked:  1_analysis/figure/dge.Rmd/volcano_treat-5.png
     Untracked:  1_analysis/figure/go.Rmd/
     Untracked:  1_analysis/figure/kegg.Rmd/completePathway-1.png
+    Untracked:  1_analysis/figure/kegg.Rmd/dotPlot-1.png
+    Untracked:  1_analysis/figure/kegg.Rmd/partialPathway, -1.png
     Untracked:  1_analysis/figure/kegg.Rmd/partialPathway-1.png
     Untracked:  1_analysis/figure/setUp.Rmd/afterFiltering-2.png
     Untracked:  1_analysis/go.html
     Untracked:  1_analysis/index.html
     Untracked:  1_analysis/site_libs/
-    Untracked:  2_plots/1_setup/counts_after_filtering.svg
-    Untracked:  2_plots/1_setup/counts_before_filtering.svg
-    Untracked:  2_plots/2_dge/logCPM_heatmap.svg
+    Untracked:  2_plots/1_setup/after_normalisation.svg
+    Untracked:  2_plots/2_dge/MA_treat_CKI-Mac vs CKI.svg
+    Untracked:  2_plots/2_dge/MA_treat_CKI-Nme vs CKI.svg
+    Untracked:  2_plots/2_dge/MA_treat_CKI-Omt vs CKI.svg
+    Untracked:  2_plots/2_dge/MA_treat_CKI-Tri vs CKI.svg
+    Untracked:  2_plots/2_dge/MA_treat_UT vs CKI.svg
+    Untracked:  2_plots/2_dge/NB_dispersion.svg
+    Untracked:  2_plots/2_dge/heatmap_logCPM_common.svg
+    Untracked:  2_plots/2_dge/heatmap_logCPM_unique.svg
+    Untracked:  2_plots/2_dge/pValue_treat_CKI-Mac vs CKI.svg
+    Untracked:  2_plots/2_dge/pValue_treat_CKI-Nme vs CKI.svg
+    Untracked:  2_plots/2_dge/pValue_treat_CKI-Omt vs CKI.svg
+    Untracked:  2_plots/2_dge/pValue_treat_CKI-Tri vs CKI.svg
+    Untracked:  2_plots/2_dge/pValue_treat_UT vs CKI.svg
+    Untracked:  2_plots/2_dge/volcano_treat_CKI-Mac vs CKI.svg
+    Untracked:  2_plots/2_dge/volcano_treat_CKI-Nme vs CKI.svg
+    Untracked:  2_plots/2_dge/volcano_treat_CKI-Omt vs CKI.svg
+    Untracked:  2_plots/2_dge/volcano_treat_CKI-Tri vs CKI.svg
+    Untracked:  2_plots/2_dge/volcano_treat_UT vs CKI.svg
     Untracked:  2_plots/3_go/
     Untracked:  2_plots/4_kegg/
+    Untracked:  3_output/enrichKEGG_treat_sig.xlsx
+    Untracked:  3_output/goana_treat.xlsx
+    Untracked:  3_output/kegga_treat_sig.xlsx
+    Untracked:  3_output/qlf_decideTest.xlsx
+    Untracked:  3_output/qlf_sig.xlsx
+    Untracked:  3_output/treat_decideTest.xlsx
+    Untracked:  3_output/treat_sig.xlsx
+    Untracked:  Meeting Notes.pdf
 
 Unstaged changes:
     Modified:   0_data/rds_object/dge.rds
-    Modified:   0_data/rds_object/enrichGO_treat.rds
-    Modified:   0_data/rds_object/enrichKEGG_treat_filtered.rds
+    Deleted:    0_data/rds_object/dge_treat_unfiltered.rds
+    Deleted:    0_data/rds_object/enrichGO_treat.rds
+    Deleted:    0_data/rds_object/enrichKEGG_treat_filtered.rds
     Modified:   0_data/rds_object/qlf.rds
-    Modified:   0_data/rds_object/qlf_filtered.rds
+    Deleted:    0_data/rds_object/qlf_filtered.rds
     Modified:   0_data/rds_object/treat.rds
-    Modified:   0_data/rds_object/treat_filtered.rds
-    Modified:   0_data/rds_object/treat_unfiltered.rds
-    Modified:   1_analysis/about.Rmd
+    Deleted:    0_data/rds_object/treat_filtered.rds
+    Deleted:    0_data/rds_object/treat_unfiltered.rds
     Modified:   1_analysis/dge.Rmd
     Modified:   1_analysis/figure/dge.Rmd/MAplotCustom_treat-1.png
     Modified:   1_analysis/figure/dge.Rmd/MAplotCustom_treat-2.png
     Modified:   1_analysis/figure/dge.Rmd/MAplotCustom_treat-3.png
     Modified:   1_analysis/figure/dge.Rmd/MAplotCustom_treat-4.png
     Modified:   1_analysis/figure/dge.Rmd/MAplotCustom_treat-5.png
-    Modified:   1_analysis/figure/dge.Rmd/estimateDispersion-1.png
-    Modified:   1_analysis/figure/dge.Rmd/fitGLMqlf-1.png
     Modified:   1_analysis/figure/dge.Rmd/pValueHistogram_treat-1.png
     Modified:   1_analysis/figure/dge.Rmd/pValueHistogram_treat-2.png
     Modified:   1_analysis/figure/dge.Rmd/pValueHistogram_treat-3.png
     Modified:   1_analysis/figure/dge.Rmd/pValueHistogram_treat-4.png
     Modified:   1_analysis/figure/dge.Rmd/pValueHistogram_treat-5.png
-    Modified:   1_analysis/figure/kegg.Rmd/unnamed-chunk-6-1.png
     Modified:   1_analysis/figure/setUp.Rmd/MDSplot-1.png
     Modified:   1_analysis/figure/setUp.Rmd/afterFiltering-1.png
     Modified:   1_analysis/figure/setUp.Rmd/libraryChecks-1.png
@@ -927,38 +991,37 @@ Unstaged changes:
     Modified:   1_analysis/figure/setUp.Rmd/visualisingNormalisation-1.png
     Modified:   1_analysis/go.Rmd
     Modified:   1_analysis/kegg.Rmd
-    Modified:   1_analysis/obtainData.Rmd
     Modified:   1_analysis/setUp.Rmd
     Modified:   2_plots/1_setup/counts_before_and_after_filtering.svg
     Modified:   2_plots/1_setup/library_size.svg
     Modified:   2_plots/1_setup/sample_group_PCA_plot.svg
     Modified:   2_plots/1_setup/sample_type_PCA_plot.svg
-    Modified:   2_plots/2_dge/MA_plot_treat_CKI-Mac vs CKI.svg
-    Modified:   2_plots/2_dge/MA_plot_treat_CKI-Nme vs CKI.svg
-    Modified:   2_plots/2_dge/MA_plot_treat_CKI-Omt vs CKI.svg
-    Modified:   2_plots/2_dge/MA_plot_treat_CKI-Tri vs CKI.svg
-    Modified:   2_plots/2_dge/MA_plot_treat_UT vs CKI.svg
-    Modified:   2_plots/2_dge/estimate_dispersion.svg
+    Deleted:    2_plots/2_dge/MA_plot_treat_CKI-Mac vs CKI.svg
+    Deleted:    2_plots/2_dge/MA_plot_treat_CKI-Nme vs CKI.svg
+    Deleted:    2_plots/2_dge/MA_plot_treat_CKI-Omt vs CKI.svg
+    Deleted:    2_plots/2_dge/MA_plot_treat_CKI-Tri vs CKI.svg
+    Deleted:    2_plots/2_dge/MA_plot_treat_UT vs CKI.svg
+    Deleted:    2_plots/2_dge/estimate_dispersion.svg
     Modified:   2_plots/2_dge/qlf_dispersion.svg
-    Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Mac vs CKI.svg
-    Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Nme vs CKI.svg
-    Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Omt vs CKI.svg
-    Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Tri vs CKI.svg
-    Modified:   2_plots/2_dge/qlf_pValue_histogram_UT vs CKI.svg
-    Modified:   2_plots/2_dge/treat_pValue_histogram_CKI-Mac vs CKI.svg
-    Modified:   2_plots/2_dge/treat_pValue_histogram_CKI-Nme vs CKI.svg
-    Modified:   2_plots/2_dge/treat_pValue_histogram_CKI-Omt vs CKI.svg
-    Modified:   2_plots/2_dge/treat_pValue_histogram_CKI-Tri vs CKI.svg
-    Modified:   2_plots/2_dge/treat_pValue_histogram_UT vs CKI.svg
-    Modified:   2_plots/2_dge/volcano_plot_treat_CKI-Mac vs CKI.svg
-    Modified:   2_plots/2_dge/volcano_plot_treat_CKI-Nme vs CKI.svg
-    Modified:   2_plots/2_dge/volcano_plot_treat_CKI-Omt vs CKI.svg
-    Modified:   2_plots/2_dge/volcano_plot_treat_CKI-Tri vs CKI.svg
-    Modified:   2_plots/2_dge/volcano_plot_treat_UT vs CKI.svg
-    Modified:   3_output/enrichGO_treat.xlsx
-    Modified:   3_output/enrichKEGG_treat_unfiltered.xlsx
-    Modified:   3_output/qlf_filtered.xlsx
-    Modified:   3_output/treat_filtered.xlsx
+    Deleted:    2_plots/2_dge/qlf_pValue_histogram_CKI-Mac vs CKI.svg
+    Deleted:    2_plots/2_dge/qlf_pValue_histogram_CKI-Nme vs CKI.svg
+    Deleted:    2_plots/2_dge/qlf_pValue_histogram_CKI-Omt vs CKI.svg
+    Deleted:    2_plots/2_dge/qlf_pValue_histogram_CKI-Tri vs CKI.svg
+    Deleted:    2_plots/2_dge/qlf_pValue_histogram_UT vs CKI.svg
+    Deleted:    2_plots/2_dge/treat_pValue_histogram_CKI-Mac vs CKI.svg
+    Deleted:    2_plots/2_dge/treat_pValue_histogram_CKI-Nme vs CKI.svg
+    Deleted:    2_plots/2_dge/treat_pValue_histogram_CKI-Omt vs CKI.svg
+    Deleted:    2_plots/2_dge/treat_pValue_histogram_CKI-Tri vs CKI.svg
+    Deleted:    2_plots/2_dge/treat_pValue_histogram_UT vs CKI.svg
+    Deleted:    2_plots/2_dge/volcano_plot_treat_CKI-Mac vs CKI.svg
+    Deleted:    2_plots/2_dge/volcano_plot_treat_CKI-Nme vs CKI.svg
+    Deleted:    2_plots/2_dge/volcano_plot_treat_CKI-Omt vs CKI.svg
+    Deleted:    2_plots/2_dge/volcano_plot_treat_CKI-Tri vs CKI.svg
+    Deleted:    2_plots/2_dge/volcano_plot_treat_UT vs CKI.svg
+    Deleted:    3_output/enrichGO_treat.xlsx
+    Deleted:    3_output/enrichKEGG_treat_unfiltered.xlsx
+    Deleted:    3_output/qlf_filtered.xlsx
+    Deleted:    3_output/treat_filtered.xlsx
 
 </code></pre>
 <p>
@@ -997,6 +1060,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/tranmanhha135/01_CKI_DGE/blob/848e971e9ccbf102898eeb089076953d68a0817f/1_analysis/kegg.Rmd" target="_blank">848e971</a>
+</td>
+<td>
+Ha Tran
+</td>
+<td>
+2021-11-08
+</td>
+<td>
+adjust plot size, added dot plot for GO and KEGG, added heatmap for DE genes, minor cosmetic changes
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/tranmanhha135/01_CKI_DGE/848e971e9ccbf102898eeb089076953d68a0817f/docs/kegg.html" target="_blank">848e971</a>
+</td>
+<td>
+Ha Tran
+</td>
+<td>
+2021-11-08
+</td>
+<td>
+adjust plot size, added dot plot for GO and KEGG, added heatmap for DE genes, minor cosmetic changes
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1260,23 +1357,7 @@ library(enrichplot)
 library(biomaRt)
 
 # Set ggplot theme
-theme_set(theme_minimal())
-
-theme_update(
-  legend.background = element_rect(fill = &quot;transparent&quot;, colour = NA),
-  legend.box.background = element_rect(fill = &quot;transparent&quot;, colour = NA),
-  
-  panel.background = element_rect(fill = &quot;transparent&quot;,colour = NA),
-  plot.background = element_rect(fill = &quot;transparent&quot;, colour = NA),
-  
-  plot.title = element_text(color = &quot;gray20&quot;, size = 24, angle = 0, hjust = 0, vjust = .5, face = &quot;bold&quot;),
-  plot.subtitle = element_text(color = &quot;gray25&quot;, size = 20, angle = 0, hjust = 0, vjust = .5, face = &quot;plain&quot;),
-  legend.title = element_text(color = &quot;gray25&quot;, size = 16, angle = 0, hjust = 0, vjust = .5, face = &quot;plain&quot;),
-  legend.text = element_text(color = &quot;gray25&quot;, size = 12, angle = 0, hjust = 0, vjust = .5, face = &quot;plain&quot;),
-  axis.text.x = element_text(color = &quot;gray30&quot;, size = 12, angle = 0, hjust = .5, vjust = .5, face = &quot;plain&quot;),
-  axis.text.y = element_text(color = &quot;gray30&quot;, size = 12, angle = 0, hjust = 1, vjust = 0, face = &quot;plain&quot;),  
-  axis.title.x = element_text(color = &quot;gray30&quot;, size = 14, angle = 0, hjust = .5, vjust = 0, face = &quot;plain&quot;),
-  axis.title.y = element_text(color = &quot;gray30&quot;, size = 14, angle = 90, hjust = .5, vjust = .5, face = &quot;plain&quot;))</code></pre>
+theme_set(theme_minimal())</code></pre>
 </div>
 <div id="import-rds-data" class="section level3">
 <h3>Import RDS Data</h3>
@@ -1285,10 +1366,9 @@ theme_update(
 dge &lt;- readRDS(here::here(&quot;0_data/rds_object/dge.rds&quot;))
 designMatrix &lt;- readRDS(here::here(&quot;0_data/rds_object/designMatrix.rds&quot;))
 contrast &lt;- readRDS(here::here(&quot;0_data/rds_object/contrastMatrix.rds&quot;))
-
 treat &lt;- readRDS(here::here(&quot;0_data/rds_object/treat.rds&quot;))
-treat_unfiltered &lt;- readRDS(here::here(&quot;0_data/rds_object/treat_unfiltered.rds&quot;))
-treat_filtered &lt;- readRDS(here::here(&quot;0_data/rds_object/treat_filtered.rds&quot;))</code></pre>
+treat_all &lt;- readRDS(here::here(&quot;0_data/rds_object/treat_all.rds&quot;))
+treat_sig &lt;- readRDS(here::here(&quot;0_data/rds_object/treat_sig.rds&quot;))</code></pre>
 </div>
 </div>
 <div id="kegg-enrichment-analysis" class="section level1">
@@ -1298,16 +1378,16 @@ treat_filtered &lt;- readRDS(here::here(&quot;0_data/rds_object/treat_filtered.r
 <p>KEGG pathway enrichment analysis is performed with GLM:QLF + TREAT.</p>
 <p>The top 30 most significant KEGG terms are displayed in relation to their respective comparison. KEGG terms with <code>qvalue &lt;= 0.2</code> are considered as significant</p>
 <pre class="r"><code>comparison_group=colnames(contrast) %&gt;% as.data.frame()
-
 # Create list object
 enrichKEGG_treat=list()
 enrichKEGG_treat_sig=list()
+
 for (i in 1:ncol(contrast)){
   #at each iteration, let x = name of each contrast group
   x=comparison_group[i,]
   
   #populate the enrichGo list with all KEGG terms
-  KEGGresults &lt;- clusterProfiler::enrichKEGG(gene = treat_filtered[[x]]$entrezid,
+  KEGGresults &lt;- clusterProfiler::enrichKEGG(gene = treat_sig[[x]]$entrezid,
                         organism = &quot;hsa&quot;,
                         pvalueCutoff = 0.05,
                         pAdjustMethod = &quot;fdr&quot;) 
@@ -1316,17 +1396,33 @@ for (i in 1:ncol(contrast)){
  
   #filter only significant KEGG terms
   enrichKEGG_treat_sig[[x]] &lt;- enrichKEGG_treat[[x]] %&gt;% dplyr::filter(qvalue &lt;= 0.2)
-} 
-# save rds object for use in downstream GO and KEGG analysis
-# enrichKEGG_treat %&gt;% saveRDS(file = here::here(&quot;0_data/rds_object/enrichKEGG_treat_unfiltered.rds&quot;))
-enrichKEGG_treat_sig %&gt;% saveRDS(file = here::here(&quot;0_data/rds_object/enrichKEGG_treat_filtered.rds&quot;))
+} </code></pre>
+</div>
+<div id="edgerkegga-package" class="section level3 tabset">
+<h3 class="tabset"><code>edgeR::kegga</code> package</h3>
+<p>Through edgeR, the proportion of upregulation and downregulated genes enriching the KEGG pathway can be determined</p>
+<pre class="r"><code>comparison_group=colnames(contrast) %&gt;% as.data.frame()
+# Create list object
+kegga_treat=list()
+kegga_treat_sig=list()
+# kegga_treat_sig=list()
 
-#save each unfiltered comparison group in the output directory
-writexl::write_xlsx(x = enrichKEGG_treat,
-                    path = here::here(&quot;3_output/enrichKEGG_treat_unfiltered.xlsx&quot;))</code></pre>
+for (i in 1:ncol(contrast)){
+  #at each iteration, let x = name of each contrast group
+  x=comparison_group[i,]
+  
+  #populate the enrichGo list with all KEGG terms
+  kegga_treat[[x]] &lt;- edgeR::kegga.DGELRT(de = treat[[x]],
+                                    geneid = treat[[x]]$genes$entrezid,
+                                    species = &quot;Hs&quot;,
+                                    FDR = 0.05, 
+                                    trend = F) 
+  
+  kegga_treat_sig[[x]] &lt;- topKEGG(results = kegga_treat[[x]], number = Inf)
+}</code></pre>
 <div id="ut-vs-cki" class="section level4">
 <h4>UT vs CKI</h4>
-<pre class="r"><code>enrichKEGG_treat_sig[[&quot;UT vs CKI&quot;]][1:12,] %&gt;% as.data.frame() %&gt;% dplyr::select(-c(&quot;ID&quot;)) %&gt;% kable() %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;% scroll_box(height=&quot;600px&quot;)</code></pre>
+<pre class="r"><code>kegga_treat_sig[[&quot;UT vs CKI&quot;]][1:30,] %&gt;% as.data.frame() %&gt;% kable(digits = Inf) %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;% scroll_box(height=&quot;600px&quot;)</code></pre>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:600px; ">
 <table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -1334,378 +1430,714 @@ writexl::write_xlsx(x = enrichKEGG_treat,
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 </th>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-Description
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-GeneRatio
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-BgRatio
+Pathway
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
-pvalue
+N
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
-p.adjust
+Up
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
-qvalue
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-geneID
+Down
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
-Count
+P.Up
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+P.Down
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
-hsa00140
+path:hsa00140
 </td>
 <td style="text-align:left;">
 Steroid hormone biosynthesis
 </td>
-<td style="text-align:left;">
-6/95
-</td>
-<td style="text-align:left;">
-61/8105
+<td style="text-align:right;">
+19
 </td>
 <td style="text-align:right;">
-0.0000731
-</td>
-<td style="text-align:right;">
-0.0150522
-</td>
-<td style="text-align:right;">
-0.0134600
-</td>
-<td style="text-align:left;">
-1543/1545/8644/1645/3290/1646
+0
 </td>
 <td style="text-align:right;">
 6
 </td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05323
-</td>
-<td style="text-align:left;">
-Rheumatoid arthritis
-</td>
-<td style="text-align:left;">
-6/95
-</td>
-<td style="text-align:left;">
-93/8105
+<td style="text-align:right;">
+1.000000e+00
 </td>
 <td style="text-align:right;">
-0.0007427
-</td>
-<td style="text-align:right;">
-0.0354886
-</td>
-<td style="text-align:right;">
-0.0317348
-</td>
-<td style="text-align:left;">
-7042/4312/2919/3569/3576/2920
-</td>
-<td style="text-align:right;">
-6
+8.170340e-09
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-hsa04657
-</td>
-<td style="text-align:left;">
-IL-17 signaling pathway
-</td>
-<td style="text-align:left;">
-6/95
-</td>
-<td style="text-align:left;">
-94/8105
-</td>
-<td style="text-align:right;">
-0.0007859
-</td>
-<td style="text-align:right;">
-0.0354886
-</td>
-<td style="text-align:right;">
-0.0317348
-</td>
-<td style="text-align:left;">
-4312/2919/3569/3934/3576/2920
-</td>
-<td style="text-align:right;">
-6
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05417
-</td>
-<td style="text-align:left;">
-Lipid and atherosclerosis
-</td>
-<td style="text-align:left;">
-9/95
-</td>
-<td style="text-align:left;">
-215/8105
-</td>
-<td style="text-align:right;">
-0.0008952
-</td>
-<td style="text-align:right;">
-0.0354886
-</td>
-<td style="text-align:right;">
-0.0317348
-</td>
-<td style="text-align:left;">
-1543/19/4312/2919/3569/7157/9619/3576/2920
-</td>
-<td style="text-align:right;">
-9
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04061
-</td>
-<td style="text-align:left;">
-Viral protein interaction with cytokine and cytokine receptor
-</td>
-<td style="text-align:left;">
-6/95
-</td>
-<td style="text-align:left;">
-100/8105
-</td>
-<td style="text-align:right;">
-0.0010877
-</td>
-<td style="text-align:right;">
-0.0354886
-</td>
-<td style="text-align:right;">
-0.0317348
-</td>
-<td style="text-align:left;">
-2919/3569/3576/2920/7133/8794
-</td>
-<td style="text-align:right;">
-6
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04933
-</td>
-<td style="text-align:left;">
-AGE-RAGE signaling pathway in diabetic complications
-</td>
-<td style="text-align:left;">
-6/95
-</td>
-<td style="text-align:left;">
-100/8105
-</td>
-<td style="text-align:right;">
-0.0010877
-</td>
-<td style="text-align:right;">
-0.0354886
-</td>
-<td style="text-align:right;">
-0.0317348
-</td>
-<td style="text-align:left;">
-7042/3569/7056/2335/3576/1958
-</td>
-<td style="text-align:right;">
-6
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05146
-</td>
-<td style="text-align:left;">
-Amoebiasis
-</td>
-<td style="text-align:left;">
-6/95
-</td>
-<td style="text-align:left;">
-102/8105
-</td>
-<td style="text-align:right;">
-0.0012059
-</td>
-<td style="text-align:right;">
-0.0354886
-</td>
-<td style="text-align:right;">
-0.0317348
-</td>
-<td style="text-align:left;">
-7042/2919/3569/2335/3576/2920
-</td>
-<td style="text-align:right;">
-6
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa00380
-</td>
-<td style="text-align:left;">
-Tryptophan metabolism
-</td>
-<td style="text-align:left;">
-4/95
-</td>
-<td style="text-align:left;">
-42/8105
-</td>
-<td style="text-align:right;">
-0.0014099
-</td>
-<td style="text-align:right;">
-0.0363054
-</td>
-<td style="text-align:right;">
-0.0324652
-</td>
-<td style="text-align:left;">
-1543/1545/51166/224
-</td>
-<td style="text-align:right;">
-4
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa00980
+path:hsa00980
 </td>
 <td style="text-align:left;">
 Metabolism of xenobiotics by cytochrome P450
 </td>
-<td style="text-align:left;">
-5/95
-</td>
-<td style="text-align:left;">
-78/8105
+<td style="text-align:right;">
+25
 </td>
 <td style="text-align:right;">
-0.0021400
-</td>
-<td style="text-align:right;">
-0.0489820
-</td>
-<td style="text-align:right;">
-0.0438010
-</td>
-<td style="text-align:left;">
-1543/1545/1645/3290/218
+0
 </td>
 <td style="text-align:right;">
 5
 </td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05134
-</td>
-<td style="text-align:left;">
-Legionellosis
-</td>
-<td style="text-align:left;">
-4/95
-</td>
-<td style="text-align:left;">
-57/8105
+<td style="text-align:right;">
+1.000000e+00
 </td>
 <td style="text-align:right;">
-0.0043535
-</td>
-<td style="text-align:right;">
-0.0896814
-</td>
-<td style="text-align:right;">
-0.0801954
-</td>
-<td style="text-align:left;">
-2919/3569/3576/2920
-</td>
-<td style="text-align:right;">
-4
+1.884032e-06
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-hsa05204
+path:hsa05146
+</td>
+<td style="text-align:left;">
+Amoebiasis
+</td>
+<td style="text-align:right;">
+61
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+7.503240e-06
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05204
 </td>
 <td style="text-align:left;">
 Chemical carcinogenesis - DNA adducts
 </td>
-<td style="text-align:left;">
-4/95
-</td>
-<td style="text-align:left;">
-69/8105
+<td style="text-align:right;">
+21
 </td>
 <td style="text-align:right;">
-0.0085661
-</td>
-<td style="text-align:right;">
-0.1604196
-</td>
-<td style="text-align:right;">
-0.1434514
-</td>
-<td style="text-align:left;">
-1543/1545/3290/1646
+0
 </td>
 <td style="text-align:right;">
 4
 </td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+<td style="text-align:right;">
+2.653389e-05
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-hsa05219
+path:hsa05323
 </td>
 <td style="text-align:left;">
-Bladder cancer
-</td>
-<td style="text-align:left;">
-3/95
-</td>
-<td style="text-align:left;">
-41/8105
+Rheumatoid arthritis
 </td>
 <td style="text-align:right;">
-0.0120540
+59
 </td>
 <td style="text-align:right;">
-0.2069263
+5
 </td>
 <td style="text-align:right;">
-0.1850388
+1
+</td>
+<td style="text-align:right;">
+9.270535e-05
+</td>
+<td style="text-align:right;">
+3.967717e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04061
 </td>
 <td style="text-align:left;">
-4312/7157/3576
+Viral protein interaction with cytokine and cytokine receptor
+</td>
+<td style="text-align:right;">
+32
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1.051605e-04
+</td>
+<td style="text-align:right;">
+3.014869e-02
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04657
+</td>
+<td style="text-align:left;">
+IL-17 signaling pathway
+</td>
+<td style="text-align:right;">
+64
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.369199e-04
+</td>
+<td style="text-align:right;">
+4.221298e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05417
+</td>
+<td style="text-align:left;">
+Lipid and atherosclerosis
+</td>
+<td style="text-align:right;">
+154
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1.952556e-04
+</td>
+<td style="text-align:right;">
+3.780755e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04933
+</td>
+<td style="text-align:left;">
+AGE-RAGE signaling pathway in diabetic complications
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3.913846e-04
+</td>
+<td style="text-align:right;">
+4.963894e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04621
+</td>
+<td style="text-align:left;">
+NOD-like receptor signaling pathway
+</td>
+<td style="text-align:right;">
+129
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+5.026596e-04
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05134
+</td>
+<td style="text-align:left;">
+Legionellosis
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6.050657e-04
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05144
+</td>
+<td style="text-align:left;">
+Malaria
+</td>
+<td style="text-align:right;">
+24
 </td>
 <td style="text-align:right;">
 3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+8.230637e-04
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05167
+</td>
+<td style="text-align:left;">
+Kaposi sarcoma-associated herpesvirus infection
+</td>
+<td style="text-align:right;">
+149
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.070941e-03
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04913
+</td>
+<td style="text-align:left;">
+Ovarian steroidogenesis
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+<td style="text-align:right;">
+1.351010e-03
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa00380
+</td>
+<td style="text-align:left;">
+Tryptophan metabolism
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1.841189e-01
+</td>
+<td style="text-align:right;">
+1.351010e-03
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04060
+</td>
+<td style="text-align:left;">
+Cytokine-cytokine receptor interaction
+</td>
+<td style="text-align:right;">
+115
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+2.017760e-03
+</td>
+<td style="text-align:right;">
+7.478291e-02
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04110
+</td>
+<td style="text-align:left;">
+Cell cycle
+</td>
+<td style="text-align:right;">
+121
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2.519758e-03
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05160
+</td>
+<td style="text-align:left;">
+Hepatitis C
+</td>
+<td style="text-align:right;">
+121
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2.519758e-03
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05164
+</td>
+<td style="text-align:left;">
+Influenza A
+</td>
+<td style="text-align:right;">
+126
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3.002825e-03
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04218
+</td>
+<td style="text-align:left;">
+Cellular senescence
+</td>
+<td style="text-align:right;">
+141
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+4.852209e-03
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa00340
+</td>
+<td style="text-align:left;">
+Histidine metabolism
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+<td style="text-align:right;">
+5.264426e-03
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04512
+</td>
+<td style="text-align:left;">
+ECM-receptor interaction
+</td>
+<td style="text-align:right;">
+48
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+6.146326e-03
+</td>
+<td style="text-align:right;">
+3.370385e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04371
+</td>
+<td style="text-align:left;">
+Apelin signaling pathway
+</td>
+<td style="text-align:right;">
+89
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+<td style="text-align:right;">
+6.956942e-03
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa00010
+</td>
+<td style="text-align:left;">
+Glycolysis / Gluconeogenesis
+</td>
+<td style="text-align:right;">
+46
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+<td style="text-align:right;">
+6.974996e-03
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04114
+</td>
+<td style="text-align:left;">
+Oocyte meiosis
+</td>
+<td style="text-align:right;">
+99
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+7.403498e-03
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04936
+</td>
+<td style="text-align:left;">
+Alcoholic liver disease
+</td>
+<td style="text-align:right;">
+104
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+8.781487e-03
+</td>
+<td style="text-align:right;">
+5.904131e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05162
+</td>
+<td style="text-align:left;">
+Measles
+</td>
+<td style="text-align:right;">
+108
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+9.997326e-03
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05171
+</td>
+<td style="text-align:left;">
+Coronavirus disease - COVID-19
+</td>
+<td style="text-align:right;">
+168
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.000957e-02
+</td>
+<td style="text-align:right;">
+7.644099e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04068
+</td>
+<td style="text-align:left;">
+FoxO signaling pathway
+</td>
+<td style="text-align:right;">
+109
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.031748e-02
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05120
+</td>
+<td style="text-align:left;">
+Epithelial cell signaling in Helicobacter pylori infection
+</td>
+<td style="text-align:right;">
+59
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.086421e-02
+</td>
+<td style="text-align:right;">
+1.000000e+00
 </td>
 </tr>
 </tbody>
@@ -1714,7 +2146,7 @@ Bladder cancer
 </div>
 <div id="cki-mac-vs-cki" class="section level4">
 <h4>CKI-Mac vs CKI</h4>
-<pre class="r"><code>enrichKEGG_treat_sig[[&quot;CKI-Mac vs CKI&quot;]][1:30,] %&gt;% as.data.frame() %&gt;% dplyr::select(-c(&quot;ID&quot;)) %&gt;% kable() %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;% scroll_box(height=&quot;600px&quot;)</code></pre>
+<pre class="r"><code>kegga_treat_sig[[&quot;CKI-Mac vs CKI&quot;]][1:30,] %&gt;% as.data.frame() %&gt;% kable(digits = Inf) %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;% scroll_box(height=&quot;600px&quot;)</code></pre>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:600px; ">
 <table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -1722,900 +2154,714 @@ Bladder cancer
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 </th>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-Description
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-GeneRatio
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-BgRatio
+Pathway
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
-pvalue
+N
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
-p.adjust
+Up
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
-qvalue
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-geneID
+Down
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
-Count
+P.Up
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+P.Down
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
-hsa04657
+path:hsa04657
 </td>
 <td style="text-align:left;">
 IL-17 signaling pathway
 </td>
-<td style="text-align:left;">
-14/158
-</td>
-<td style="text-align:left;">
-94/8105
-</td>
 <td style="text-align:right;">
-0.0000000
-</td>
-<td style="text-align:right;">
-0.0000007
-</td>
-<td style="text-align:right;">
-0.0000006
-</td>
-<td style="text-align:left;">
-3569/2919/3553/5743/2921/1437/1440/3934/2920/3576/6364/7128/4314/7184
+64
 </td>
 <td style="text-align:right;">
 14
 </td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04668
-</td>
-<td style="text-align:left;">
-TNF signaling pathway
-</td>
-<td style="text-align:left;">
-13/158
-</td>
-<td style="text-align:left;">
-112/8105
+<td style="text-align:right;">
+0
 </td>
 <td style="text-align:right;">
-0.0000002
+1.798677e-13
 </td>
 <td style="text-align:right;">
-0.0000293
-</td>
-<td style="text-align:right;">
-0.0000255
-</td>
-<td style="text-align:left;">
-3569/2919/3553/5743/2921/1437/2920/6364/7128/9021/4314/9586/7185
-</td>
-<td style="text-align:right;">
-13
+1.000000e+00
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-hsa05323
-</td>
-<td style="text-align:left;">
-Rheumatoid arthritis
-</td>
-<td style="text-align:left;">
-11/158
-</td>
-<td style="text-align:left;">
-93/8105
-</td>
-<td style="text-align:right;">
-0.0000017
-</td>
-<td style="text-align:right;">
-0.0001426
-</td>
-<td style="text-align:right;">
-0.0001242
-</td>
-<td style="text-align:left;">
-3569/2919/3553/2921/1437/3552/2920/3576/6364/245972/4314
-</td>
-<td style="text-align:right;">
-11
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05417
-</td>
-<td style="text-align:left;">
-Lipid and atherosclerosis
-</td>
-<td style="text-align:left;">
-16/158
-</td>
-<td style="text-align:left;">
-215/8105
-</td>
-<td style="text-align:right;">
-0.0000040
-</td>
-<td style="text-align:right;">
-0.0002151
-</td>
-<td style="text-align:right;">
-0.0001873
-</td>
-<td style="text-align:left;">
-3569/2919/3553/2921/6648/19/1543/2920/3576/4688/3309/4314/929/1649/7184/114548
-</td>
-<td style="text-align:right;">
-16
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05146
-</td>
-<td style="text-align:left;">
-Amoebiasis
-</td>
-<td style="text-align:left;">
-11/158
-</td>
-<td style="text-align:left;">
-102/8105
-</td>
-<td style="text-align:right;">
-0.0000042
-</td>
-<td style="text-align:right;">
-0.0002151
-</td>
-<td style="text-align:right;">
-0.0001873
-</td>
-<td style="text-align:left;">
-3569/2919/3553/2921/1437/2920/3576/3911/284217/929/2774
-</td>
-<td style="text-align:right;">
-11
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04060
+path:hsa04060
 </td>
 <td style="text-align:left;">
 Cytokine-cytokine receptor interaction
 </td>
-<td style="text-align:left;">
-18/158
-</td>
-<td style="text-align:left;">
-295/8105
-</td>
 <td style="text-align:right;">
-0.0000160
-</td>
-<td style="text-align:right;">
-0.0006789
-</td>
-<td style="text-align:right;">
-0.0005914
-</td>
-<td style="text-align:left;">
-3569/2919/3553/2921/1437/3552/1440/9966/2920/3576/6364/652/26525/11009/3570/4803/3624/8794
-</td>
-<td style="text-align:right;">
-18
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04064
-</td>
-<td style="text-align:left;">
-NF-kappa B signaling pathway
-</td>
-<td style="text-align:left;">
-10/158
-</td>
-<td style="text-align:left;">
-104/8105
-</td>
-<td style="text-align:right;">
-0.0000323
-</td>
-<td style="text-align:right;">
-0.0011760
-</td>
-<td style="text-align:right;">
-0.0010243
-</td>
-<td style="text-align:left;">
-2919/3553/5743/2921/2920/3576/29775/7128/929/7185
-</td>
-<td style="text-align:right;">
-10
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05202
-</td>
-<td style="text-align:left;">
-Transcriptional misregulation in cancer
-</td>
-<td style="text-align:left;">
-13/158
-</td>
-<td style="text-align:left;">
-192/8105
-</td>
-<td style="text-align:right;">
-0.0000901
-</td>
-<td style="text-align:right;">
-0.0028724
-</td>
-<td style="text-align:right;">
-0.0025018
-</td>
-<td style="text-align:left;">
-3569/1437/3576/64332/8464/3486/4314/929/1649/894/7185/26471/7490
-</td>
-<td style="text-align:right;">
-13
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05134
-</td>
-<td style="text-align:left;">
-Legionellosis
-</td>
-<td style="text-align:left;">
-7/158
-</td>
-<td style="text-align:left;">
-57/8105
-</td>
-<td style="text-align:right;">
-0.0001093
-</td>
-<td style="text-align:right;">
-0.0030955
-</td>
-<td style="text-align:right;">
-0.0026962
-</td>
-<td style="text-align:left;">
-3569/2919/3553/2921/2920/3576/929
-</td>
-<td style="text-align:right;">
-7
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04061
-</td>
-<td style="text-align:left;">
-Viral protein interaction with cytokine and cytokine receptor
-</td>
-<td style="text-align:left;">
-9/158
-</td>
-<td style="text-align:left;">
-100/8105
-</td>
-<td style="text-align:right;">
-0.0001354
-</td>
-<td style="text-align:right;">
-0.0034532
-</td>
-<td style="text-align:right;">
-0.0030077
-</td>
-<td style="text-align:left;">
-3569/2919/2921/2920/3576/6364/11009/3570/8794
-</td>
-<td style="text-align:right;">
-9
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04151
-</td>
-<td style="text-align:left;">
-PI3K-Akt signaling pathway
-</td>
-<td style="text-align:left;">
-17/158
-</td>
-<td style="text-align:left;">
-354/8105
-</td>
-<td style="text-align:right;">
-0.0005122
-</td>
-<td style="text-align:right;">
-0.0118735
-</td>
-<td style="text-align:right;">
-0.0103418
-</td>
-<td style="text-align:left;">
-3569/1440/3911/896/3371/8515/284217/3570/4803/5649/1950/9586/894/2261/7184/6446/3693
-</td>
-<td style="text-align:right;">
-17
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05165
-</td>
-<td style="text-align:left;">
-Human papillomavirus infection
-</td>
-<td style="text-align:left;">
-16/158
-</td>
-<td style="text-align:left;">
-331/8105
-</td>
-<td style="text-align:right;">
-0.0007007
-</td>
-<td style="text-align:right;">
-0.0148897
-</td>
-<td style="text-align:right;">
-0.0129690
-</td>
-<td style="text-align:left;">
-5743/3911/245972/896/3371/8515/284217/7477/4854/5649/1950/9586/894/4242/3693/1869
+115
 </td>
 <td style="text-align:right;">
 16
 </td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05219
-</td>
-<td style="text-align:left;">
-Bladder cancer
-</td>
-<td style="text-align:left;">
-5/158
-</td>
-<td style="text-align:left;">
-41/8105
+<td style="text-align:right;">
+2
 </td>
 <td style="text-align:right;">
-0.0011235
+5.183302e-12
 </td>
 <td style="text-align:right;">
-0.0220384
-</td>
-<td style="text-align:right;">
-0.0191955
-</td>
-<td style="text-align:left;">
-3576/1950/1870/2261/1869
-</td>
-<td style="text-align:right;">
-5
+4.519540e-01
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-hsa04512
+path:hsa05323
 </td>
 <td style="text-align:left;">
-ECM-receptor interaction
-</td>
-<td style="text-align:left;">
-7/158
-</td>
-<td style="text-align:left;">
-88/8105
+Rheumatoid arthritis
 </td>
 <td style="text-align:right;">
-0.0015851
-</td>
-<td style="text-align:right;">
-0.0288719
-</td>
-<td style="text-align:right;">
-0.0251475
-</td>
-<td style="text-align:left;">
-3911/3371/8515/284217/5649/3693/375790
-</td>
-<td style="text-align:right;">
-7
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04640
-</td>
-<td style="text-align:left;">
-Hematopoietic cell lineage
-</td>
-<td style="text-align:left;">
-7/158
-</td>
-<td style="text-align:left;">
-99/8105
-</td>
-<td style="text-align:right;">
-0.0031114
-</td>
-<td style="text-align:right;">
-0.0498165
-</td>
-<td style="text-align:right;">
-0.0433903
-</td>
-<td style="text-align:left;">
-3569/3553/1437/3552/1440/3570/929
-</td>
-<td style="text-align:right;">
-7
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04621
-</td>
-<td style="text-align:left;">
-NOD-like receptor signaling pathway
-</td>
-<td style="text-align:left;">
-10/158
-</td>
-<td style="text-align:left;">
-184/8105
-</td>
-<td style="text-align:right;">
-0.0031257
-</td>
-<td style="text-align:right;">
-0.0498165
-</td>
-<td style="text-align:right;">
-0.0433903
-</td>
-<td style="text-align:left;">
-3569/2919/3553/2921/2920/3576/7128/114548/837/10135
-</td>
-<td style="text-align:right;">
-10
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04218
-</td>
-<td style="text-align:left;">
-Cellular senescence
-</td>
-<td style="text-align:left;">
-9/158
-</td>
-<td style="text-align:left;">
-156/8105
-</td>
-<td style="text-align:right;">
-0.0033650
-</td>
-<td style="text-align:right;">
-0.0502266
-</td>
-<td style="text-align:right;">
-0.0437474
-</td>
-<td style="text-align:left;">
-3569/3552/3576/5054/896/3486/894/1870/1869
-</td>
-<td style="text-align:right;">
-9
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05133
-</td>
-<td style="text-align:left;">
-Pertussis
-</td>
-<td style="text-align:left;">
-6/158
-</td>
-<td style="text-align:left;">
-76/8105
-</td>
-<td style="text-align:right;">
-0.0035454
-</td>
-<td style="text-align:right;">
-0.0502266
-</td>
-<td style="text-align:right;">
-0.0437474
-</td>
-<td style="text-align:left;">
-3569/3553/3552/3576/929/114548
-</td>
-<td style="text-align:right;">
-6
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04630
-</td>
-<td style="text-align:left;">
-JAK-STAT signaling pathway
-</td>
-<td style="text-align:left;">
-9/158
-</td>
-<td style="text-align:left;">
-162/8105
-</td>
-<td style="text-align:right;">
-0.0043201
-</td>
-<td style="text-align:right;">
-0.0579807
-</td>
-<td style="text-align:right;">
-0.0505013
-</td>
-<td style="text-align:left;">
-3569/1437/1440/11009/896/3570/9021/1950/894
-</td>
-<td style="text-align:right;">
-9
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05167
-</td>
-<td style="text-align:left;">
-Kaposi sarcoma-associated herpesvirus infection
-</td>
-<td style="text-align:left;">
-10/158
-</td>
-<td style="text-align:left;">
-194/8105
-</td>
-<td style="text-align:right;">
-0.0045561
-</td>
-<td style="text-align:right;">
-0.0580906
-</td>
-<td style="text-align:right;">
-0.0505970
-</td>
-<td style="text-align:left;">
-3569/2919/5743/2921/1437/2920/3576/1827/1870/1869
-</td>
-<td style="text-align:right;">
-10
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05171
-</td>
-<td style="text-align:left;">
-Coronavirus disease - COVID-19
-</td>
-<td style="text-align:left;">
-11/158
-</td>
-<td style="text-align:left;">
-232/8105
-</td>
-<td style="text-align:right;">
-0.0055758
-</td>
-<td style="text-align:right;">
-0.0677059
-</td>
-<td style="text-align:right;">
-0.0589719
-</td>
-<td style="text-align:left;">
-3569/3553/1437/1440/3576/200916/3570/629/4314/23521/114548
+59
 </td>
 <td style="text-align:right;">
 11
 </td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+4.796450e-10
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-hsa04936
+path:hsa04668
 </td>
 <td style="text-align:left;">
-Alcoholic liver disease
-</td>
-<td style="text-align:left;">
-8/158
-</td>
-<td style="text-align:left;">
-142/8105
+TNF signaling pathway
 </td>
 <td style="text-align:right;">
-0.0064614
+94
 </td>
 <td style="text-align:right;">
-0.0720053
+12
 </td>
 <td style="text-align:right;">
-0.0627167
+1
+</td>
+<td style="text-align:right;">
+7.127366e-09
+</td>
+<td style="text-align:right;">
+7.158749e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04061
 </td>
 <td style="text-align:left;">
-3569/2919/3553/2921/2920/3576/2194/929
+Viral protein interaction with cytokine and cytokine receptor
+</td>
+<td style="text-align:right;">
+32
 </td>
 <td style="text-align:right;">
 8
 </td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa00532
-</td>
-<td style="text-align:left;">
-Glycosaminoglycan biosynthesis - chondroitin sulfate / dermatan sulfate
-</td>
-<td style="text-align:left;">
-3/158
-</td>
-<td style="text-align:left;">
-20/8105
+<td style="text-align:right;">
+1
 </td>
 <td style="text-align:right;">
-0.0064946
+1.021030e-08
 </td>
 <td style="text-align:right;">
-0.0720053
-</td>
-<td style="text-align:right;">
-0.0627167
-</td>
-<td style="text-align:left;">
-56548/54480/55501
-</td>
-<td style="text-align:right;">
-3
+3.477287e-01
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-hsa05222
+path:hsa05417
 </td>
 <td style="text-align:left;">
-Small cell lung cancer
-</td>
-<td style="text-align:left;">
-6/158
-</td>
-<td style="text-align:left;">
-92/8105
+Lipid and atherosclerosis
 </td>
 <td style="text-align:right;">
-0.0089725
+154
 </td>
 <td style="text-align:right;">
-0.0953326
+14
 </td>
 <td style="text-align:right;">
-0.0830348
-</td>
-<td style="text-align:left;">
-5743/3911/284217/1870/7185/1869
+2
 </td>
 <td style="text-align:right;">
-6
+3.309226e-08
+</td>
+<td style="text-align:right;">
+6.082960e-01
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-hsa04932
+path:hsa05146
 </td>
 <td style="text-align:left;">
-Non-alcoholic fatty liver disease
-</td>
-<td style="text-align:left;">
-8/158
-</td>
-<td style="text-align:left;">
-155/8105
+Amoebiasis
 </td>
 <td style="text-align:right;">
-0.0107247
-</td>
-<td style="text-align:right;">
-0.1091708
-</td>
-<td style="text-align:right;">
-0.0950879
-</td>
-<td style="text-align:left;">
-3569/3553/3552/3576/3570/9021/1649/125965
-</td>
-<td style="text-align:right;">
-8
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05215
-</td>
-<td style="text-align:left;">
-Prostate cancer
-</td>
-<td style="text-align:left;">
-6/158
-</td>
-<td style="text-align:left;">
-97/8105
-</td>
-<td style="text-align:right;">
-0.0114896
-</td>
-<td style="text-align:right;">
-0.1091708
-</td>
-<td style="text-align:right;">
-0.0950879
-</td>
-<td style="text-align:left;">
-4314/1950/9586/1870/7184/1869
-</td>
-<td style="text-align:right;">
-6
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05120
-</td>
-<td style="text-align:left;">
-Epithelial cell signaling in Helicobacter pylori infection
-</td>
-<td style="text-align:left;">
-5/158
-</td>
-<td style="text-align:left;">
-70/8105
-</td>
-<td style="text-align:right;">
-0.0115593
-</td>
-<td style="text-align:right;">
-0.1091708
-</td>
-<td style="text-align:right;">
-0.0950879
-</td>
-<td style="text-align:left;">
-2919/2921/2920/3576/245972
-</td>
-<td style="text-align:right;">
-5
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04933
-</td>
-<td style="text-align:left;">
-AGE-RAGE signaling pathway in diabetic complications
-</td>
-<td style="text-align:left;">
-6/158
-</td>
-<td style="text-align:left;">
-100/8105
-</td>
-<td style="text-align:right;">
-0.0132195
-</td>
-<td style="text-align:right;">
-0.1203915
-</td>
-<td style="text-align:right;">
-0.1048611
-</td>
-<td style="text-align:left;">
-3569/3553/3552/3576/5054/2152
-</td>
-<td style="text-align:right;">
-6
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05130
-</td>
-<td style="text-align:left;">
-Pathogenic Escherichia coli infection
-</td>
-<td style="text-align:left;">
-9/158
-</td>
-<td style="text-align:left;">
-197/8105
-</td>
-<td style="text-align:right;">
-0.0147467
-</td>
-<td style="text-align:right;">
-0.1296695
-</td>
-<td style="text-align:right;">
-0.1129423
-</td>
-<td style="text-align:left;">
-3569/3553/9076/3576/10381/27128/114548/837/9075
+61
 </td>
 <td style="text-align:right;">
 9
 </td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1.608522e-07
+</td>
+<td style="text-align:right;">
+1.934733e-01
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-hsa05144
+path:hsa05202
+</td>
+<td style="text-align:left;">
+Transcriptional misregulation in cancer
+</td>
+<td style="text-align:right;">
+122
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1.119545e-06
+</td>
+<td style="text-align:right;">
+4.825713e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04080
+</td>
+<td style="text-align:left;">
+Neuroactive ligand-receptor interaction
+</td>
+<td style="text-align:right;">
+76
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+<td style="text-align:right;">
+7.023903e-06
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04064
+</td>
+<td style="text-align:left;">
+NF-kappa B signaling pathway
+</td>
+<td style="text-align:right;">
+73
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+7.993704e-06
+</td>
+<td style="text-align:right;">
+2.519953e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04621
+</td>
+<td style="text-align:left;">
+NOD-like receptor signaling pathway
+</td>
+<td style="text-align:right;">
+129
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.349574e-05
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04640
+</td>
+<td style="text-align:left;">
+Hematopoietic cell lineage
+</td>
+<td style="text-align:right;">
+41
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2.111429e-05
+</td>
+<td style="text-align:right;">
+4.217049e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05171
+</td>
+<td style="text-align:left;">
+Coronavirus disease - COVID-19
+</td>
+<td style="text-align:right;">
+168
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2.465219e-05
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05134
+</td>
+<td style="text-align:left;">
+Legionellosis
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+6.721155e-05
+</td>
+<td style="text-align:right;">
+4.873363e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05144
 </td>
 <td style="text-align:left;">
 Malaria
 </td>
-<td style="text-align:left;">
-4/158
-</td>
-<td style="text-align:left;">
-50/8105
-</td>
 <td style="text-align:right;">
-0.0159762
-</td>
-<td style="text-align:right;">
-0.1357977
-</td>
-<td style="text-align:right;">
-0.1182799
-</td>
-<td style="text-align:left;">
-3569/3553/1440/3576
+24
 </td>
 <td style="text-align:right;">
 4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3.211999e-04
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04151
+</td>
+<td style="text-align:left;">
+PI3K-Akt signaling pathway
+</td>
+<td style="text-align:right;">
+225
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+3.354109e-04
+</td>
+<td style="text-align:right;">
+7.881236e-02
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04630
+</td>
+<td style="text-align:left;">
+JAK-STAT signaling pathway
+</td>
+<td style="text-align:right;">
+96
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+3.995657e-04
+</td>
+<td style="text-align:right;">
+1.346765e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04933
+</td>
+<td style="text-align:left;">
+AGE-RAGE signaling pathway in diabetic complications
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+8.982439e-04
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05133
+</td>
+<td style="text-align:left;">
+Pertussis
+</td>
+<td style="text-align:right;">
+54
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+9.373373e-04
+</td>
+<td style="text-align:right;">
+5.140760e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05167
+</td>
+<td style="text-align:left;">
+Kaposi sarcoma-associated herpesvirus infection
+</td>
+<td style="text-align:right;">
+149
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1.200180e-03
+</td>
+<td style="text-align:right;">
+5.902619e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05219
+</td>
+<td style="text-align:left;">
+Bladder cancer
+</td>
+<td style="text-align:right;">
+37
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+4.080434e-01
+</td>
+<td style="text-align:right;">
+1.395048e-03
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05120
+</td>
+<td style="text-align:left;">
+Epithelial cell signaling in Helicobacter pylori infection
+</td>
+<td style="text-align:right;">
+59
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.402484e-03
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05332
+</td>
+<td style="text-align:left;">
+Graft-versus-host disease
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.603850e-03
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa00532
+</td>
+<td style="text-align:left;">
+Glycosaminoglycan biosynthesis - chondroitin sulfate / dermatan sulfate
+</td>
+<td style="text-align:right;">
+18
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+<td style="text-align:right;">
+1.609430e-03
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05224
+</td>
+<td style="text-align:left;">
+Breast cancer
+</td>
+<td style="text-align:right;">
+102
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+<td style="text-align:right;">
+2.331468e-03
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04932
+</td>
+<td style="text-align:left;">
+Non-alcoholic fatty liver disease
+</td>
+<td style="text-align:right;">
+135
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2.941332e-03
+</td>
+<td style="text-align:right;">
+8.363805e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05142
+</td>
+<td style="text-align:left;">
+Chagas disease
+</td>
+<td style="text-align:right;">
+71
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3.186862e-03
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04936
+</td>
+<td style="text-align:left;">
+Alcoholic liver disease
+</td>
+<td style="text-align:right;">
+104
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+3.441766e-03
+</td>
+<td style="text-align:right;">
+4.018733e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04512
+</td>
+<td style="text-align:left;">
+ECM-receptor interaction
+</td>
+<td style="text-align:right;">
+48
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+2.972377e-02
+</td>
+<td style="text-align:right;">
+3.672074e-03
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05140
+</td>
+<td style="text-align:left;">
+Leishmaniasis
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+5.243869e-03
+</td>
+<td style="text-align:right;">
+1.000000e+00
 </td>
 </tr>
 </tbody>
@@ -2624,7 +2870,7 @@ Malaria
 </div>
 <div id="cki-nme-vs-cki" class="section level4">
 <h4>CKI-Nme vs CKI</h4>
-<pre class="r"><code>enrichKEGG_treat_sig[[&quot;CKI-Nme vs CKI&quot;]][1:30,] %&gt;% as.data.frame() %&gt;% dplyr::select(-c(&quot;ID&quot;)) %&gt;% kable() %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;% scroll_box(height=&quot;600px&quot;)</code></pre>
+<pre class="r"><code>kegga_treat_sig[[&quot;CKI-Nme vs CKI&quot;]][1:30,] %&gt;% as.data.frame() %&gt;% kable(digits = Inf) %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;% scroll_box(height=&quot;600px&quot;)</code></pre>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:600px; ">
 <table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -2632,900 +2878,714 @@ Malaria
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 </th>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-Description
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-GeneRatio
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-BgRatio
+Pathway
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
-pvalue
+N
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
-p.adjust
+Up
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
-qvalue
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-geneID
+Down
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
-Count
+P.Up
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+P.Down
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
-hsa04657
+path:hsa04657
 </td>
 <td style="text-align:left;">
 IL-17 signaling pathway
 </td>
-<td style="text-align:left;">
-13/185
-</td>
-<td style="text-align:left;">
-94/8105
-</td>
 <td style="text-align:right;">
-0.0000002
-</td>
-<td style="text-align:right;">
-0.0000470
-</td>
-<td style="text-align:right;">
-0.0000417
-</td>
-<td style="text-align:left;">
-5743/7184/3569/2921/2919/3576/3934/2920/4314/2353/4312/6364/1440
+64
 </td>
 <td style="text-align:right;">
 13
 </td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.069904e-13
+</td>
+<td style="text-align:right;">
+7.038702e-01
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-hsa05323
+path:hsa05323
 </td>
 <td style="text-align:left;">
 Rheumatoid arthritis
 </td>
-<td style="text-align:left;">
-12/185
-</td>
-<td style="text-align:left;">
-93/8105
+<td style="text-align:right;">
+59
 </td>
 <td style="text-align:right;">
-0.0000012
+11
 </td>
 <td style="text-align:right;">
-0.0001523
+2
 </td>
 <td style="text-align:right;">
-0.0001352
-</td>
-<td style="text-align:left;">
-3569/2921/2919/3576/3552/2920/245972/4314/2353/4312/3109/6364
+2.453107e-11
 </td>
 <td style="text-align:right;">
-12
+3.045174e-01
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-hsa05417
+path:hsa05417
 </td>
 <td style="text-align:left;">
 Lipid and atherosclerosis
 </td>
-<td style="text-align:left;">
-17/185
-</td>
-<td style="text-align:left;">
-215/8105
+<td style="text-align:right;">
+154
 </td>
 <td style="text-align:right;">
-0.0000076
+14
 </td>
 <td style="text-align:right;">
-0.0006599
+4
 </td>
 <td style="text-align:right;">
-0.0005859
-</td>
-<td style="text-align:left;">
-1543/7184/19/3569/2921/2919/3576/2920/4688/3309/4314/929/2353/4312/1649/3310/5608
+9.299453e-10
 </td>
 <td style="text-align:right;">
-17
+3.284634e-01
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-hsa04668
-</td>
-<td style="text-align:left;">
-TNF signaling pathway
-</td>
-<td style="text-align:left;">
-11/185
-</td>
-<td style="text-align:left;">
-112/8105
-</td>
-<td style="text-align:right;">
-0.0000460
-</td>
-<td style="text-align:right;">
-0.0030130
-</td>
-<td style="text-align:right;">
-0.0026753
-</td>
-<td style="text-align:left;">
-5743/3569/2921/2919/2920/9021/4314/2353/6364/5608/9586
-</td>
-<td style="text-align:right;">
-11
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04061
+path:hsa04061
 </td>
 <td style="text-align:left;">
 Viral protein interaction with cytokine and cytokine receptor
 </td>
-<td style="text-align:left;">
-10/185
-</td>
-<td style="text-align:left;">
-100/8105
-</td>
 <td style="text-align:right;">
-0.0000879
-</td>
-<td style="text-align:right;">
-0.0046070
-</td>
-<td style="text-align:right;">
-0.0040906
-</td>
-<td style="text-align:left;">
-3569/2921/2919/3576/2920/11009/8794/1436/6364/58985
-</td>
-<td style="text-align:right;">
-10
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05165
-</td>
-<td style="text-align:left;">
-Human papillomavirus infection
-</td>
-<td style="text-align:left;">
-19/185
-</td>
-<td style="text-align:left;">
-331/8105
-</td>
-<td style="text-align:right;">
-0.0001882
-</td>
-<td style="text-align:right;">
-0.0082199
-</td>
-<td style="text-align:right;">
-0.0072985
-</td>
-<td style="text-align:left;">
-5743/896/7477/1869/3693/3911/245972/8515/3955/4854/284217/3371/1950/5649/4242/5159/9134/894/9586
-</td>
-<td style="text-align:right;">
-19
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05134
-</td>
-<td style="text-align:left;">
-Legionellosis
-</td>
-<td style="text-align:left;">
-7/185
-</td>
-<td style="text-align:left;">
-57/8105
-</td>
-<td style="text-align:right;">
-0.0002904
-</td>
-<td style="text-align:right;">
-0.0098780
-</td>
-<td style="text-align:right;">
-0.0087707
-</td>
-<td style="text-align:left;">
-3569/2921/2919/3576/2920/929/3310
+32
 </td>
 <td style="text-align:right;">
 7
 </td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05219
-</td>
-<td style="text-align:left;">
-Bladder cancer
-</td>
-<td style="text-align:left;">
-6/185
-</td>
-<td style="text-align:left;">
-41/8105
+<td style="text-align:right;">
+3
 </td>
 <td style="text-align:right;">
-0.0003016
+3.640487e-08
 </td>
 <td style="text-align:right;">
-0.0098780
-</td>
-<td style="text-align:right;">
-0.0087707
-</td>
-<td style="text-align:left;">
-3576/1869/2261/1870/1950/4312
-</td>
-<td style="text-align:right;">
-6
+2.174725e-02
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-hsa04151
-</td>
-<td style="text-align:left;">
-PI3K-Akt signaling pathway
-</td>
-<td style="text-align:left;">
-19/185
-</td>
-<td style="text-align:left;">
-354/8105
-</td>
-<td style="text-align:right;">
-0.0004411
-</td>
-<td style="text-align:right;">
-0.0128401
-</td>
-<td style="text-align:right;">
-0.0114008
-</td>
-<td style="text-align:left;">
-7184/3569/896/3693/3911/2261/8515/284217/3371/1950/5649/4804/1436/5159/1440/9134/2264/894/9586
-</td>
-<td style="text-align:right;">
-19
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05146
-</td>
-<td style="text-align:left;">
-Amoebiasis
-</td>
-<td style="text-align:left;">
-9/185
-</td>
-<td style="text-align:left;">
-102/8105
-</td>
-<td style="text-align:right;">
-0.0005104
-</td>
-<td style="text-align:right;">
-0.0133719
-</td>
-<td style="text-align:right;">
-0.0118730
-</td>
-<td style="text-align:left;">
-3569/2921/2919/3576/2920/3911/929/284217/2774
-</td>
-<td style="text-align:right;">
-9
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05202
-</td>
-<td style="text-align:left;">
-Transcriptional misregulation in cancer
-</td>
-<td style="text-align:left;">
-12/185
-</td>
-<td style="text-align:left;">
-192/8105
-</td>
-<td style="text-align:right;">
-0.0014437
-</td>
-<td style="text-align:right;">
-0.0343855
-</td>
-<td style="text-align:right;">
-0.0305311
-</td>
-<td style="text-align:left;">
-3569/3576/8464/4314/929/7490/4804/1649/1436/26471/894/64332
-</td>
-<td style="text-align:right;">
-12
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05215
-</td>
-<td style="text-align:left;">
-Prostate cancer
-</td>
-<td style="text-align:left;">
-8/185
-</td>
-<td style="text-align:left;">
-97/8105
-</td>
-<td style="text-align:right;">
-0.0016191
-</td>
-<td style="text-align:right;">
-0.0353502
-</td>
-<td style="text-align:right;">
-0.0313877
-</td>
-<td style="text-align:left;">
-7184/1869/4314/1870/1950/5159/9134/9586
-</td>
-<td style="text-align:right;">
-8
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04010
-</td>
-<td style="text-align:left;">
-MAPK signaling pathway
-</td>
-<td style="text-align:left;">
-15/185
-</td>
-<td style="text-align:left;">
-294/8105
-</td>
-<td style="text-align:right;">
-0.0029101
-</td>
-<td style="text-align:right;">
-0.0524982
-</td>
-<td style="text-align:right;">
-0.0466136
-</td>
-<td style="text-align:left;">
-3552/2261/929/25780/1950/1850/5801/4804/2353/1649/1436/5159/3310/2264/5608
-</td>
-<td style="text-align:right;">
-15
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04218
-</td>
-<td style="text-align:left;">
-Cellular senescence
-</td>
-<td style="text-align:left;">
-10/185
-</td>
-<td style="text-align:left;">
-156/8105
-</td>
-<td style="text-align:right;">
-0.0029641
-</td>
-<td style="text-align:right;">
-0.0524982
-</td>
-<td style="text-align:right;">
-0.0466136
-</td>
-<td style="text-align:left;">
-3569/896/3576/1869/3552/1870/9134/894/4605/5608
-</td>
-<td style="text-align:right;">
-10
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04060
+path:hsa04060
 </td>
 <td style="text-align:left;">
 Cytokine-cytokine receptor interaction
 </td>
-<td style="text-align:left;">
-15/185
-</td>
-<td style="text-align:left;">
-295/8105
-</td>
 <td style="text-align:right;">
-0.0030056
-</td>
-<td style="text-align:right;">
-0.0524982
-</td>
-<td style="text-align:right;">
-0.0466136
-</td>
-<td style="text-align:left;">
-3569/2921/2919/652/3576/3552/2920/11009/8794/26525/4804/1436/6364/1440/58985
-</td>
-<td style="text-align:right;">
-15
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04512
-</td>
-<td style="text-align:left;">
-ECM-receptor interaction
-</td>
-<td style="text-align:left;">
-7/185
-</td>
-<td style="text-align:left;">
-88/8105
-</td>
-<td style="text-align:right;">
-0.0038563
-</td>
-<td style="text-align:right;">
-0.0631475
-</td>
-<td style="text-align:right;">
-0.0560691
-</td>
-<td style="text-align:left;">
-3693/3911/8515/284217/3371/5649/1605
-</td>
-<td style="text-align:right;">
-7
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05167
-</td>
-<td style="text-align:left;">
-Kaposi sarcoma-associated herpesvirus infection
-</td>
-<td style="text-align:left;">
-11/185
-</td>
-<td style="text-align:left;">
-194/8105
-</td>
-<td style="text-align:right;">
-0.0047842
-</td>
-<td style="text-align:right;">
-0.0737329
-</td>
-<td style="text-align:right;">
-0.0654680
-</td>
-<td style="text-align:left;">
-5743/3569/2921/2919/3576/1869/2920/1827/1870/2353/5608
+115
 </td>
 <td style="text-align:right;">
 11
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa00051
-</td>
-<td style="text-align:left;">
-Fructose and mannose metabolism
-</td>
-<td style="text-align:left;">
-4/185
-</td>
-<td style="text-align:left;">
-33/8105
-</td>
-<td style="text-align:right;">
-0.0064092
-</td>
-<td style="text-align:right;">
-0.0932895
-</td>
-<td style="text-align:right;">
-0.0828324
-</td>
-<td style="text-align:left;">
-57016/230/3795/80201
-</td>
-<td style="text-align:right;">
-4
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04640
-</td>
-<td style="text-align:left;">
-Hematopoietic cell lineage
-</td>
-<td style="text-align:left;">
-7/185
-</td>
-<td style="text-align:left;">
-99/8105
-</td>
-<td style="text-align:right;">
-0.0073390
-</td>
-<td style="text-align:right;">
-0.1012005
-</td>
-<td style="text-align:right;">
-0.0898566
-</td>
-<td style="text-align:left;">
-3569/3552/929/1436/3109/1440/966
-</td>
-<td style="text-align:right;">
-7
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04145
-</td>
-<td style="text-align:left;">
-Phagosome
-</td>
-<td style="text-align:left;">
-9/185
-</td>
-<td style="text-align:left;">
-152/8105
-</td>
-<td style="text-align:right;">
-0.0079055
-</td>
-<td style="text-align:right;">
-0.1035625
-</td>
-<td style="text-align:right;">
-0.0919538
-</td>
-<td style="text-align:left;">
-9902/81035/4688/3693/245972/929/7277/3109/10381
-</td>
-<td style="text-align:right;">
-9
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04015
-</td>
-<td style="text-align:left;">
-Rap1 signaling pathway
-</td>
-<td style="text-align:left;">
-11/185
-</td>
-<td style="text-align:left;">
-210/8105
-</td>
-<td style="text-align:right;">
-0.0085494
-</td>
-<td style="text-align:right;">
-0.1066641
-</td>
-<td style="text-align:right;">
-0.0947078
-</td>
-<td style="text-align:left;">
-9002/2357/3397/2261/25780/1950/4804/1436/5159/2264/5608
-</td>
-<td style="text-align:right;">
-11
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04064
-</td>
-<td style="text-align:left;">
-NF-kappa B signaling pathway
-</td>
-<td style="text-align:left;">
-7/185
-</td>
-<td style="text-align:left;">
-104/8105
-</td>
-<td style="text-align:right;">
-0.0095267
-</td>
-<td style="text-align:right;">
-0.1093887
-</td>
-<td style="text-align:right;">
-0.0971269
-</td>
-<td style="text-align:left;">
-5743/2921/2919/3576/2920/29775/929
-</td>
-<td style="text-align:right;">
-7
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa00100
-</td>
-<td style="text-align:left;">
-Steroid biosynthesis
-</td>
-<td style="text-align:left;">
-3/185
-</td>
-<td style="text-align:left;">
-20/8105
-</td>
-<td style="text-align:right;">
-0.0100203
-</td>
-<td style="text-align:right;">
-0.1093887
-</td>
-<td style="text-align:right;">
-0.0971269
-</td>
-<td style="text-align:left;">
-7108/10682/1718
-</td>
-<td style="text-align:right;">
-3
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa00532
-</td>
-<td style="text-align:left;">
-Glycosaminoglycan biosynthesis - chondroitin sulfate / dermatan sulfate
-</td>
-<td style="text-align:left;">
-3/185
-</td>
-<td style="text-align:left;">
-20/8105
-</td>
-<td style="text-align:right;">
-0.0100203
-</td>
-<td style="text-align:right;">
-0.1093887
-</td>
-<td style="text-align:right;">
-0.0971269
-</td>
-<td style="text-align:left;">
-56548/54480/55790
-</td>
-<td style="text-align:right;">
-3
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04630
-</td>
-<td style="text-align:left;">
-JAK-STAT signaling pathway
-</td>
-<td style="text-align:left;">
-9/185
-</td>
-<td style="text-align:left;">
-162/8105
-</td>
-<td style="text-align:right;">
-0.0117406
-</td>
-<td style="text-align:right;">
-0.1230410
-</td>
-<td style="text-align:right;">
-0.1092489
-</td>
-<td style="text-align:left;">
-3569/896/11009/9021/1950/5159/1440/894/58985
-</td>
-<td style="text-align:right;">
-9
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04510
-</td>
-<td style="text-align:left;">
-Focal adhesion
-</td>
-<td style="text-align:left;">
-10/185
-</td>
-<td style="text-align:left;">
-201/8105
-</td>
-<td style="text-align:right;">
-0.0166394
-</td>
-<td style="text-align:right;">
-0.1676743
-</td>
-<td style="text-align:right;">
-0.1488792
-</td>
-<td style="text-align:left;">
-896/3693/3911/8515/284217/3371/1950/5649/5159/894
-</td>
-<td style="text-align:right;">
-10
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05222
-</td>
-<td style="text-align:left;">
-Small cell lung cancer
-</td>
-<td style="text-align:left;">
-6/185
-</td>
-<td style="text-align:left;">
-92/8105
-</td>
-<td style="text-align:right;">
-0.0184119
-</td>
-<td style="text-align:right;">
-0.1786636
-</td>
-<td style="text-align:right;">
-0.1586367
-</td>
-<td style="text-align:left;">
-5743/1869/3911/1870/284217/9134
-</td>
-<td style="text-align:right;">
-6
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05120
-</td>
-<td style="text-align:left;">
-Epithelial cell signaling in Helicobacter pylori infection
-</td>
-<td style="text-align:left;">
-5/185
-</td>
-<td style="text-align:left;">
-70/8105
-</td>
-<td style="text-align:right;">
-0.0215007
-</td>
-<td style="text-align:right;">
-0.1973473
-</td>
-<td style="text-align:right;">
-0.1752260
-</td>
-<td style="text-align:left;">
-2921/2919/3576/2920/245972
 </td>
 <td style="text-align:right;">
 5
 </td>
+<td style="text-align:right;">
+3.760749e-08
+</td>
+<td style="text-align:right;">
+6.558289e-02
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-hsa00514
+path:hsa05146
 </td>
 <td style="text-align:left;">
-Other types of O-glycan biosynthesis
-</td>
-<td style="text-align:left;">
-4/185
-</td>
-<td style="text-align:left;">
-47/8105
+Amoebiasis
 </td>
 <td style="text-align:right;">
-0.0218438
+61
 </td>
 <td style="text-align:right;">
-0.1973473
+8
 </td>
 <td style="text-align:right;">
-0.1752260
+2
+</td>
+<td style="text-align:right;">
+2.504620e-07
+</td>
+<td style="text-align:right;">
+3.184025e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04668
 </td>
 <td style="text-align:left;">
-55568/3955/4242/2590
+TNF signaling pathway
+</td>
+<td style="text-align:right;">
+94
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+6.796951e-07
+</td>
+<td style="text-align:right;">
+2.594398e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05134
+</td>
+<td style="text-align:left;">
+Legionellosis
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+9.208567e-07
+</td>
+<td style="text-align:right;">
+6.133388e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05202
+</td>
+<td style="text-align:left;">
+Transcriptional misregulation in cancer
+</td>
+<td style="text-align:right;">
+122
+</td>
+<td style="text-align:right;">
+9
 </td>
 <td style="text-align:right;">
 4
 </td>
+<td style="text-align:right;">
+6.060349e-06
+</td>
+<td style="text-align:right;">
+1.969396e-01
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-NA
+path:hsa04621
 </td>
 <td style="text-align:left;">
-NA
+NOD-like receptor signaling pathway
+</td>
+<td style="text-align:right;">
+129
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+7.064271e-05
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04080
 </td>
 <td style="text-align:left;">
-NA
+Neuroactive ligand-receptor interaction
+</td>
+<td style="text-align:right;">
+76
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+5.588656e-01
+</td>
+<td style="text-align:right;">
+8.644346e-05
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05144
 </td>
 <td style="text-align:left;">
-NA
+Malaria
 </td>
 <td style="text-align:right;">
-NA
+24
 </td>
 <td style="text-align:right;">
-NA
+4
 </td>
 <td style="text-align:right;">
-NA
+0
+</td>
+<td style="text-align:right;">
+1.118790e-04
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04064
 </td>
 <td style="text-align:left;">
-NA
+NF-kappa B signaling pathway
 </td>
 <td style="text-align:right;">
-NA
+73
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1.254328e-04
+</td>
+<td style="text-align:right;">
+3.998752e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04015
+</td>
+<td style="text-align:left;">
+Rap1 signaling pathway
+</td>
+<td style="text-align:right;">
+142
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+7.841638e-01
+</td>
+<td style="text-align:right;">
+3.445897e-04
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05120
+</td>
+<td style="text-align:left;">
+Epithelial cell signaling in Helicobacter pylori infection
+</td>
+<td style="text-align:right;">
+59
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+4.060664e-04
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05332
+</td>
+<td style="text-align:left;">
+Graft-versus-host disease
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+7.254868e-04
+</td>
+<td style="text-align:right;">
+2.757636e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04936
+</td>
+<td style="text-align:left;">
+Alcoholic liver disease
+</td>
+<td style="text-align:right;">
+104
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+8.540500e-04
+</td>
+<td style="text-align:right;">
+5.849777e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04640
+</td>
+<td style="text-align:left;">
+Hematopoietic cell lineage
+</td>
+<td style="text-align:right;">
+41
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+9.266478e-04
+</td>
+<td style="text-align:right;">
+4.136236e-02
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05167
+</td>
+<td style="text-align:left;">
+Kaposi sarcoma-associated herpesvirus infection
+</td>
+<td style="text-align:right;">
+149
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1.078795e-03
+</td>
+<td style="text-align:right;">
+3.071872e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05200
+</td>
+<td style="text-align:left;">
+Pathways in cancer
+</td>
+<td style="text-align:right;">
+368
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+4.356827e-02
+</td>
+<td style="text-align:right;">
+1.601716e-03
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05020
+</td>
+<td style="text-align:left;">
+Prion disease
+</td>
+<td style="text-align:right;">
+207
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1.689907e-03
+</td>
+<td style="text-align:right;">
+9.040065e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05140
+</td>
+<td style="text-align:left;">
+Leishmaniasis
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1.957010e-03
+</td>
+<td style="text-align:right;">
+2.416715e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05152
+</td>
+<td style="text-align:left;">
+Tuberculosis
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+2.029032e-03
+</td>
+<td style="text-align:right;">
+4.080082e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05171
+</td>
+<td style="text-align:left;">
+Coronavirus disease - COVID-19
+</td>
+<td style="text-align:right;">
+168
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2.150487e-03
+</td>
+<td style="text-align:right;">
+9.595671e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04915
+</td>
+<td style="text-align:left;">
+Estrogen signaling pathway
+</td>
+<td style="text-align:right;">
+87
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2.362883e-03
+</td>
+<td style="text-align:right;">
+4.887625e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05133
+</td>
+<td style="text-align:left;">
+Pertussis
+</td>
+<td style="text-align:right;">
+54
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2.600630e-03
+</td>
+<td style="text-align:right;">
+2.696231e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04151
+</td>
+<td style="text-align:left;">
+PI3K-Akt signaling pathway
+</td>
+<td style="text-align:right;">
+225
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+2.839250e-03
+</td>
+<td style="text-align:right;">
+3.528335e-03
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa01523
+</td>
+<td style="text-align:left;">
+Antifolate resistance
+</td>
+<td style="text-align:right;">
+27
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2.886730e-03
+</td>
+<td style="text-align:right;">
+4.010830e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa00100
+</td>
+<td style="text-align:left;">
+Steroid biosynthesis
+</td>
+<td style="text-align:right;">
+16
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+<td style="text-align:right;">
+3.059437e-03
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05224
+</td>
+<td style="text-align:left;">
+Breast cancer
+</td>
+<td style="text-align:right;">
+102
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+<td style="text-align:right;">
+3.075748e-03
 </td>
 </tr>
 </tbody>
@@ -3534,7 +3594,7 @@ NA
 </div>
 <div id="cki-omt-vs-cki" class="section level4">
 <h4>CKI-Omt vs CKI</h4>
-<pre class="r"><code>enrichKEGG_treat_sig[[&quot;CKI-Omt vs CKI&quot;]][1:30,] %&gt;% as.data.frame() %&gt;% dplyr::select(-c(&quot;ID&quot;)) %&gt;% kable() %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;% scroll_box(height=&quot;600px&quot;)</code></pre>
+<pre class="r"><code>kegga_treat_sig[[&quot;CKI-Omt vs CKI&quot;]][1:30,] %&gt;% as.data.frame() %&gt;% kable(digits = Inf) %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;% scroll_box(height=&quot;600px&quot;)</code></pre>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:600px; ">
 <table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -3542,900 +3602,714 @@ NA
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 </th>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-Description
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-GeneRatio
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-BgRatio
+Pathway
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
-pvalue
+N
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
-p.adjust
+Up
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
-qvalue
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-geneID
+Down
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
-Count
+P.Up
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+P.Down
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
-hsa04110
+path:hsa04110
 </td>
 <td style="text-align:left;">
 Cell cycle
 </td>
-<td style="text-align:left;">
-26/287
-</td>
-<td style="text-align:left;">
-126/8105
+<td style="text-align:right;">
+121
 </td>
 <td style="text-align:right;">
-0.0000000
+3
 </td>
 <td style="text-align:right;">
-0.0000000
+23
 </td>
 <td style="text-align:right;">
-0.0000000
-</td>
-<td style="text-align:left;">
-890/9088/699/983/701/9134/8318/894/5347/995/993/7272/9700/4085/990/9133/891/896/1870/5933/4174/1869/4175/4998/1647/1875
+4.135760e-01
 </td>
 <td style="text-align:right;">
-26
+1.149497e-11
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-hsa00260
-</td>
-<td style="text-align:left;">
-Glycine, serine and threonine metabolism
-</td>
-<td style="text-align:left;">
-9/287
-</td>
-<td style="text-align:left;">
-40/8105
-</td>
-<td style="text-align:right;">
-0.0000080
-</td>
-<td style="text-align:right;">
-0.0006333
-</td>
-<td style="text-align:right;">
-0.0005748
-</td>
-<td style="text-align:left;">
-314/8639/23464/26227/4129/29968/113675/1491/1757
-</td>
-<td style="text-align:right;">
-9
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04115
-</td>
-<td style="text-align:left;">
-p53 signaling pathway
-</td>
-<td style="text-align:left;">
-12/287
-</td>
-<td style="text-align:left;">
-73/8105
-</td>
-<td style="text-align:right;">
-0.0000082
-</td>
-<td style="text-align:right;">
-0.0006333
-</td>
-<td style="text-align:right;">
-0.0005748
-</td>
-<td style="text-align:left;">
-6241/983/9134/894/9133/891/896/3732/143686/1647/7161/83667
-</td>
-<td style="text-align:right;">
-12
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04218
-</td>
-<td style="text-align:left;">
-Cellular senescence
-</td>
-<td style="text-align:left;">
-18/287
-</td>
-<td style="text-align:left;">
-156/8105
-</td>
-<td style="text-align:right;">
-0.0000092
-</td>
-<td style="text-align:right;">
-0.0006333
-</td>
-<td style="text-align:right;">
-0.0005748
-</td>
-<td style="text-align:left;">
-3569/890/3552/983/9134/894/4605/993/3576/2113/9133/891/896/1870/5933/1869/1647/1875
-</td>
-<td style="text-align:right;">
-18
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa03460
-</td>
-<td style="text-align:left;">
-Fanconi anemia pathway
-</td>
-<td style="text-align:left;">
-10/287
-</td>
-<td style="text-align:left;">
-54/8105
-</td>
-<td style="text-align:right;">
-0.0000159
-</td>
-<td style="text-align:right;">
-0.0008793
-</td>
-<td style="text-align:right;">
-0.0007982
-</td>
-<td style="text-align:left;">
-672/641/83990/55215/2177/5888/29089/2175/116028/9894
-</td>
-<td style="text-align:right;">
-10
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04657
-</td>
-<td style="text-align:left;">
-IL-17 signaling pathway
-</td>
-<td style="text-align:left;">
-13/287
-</td>
-<td style="text-align:left;">
-94/8105
-</td>
-<td style="text-align:right;">
-0.0000241
-</td>
-<td style="text-align:right;">
-0.0011071
-</td>
-<td style="text-align:right;">
-0.0010049
-</td>
-<td style="text-align:left;">
-3569/3553/2921/1437/3576/2919/7128/6364/5743/2920/3934/1440/4314
-</td>
-<td style="text-align:right;">
-13
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa03440
-</td>
-<td style="text-align:left;">
-Homologous recombination
-</td>
-<td style="text-align:left;">
-8/287
-</td>
-<td style="text-align:left;">
-41/8105
-</td>
-<td style="text-align:right;">
-0.0000773
-</td>
-<td style="text-align:right;">
-0.0030495
-</td>
-<td style="text-align:right;">
-0.0027680
-</td>
-<td style="text-align:left;">
-672/641/83990/8438/7516/5888/25788/580
-</td>
-<td style="text-align:right;">
-8
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05323
-</td>
-<td style="text-align:left;">
-Rheumatoid arthritis
-</td>
-<td style="text-align:left;">
-12/287
-</td>
-<td style="text-align:left;">
-93/8105
-</td>
-<td style="text-align:right;">
-0.0000989
-</td>
-<td style="text-align:right;">
-0.0034121
-</td>
-<td style="text-align:right;">
-0.0030972
-</td>
-<td style="text-align:left;">
-3569/3553/3552/2921/1437/3576/2919/6364/2920/245972/4314/155066
-</td>
-<td style="text-align:right;">
-12
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa03030
-</td>
-<td style="text-align:left;">
-DNA replication
-</td>
-<td style="text-align:left;">
-7/287
-</td>
-<td style="text-align:left;">
-36/8105
-</td>
-<td style="text-align:right;">
-0.0002238
-</td>
-<td style="text-align:right;">
-0.0068642
-</td>
-<td style="text-align:right;">
-0.0062307
-</td>
-<td style="text-align:left;">
-5557/2237/5427/4174/4175/5983/5426
-</td>
-<td style="text-align:right;">
-7
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04114
-</td>
-<td style="text-align:left;">
-Oocyte meiosis
-</td>
-<td style="text-align:left;">
-13/287
-</td>
-<td style="text-align:left;">
-131/8105
-</td>
-<td style="text-align:right;">
-0.0007195
-</td>
-<td style="text-align:right;">
-0.0198587
-</td>
-<td style="text-align:right;">
-0.0180258
-</td>
-<td style="text-align:left;">
-9088/699/983/9134/5347/995/151648/9700/4085/9133/891/89869/286151
-</td>
-<td style="text-align:right;">
-13
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04914
-</td>
-<td style="text-align:left;">
-Progesterone-mediated oocyte maturation
-</td>
-<td style="text-align:left;">
-11/287
-</td>
-<td style="text-align:left;">
-102/8105
-</td>
-<td style="text-align:right;">
-0.0009190
-</td>
-<td style="text-align:right;">
-0.0230592
-</td>
-<td style="text-align:right;">
-0.0209309
-</td>
-<td style="text-align:left;">
-890/9088/699/983/5347/995/993/4085/9133/891/3835
-</td>
-<td style="text-align:right;">
-11
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04668
-</td>
-<td style="text-align:left;">
-TNF signaling pathway
-</td>
-<td style="text-align:left;">
-11/287
-</td>
-<td style="text-align:left;">
-112/8105
-</td>
-<td style="text-align:right;">
-0.0019811
-</td>
-<td style="text-align:right;">
-0.0455649
-</td>
-<td style="text-align:right;">
-0.0413594
-</td>
-<td style="text-align:left;">
-3569/3553/2921/1437/2919/7128/6364/5743/2920/197259/4314
-</td>
-<td style="text-align:right;">
-11
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa00360
-</td>
-<td style="text-align:left;">
-Phenylalanine metabolism
-</td>
-<td style="text-align:left;">
-4/287
-</td>
-<td style="text-align:left;">
-17/8105
-</td>
-<td style="text-align:right;">
-0.0025431
-</td>
-<td style="text-align:right;">
-0.0539917
-</td>
-<td style="text-align:right;">
-0.0490085
-</td>
-<td style="text-align:left;">
-314/8639/4129/218
-</td>
-<td style="text-align:right;">
-4
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05146
-</td>
-<td style="text-align:left;">
-Amoebiasis
-</td>
-<td style="text-align:left;">
-10/287
-</td>
-<td style="text-align:left;">
-102/8105
-</td>
-<td style="text-align:right;">
-0.0031788
-</td>
-<td style="text-align:right;">
-0.0626684
-</td>
-<td style="text-align:right;">
-0.0568844
-</td>
-<td style="text-align:left;">
-3569/3553/284217/2921/1437/3576/2919/2920/3911/2774
-</td>
-<td style="text-align:right;">
-10
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa01523
-</td>
-<td style="text-align:left;">
-Antifolate resistance
-</td>
-<td style="text-align:left;">
-5/287
-</td>
-<td style="text-align:left;">
-31/8105
-</td>
-<td style="text-align:right;">
-0.0042864
-</td>
-<td style="text-align:right;">
-0.0786280
-</td>
-<td style="text-align:right;">
-0.0713709
-</td>
-<td style="text-align:left;">
-3569/3553/1719/7298/2352
-</td>
-<td style="text-align:right;">
-5
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa01230
-</td>
-<td style="text-align:left;">
-Biosynthesis of amino acids
-</td>
-<td style="text-align:left;">
-8/287
-</td>
-<td style="text-align:left;">
-75/8105
-</td>
-<td style="text-align:right;">
-0.0048304
-</td>
-<td style="text-align:right;">
-0.0786280
-</td>
-<td style="text-align:right;">
-0.0713709
-</td>
-<td style="text-align:left;">
-445/230/26227/29968/1373/113675/2027/1491
-</td>
-<td style="text-align:right;">
-8
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04630
-</td>
-<td style="text-align:left;">
-JAK-STAT signaling pathway
-</td>
-<td style="text-align:left;">
-13/287
-</td>
-<td style="text-align:left;">
-162/8105
-</td>
-<td style="text-align:right;">
-0.0048430
-</td>
-<td style="text-align:right;">
-0.0786280
-</td>
-<td style="text-align:right;">
-0.0713709
-</td>
-<td style="text-align:left;">
-3569/1437/894/8835/11009/896/3570/1950/1440/3563/5155/58985/5618
-</td>
-<td style="text-align:right;">
-13
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa00051
-</td>
-<td style="text-align:left;">
-Fructose and mannose metabolism
-</td>
-<td style="text-align:left;">
-5/287
-</td>
-<td style="text-align:left;">
-33/8105
-</td>
-<td style="text-align:right;">
-0.0056523
-</td>
-<td style="text-align:right;">
-0.0866693
-</td>
-<td style="text-align:right;">
-0.0786701
-</td>
-<td style="text-align:left;">
-230/57016/3795/80201/5208
-</td>
-<td style="text-align:right;">
-5
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05202
-</td>
-<td style="text-align:left;">
-Transcriptional misregulation in cancer
-</td>
-<td style="text-align:left;">
-14/287
-</td>
-<td style="text-align:left;">
-192/8105
-</td>
-<td style="text-align:right;">
-0.0081368
-</td>
-<td style="text-align:right;">
-0.1099936
-</td>
-<td style="text-align:right;">
-0.0998416
-</td>
-<td style="text-align:left;">
-3569/890/1437/894/3576/7490/64332/3398/4314/51274/1647/26471/3728/1649
-</td>
-<td style="text-align:right;">
-14
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa00350
-</td>
-<td style="text-align:left;">
-Tyrosine metabolism
-</td>
-<td style="text-align:left;">
-5/287
-</td>
-<td style="text-align:left;">
-36/8105
-</td>
-<td style="text-align:right;">
-0.0082371
-</td>
-<td style="text-align:right;">
-0.1099936
-</td>
-<td style="text-align:right;">
-0.0998416
-</td>
-<td style="text-align:left;">
-314/8639/4129/2954/218
-</td>
-<td style="text-align:right;">
-5
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04060
+path:hsa04060
 </td>
 <td style="text-align:left;">
 Cytokine-cytokine receptor interaction
 </td>
-<td style="text-align:left;">
-19/287
-</td>
-<td style="text-align:left;">
-295/8105
+<td style="text-align:right;">
+115
 </td>
 <td style="text-align:right;">
-0.0084360
+17
 </td>
 <td style="text-align:right;">
-0.1099936
+2
 </td>
 <td style="text-align:right;">
-0.0998416
-</td>
-<td style="text-align:left;">
-3569/3553/9966/3552/2921/1437/3576/2919/6364/11009/2920/3570/652/9518/1440/3563/58985/26525/5618
+6.437442e-11
 </td>
 <td style="text-align:right;">
-19
+9.032857e-01
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-hsa04061
+path:hsa04657
 </td>
 <td style="text-align:left;">
-Viral protein interaction with cytokine and cytokine receptor
-</td>
-<td style="text-align:left;">
-9/287
-</td>
-<td style="text-align:left;">
-100/8105
+IL-17 signaling pathway
 </td>
 <td style="text-align:right;">
-0.0087676
+64
 </td>
 <td style="text-align:right;">
-0.1099936
+13
 </td>
 <td style="text-align:right;">
-0.0998416
-</td>
-<td style="text-align:left;">
-3569/2921/3576/2919/6364/11009/2920/3570/58985
+0
 </td>
 <td style="text-align:right;">
-9
+2.006953e-10
+</td>
+<td style="text-align:right;">
+1.000000e+00
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-hsa04064
+path:hsa05323
 </td>
 <td style="text-align:left;">
-NF-kappa B signaling pathway
-</td>
-<td style="text-align:left;">
-9/287
-</td>
-<td style="text-align:left;">
-104/8105
+Rheumatoid arthritis
 </td>
 <td style="text-align:right;">
-0.0112091
-</td>
-<td style="text-align:right;">
-0.1345094
-</td>
-<td style="text-align:right;">
-0.1220948
-</td>
-<td style="text-align:left;">
-3553/2921/3576/2919/7128/5743/2920/29775/1647
-</td>
-<td style="text-align:right;">
-9
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05165
-</td>
-<td style="text-align:left;">
-Human papillomavirus infection
-</td>
-<td style="text-align:left;">
-20/287
-</td>
-<td style="text-align:left;">
-331/8105
-</td>
-<td style="text-align:right;">
-0.0135332
-</td>
-<td style="text-align:right;">
-0.1556315
-</td>
-<td style="text-align:right;">
-0.1412673
-</td>
-<td style="text-align:left;">
-890/284217/9134/894/8638/5649/5743/3371/896/5933/3911/245972/8515/1869/1950/3955/7481/7483/155066/8321
-</td>
-<td style="text-align:right;">
-20
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05134
-</td>
-<td style="text-align:left;">
-Legionellosis
-</td>
-<td style="text-align:left;">
-6/287
-</td>
-<td style="text-align:left;">
-57/8105
-</td>
-<td style="text-align:right;">
-0.0149279
-</td>
-<td style="text-align:right;">
-0.1648035
-</td>
-<td style="text-align:right;">
-0.1495928
-</td>
-<td style="text-align:left;">
-3569/3553/2921/3576/2919/2920
-</td>
-<td style="text-align:right;">
-6
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa00240
-</td>
-<td style="text-align:left;">
-Pyrimidine metabolism
-</td>
-<td style="text-align:left;">
-6/287
-</td>
-<td style="text-align:left;">
-58/8105
-</td>
-<td style="text-align:right;">
-0.0161713
-</td>
-<td style="text-align:right;">
-0.1689253
-</td>
-<td style="text-align:right;">
-0.1533342
-</td>
-<td style="text-align:left;">
-6241/7083/7298/978/7378/6240
-</td>
-<td style="text-align:right;">
-6
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05226
-</td>
-<td style="text-align:left;">
-Gastric cancer
-</td>
-<td style="text-align:left;">
-11/287
-</td>
-<td style="text-align:left;">
-149/8105
-</td>
-<td style="text-align:right;">
-0.0165253
-</td>
-<td style="text-align:right;">
-0.1689253
-</td>
-<td style="text-align:right;">
-0.1533342
-</td>
-<td style="text-align:left;">
-4041/9134/1870/1869/1950/7481/1647/7483/399694/8321/3728
+59
 </td>
 <td style="text-align:right;">
 11
 </td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04068
-</td>
-<td style="text-align:left;">
-FoxO signaling pathway
-</td>
-<td style="text-align:left;">
-10/287
-</td>
-<td style="text-align:left;">
-131/8105
+<td style="text-align:right;">
+1
 </td>
 <td style="text-align:right;">
-0.0176292
+1.340250e-08
 </td>
 <td style="text-align:right;">
-0.1737732
-</td>
-<td style="text-align:right;">
-0.1577347
-</td>
-<td style="text-align:left;">
-3569/10733/894/5347/9133/891/6648/1950/1647/6446
-</td>
-<td style="text-align:right;">
-10
+8.678446e-01
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-hsa01200
+path:hsa04061
 </td>
 <td style="text-align:left;">
-Carbon metabolism
-</td>
-<td style="text-align:left;">
-9/287
-</td>
-<td style="text-align:left;">
-115/8105
+Viral protein interaction with cytokine and cytokine receptor
 </td>
 <td style="text-align:right;">
-0.0205362
+32
 </td>
 <td style="text-align:right;">
-0.1954476
+8
 </td>
 <td style="text-align:right;">
-0.1774086
-</td>
-<td style="text-align:left;">
-230/26227/29968/80201/84532/1373/113675/2027/9563
+1
 </td>
 <td style="text-align:right;">
-9
+1.193469e-07
+</td>
+<td style="text-align:right;">
+6.659379e-01
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-hsa04640
+path:hsa04668
+</td>
+<td style="text-align:left;">
+TNF signaling pathway
+</td>
+<td style="text-align:right;">
+94
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2.353460e-07
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04640
 </td>
 <td style="text-align:left;">
 Hematopoietic cell lineage
 </td>
-<td style="text-align:left;">
-8/287
-</td>
-<td style="text-align:left;">
-99/8105
-</td>
 <td style="text-align:right;">
-0.0237713
-</td>
-<td style="text-align:right;">
-0.2186964
-</td>
-<td style="text-align:right;">
-0.1985116
-</td>
-<td style="text-align:left;">
-3569/3553/3552/1437/3570/1440/1604/3563
+41
 </td>
 <td style="text-align:right;">
 8
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+9.333811e-07
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05146
+</td>
+<td style="text-align:left;">
+Amoebiasis
+</td>
+<td style="text-align:right;">
+61
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2.284843e-06
+</td>
+<td style="text-align:right;">
+8.766280e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa03460
+</td>
+<td style="text-align:left;">
+Fanconi anemia pathway
+</td>
+<td style="text-align:right;">
+48
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+<td style="text-align:right;">
+3.468817e-06
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05202
+</td>
+<td style="text-align:left;">
+Transcriptional misregulation in cancer
+</td>
+<td style="text-align:right;">
+122
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+3.975183e-06
+</td>
+<td style="text-align:right;">
+7.831845e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04630
+</td>
+<td style="text-align:left;">
+JAK-STAT signaling pathway
+</td>
+<td style="text-align:right;">
+96
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1.546535e-05
+</td>
+<td style="text-align:right;">
+6.315429e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa03440
+</td>
+<td style="text-align:left;">
+Homologous recombination
+</td>
+<td style="text-align:right;">
+39
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+<td style="text-align:right;">
+3.773112e-05
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05417
+</td>
+<td style="text-align:left;">
+Lipid and atherosclerosis
+</td>
+<td style="text-align:right;">
+154
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4.259294e-05
+</td>
+<td style="text-align:right;">
+9.950238e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04914
+</td>
+<td style="text-align:left;">
+Progesterone-mediated oocyte maturation
+</td>
+<td style="text-align:right;">
+77
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+<td style="text-align:right;">
+4.954075e-05
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04064
+</td>
+<td style="text-align:left;">
+NF-kappa B signaling pathway
+</td>
+<td style="text-align:right;">
+73
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+7.724718e-05
+</td>
+<td style="text-align:right;">
+9.183598e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04114
+</td>
+<td style="text-align:left;">
+Oocyte meiosis
+</td>
+<td style="text-align:right;">
+99
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+8.554284e-01
+</td>
+<td style="text-align:right;">
+1.174922e-04
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa00260
+</td>
+<td style="text-align:left;">
+Glycine, serine and threonine metabolism
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1.203799e-04
+</td>
+<td style="text-align:right;">
+5.545767e-02
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04080
+</td>
+<td style="text-align:left;">
+Neuroactive ligand-receptor interaction
+</td>
+<td style="text-align:right;">
+76
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+7.731078e-01
+</td>
+<td style="text-align:right;">
+2.186150e-04
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05134
+</td>
+<td style="text-align:left;">
+Legionellosis
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3.759009e-04
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04115
+</td>
+<td style="text-align:left;">
+p53 signaling pathway
+</td>
+<td style="text-align:right;">
+67
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+4.011926e-02
+</td>
+<td style="text-align:right;">
+3.839455e-04
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa03030
+</td>
+<td style="text-align:left;">
+DNA replication
+</td>
+<td style="text-align:right;">
+35
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+<td style="text-align:right;">
+9.910943e-04
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05144
+</td>
+<td style="text-align:left;">
+Malaria
+</td>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.054800e-03
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05167
+</td>
+<td style="text-align:left;">
+Kaposi sarcoma-associated herpesvirus infection
+</td>
+<td style="text-align:right;">
+149
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2.375477e-03
+</td>
+<td style="text-align:right;">
+9.630064e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05143
+</td>
+<td style="text-align:left;">
+African trypanosomiasis
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2.708445e-03
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04621
+</td>
+<td style="text-align:left;">
+NOD-like receptor signaling pathway
+</td>
+<td style="text-align:right;">
+129
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3.488666e-03
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04923
+</td>
+<td style="text-align:left;">
+Regulation of lipolysis in adipocytes
+</td>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3.547179e-03
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05332
+</td>
+<td style="text-align:left;">
+Graft-versus-host disease
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3.934360e-03
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa01230
+</td>
+<td style="text-align:left;">
+Biosynthesis of amino acids
+</td>
+<td style="text-align:right;">
+57
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4.722445e-03
+</td>
+<td style="text-align:right;">
+3.005321e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05162
+</td>
+<td style="text-align:left;">
+Measles
+</td>
+<td style="text-align:right;">
+108
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4.848407e-03
+</td>
+<td style="text-align:right;">
+7.091949e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05171
+</td>
+<td style="text-align:left;">
+Coronavirus disease - COVID-19
+</td>
+<td style="text-align:right;">
+168
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+5.261665e-03
+</td>
+<td style="text-align:right;">
+1.000000e+00
 </td>
 </tr>
 </tbody>
@@ -4444,7 +4318,7 @@ Hematopoietic cell lineage
 </div>
 <div id="cki-tri-vs-cki" class="section level4">
 <h4>CKI-Tri vs CKI</h4>
-<pre class="r"><code>enrichKEGG_treat_sig[[&quot;CKI-Tri vs CKI&quot;]][1:30,] %&gt;% as.data.frame() %&gt;% dplyr::select(-c(&quot;ID&quot;)) %&gt;% kable() %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;% scroll_box(height=&quot;600px&quot;)</code></pre>
+<pre class="r"><code>kegga_treat_sig[[&quot;CKI-Tri vs CKI&quot;]][1:30,] %&gt;% as.data.frame() %&gt;% kable(digits = Inf ) %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;% scroll_box(height=&quot;600px&quot;)</code></pre>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:600px; ">
 <table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -4452,900 +4326,714 @@ Hematopoietic cell lineage
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 </th>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-Description
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-GeneRatio
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-BgRatio
+Pathway
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
-pvalue
+N
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
-p.adjust
+Up
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
-qvalue
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-geneID
+Down
 </th>
 <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
-Count
+P.Up
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+P.Down
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
-hsa04657
+path:hsa04657
 </td>
 <td style="text-align:left;">
 IL-17 signaling pathway
 </td>
-<td style="text-align:left;">
-13/171
-</td>
-<td style="text-align:left;">
-94/8105
-</td>
 <td style="text-align:right;">
-0.0000001
-</td>
-<td style="text-align:right;">
-0.0000190
-</td>
-<td style="text-align:right;">
-0.0000158
-</td>
-<td style="text-align:left;">
-3569/5743/2921/2919/3553/3576/2920/3934/7184/6364/4314/1437/1440
+64
 </td>
 <td style="text-align:right;">
 13
 </td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05323
-</td>
-<td style="text-align:left;">
-Rheumatoid arthritis
-</td>
-<td style="text-align:left;">
-12/171
-</td>
-<td style="text-align:left;">
-93/8105
+<td style="text-align:right;">
+0
 </td>
 <td style="text-align:right;">
-0.0000005
+3.616725e-13
 </td>
 <td style="text-align:right;">
-0.0000667
-</td>
-<td style="text-align:right;">
-0.0000558
-</td>
-<td style="text-align:left;">
-3569/2921/2919/3552/3553/3576/2920/245972/6364/4314/1437/3109
-</td>
-<td style="text-align:right;">
-12
+1.000000e+00
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-hsa05417
-</td>
-<td style="text-align:left;">
-Lipid and atherosclerosis
-</td>
-<td style="text-align:left;">
-17/171
-</td>
-<td style="text-align:left;">
-215/8105
-</td>
-<td style="text-align:right;">
-0.0000026
-</td>
-<td style="text-align:right;">
-0.0002299
-</td>
-<td style="text-align:right;">
-0.0001922
-</td>
-<td style="text-align:left;">
-3569/1543/2921/2919/19/3553/3576/2920/7184/4688/4314/6648/3309/1649/929/3310/5608
-</td>
-<td style="text-align:right;">
-17
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04668
-</td>
-<td style="text-align:left;">
-TNF signaling pathway
-</td>
-<td style="text-align:left;">
-12/171
-</td>
-<td style="text-align:left;">
-112/8105
-</td>
-<td style="text-align:right;">
-0.0000037
-</td>
-<td style="text-align:right;">
-0.0002500
-</td>
-<td style="text-align:right;">
-0.0002089
-</td>
-<td style="text-align:left;">
-3569/5743/2921/2919/3553/2920/6364/4314/1437/9586/9021/5608
-</td>
-<td style="text-align:right;">
-12
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05146
-</td>
-<td style="text-align:left;">
-Amoebiasis
-</td>
-<td style="text-align:left;">
-11/171
-</td>
-<td style="text-align:left;">
-102/8105
-</td>
-<td style="text-align:right;">
-0.0000090
-</td>
-<td style="text-align:right;">
-0.0004825
-</td>
-<td style="text-align:right;">
-0.0004033
-</td>
-<td style="text-align:left;">
-3569/2921/2919/3553/3576/2920/3911/284217/1437/2774/929
-</td>
-<td style="text-align:right;">
-11
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05134
-</td>
-<td style="text-align:left;">
-Legionellosis
-</td>
-<td style="text-align:left;">
-8/171
-</td>
-<td style="text-align:left;">
-57/8105
-</td>
-<td style="text-align:right;">
-0.0000228
-</td>
-<td style="text-align:right;">
-0.0010156
-</td>
-<td style="text-align:right;">
-0.0008488
-</td>
-<td style="text-align:left;">
-3569/2921/2919/3553/3576/2920/929/3310
-</td>
-<td style="text-align:right;">
-8
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04218
-</td>
-<td style="text-align:left;">
-Cellular senescence
-</td>
-<td style="text-align:left;">
-12/171
-</td>
-<td style="text-align:left;">
-156/8105
-</td>
-<td style="text-align:right;">
-0.0001067
-</td>
-<td style="text-align:right;">
-0.0040686
-</td>
-<td style="text-align:right;">
-0.0034005
-</td>
-<td style="text-align:left;">
-3569/3552/3576/1869/896/1870/894/2113/677/9134/3486/5608
-</td>
-<td style="text-align:right;">
-12
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04060
+path:hsa04060
 </td>
 <td style="text-align:left;">
 Cytokine-cytokine receptor interaction
 </td>
-<td style="text-align:left;">
-17/171
-</td>
-<td style="text-align:left;">
-295/8105
+<td style="text-align:right;">
+115
 </td>
 <td style="text-align:right;">
-0.0001544
+15
 </td>
 <td style="text-align:right;">
-0.0051542
+2
 </td>
 <td style="text-align:right;">
-0.0043079
-</td>
-<td style="text-align:left;">
-3569/2921/2919/3552/3553/3576/2920/652/9966/11009/6364/1437/26525/1440/8794/3570/4803
+4.608758e-12
 </td>
 <td style="text-align:right;">
-17
+5.513003e-01
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-hsa05202
+path:hsa05323
 </td>
 <td style="text-align:left;">
-Transcriptional misregulation in cancer
-</td>
-<td style="text-align:left;">
-13/171
-</td>
-<td style="text-align:left;">
-192/8105
+Rheumatoid arthritis
 </td>
 <td style="text-align:right;">
-0.0002002
+59
 </td>
 <td style="text-align:right;">
-0.0054346
+11
 </td>
 <td style="text-align:right;">
-0.0045423
-</td>
-<td style="text-align:left;">
-3569/3576/8464/4314/1437/894/64332/7490/1649/929/3486/1031/26471
+0
 </td>
 <td style="text-align:right;">
-13
+6.791268e-11
+</td>
+<td style="text-align:right;">
+1.000000e+00
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-hsa05165
-</td>
-<td style="text-align:left;">
-Human papillomavirus infection
-</td>
-<td style="text-align:left;">
-18/171
-</td>
-<td style="text-align:left;">
-331/8105
-</td>
-<td style="text-align:right;">
-0.0002035
-</td>
-<td style="text-align:right;">
-0.0054346
-</td>
-<td style="text-align:right;">
-0.0045423
-</td>
-<td style="text-align:left;">
-5743/1869/8515/896/245972/3693/3911/284217/3371/1950/7477/9586/894/5649/3955/9134/4242/4854
-</td>
-<td style="text-align:right;">
-18
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04061
+path:hsa04061
 </td>
 <td style="text-align:left;">
 Viral protein interaction with cytokine and cytokine receptor
 </td>
-<td style="text-align:left;">
-9/171
-</td>
-<td style="text-align:left;">
-100/8105
-</td>
 <td style="text-align:right;">
-0.0002461
-</td>
-<td style="text-align:right;">
-0.0059747
-</td>
-<td style="text-align:right;">
-0.0049936
-</td>
-<td style="text-align:left;">
-3569/2921/2919/3576/2920/11009/6364/8794/3570
-</td>
-<td style="text-align:right;">
-9
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04640
-</td>
-<td style="text-align:left;">
-Hematopoietic cell lineage
-</td>
-<td style="text-align:left;">
-8/171
-</td>
-<td style="text-align:left;">
-99/8105
-</td>
-<td style="text-align:right;">
-0.0011163
-</td>
-<td style="text-align:right;">
-0.0248374
-</td>
-<td style="text-align:right;">
-0.0207590
-</td>
-<td style="text-align:left;">
-3569/3552/3553/1437/1440/3570/929/3109
+32
 </td>
 <td style="text-align:right;">
 8
 </td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04151
-</td>
-<td style="text-align:left;">
-PI3K-Akt signaling pathway
-</td>
-<td style="text-align:left;">
-17/171
-</td>
-<td style="text-align:left;">
-354/8105
+<td style="text-align:right;">
+1
 </td>
 <td style="text-align:right;">
-0.0012566
+2.438238e-09
 </td>
 <td style="text-align:right;">
-0.0258084
-</td>
-<td style="text-align:right;">
-0.0215706
-</td>
-<td style="text-align:left;">
-3569/7184/8515/896/3693/3911/284217/3371/1950/9586/894/1440/5649/2261/3570/4803/9134
-</td>
-<td style="text-align:right;">
-17
+4.031305e-01
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-hsa04064
+path:hsa05417
 </td>
 <td style="text-align:left;">
-NF-kappa B signaling pathway
-</td>
-<td style="text-align:left;">
-8/171
-</td>
-<td style="text-align:left;">
-104/8105
+Lipid and atherosclerosis
 </td>
 <td style="text-align:right;">
-0.0015365
+154
 </td>
 <td style="text-align:right;">
-0.0284388
-</td>
-<td style="text-align:right;">
-0.0237691
-</td>
-<td style="text-align:left;">
-5743/2921/2919/3553/3576/2920/29775/929
-</td>
-<td style="text-align:right;">
-8
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05219
-</td>
-<td style="text-align:left;">
-Bladder cancer
-</td>
-<td style="text-align:left;">
-5/171
-</td>
-<td style="text-align:left;">
-41/8105
-</td>
-<td style="text-align:right;">
-0.0015977
-</td>
-<td style="text-align:right;">
-0.0284388
-</td>
-<td style="text-align:right;">
-0.0237691
-</td>
-<td style="text-align:left;">
-3576/1869/1870/1950/2261
-</td>
-<td style="text-align:right;">
-5
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04630
-</td>
-<td style="text-align:left;">
-JAK-STAT signaling pathway
-</td>
-<td style="text-align:left;">
-10/171
-</td>
-<td style="text-align:left;">
-162/8105
-</td>
-<td style="text-align:right;">
-0.0021997
-</td>
-<td style="text-align:right;">
-0.0367078
-</td>
-<td style="text-align:right;">
-0.0306803
-</td>
-<td style="text-align:left;">
-3569/11009/896/1950/1437/894/9021/1440/3570/8835
-</td>
-<td style="text-align:right;">
-10
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04512
-</td>
-<td style="text-align:left;">
-ECM-receptor interaction
-</td>
-<td style="text-align:left;">
-7/171
-</td>
-<td style="text-align:left;">
-88/8105
-</td>
-<td style="text-align:right;">
-0.0024874
-</td>
-<td style="text-align:right;">
-0.0388734
-</td>
-<td style="text-align:right;">
-0.0324903
-</td>
-<td style="text-align:left;">
-8515/3693/3911/284217/3371/5649/1605
-</td>
-<td style="text-align:right;">
-7
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05167
-</td>
-<td style="text-align:left;">
-Kaposi sarcoma-associated herpesvirus infection
-</td>
-<td style="text-align:left;">
-11/171
-</td>
-<td style="text-align:left;">
-194/8105
-</td>
-<td style="text-align:right;">
-0.0026207
-</td>
-<td style="text-align:right;">
-0.0388734
-</td>
-<td style="text-align:right;">
-0.0324903
-</td>
-<td style="text-align:left;">
-3569/5743/2921/2919/3576/2920/1869/1827/1870/1437/5608
-</td>
-<td style="text-align:right;">
-11
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04936
-</td>
-<td style="text-align:left;">
-Alcoholic liver disease
-</td>
-<td style="text-align:left;">
-9/171
-</td>
-<td style="text-align:left;">
-142/8105
-</td>
-<td style="text-align:right;">
-0.0030414
-</td>
-<td style="text-align:right;">
-0.0427390
-</td>
-<td style="text-align:right;">
-0.0357212
-</td>
-<td style="text-align:left;">
-3569/2921/2919/3553/3576/2920/929/5608/224
-</td>
-<td style="text-align:right;">
-9
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa01523
-</td>
-<td style="text-align:left;">
-Antifolate resistance
-</td>
-<td style="text-align:left;">
-4/171
-</td>
-<td style="text-align:left;">
-31/8105
-</td>
-<td style="text-align:right;">
-0.0038581
-</td>
-<td style="text-align:right;">
-0.0515052
-</td>
-<td style="text-align:right;">
-0.0430479
-</td>
-<td style="text-align:left;">
-3569/3553/2352/2348
-</td>
-<td style="text-align:right;">
-4
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05215
-</td>
-<td style="text-align:left;">
-Prostate cancer
-</td>
-<td style="text-align:left;">
-7/171
-</td>
-<td style="text-align:left;">
-97/8105
-</td>
-<td style="text-align:right;">
-0.0042985
-</td>
-<td style="text-align:right;">
-0.0546526
-</td>
-<td style="text-align:right;">
-0.0456785
-</td>
-<td style="text-align:left;">
-7184/1869/1870/1950/4314/9586/9134
-</td>
-<td style="text-align:right;">
-7
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04145
-</td>
-<td style="text-align:left;">
-Phagosome
-</td>
-<td style="text-align:left;">
-9/171
-</td>
-<td style="text-align:left;">
-152/8105
-</td>
-<td style="text-align:right;">
-0.0047753
-</td>
-<td style="text-align:right;">
-0.0563730
-</td>
-<td style="text-align:right;">
-0.0471164
-</td>
-<td style="text-align:left;">
-81035/4688/245972/3693/9902/929/10381/7277/3109
-</td>
-<td style="text-align:right;">
-9
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa00051
-</td>
-<td style="text-align:left;">
-Fructose and mannose metabolism
-</td>
-<td style="text-align:left;">
-4/171
-</td>
-<td style="text-align:left;">
-33/8105
-</td>
-<td style="text-align:right;">
-0.0048561
-</td>
-<td style="text-align:right;">
-0.0563730
-</td>
-<td style="text-align:right;">
-0.0471164
-</td>
-<td style="text-align:left;">
-57016/230/5208/3795
-</td>
-<td style="text-align:right;">
-4
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04110
-</td>
-<td style="text-align:left;">
-Cell cycle
-</td>
-<td style="text-align:left;">
-8/171
-</td>
-<td style="text-align:left;">
-126/8105
-</td>
-<td style="text-align:right;">
-0.0050713
-</td>
-<td style="text-align:right;">
-0.0564177
-</td>
-<td style="text-align:right;">
-0.0471537
-</td>
-<td style="text-align:left;">
-1869/896/1870/894/4998/9134/1031/5347
-</td>
-<td style="text-align:right;">
-8
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05166
-</td>
-<td style="text-align:left;">
-Human T-cell leukemia virus 1 infection
-</td>
-<td style="text-align:left;">
-11/171
-</td>
-<td style="text-align:left;">
-222/8105
-</td>
-<td style="text-align:right;">
-0.0072256
-</td>
-<td style="text-align:right;">
-0.0771692
-</td>
-<td style="text-align:right;">
-0.0644978
-</td>
-<td style="text-align:left;">
-3569/1869/896/1870/1437/9586/894/2113/9134/1031/3109
-</td>
-<td style="text-align:right;">
-11
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa04010
-</td>
-<td style="text-align:left;">
-MAPK signaling pathway
-</td>
-<td style="text-align:left;">
-13/171
-</td>
-<td style="text-align:left;">
-294/8105
-</td>
-<td style="text-align:right;">
-0.0091875
-</td>
-<td style="text-align:right;">
-0.0943487
-</td>
-<td style="text-align:right;">
-0.0788564
-</td>
-<td style="text-align:left;">
-3552/3553/1850/1950/25780/2261/4803/5801/1649/929/3310/5608/785
-</td>
-<td style="text-align:right;">
-13
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa00340
-</td>
-<td style="text-align:left;">
-Histidine metabolism
-</td>
-<td style="text-align:left;">
-3/171
-</td>
-<td style="text-align:left;">
-22/8105
-</td>
-<td style="text-align:right;">
-0.0105820
-</td>
-<td style="text-align:right;">
-0.1046441
-</td>
-<td style="text-align:right;">
-0.0874613
-</td>
-<td style="text-align:left;">
-218/4129/224
+14
 </td>
 <td style="text-align:right;">
 3
 </td>
+<td style="text-align:right;">
+3.191468e-09
+</td>
+<td style="text-align:right;">
+4.477029e-01
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-hsa05332
+path:hsa05146
 </td>
 <td style="text-align:left;">
-Graft-versus-host disease
-</td>
-<td style="text-align:left;">
-4/171
-</td>
-<td style="text-align:left;">
-42/8105
+Amoebiasis
 </td>
 <td style="text-align:right;">
-0.0114734
+61
 </td>
 <td style="text-align:right;">
-0.1075446
+9
 </td>
 <td style="text-align:right;">
-0.0898855
+2
+</td>
+<td style="text-align:right;">
+3.369301e-08
+</td>
+<td style="text-align:right;">
+2.547865e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04668
 </td>
 <td style="text-align:left;">
-3569/3552/3553/3109
+TNF signaling pathway
+</td>
+<td style="text-align:right;">
+94
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1.402841e-07
+</td>
+<td style="text-align:right;">
+4.447782e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05202
+</td>
+<td style="text-align:left;">
+Transcriptional misregulation in cancer
+</td>
+<td style="text-align:right;">
+122
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1.617675e-06
+</td>
+<td style="text-align:right;">
+3.093831e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05134
+</td>
+<td style="text-align:left;">
+Legionellosis
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.725302e-06
+</td>
+<td style="text-align:right;">
+5.537732e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04640
+</td>
+<td style="text-align:left;">
+Hematopoietic cell lineage
+</td>
+<td style="text-align:right;">
+41
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+7.505255e-06
+</td>
+<td style="text-align:right;">
+4.838920e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04080
+</td>
+<td style="text-align:left;">
+Neuroactive ligand-receptor interaction
+</td>
+<td style="text-align:right;">
+76
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+<td style="text-align:right;">
+2.744942e-05
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04630
+</td>
+<td style="text-align:left;">
+JAK-STAT signaling pathway
+</td>
+<td style="text-align:right;">
+96
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1.314334e-04
+</td>
+<td style="text-align:right;">
+1.982536e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04621
+</td>
+<td style="text-align:left;">
+NOD-like receptor signaling pathway
+</td>
+<td style="text-align:right;">
+129
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.357830e-04
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05144
+</td>
+<td style="text-align:left;">
+Malaria
+</td>
+<td style="text-align:right;">
+24
 </td>
 <td style="text-align:right;">
 4
 </td>
-</tr>
-<tr>
-<td style="text-align:left;">
-hsa05410
-</td>
-<td style="text-align:left;">
-Hypertrophic cardiomyopathy
-</td>
-<td style="text-align:left;">
-6/171
-</td>
-<td style="text-align:left;">
-90/8105
+<td style="text-align:right;">
+0
 </td>
 <td style="text-align:right;">
-0.0116809
+1.604193e-04
 </td>
 <td style="text-align:right;">
-0.1075446
-</td>
-<td style="text-align:right;">
-0.0898855
-</td>
-<td style="text-align:left;">
-3569/8515/3693/284217/1605/785
-</td>
-<td style="text-align:right;">
-6
+1.000000e+00
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-hsa05222
+path:hsa04064
 </td>
 <td style="text-align:left;">
-Small cell lung cancer
-</td>
-<td style="text-align:left;">
-6/171
-</td>
-<td style="text-align:left;">
-92/8105
+NF-kappa B signaling pathway
 </td>
 <td style="text-align:right;">
-0.0129274
-</td>
-<td style="text-align:right;">
-0.1150542
-</td>
-<td style="text-align:right;">
-0.0961620
-</td>
-<td style="text-align:left;">
-5743/1869/3911/284217/1870/9134
+73
 </td>
 <td style="text-align:right;">
 6
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2.088869e-04
+</td>
+<td style="text-align:right;">
+3.258244e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04218
+</td>
+<td style="text-align:left;">
+Cellular senescence
+</td>
+<td style="text-align:right;">
+141
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+2.506383e-04
+</td>
+<td style="text-align:right;">
+7.561901e-02
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04151
+</td>
+<td style="text-align:left;">
+PI3K-Akt signaling pathway
+</td>
+<td style="text-align:right;">
+225
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+3.152155e-04
+</td>
+<td style="text-align:right;">
+6.946354e-02
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05167
+</td>
+<td style="text-align:left;">
+Kaposi sarcoma-associated herpesvirus infection
+</td>
+<td style="text-align:right;">
+149
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+3.643350e-04
+</td>
+<td style="text-align:right;">
+4.266085e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05120
+</td>
+<td style="text-align:left;">
+Epithelial cell signaling in Helicobacter pylori infection
+</td>
+<td style="text-align:right;">
+59
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+6.219373e-04
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05171
+</td>
+<td style="text-align:left;">
+Coronavirus disease - COVID-19
+</td>
+<td style="text-align:right;">
+168
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+8.075663e-04
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05332
+</td>
+<td style="text-align:left;">
+Graft-versus-host disease
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+9.511499e-04
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa00340
+</td>
+<td style="text-align:left;">
+Histidine metabolism
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+<td style="text-align:right;">
+1.020990e-03
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04010
+</td>
+<td style="text-align:left;">
+MAPK signaling pathway
+</td>
+<td style="text-align:right;">
+217
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+1.030437e-03
+</td>
+<td style="text-align:right;">
+4.579362e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04936
+</td>
+<td style="text-align:left;">
+Alcoholic liver disease
+</td>
+<td style="text-align:right;">
+104
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1.384170e-03
+</td>
+<td style="text-align:right;">
+2.315744e-01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05142
+</td>
+<td style="text-align:left;">
+Chagas disease
+</td>
+<td style="text-align:right;">
+71
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.445664e-03
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa04933
+</td>
+<td style="text-align:left;">
+AGE-RAGE signaling pathway in diabetic complications
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2.454243e-03
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05140
+</td>
+<td style="text-align:left;">
+Leishmaniasis
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2.746668e-03
+</td>
+<td style="text-align:right;">
+1.000000e+00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05219
+</td>
+<td style="text-align:left;">
+Bladder cancer
+</td>
+<td style="text-align:right;">
+37
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3.539763e-01
+</td>
+<td style="text-align:right;">
+2.764455e-03
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05165
+</td>
+<td style="text-align:left;">
+Human papillomavirus infection
+</td>
+<td style="text-align:right;">
+258
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+3.227072e-02
+</td>
+<td style="text-align:right;">
+2.906586e-03
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+path:hsa05020
+</td>
+<td style="text-align:left;">
+Prion disease
+</td>
+<td style="text-align:right;">
+207
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+3.027138e-03
+</td>
+<td style="text-align:right;">
+8.468534e-01
 </td>
 </tr>
 </tbody>
@@ -5356,42 +5044,64 @@ Small cell lung cancer
 </div>
 <div id="visualisation" class="section level1">
 <h1>Visualisation</h1>
-<pre class="r"><code>big_df=list()
+<pre class="r"><code>top_kegg=list()
 for (i in 1:ncol(contrast)){
   #at each iteration, let x = name of each contrast group
   x=comparison_group[i,]
-  
-big_df[[x]] &lt;- enrichKEGG_treat[[x]][1:10,]
+
+top_kegg[[x]] &lt;- kegga_treat_sig[[x]][1:15,]
 }
+#combine all list from big merged_kegg into one
+merged_kegg &lt;- as.data.frame(do.call(rbind, lapply(top_kegg, as.data.frame))) %&gt;% rownames_to_column(&quot;group&quot;)
 
-#combine all list from big df into one
-df &lt;- as.data.frame(do.call(rbind, lapply(big_df, as.data.frame))) %&gt;% rownames_to_column(&quot;group&quot;) %&gt;% dplyr::select(-c(&quot;BgRatio&quot;, &quot;pvalue&quot;, &quot;geneID&quot;)) 
+#remove KEGG ID from group names
+merged_kegg$group &lt;- gsub(pattern = &quot;\\..*&quot;, &quot;&quot;, merged_kegg$group)
 
-df &lt;- df %&gt;% separate(col = GeneRatio, into = c(&quot;numerator&quot;, &quot;denomenator&quot;), sep = &quot;/&quot;)
-df$numerator &lt;- as.numeric(df$numerator)
-df$denomenator &lt;- as.numeric(df$denomenator)
-df$&#39;geneRatio&#39; &lt;- df$numerator / df$denomenator
-df &lt;- df %&gt;% filter(p.adjust &lt;= 0.05)
+#direction column
+merged_kegg &lt;- merged_kegg %&gt;% dplyr::mutate(direction = case_when
+                         (Up &gt; Down ~ &quot;Up-\nregulated\n&quot;,
+                          Up &lt; Down ~ &quot;Down-\nregulated\n&quot;,
+                          TRUE ~ &quot;Mutual&quot;))
 
+#geneRatio column
+merged_kegg &lt;- merged_kegg %&gt;% dplyr::mutate(geneRatio = case_when
+                                     (Up &gt; Down &amp; group == &quot;UT vs CKI&quot; ~ Up/215,
+                                       Up &gt; Down &amp; group == &quot;CKI-Omt vs CKI&quot; ~ Up/689,
+                                        Up &gt; Down &amp; group == &quot;CKI-Mac vs CKI&quot; ~ Up/353,
+                                        Up &gt; Down &amp; group == &quot;CKI-Nme vs CKI&quot; ~ Up/382,
+                                        Up &gt; Down &amp; group == &quot;CKI-Tri vs CKI&quot; ~ Up/358,
+                                      Up &lt; Down &amp; group == &quot;UT vs CKI&quot; ~ Down/215,
+                                       Up &lt; Down &amp; group == &quot;CKI-Omt vs CKI&quot; ~ Down/689,
+                                        Up &lt; Down &amp; group == &quot;CKI-Mac vs CKI&quot; ~ Down/353,
+                                        Up &lt; Down &amp; group == &quot;CKI-Nme vs CKI&quot; ~ Down/382,
+                                        Up &lt; Down &amp; group == &quot;CKI-Tri vs CKI&quot; ~ Down/358,
+                                       ))
 
-#remove GO ID from group names
-df$group &lt;- gsub(pattern = &quot;\\.hsa[0-9]*&quot;, &quot;&quot;, df$group)
+#pvalue colum
+merged_kegg &lt;- merged_kegg %&gt;% dplyr::mutate(pValue = case_when
+                         (Up &gt; Down ~ P.Up,
+                          Up &lt; Down ~ P.Down,
+                          TRUE ~ P.Up))
+
+merged_kegg &lt;- merged_kegg %&gt;% filter(pValue &lt;= 0.05)
 
 # Transform the column &#39;Description&#39; into factors
-df$Description &lt;- as.factor(df$Description)
+merged_kegg$Pathway &lt;- as.factor(merged_kegg$Pathway)
 
 # Transform FDR values by -log10(&#39;FDR values&#39;)
-df$&#39;|log10(FDR)|&#39; &lt;- -(log10(df$p.adjust))
+merged_kegg$&#39;|log10(FDR)|&#39; &lt;- -(log10(merged_kegg$pValue))
 
 # Change factor order
-df$group &lt;- factor(df$group, levels = c(&quot;CKI-Mac vs CKI&quot;, &quot;CKI-Nme vs CKI&quot;, &quot;CKI-Omt vs CKI&quot;, &quot;CKI-Tri vs CKI&quot;, &quot;UT vs CKI&quot;))
-df$Description &lt;- factor(df$Description, levels = rev(levels(df$Description)))
+merged_kegg$group &lt;- factor(merged_kegg$group, levels = c(&quot;UT vs CKI&quot;, &quot;CKI-Omt vs CKI&quot;, &quot;CKI-Mac vs CKI&quot;, &quot;CKI-Nme vs CKI&quot;, &quot;CKI-Tri vs CKI&quot;))
 
-group.labs &lt;- df$group
+merged_kegg$Pathway &lt;- factor(merged_kegg$Pathway, levels = rev(levels(merged_kegg$Pathway)))
 
-ggplot(df, aes(x = Description, y = group)) +
-  geom_point(data=df,aes(x=Description, y=group, size = geneRatio, colour = `|log10(FDR)|`), alpha=.9)+
+group.labs &lt;- merged_kegg$group
+
+ggplot(merged_kegg, aes(x = Pathway, y = group)) +
+  geom_point(data=merged_kegg,aes(x=Pathway, y=group, size = geneRatio, colour = `|log10(FDR)|`, shape = direction), alpha=.9)+
   # scale_y_discrete(labels =group.labs)+
+  scale_shape_manual(values = c(15,16,17))+
   scale_color_gradient(low = &quot;dodgerblue3&quot;, high = &quot;firebrick3&quot;, limits=c(0, NA))+
   coord_flip()+
   theme_bw()+
@@ -5401,23 +5111,94 @@ ggplot(df, aes(x = Description, y = group)) +
         axis.text = element_text(color = &quot;black&quot;),
         axis.title.x=element_blank())+
   xlab(label = &quot;&quot;)+
-  labs(color=expression(&quot;-log&quot;[10]*&quot;FDR&quot;), size=&quot;Gene Ratio&quot;)</code></pre>
-<p><img src="figure/kegg.Rmd/unnamed-chunk-6-1.png" width="768" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>ggsave(filename = &quot;enrichedKEGG_treat.svg&quot;, width = 7, height = 6.5, plot = last_plot(), path = here::here(&quot;2_plots/4_kegg/&quot;))</code></pre>
-<pre class="r"><code>kegg_id &lt;- &quot;hsa04657&quot;
+  labs(color=expression(&quot;-log&quot;[10]*&quot;FDR&quot;), size=&quot;Gene Ratio&quot;, shape = &quot;Expression&quot;)</code></pre>
+<p><img src="figure/kegg.Rmd/dotPlot-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>  # theme(legend.position = &quot;bottom&quot;)
+ggsave(filename = &quot;kegga_treat.svg&quot;, plot = last_plot(), path = here::here(&quot;2_plots/4_kegg/&quot;))</code></pre>
+<pre class="r"><code>#kegg pathway of interest
+kegg_id &lt;- &quot;hsa04110&quot;
 kegg_pathway &lt;- KEGGREST::keggGet(kegg_id)
 kegg_pathway_name &lt;- kegg_pathway[[1]]$NAME</code></pre>
-<div id="heatmap-of-il-17-signaling-pathway---homo-sapiens-human" class="section level2">
-<h2>Heatmap of IL-17 signaling pathway - Homo sapiens (human)</h2>
+<div id="heatmap-of-cell-cycle---homo-sapiens-human" class="section level2 tabset">
+<h2 class="tabset">Heatmap of Cell cycle - Homo sapiens (human)</h2>
 <div id="partial" class="section level3">
 <h3>Partial</h3>
+<p>The partial heatmap illustrates the logFC of significant DE genes within the Cell cycle - Homo sapiens (human) pathway.</p>
 <pre class="r"><code># kegg_id &lt;- &quot;hsa04657&quot;
 # kegg_pathway &lt;- KEGGREST::keggGet(kegg_id)
 # kegg_pathway_name &lt;- kegg_pathway[[1]]$NAME
-
 entrezID=list()
-matrix=list()
+matrix_all=list()
+for (i in 1:ncol(contrast)){
+  #at each iteration, let x = name of each contrast group
+  x=comparison_group[i,]
+  
+  entrezID[[x]] &lt;- kegg_pathway[[1]]$GENE %&gt;% as.data.frame()
+  entrezID[[x]] &lt;- entrezID[[x]][seq(1, nrow(entrezID[[x]]), 2),] %&gt;% as.data.frame()
+  colnames(entrezID[[x]]) &lt;- &quot;entrezid&quot;
+  
+  match &lt;- treat_sig[[x]]$entrezid %in% entrezID[[x]]$entrezid
+  matrix_all[[x]] &lt;- treat_sig[[x]][match, c(&quot;gene_name&quot;, &quot;logFC&quot;)]
+}
 
+big_matrix &lt;- as.data.frame(do.call(rbind, lapply(matrix_all, as.data.frame))) %&gt;% rownames_to_column(&quot;group&quot;) 
+big_matrix$group &lt;- gsub(pattern = &quot;\\..*&quot;, &quot;&quot;, big_matrix$group)
+
+big_matrix &lt;- pivot_wider(big_matrix, names_from = group, values_from = logFC) %&gt;% column_to_rownames(&quot;gene_name&quot;)
+# big_matrix[is.na(big_matrix)]=-0.7305
+summary(big_matrix)</code></pre>
+<pre><code> CKI-Mac vs CKI   CKI-Nme vs CKI   CKI-Omt vs CKI   CKI-Tri vs CKI  
+ Min.   :-2.762   Min.   :-3.720   Min.   :-4.734   Min.   :-3.899  
+ 1st Qu.:-1.899   1st Qu.:-2.129   1st Qu.:-3.202   1st Qu.:-2.058  
+ Median :-1.891   Median :-2.035   Median :-2.492   Median :-1.924  
+ Mean   :-1.205   Mean   :-1.643   Mean   :-2.183   Mean   :-1.638  
+ 3rd Qu.:-1.661   3rd Qu.:-1.921   3rd Qu.:-1.979   3rd Qu.:-1.752  
+ Max.   : 2.190   Max.   : 1.973   Max.   : 3.273   Max.   : 2.302  
+ NA&#39;s   :25       NA&#39;s   :24       NA&#39;s   :4        NA&#39;s   :22      
+   UT vs CKI    
+ Min.   :1.921  
+ 1st Qu.:1.934  
+ Median :2.150  
+ Mean   :2.150  
+ 3rd Qu.:2.226  
+ Max.   :2.519  
+ NA&#39;s   :25     </code></pre>
+<pre class="r"><code>## this was a waste of time
+# huge_matrix &lt;- as.data.frame(do.call(rbind, lapply(treat_all, as.data.frame))) %&gt;% rownames_to_column(&quot;group&quot;) %&gt;% dplyr::select(c(&quot;group&quot;, &quot;gene&quot;, &quot;logFC&quot;))
+# huge_matrix$group &lt;- gsub(pattern = &quot;\\..*&quot;, &quot;&quot;, huge_matrix$group)
+# huge_matrix &lt;- pivot_wider(huge_matrix, names_from = group, values_from = logFC) %&gt;% column_to_rownames(&quot;gene&quot;)
+# huge_matrix &lt;- huge_matrix[rownames(big_matrix),]
+
+  my_palette &lt;- colorRampPalette(c(
+  rgb(32,121,226, maxColorValue = 255),
+  # rgb(144,203,180, maxColorValue = 255), 
+  rgb(255,255,255, maxColorValue = 255), 
+  # rgb(251,192,52, maxColorValue = 255), 
+  rgb(226,46,45, maxColorValue = 255)))(n = 201)
+ 
+p &lt;- pheatmap(mat = big_matrix,
+         cluster_cols = F,
+         cluster_rows = F,
+         clustering_distance_rows = &quot;euclidean&quot;,
+         treeheight_row = 30,
+         treeheight_col = 20,
+         cutree_rows = 4,
+         cutree_cols = 3,
+         na_col = &quot;white&quot;,
+         main = paste0(&quot;Heatmap of &quot;, kegg_pathway_name,&quot;\n&quot;),
+         angle_col =90,
+         
+         # scale = &quot;row&quot;,
+         legend_breaks = c(seq(-8, 8, by = 1), max(big_matrix, na.rm = T)),
+         legend_labels = c(seq(-8, 8, by = 1), &quot;logCPM\n&quot;),
+         # border_color = F,
+         border_color = &quot;gray90&quot;,
+         color = my_palette,
+         )</code></pre>
+<p><img src="figure/kegg.Rmd/partialPathway,%20-1.png" width="768" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>invisible(dev.print(device = svg, here::here(&quot;2_plots/4_kegg/heatmap_partial.svg&quot;)))</code></pre>
+<pre class="r"><code>entrezID=list()
+matrix=list()
 for (i in 1:ncol(contrast)){
   #at each iteration, let x = name of each contrast group
   x=comparison_group[i,]
@@ -5427,12 +5208,12 @@ for (i in 1:ncol(contrast)){
   entrezID[[x]] &lt;- separate_rows(entrezID[[x]],.,sep = &quot;/&quot;)
   colnames(entrezID[[x]]) &lt;- &quot;entrezid&quot;
   
-  match &lt;- treat_filtered[[x]]$entrezid %in% entrezID[[x]]$entrezid
-
-  matrix[[x]] &lt;- treat_filtered[[x]][match, c(&quot;gene_name&quot;, &quot;logFC&quot;)]
+  match &lt;- treat_sig[[x]]$entrezid %in% entrezID[[x]]$entrezid
+  matrix[[x]] &lt;- treat_sig[[x]][match, c(&quot;gene_name&quot;, &quot;logFC&quot;)]
 }
 
-matrix_merged &lt;- matrix$`UT vs CKI` %&gt;% 
+matrix_merged &lt;- 
+  matrix$`UT vs CKI` %&gt;% 
   left_join(matrix$`CKI-Mac vs CKI`, by = &quot;gene_name&quot;) %&gt;% 
   left_join(matrix$`CKI-Nme vs CKI`, by = &quot;gene_name&quot;) %&gt;% 
   left_join(matrix$`CKI-Omt vs CKI`, by = &quot;gene_name&quot;) %&gt;% 
@@ -5440,16 +5221,12 @@ matrix_merged &lt;- matrix$`UT vs CKI` %&gt;%
   column_to_rownames(&quot;gene_name&quot;)
 
 colnames(matrix_merged) &lt;- c(&quot;UT\nvs\nCKI&quot;, &quot;CKI-Mac\nvs\nCKI&quot;, &quot;CKI-Nme\nvs\nCKI&quot;, &quot;CKI-Omt\nvs\nCKI&quot;, &quot;CKI-Tri\nvs\nCKI&quot;)
-
-
 my_palette &lt;- colorRampPalette(c(
   rgb(32,121,226, maxColorValue = 255),
   # rgb(144,203,180, maxColorValue = 255), 
-  rgb(254,238,229, maxColorValue = 255), 
+  rgb(254,248,239, maxColorValue = 255), 
   # rgb(251,192,52, maxColorValue = 255), 
   rgb(226,46,45, maxColorValue = 255)))(n = 201)
-
-
 pheatmap(mat = matrix_merged,
          clustering_distance_rows = &quot;euclidean&quot;,
          treeheight_row = 70,
@@ -5461,70 +5238,76 @@ pheatmap(mat = matrix_merged,
          # fontsize_col = 18,
          angle_col =0,
          border_color = &quot;gray70&quot;,
-         color = my_palette)</code></pre>
-<p><img src="figure/kegg.Rmd/partialPathway-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>invisible(dev.print(svg, here::here(&quot;2_plots/4_kegg/heatmap_partial.svg&quot;)))</code></pre>
+         color = my_palette)
+invisible(dev.print(svg, here::here(&quot;2_plots/4_kegg/heatmap_partial.svg&quot;)))</code></pre>
 </div>
-<div id="complete" class="section level3">
-<h3>Complete</h3>
-<pre class="r"><code># kegg_id &lt;- &quot;hsa04657&quot;
-# kegg_pathway &lt;- KEGGREST::keggGet(kegg_id)
-# kegg_pathway_name &lt;- kegg_pathway[[1]]$NAME
-
-entrezID=list()
+<div id="complete-pathway" class="section level3">
+<h3>Complete Pathway</h3>
+<p>This heatmap illustrates the logfc of all the genes within the Cell cycle - Homo sapiens (human), regardless of their statistical significance. Th</p>
+<pre class="r"><code>entrezID=list()
 matrix_all=list()
-
 for (i in 1:ncol(contrast)){
   #at each iteration, let x = name of each contrast group
   x=comparison_group[i,]
   
   entrezID[[x]] &lt;- kegg_pathway[[1]]$GENE %&gt;% as.data.frame()
   entrezID[[x]] &lt;- entrezID[[x]][seq(1, nrow(entrezID[[x]]), 2),] %&gt;% as.data.frame()
-
   colnames(entrezID[[x]]) &lt;- &quot;entrezid&quot;
   
-  match &lt;- treat_unfiltered[[x]]$entrezid %in% entrezID[[x]]$entrezid
-
-  matrix_all[[x]] &lt;- treat_unfiltered[[x]][match, c(&quot;gene_name&quot;, &quot;logFC&quot;)]
+  match &lt;- treat_all[[x]]$entrezid %in% entrezID[[x]]$entrezid
+  matrix_all[[x]] &lt;- treat_all[[x]][match, c(&quot;gene_name&quot;, &quot;logFC&quot;)]
 }
-
 matrix_all_merged &lt;- matrix_all$`UT vs CKI` %&gt;% 
   left_join(matrix_all$`CKI-Mac vs CKI`, by = &quot;gene_name&quot;) %&gt;% 
   left_join(matrix_all$`CKI-Nme vs CKI`, by = &quot;gene_name&quot;) %&gt;% 
   left_join(matrix_all$`CKI-Omt vs CKI`, by = &quot;gene_name&quot;) %&gt;% 
   left_join(matrix_all$`CKI-Tri vs CKI`, by = &quot;gene_name&quot;) %&gt;% 
   column_to_rownames(&quot;gene_name&quot;)
-
 colnames(matrix_all_merged) &lt;- c(&quot;UT vs CKI&quot;, &quot;CKI-Mac vs CKI&quot;, &quot;CKI-Nme vs CKI&quot;, &quot;CKI-Omt vs CKI&quot;, &quot;CKI-Tri vs CKI&quot;)
 
-p &lt;- pheatmap(mat = matrix_all_merged,
-         cluster_cols = F,
+summary(matrix_all_merged)</code></pre>
+<pre><code>   UT vs CKI       CKI-Mac vs CKI    CKI-Nme vs CKI    CKI-Omt vs CKI   
+ Min.   :-1.1178   Min.   :-2.7624   Min.   :-3.7203   Min.   :-4.7338  
+ 1st Qu.: 0.0725   1st Qu.:-0.8730   1st Qu.:-0.7379   1st Qu.:-1.2907  
+ Median : 0.2723   Median :-0.1407   Median :-0.1544   Median :-0.2154  
+ Mean   : 0.3832   Mean   :-0.2785   Mean   :-0.2538   Mean   :-0.5285  
+ 3rd Qu.: 0.7418   3rd Qu.: 0.2129   3rd Qu.: 0.2733   3rd Qu.: 0.3363  
+ Max.   : 2.5192   Max.   : 2.1897   Max.   : 1.9727   Max.   : 3.2729  
+ CKI-Tri vs CKI   
+ Min.   :-3.8990  
+ 1st Qu.:-0.9164  
+ Median :-0.1483  
+ Mean   :-0.3246  
+ 3rd Qu.: 0.2606  
+ Max.   : 2.3024  </code></pre>
+<pre class="r"><code>p &lt;- pheatmap(mat = matrix_all_merged,
+         cluster_cols = T,
          clustering_distance_rows = &quot;euclidean&quot;,
-         treeheight_row = 70,
-         treeheight_col = 50,
+         treeheight_row = 60,
+         treeheight_col = 20,
          cutree_rows = 4,
+         cutree_cols = 3,
          
-         # legend_labels = &quot;logFC&quot;,
          main = paste0(&quot;Heatmap of &quot;, kegg_pathway_name),
-         # cellwidth = 65,
-         # cellheight = 25,
-         
-         # fontsize = 14,
-         # fontsize_row = 12,
-         # fontsize_number = 10,
-         # fontsize_col = 18,
-         angle_col =90,
          
          scale = &quot;row&quot;,
-         # legend_breaks = c(seq(-2, 8, by = 2), max(matrix_all_merged)),
-         # legend_labels = c(seq(-2, 8, by = 2), &quot;logCPM\n&quot;),
+         legend = T,
+         legend_breaks = c(seq(-3, 3, by = .5), 1.7),
+         legend_labels = c(seq(-3, 3, by = .5), &quot;Z-Score\n\n&quot;),
          # border_color = F,
          border_color = &quot;gray70&quot;,
          color = my_palette,
          )</code></pre>
 <p><img src="figure/kegg.Rmd/completePathway-1.png" width="768" style="display: block; margin: auto;" /></p>
 <pre class="r"><code># ggsave(filename = &quot;heatmap_all.svg&quot;,plot = last_plot(), path = here::here(&quot;2_plots/4_kegg/&quot;))
-invisible(dev.print(width = 8.5, height = 18, device = svg, here::here(&quot;2_plots/4_kegg/heatmap_complete.svg&quot;)))</code></pre>
+invisible(dev.print(width = 8.8, height = 22, device = svg, here::here(&quot;2_plots/4_kegg/heatmap_complete.svg&quot;)))</code></pre>
+</div>
+</div>
+</div>
+<div id="export-data" class="section level1">
+<h1>Export Data</h1>
+<pre class="r"><code>writexl::write_xlsx(x = enrichKEGG_treat, path = here::here(&quot;3_output/enrichKEGG_treat_sig.xlsx&quot;))
+writexl::write_xlsx(x = kegga_treat, path = here::here(&quot;3_output/kegga_treat_sig.xlsx&quot;))</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -5596,50 +5379,48 @@ loaded via a namespace (and not attached):
  [61] ggplotify_0.1.0             ellipsis_0.3.2             
  [63] jquerylib_0.1.4             Rcpp_1.0.6                 
  [65] progress_1.2.2              zlibbioc_1.38.0            
- [67] RCurl_1.98-1.3              prettyunits_1.1.1          
- [69] viridis_0.6.2               SummarizedExperiment_1.22.0
- [71] haven_2.4.3                 fs_1.5.0                   
- [73] here_1.0.1                  data.table_1.14.0          
- [75] DO.db_2.9                   openxlsx_4.2.4             
- [77] reprex_2.0.1                whisker_0.4                
- [79] matrixStats_0.60.1          patchwork_1.1.1            
- [81] hms_1.1.1                   evaluate_0.14              
- [83] xtable_1.8-4                XML_3.99-0.6               
- [85] rio_0.5.27                  readxl_1.3.1               
- [87] gridExtra_2.3               compiler_4.1.0             
- [89] shadowtext_0.0.9            writexl_1.4.0              
- [91] crayon_1.4.1                htmltools_0.5.2            
- [93] ggfun_0.0.4                 later_1.2.0                
- [95] tzdb_0.1.2                  aplot_0.1.1                
- [97] geneplotter_1.70.0          lubridate_1.7.10           
- [99] DBI_1.1.1                   tweenr_1.0.2               
-[101] dbplyr_2.1.1                rappdirs_0.3.3             
-[103] MASS_7.3-54                 Matrix_1.3-3               
-[105] car_3.0-11                  cli_3.0.1                  
-[107] igraph_1.2.6                GenomicRanges_1.44.0       
-[109] pkgconfig_2.0.3             foreign_0.8-81             
-[111] xml2_1.3.2                  ggtree_3.0.4               
-[113] svglite_2.0.0               annotate_1.70.0            
-[115] bslib_0.3.1                 webshot_0.5.2              
-[117] XVector_0.32.0              rvest_1.0.2                
-[119] yulab.utils_0.0.4           digest_0.6.27              
-[121] Biostrings_2.60.1           rmarkdown_2.11             
-[123] cellranger_1.1.0            fastmatch_1.1-3            
-[125] tidytree_0.3.5              curl_4.3.2                 
-[127] nlme_3.1-152                lifecycle_1.0.1            
-[129] jsonlite_1.7.2              carData_3.0-4              
-[131] viridisLite_0.4.0           fansi_0.5.0                
-[133] pillar_1.6.4                lattice_0.20-44            
-[135] fastmap_1.1.0               httr_1.4.2                 
-[137] survival_3.2-11             GO.db_3.13.0               
-[139] glue_1.4.2                  zip_2.2.0                  
-[141] png_0.1-7                   bit_4.0.4                  
-[143] ggforce_0.3.3               stringi_1.6.2              
-[145] sass_0.4.0                  blob_1.2.2                 
-[147] DESeq2_1.32.0               memoise_2.0.0              
-[149] ape_5.5                    </code></pre>
-</div>
-</div>
+ [67] BiasedUrn_1.07              RCurl_1.98-1.3             
+ [69] prettyunits_1.1.1           viridis_0.6.2              
+ [71] SummarizedExperiment_1.22.0 haven_2.4.3                
+ [73] fs_1.5.0                    here_1.0.1                 
+ [75] data.table_1.14.0           DO.db_2.9                  
+ [77] openxlsx_4.2.4              reprex_2.0.1               
+ [79] whisker_0.4                 matrixStats_0.60.1         
+ [81] patchwork_1.1.1             hms_1.1.1                  
+ [83] evaluate_0.14               xtable_1.8-4               
+ [85] XML_3.99-0.6                rio_0.5.27                 
+ [87] readxl_1.3.1                gridExtra_2.3              
+ [89] compiler_4.1.0              shadowtext_0.0.9           
+ [91] writexl_1.4.0               crayon_1.4.1               
+ [93] htmltools_0.5.2             ggfun_0.0.4                
+ [95] later_1.2.0                 tzdb_0.1.2                 
+ [97] aplot_0.1.1                 geneplotter_1.70.0         
+ [99] lubridate_1.7.10            DBI_1.1.1                  
+[101] tweenr_1.0.2                dbplyr_2.1.1               
+[103] rappdirs_0.3.3              MASS_7.3-54                
+[105] Matrix_1.3-3                car_3.0-11                 
+[107] cli_3.0.1                   igraph_1.2.6               
+[109] GenomicRanges_1.44.0        pkgconfig_2.0.3            
+[111] foreign_0.8-81              xml2_1.3.2                 
+[113] ggtree_3.0.4                svglite_2.0.0              
+[115] annotate_1.70.0             bslib_0.3.1                
+[117] webshot_0.5.2               XVector_0.32.0             
+[119] rvest_1.0.2                 yulab.utils_0.0.4          
+[121] digest_0.6.27               Biostrings_2.60.1          
+[123] rmarkdown_2.11              cellranger_1.1.0           
+[125] fastmatch_1.1-3             tidytree_0.3.5             
+[127] curl_4.3.2                  nlme_3.1-152               
+[129] lifecycle_1.0.1             jsonlite_1.7.2             
+[131] carData_3.0-4               viridisLite_0.4.0          
+[133] fansi_0.5.0                 pillar_1.6.4               
+[135] lattice_0.20-44             fastmap_1.1.0              
+[137] httr_1.4.2                  survival_3.2-11            
+[139] GO.db_3.13.0                glue_1.4.2                 
+[141] zip_2.2.0                   png_0.1-7                  
+[143] bit_4.0.4                   ggforce_0.3.3              
+[145] stringi_1.6.2               sass_0.4.0                 
+[147] blob_1.2.2                  DESeq2_1.32.0              
+[149] memoise_2.0.0               ape_5.5                    </code></pre>
 </div>
 </div>
 

@@ -8,11 +8,13 @@ editor_options:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE,
-                      message = FALSE,
-                      warning = FALSE,
-                      eval = TRUE,
-                      fig.width = 11)
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE,
+  eval = TRUE,
+  fig.width = 11
+)
 ```
 
 # Data Setup
@@ -34,7 +36,7 @@ library(grid)
 library(pander)
 library(cowplot)
 
-# Custom ggplot 
+# Custom ggplot
 library(ggbiplot)
 library(ggrepel)
 
@@ -47,24 +49,7 @@ library(org.Hs.eg.db)
 # library(enrichplot)
 library(biomaRt)
 
-theme_set(theme_bw())
-
-theme_update(
-  legend.background = element_rect(fill = "transparent", colour = NA),
-  legend.box.background = element_rect(fill = "transparent", colour = NA),
-  
-  panel.background = element_rect(fill = "transparent",colour = NA),
-  plot.background = element_rect(fill = "transparent", colour = NA),
-  
-  plot.title = element_text(color = "gray20", size = 14, angle = 0, hjust = 0, vjust = .5, face = "bold"),
-  plot.subtitle = element_text(color = "gray25", size = 12, angle = 0, hjust = 0, vjust = .5, face = "plain"),
-  legend.title = element_text(color = "gray25", size = 11, angle = 0, hjust = 0, vjust = .5, face = "plain"),
-  legend.text = element_text(color = "gray25", size = 11, angle = 0, hjust = 0, vjust = .5, face = "plain"),
-  axis.text.x = element_text(color = "gray30", size = 10, angle = 0, hjust = .5, vjust = .5, face = "plain"),
-  axis.text.y = element_text(color = "gray30", size = 10, angle = 0, hjust = 1, vjust = 0, face = "plain"),  
-  axis.title.x = element_text(color = "gray30", size = 12, angle = 0, hjust = .5, vjust = 0, face = "plain"),
-  axis.title.y = element_text(color = "gray30", size = 12, angle = 90, hjust = .5, vjust = .5, face = "plain"))
-
+theme_set(theme_minimal())
 ```
 
 
@@ -77,144 +62,227 @@ DGElist object containing the raw feature count, sample metadata, and gene metad
 dge <- readRDS(here::here("0_data/rds_object/dge.rds"))
 designMatrix <- readRDS(here::here("0_data/rds_object/designMatrix.rds"))
 contrast <- readRDS(here::here("0_data/rds_object/contrastMatrix.rds"))
-
 treat <- readRDS(here::here("0_data/rds_object/treat.rds"))
-treat_filtered <- readRDS(here::here("0_data/rds_object/treat_filtered.rds"))
-
-# qlf <- readRDS(here::here("0_data/rds_object/qlf.rds"))
-# qlf_filtered <- readRDS(here::here("0_data/rds_object/qlf_filtered.rds"))
+treat_sig <- readRDS(here::here("0_data/rds_object/treat_sig.rds"))
 ```
 
 # Gene Ontology (GO) Enrichment Analysis
+Gene ontology can be perfomred with many packages. `edgeR` can be used to perform GO enrihcment analysis 
 
-### Using the `clusterProfiler::enrichGO` package {.tabset}
+### Using the `edgeR::goanna` package {.tabset}
 
-GO enrichment analysis is performed using the DGE obtained from GLM:QLF + TREAT.
-
-The top 30 most significant GO terms are displayed in relation to their respective comparison
-
-```{r treat_enrichGO}
-comparison_group=colnames(contrast) %>% as.data.frame()
+```{r treat_goana}
+comparison_group <- colnames(contrast) %>% as.data.frame()
 goSummaries <- url("https://uofabioinformaticshub.github.io/summaries2GO/data/goSummaries.RDS") %>%
-  readRDS() 
+  readRDS()
 minPath <- 3
 
 # Create list object
-enrichGO_treat=list()
-for (i in 1:ncol(contrast)){
-  #at each iteration, let x = name of each contrast group
-  x=comparison_group[i,]
-  
-  #populate the enrichGo list with all GO terms
-  GOresults <- enrichGO(gene = treat_filtered[[x]]$entrezid,
-                        keyType = "ENTREZID",
-                        ont = "ALL",
-                        OrgDb = org.Hs.eg.db,
-                        pAdjustMethod = "fdr")
+goana_treat <- list()
+goana_treat_sig <- list()
 
-  enrichGO_treat[[x]] <- GOresults@result
-  
-  enrichGO_treat[[x]] <- enrichGO_treat[[x]] %>% rownames_to_column("id") %>%
-  left_join(goSummaries) %>%
-  dplyr::filter(shortest_path >= minPath) %>%
-  column_to_rownames("id")
+for (i in 1:ncol(contrast)) {
+  # at each iteration, let x = name of each contrast group
+  x <- comparison_group[i, ]
 
-  #filter only significant GO terms. all terms already sig
-  # enrichGO_treat_sig[[x]] <- enrichGO_treat[[x]] %>% filter(pvalue <= 0.05)
+  # populate the goanna list with all GO terms
+  goana_treat[[x]] <- edgeR::goana.DGELRT(
+    de = treat[[x]],
+    geneid = treat[[x]]$genes$entrezid,
+    FDR = 0.05,
+    species = "Hs",
+    trend = T,
+    ont = "ALL"
+  )
+
+  # extract the top 300 enriched results
+  goana_treat_sig[[x]] <- topGO(results = goana_treat[[x]], ontology = c("MF", "BP", "CC"), number = 300)
+
+  # bind with goSummary to filter out ontologies above level 3
+  goana_treat_sig[[x]] <- goana_treat_sig[[x]] %>%
+    rownames_to_column("id") %>%
+    left_join(goSummaries) %>%
+    dplyr::filter(shortest_path >= minPath) %>%
+    column_to_rownames("id")
 }
-
-enrichGO_treat %>% saveRDS(file = here::here("0_data/rds_object/enrichGO_treat.rds"))
-
-#save each unfiltered comparison group in the output directory
-writexl::write_xlsx(x = enrichGO_treat,
-                    path = here::here("3_output/enrichGO_treat.xlsx"))
-
 ```
 
+<!-- ### Using the `clusterProfiler::enrichGO` package {.tabset} -->
 
+<!-- GO enrichment analysis is performed using the DGE obtained from GLM:QLF + TREAT. -->
 
+<!-- The top 30 most significant GO terms are displayed in relation to their respective comparison -->
+
+```{r treat_enrichGO, eval=FALSE}
+comparison_group <- colnames(contrast) %>% as.data.frame()
+goSummaries <- url("https://uofabioinformaticshub.github.io/summaries2GO/data/goSummaries.RDS") %>%
+  readRDS()
+minPath <- 3
+
+# Create list object
+enrichGO_treat <- list()
+for (i in 1:ncol(contrast)) {
+  # at each iteration, let x = name of each contrast group
+  x <- comparison_group[i, ]
+
+  # populate the enrichGo list with all GO terms
+  GOresults <- enrichGO(
+    gene = treat_filtered[[x]]$entrezid,
+    keyType = "ENTREZID",
+    ont = "ALL",
+    OrgDb = org.Hs.eg.db,
+    pAdjustMethod = "fdr"
+  )
+
+  enrichGO_treat[[x]] <- GOresults@result
+
+  enrichGO_treat[[x]] <- enrichGO_treat[[x]] %>%
+    rownames_to_column("id") %>%
+    left_join(goSummaries) %>%
+    dplyr::filter(shortest_path >= minPath) %>%
+    column_to_rownames("id")
+}
+```
 
 #### Untreated vs CKI
 
 ```{r}
-enrichGO_treat[["UT vs CKI"]][1:30,] %>% as.data.frame() %>% dplyr::select(-c("ID", "shortest_path", "longest_path", "terminal_node", "ontology")) %>% kable() %>% kable_styling(bootstrap_options = c("striped", "hover")) %>% scroll_box(height="600px")
+goana_treat_sig[["UT vs CKI"]][1:30, ] %>%
+  as.data.frame() %>%
+  dplyr::select(-c("shortest_path", "longest_path", "terminal_node", "ontology")) %>%
+  kable(digits = Inf) %>%
+  kable_styling(bootstrap_options = c("striped", "hover")) %>%
+  scroll_box(height = "600px")
 ```
 
 #### CKI-Mac vs CKI
 
 ```{r}
-enrichGO_treat[["CKI-Mac vs CKI"]][1:30,] %>% as.data.frame() %>% dplyr::select(-c("ID", "shortest_path", "longest_path", "terminal_node", "ontology")) %>% kable() %>% kable_styling(bootstrap_options = c("striped", "hover")) %>% scroll_box(height="600px")
+goana_treat_sig[["CKI-Mac vs CKI"]][1:30, ] %>%
+  as.data.frame() %>%
+  dplyr::select(-c("shortest_path", "longest_path", "terminal_node", "ontology")) %>%
+  kable(digits = Inf) %>%
+  kable_styling(bootstrap_options = c("striped", "hover")) %>%
+  scroll_box(height = "600px")
 ```
 
 #### CKI-Nme vs CKI
 
 ```{r}
-enrichGO_treat[["CKI-Nme vs CKI"]][1:30,] %>% as.data.frame() %>% dplyr::select(-c("ID", "shortest_path", "longest_path", "terminal_node", "ontology")) %>% kable() %>% kable_styling(bootstrap_options = c("striped", "hover")) %>% scroll_box(height="600px")
+goana_treat_sig[["CKI-Nme vs CKI"]][1:30, ] %>%
+  as.data.frame() %>%
+  dplyr::select(-c("shortest_path", "longest_path", "terminal_node", "ontology")) %>%
+  kable(digits = Inf) %>%
+  kable_styling(bootstrap_options = c("striped", "hover")) %>%
+  scroll_box(height = "600px")
 ```
 
 #### CKI-Omt vs CKI
 
 ```{r}
-enrichGO_treat[["CKI-Omt vs CKI"]][1:30,] %>% as.data.frame() %>% dplyr::select(-c("ID", "shortest_path", "longest_path", "terminal_node", "ontology")) %>% kable() %>% kable_styling(bootstrap_options = c("striped", "hover")) %>% scroll_box(height="600px")
+goana_treat_sig[["CKI-Omt vs CKI"]][1:30, ] %>%
+  as.data.frame() %>%
+  dplyr::select(-c("shortest_path", "longest_path", "terminal_node", "ontology")) %>%
+  kable(digits = Inf) %>%
+  kable_styling(bootstrap_options = c("striped", "hover")) %>%
+  scroll_box(height = "600px")
 ```
 
 #### CKI-Tri vs CKI
 
 ```{r}
-enrichGO_treat[["CKI-Tri vs CKI"]][1:30,] %>% as.data.frame() %>% dplyr::select(-c("ID", "shortest_path", "longest_path", "terminal_node", "ontology")) %>% kable() %>% kable_styling(bootstrap_options = c("striped", "hover")) %>% scroll_box(height="600px")
+goana_treat_sig[["CKI-Tri vs CKI"]][1:30, ] %>%
+  as.data.frame() %>%
+  dplyr::select(-c("shortest_path", "longest_path", "terminal_node", "ontology")) %>%
+  kable(digits = Inf) %>%
+  kable_styling(bootstrap_options = c("striped", "hover")) %>%
+  scroll_box(height = "600px")
 ```
-
 
 ### Enriched GO terms
-```{r, fig.width=7, fig.height=8}
-big_df=list()
-for (i in 1:ncol(contrast)){
-  #at each iteration, let x = name of each contrast group
-  x=comparison_group[i,]
-  
-big_df[[x]] <- enrichGO_treat[[x]][1:7,]
+```{r dotPlot, fig.width=8, fig.height=9}
+top_go <- list()
+for (i in 1:ncol(contrast)) {
+  # at each iteration, let x = name of each contrast group
+  x <- comparison_group[i, ]
+
+  top_go[[x]] <- goana_treat_sig[[x]][1:7,]
 }
+# combine all list from big merged_go into one
+merged_go <- as.data.frame(do.call(rbind, lapply(top_go, as.data.frame))) %>% rownames_to_column("group")
 
-#combine all list from big df into one
-df <- as.data.frame(do.call(rbind, lapply(big_df, as.data.frame))) %>% rownames_to_column("group") %>% dplyr::select(-c("BgRatio", "pvalue", "geneID", "shortest_path", "longest_path", "terminal_node", "ontology" )) 
+# remove KEGG ID from group names
+merged_go$group <- gsub(pattern = "\\..*", "", merged_go$group)
 
-df <- df %>% separate(col = GeneRatio, into = c("numerator", "denomenator"), sep = "/")
-df$numerator <- as.numeric(df$numerator)
-df$denomenator <- as.numeric(df$denomenator)
-df$'geneRatio' <- df$numerator / df$denomenator
+# direction column
+merged_go <- merged_go %>% dplyr::mutate(direction = case_when
+(
+  Up > Down ~ "Up-\nregulated\n",
+  Up < Down ~ "Down-\nregulated\n",
+  TRUE ~ "Mutual"
+))
 
+# geneRatio column 
+merged_go <- merged_go %>% dplyr::mutate(geneRatio = case_when
+(
+  Up > Down & group == "UT vs CKI" ~ Up / 215,
+  Up > Down & group == "CKI-Omt vs CKI" ~ Up / 689,
+  Up > Down & group == "CKI-Mac vs CKI" ~ Up / 353,
+  Up > Down & group == "CKI-Nme vs CKI" ~ Up / 382,
+  Up > Down & group == "CKI-Tri vs CKI" ~ Up / 358,
+  Up < Down & group == "UT vs CKI" ~ Down / 215,
+  Up < Down & group == "CKI-Omt vs CKI" ~ Down / 689,
+  Up < Down & group == "CKI-Mac vs CKI" ~ Down / 353,
+  Up < Down & group == "CKI-Nme vs CKI" ~ Down / 382,
+  Up < Down & group == "CKI-Tri vs CKI" ~ Down / 358,
+))
 
-#remove GO ID from group names
-df$group <- gsub(pattern = "\\.GO:[0-9]*", "", df$group)
+# pvalue column
+merged_go <- merged_go %>% dplyr::mutate(pValue = case_when
+(
+  Up > Down ~ P.Up,
+  Up < Down ~ P.Down,
+  TRUE ~ P.Up
+))
+
+merged_go <- merged_go %>% filter(pValue <= 0.05)
 
 # Transform the column 'Description' into factors
-df$Description <- as.factor(df$Description)
+merged_go$Term <- as.factor(merged_go$Term)
 
 # Transform FDR values by -log10('FDR values')
-df$'|log10(FDR)|' <- -(log10(df$p.adjust))
+merged_go$"|log10(FDR)|" <- -(log10(merged_go$pValue))
 
 # Change factor order
-df$group <- factor(df$group, levels = c("CKI-Mac vs CKI", "CKI-Nme vs CKI", "CKI-Omt vs CKI", "CKI-Tri vs CKI", "UT vs CKI"))
-df$Description <- factor(df$Description, levels = rev(levels(df$Description)))
+merged_go$group <- factor(merged_go$group, levels = c("UT vs CKI", "CKI-Omt vs CKI", "CKI-Mac vs CKI", "CKI-Nme vs CKI", "CKI-Tri vs CKI"))
 
-group.labs <- df$group
+# merged_go$Term <- factor(merged_go, levels = rev(levels(merged_go$Term)))
 
-ggplot(df, aes(x = Description, y = group)) +
-  geom_point(data=df,aes(x=Description, y=group, size = geneRatio, colour = `|log10(FDR)|`), alpha=.9)+
+group.labs <- merged_go$group
+
+ggplot(merged_go, aes(x = Term, y = group)) +
+  geom_point(data = merged_go, aes(x = Term, y = group, size = geneRatio, colour = `|log10(FDR)|`, shape = direction), alpha = .9) +
   # scale_y_discrete(labels =group.labs)+
-  scale_color_gradient(low = "dodgerblue3", high = "firebrick3", limits=c(0, NA))+
-  coord_flip()+
-  theme_bw()+
-  theme(axis.ticks.length=unit(-0.1, "cm"),
-        axis.text.x = element_text(margin=margin(5,5,0,5,"pt"),angle = 45, hjust = 1),
-        axis.text.y = element_text(margin=margin(5,5,5,5,"pt")),
-        axis.text = element_text(color = "black"),
-        axis.title.x=element_blank())+
-  xlab(label = "")+
-  labs(color=expression("-log"[10]*"FDR"), size="Gene Ratio")
+  scale_shape_manual(values = c(15, 16, 17)) +
+  scale_color_gradient(low = "dodgerblue3", high = "firebrick3", limits = c(0, NA)) +
+  coord_flip() +
+  theme_bw() +
+  theme(
+    axis.ticks.length = unit(-0.1, "cm"),
+    axis.text.x = element_text(margin = margin(5, 5, 0, 5, "pt"), angle = 45, hjust = 1),
+    axis.text.y = element_text(margin = margin(5, 5, 5, 5, "pt")),
+    axis.text = element_text(color = "black"),
+    axis.title.x = element_blank()
+  ) +
+  xlab(label = "") +
+  labs(color = expression("-log"[10] * "FDR"), size = "Gene Ratio", shape = "Expression")
 
-ggsave(filename = "enrichedGO_treat.svg", width = 7, height = 6.5, plot = last_plot(), path = here::here("2_plots/3_go/"))
-
+ggsave(filename = "dot_goanna_treat.svg", plot = last_plot(), path = here::here("2_plots/3_go/"))
 ```
 
 
+# Export Data
+```{r export}
+writexl::write_xlsx(x = goana_treat, path = here::here("3_output/goana_treat.xlsx"))
+# writexl::write_xlsx(x = enrichGO_treat, path = here::here("3_output/enrichGO_treat.xlsx"))
+```

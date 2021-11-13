@@ -422,7 +422,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2021-11-08
+<strong>Last updated:</strong> 2021-11-13
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 5 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 2
@@ -481,6 +481,28 @@ Size
 <tbody>
 <tr>
 <td style="text-align:left;">
+anno
+</td>
+<td style="text-align:left;">
+data.frame
+</td>
+<td style="text-align:left;">
+2.3 Kb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+anno_colour
+</td>
+<td style="text-align:left;">
+character
+</td>
+<td style="text-align:left;">
+624 bytes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 anno_colours
 </td>
 <td style="text-align:left;">
@@ -492,13 +514,24 @@ list
 </tr>
 <tr>
 <td style="text-align:left;">
-big_df
+big_matrix
 </td>
 <td style="text-align:left;">
-list
+data.frame
 </td>
 <td style="text-align:left;">
-36.5 Kb
+4.3 Kb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+common
+</td>
+<td style="text-align:left;">
+data.frame
+</td>
+<td style="text-align:left;">
+310 Kb
 </td>
 </tr>
 <tr>
@@ -536,17 +569,6 @@ matrix;array
 </tr>
 <tr>
 <td style="text-align:left;">
-df
-</td>
-<td style="text-align:left;">
-data.frame
-</td>
-<td style="text-align:left;">
-10 Kb
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 dge
 </td>
 <td style="text-align:left;">
@@ -558,24 +580,13 @@ DGEList
 </tr>
 <tr>
 <td style="text-align:left;">
-enrichGO_treat
-</td>
-<td style="text-align:left;">
-list
-</td>
-<td style="text-align:left;">
-716.4 Kb
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 enrichKEGG_treat
 </td>
 <td style="text-align:left;">
 list
 </td>
 <td style="text-align:left;">
-491.7 Kb
+491.5 Kb
 </td>
 </tr>
 <tr>
@@ -586,7 +597,7 @@ enrichKEGG_treat_sig
 list
 </td>
 <td style="text-align:left;">
-86.2 Kb
+89.2 Kb
 </td>
 </tr>
 <tr>
@@ -597,40 +608,29 @@ entrezID
 list
 </td>
 <td style="text-align:left;">
-33.6 Kb
+43.6 Kb
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-estimateDispersion
+goana_treat
 </td>
 <td style="text-align:left;">
-DGEList
+list
 </td>
 <td style="text-align:left;">
-12.5 Mb
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-fit_GLM_qlf
-</td>
-<td style="text-align:left;">
-DGEGLM
-</td>
-<td style="text-align:left;">
-20.7 Mb
+22.2 Mb
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-GOresults
+goana_treat_sig
 </td>
 <td style="text-align:left;">
-enrichResult
+list
 </td>
 <td style="text-align:left;">
-123.9 Mb
+546 Kb
 </td>
 </tr>
 <tr>
@@ -652,7 +652,7 @@ group.labs
 factor
 </td>
 <td style="text-align:left;">
-1000 bytes
+1.1 Kb
 </td>
 </tr>
 <tr>
@@ -685,7 +685,7 @@ kegg_pathway
 list
 </td>
 <td style="text-align:left;">
-51.2 Kb
+64.7 Kb
 </td>
 </tr>
 <tr>
@@ -697,6 +697,28 @@ character
 </td>
 <td style="text-align:left;">
 152 bytes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+kegga_treat
+</td>
+<td style="text-align:left;">
+list
+</td>
+<td style="text-align:left;">
+349.2 Kb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+kegga_treat_sig
+</td>
+<td style="text-align:left;">
+list
+</td>
+<td style="text-align:left;">
+349.2 Kb
 </td>
 </tr>
 <tr>
@@ -718,7 +740,18 @@ logCPM
 matrix;array
 </td>
 <td style="text-align:left;">
-7.8 Kb
+8.4 Kb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MAplot
+</td>
+<td style="text-align:left;">
+list
+</td>
+<td style="text-align:left;">
+48 bytes
 </td>
 </tr>
 <tr>
@@ -729,18 +762,7 @@ match
 logical
 </td>
 <td style="text-align:left;">
-51.9 Kb
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-matrix
-</td>
-<td style="text-align:left;">
-list
-</td>
-<td style="text-align:left;">
-12.8 Kb
+51.8 Kb
 </td>
 </tr>
 <tr>
@@ -751,7 +773,7 @@ matrix_all
 list
 </td>
 <td style="text-align:left;">
-47.5 Kb
+85.1 Kb
 </td>
 </tr>
 <tr>
@@ -762,18 +784,29 @@ matrix_all_merged
 data.frame
 </td>
 <td style="text-align:left;">
-7.8 Kb
+13.5 Kb
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-matrix_merged
+merged_go
 </td>
 <td style="text-align:left;">
 data.frame
 </td>
 <td style="text-align:left;">
-1.8 Kb
+18 Kb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+merged_kegg
+</td>
+<td style="text-align:left;">
+data.frame
+</td>
+<td style="text-align:left;">
+11.7 Kb
 </td>
 </tr>
 <tr>
@@ -800,13 +833,24 @@ character
 </tr>
 <tr>
 <td style="text-align:left;">
+NB_dispersion
+</td>
+<td style="text-align:left;">
+DGEList
+</td>
+<td style="text-align:left;">
+12.5 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 p
 </td>
 <td style="text-align:left;">
 pheatmap
 </td>
 <td style="text-align:left;">
-2.5 Mb
+4.3 Mb
 </td>
 </tr>
 <tr>
@@ -817,7 +861,18 @@ qlf
 list
 </td>
 <td style="text-align:left;">
-101.1 Mb
+101 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+qlf_all
+</td>
+<td style="text-align:left;">
+list
+</td>
+<td style="text-align:left;">
+49.2 Mb
 </td>
 </tr>
 <tr>
@@ -828,12 +883,23 @@ qlf_decideTest
 list
 </td>
 <td style="text-align:left;">
-5.6 Kb
+10.8 Kb
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-qlf_filtered
+qlf_dispersion
+</td>
+<td style="text-align:left;">
+DGEGLM
+</td>
+<td style="text-align:left;">
+20.6 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+qlf_sig
 </td>
 <td style="text-align:left;">
 list
@@ -844,46 +910,35 @@ list
 </tr>
 <tr>
 <td style="text-align:left;">
-qlf_unfiltered
+top_go
 </td>
 <td style="text-align:left;">
 list
 </td>
 <td style="text-align:left;">
-49.2 Mb
+30.2 Kb
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-sample_type
+top_kegg
 </td>
 <td style="text-align:left;">
-character
+list
 </td>
 <td style="text-align:left;">
-624 bytes
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-test
-</td>
-<td style="text-align:left;">
-data.frame
-</td>
-<td style="text-align:left;">
-2.3 Kb
+22.2 Kb
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-test3
+top_unique
 </td>
 <td style="text-align:left;">
-data.frame
+list
 </td>
 <td style="text-align:left;">
-310 Kb
+256.4 Kb
 </td>
 </tr>
 <tr>
@@ -894,7 +949,18 @@ treat
 list
 </td>
 <td style="text-align:left;">
-96.2 Mb
+96.1 Mb
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+treat_all
+</td>
+<td style="text-align:left;">
+list
+</td>
+<td style="text-align:left;">
+49.2 Mb
 </td>
 </tr>
 <tr>
@@ -905,12 +971,12 @@ treat_decideTest
 list
 </td>
 <td style="text-align:left;">
-5.6 Kb
+10.8 Kb
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-treat_filtered
+treat_sig
 </td>
 <td style="text-align:left;">
 list
@@ -921,13 +987,13 @@ list
 </tr>
 <tr>
 <td style="text-align:left;">
-treat_unfiltered
+unique
 </td>
 <td style="text-align:left;">
-list
+data.frame
 </td>
 <td style="text-align:left;">
-49.2 Mb
+4.6 Kb
 </td>
 </tr>
 <tr>
@@ -997,16 +1063,16 @@ character
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree1a47b4569a1da246294ec62c8e47e2f6e2638e10targetblank1a47b45a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/1a47b4569a1da246294ec62c8e47e2f6e2638e10" target="_blank">1a47b45</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree848e971e9ccbf102898eeb089076953d68a0817ftargetblank848e971a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/848e971e9ccbf102898eeb089076953d68a0817f" target="_blank">848e971</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree1a47b4569a1da246294ec62c8e47e2f6e2638e10targetblank1a47b45a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomtranmanhha13501CKIDGEtree848e971e9ccbf102898eeb089076953d68a0817ftargetblank848e971a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/1a47b4569a1da246294ec62c8e47e2f6e2638e10" target="_blank">1a47b45</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/tranmanhha135/01_CKI_DGE/tree/848e971e9ccbf102898eeb089076953d68a0817f" target="_blank">848e971</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -1017,9 +1083,17 @@ Ignored files:
     Ignored:    .Rproj.user/
 
 Untracked files:
+    Untracked:  0_data/rds_object/qlf_all.rds
+    Untracked:  0_data/rds_object/qlf_sig.rds
+    Untracked:  0_data/rds_object/treat_all.rds
+    Untracked:  0_data/rds_object/treat_sig.rds
     Untracked:  1_analysis/about.html
     Untracked:  1_analysis/dge.html
+    Untracked:  1_analysis/figure/dge.Rmd/NBDispersion-1.png
     Untracked:  1_analysis/figure/dge.Rmd/coolmap-1.png
+    Untracked:  1_analysis/figure/dge.Rmd/heatmap_common-1.png
+    Untracked:  1_analysis/figure/dge.Rmd/heatmap_unique-1.png
+    Untracked:  1_analysis/figure/dge.Rmd/qlf_dispersion-1.png
     Untracked:  1_analysis/figure/dge.Rmd/volcano_treat-1.png
     Untracked:  1_analysis/figure/dge.Rmd/volcano_treat-2.png
     Untracked:  1_analysis/figure/dge.Rmd/volcano_treat-3.png
@@ -1027,6 +1101,8 @@ Untracked files:
     Untracked:  1_analysis/figure/dge.Rmd/volcano_treat-5.png
     Untracked:  1_analysis/figure/go.Rmd/
     Untracked:  1_analysis/figure/kegg.Rmd/completePathway-1.png
+    Untracked:  1_analysis/figure/kegg.Rmd/dotPlot-1.png
+    Untracked:  1_analysis/figure/kegg.Rmd/partialPathway, -1.png
     Untracked:  1_analysis/figure/kegg.Rmd/partialPathway-1.png
     Untracked:  1_analysis/figure/setUp.Rmd/afterFiltering-2.png
     Untracked:  1_analysis/go.html
@@ -1034,36 +1110,57 @@ Untracked files:
     Untracked:  1_analysis/kegg.html
     Untracked:  1_analysis/obtainData.html
     Untracked:  1_analysis/site_libs/
-    Untracked:  2_plots/1_setup/counts_after_filtering.svg
-    Untracked:  2_plots/1_setup/counts_before_filtering.svg
-    Untracked:  2_plots/2_dge/logCPM_heatmap.svg
+    Untracked:  2_plots/1_setup/after_normalisation.svg
+    Untracked:  2_plots/2_dge/MA_treat_CKI-Mac vs CKI.svg
+    Untracked:  2_plots/2_dge/MA_treat_CKI-Nme vs CKI.svg
+    Untracked:  2_plots/2_dge/MA_treat_CKI-Omt vs CKI.svg
+    Untracked:  2_plots/2_dge/MA_treat_CKI-Tri vs CKI.svg
+    Untracked:  2_plots/2_dge/MA_treat_UT vs CKI.svg
+    Untracked:  2_plots/2_dge/NB_dispersion.svg
+    Untracked:  2_plots/2_dge/heatmap_logCPM_common.svg
+    Untracked:  2_plots/2_dge/heatmap_logCPM_unique.svg
+    Untracked:  2_plots/2_dge/pValue_treat_CKI-Mac vs CKI.svg
+    Untracked:  2_plots/2_dge/pValue_treat_CKI-Nme vs CKI.svg
+    Untracked:  2_plots/2_dge/pValue_treat_CKI-Omt vs CKI.svg
+    Untracked:  2_plots/2_dge/pValue_treat_CKI-Tri vs CKI.svg
+    Untracked:  2_plots/2_dge/pValue_treat_UT vs CKI.svg
+    Untracked:  2_plots/2_dge/volcano_treat_CKI-Mac vs CKI.svg
+    Untracked:  2_plots/2_dge/volcano_treat_CKI-Nme vs CKI.svg
+    Untracked:  2_plots/2_dge/volcano_treat_CKI-Omt vs CKI.svg
+    Untracked:  2_plots/2_dge/volcano_treat_CKI-Tri vs CKI.svg
+    Untracked:  2_plots/2_dge/volcano_treat_UT vs CKI.svg
     Untracked:  2_plots/3_go/
     Untracked:  2_plots/4_kegg/
+    Untracked:  3_output/enrichKEGG_treat_sig.xlsx
+    Untracked:  3_output/goana_treat.xlsx
+    Untracked:  3_output/kegga_treat_sig.xlsx
+    Untracked:  3_output/qlf_decideTest.xlsx
+    Untracked:  3_output/qlf_sig.xlsx
+    Untracked:  3_output/treat_decideTest.xlsx
+    Untracked:  3_output/treat_sig.xlsx
+    Untracked:  Meeting Notes.pdf
 
 Unstaged changes:
     Modified:   0_data/rds_object/dge.rds
-    Modified:   0_data/rds_object/enrichGO_treat.rds
-    Modified:   0_data/rds_object/enrichKEGG_treat_filtered.rds
+    Deleted:    0_data/rds_object/dge_treat_unfiltered.rds
+    Deleted:    0_data/rds_object/enrichGO_treat.rds
+    Deleted:    0_data/rds_object/enrichKEGG_treat_filtered.rds
     Modified:   0_data/rds_object/qlf.rds
-    Modified:   0_data/rds_object/qlf_filtered.rds
+    Deleted:    0_data/rds_object/qlf_filtered.rds
     Modified:   0_data/rds_object/treat.rds
-    Modified:   0_data/rds_object/treat_filtered.rds
-    Modified:   0_data/rds_object/treat_unfiltered.rds
-    Modified:   1_analysis/about.Rmd
+    Deleted:    0_data/rds_object/treat_filtered.rds
+    Deleted:    0_data/rds_object/treat_unfiltered.rds
     Modified:   1_analysis/dge.Rmd
     Modified:   1_analysis/figure/dge.Rmd/MAplotCustom_treat-1.png
     Modified:   1_analysis/figure/dge.Rmd/MAplotCustom_treat-2.png
     Modified:   1_analysis/figure/dge.Rmd/MAplotCustom_treat-3.png
     Modified:   1_analysis/figure/dge.Rmd/MAplotCustom_treat-4.png
     Modified:   1_analysis/figure/dge.Rmd/MAplotCustom_treat-5.png
-    Modified:   1_analysis/figure/dge.Rmd/estimateDispersion-1.png
-    Modified:   1_analysis/figure/dge.Rmd/fitGLMqlf-1.png
     Modified:   1_analysis/figure/dge.Rmd/pValueHistogram_treat-1.png
     Modified:   1_analysis/figure/dge.Rmd/pValueHistogram_treat-2.png
     Modified:   1_analysis/figure/dge.Rmd/pValueHistogram_treat-3.png
     Modified:   1_analysis/figure/dge.Rmd/pValueHistogram_treat-4.png
     Modified:   1_analysis/figure/dge.Rmd/pValueHistogram_treat-5.png
-    Modified:   1_analysis/figure/kegg.Rmd/unnamed-chunk-6-1.png
     Modified:   1_analysis/figure/setUp.Rmd/MDSplot-1.png
     Modified:   1_analysis/figure/setUp.Rmd/afterFiltering-1.png
     Modified:   1_analysis/figure/setUp.Rmd/libraryChecks-1.png
@@ -1072,38 +1169,37 @@ Unstaged changes:
     Modified:   1_analysis/figure/setUp.Rmd/visualisingNormalisation-1.png
     Modified:   1_analysis/go.Rmd
     Modified:   1_analysis/kegg.Rmd
-    Modified:   1_analysis/obtainData.Rmd
     Modified:   1_analysis/setUp.Rmd
     Modified:   2_plots/1_setup/counts_before_and_after_filtering.svg
     Modified:   2_plots/1_setup/library_size.svg
     Modified:   2_plots/1_setup/sample_group_PCA_plot.svg
     Modified:   2_plots/1_setup/sample_type_PCA_plot.svg
-    Modified:   2_plots/2_dge/MA_plot_treat_CKI-Mac vs CKI.svg
-    Modified:   2_plots/2_dge/MA_plot_treat_CKI-Nme vs CKI.svg
-    Modified:   2_plots/2_dge/MA_plot_treat_CKI-Omt vs CKI.svg
-    Modified:   2_plots/2_dge/MA_plot_treat_CKI-Tri vs CKI.svg
-    Modified:   2_plots/2_dge/MA_plot_treat_UT vs CKI.svg
-    Modified:   2_plots/2_dge/estimate_dispersion.svg
+    Deleted:    2_plots/2_dge/MA_plot_treat_CKI-Mac vs CKI.svg
+    Deleted:    2_plots/2_dge/MA_plot_treat_CKI-Nme vs CKI.svg
+    Deleted:    2_plots/2_dge/MA_plot_treat_CKI-Omt vs CKI.svg
+    Deleted:    2_plots/2_dge/MA_plot_treat_CKI-Tri vs CKI.svg
+    Deleted:    2_plots/2_dge/MA_plot_treat_UT vs CKI.svg
+    Deleted:    2_plots/2_dge/estimate_dispersion.svg
     Modified:   2_plots/2_dge/qlf_dispersion.svg
-    Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Mac vs CKI.svg
-    Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Nme vs CKI.svg
-    Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Omt vs CKI.svg
-    Modified:   2_plots/2_dge/qlf_pValue_histogram_CKI-Tri vs CKI.svg
-    Modified:   2_plots/2_dge/qlf_pValue_histogram_UT vs CKI.svg
-    Modified:   2_plots/2_dge/treat_pValue_histogram_CKI-Mac vs CKI.svg
-    Modified:   2_plots/2_dge/treat_pValue_histogram_CKI-Nme vs CKI.svg
-    Modified:   2_plots/2_dge/treat_pValue_histogram_CKI-Omt vs CKI.svg
-    Modified:   2_plots/2_dge/treat_pValue_histogram_CKI-Tri vs CKI.svg
-    Modified:   2_plots/2_dge/treat_pValue_histogram_UT vs CKI.svg
-    Modified:   2_plots/2_dge/volcano_plot_treat_CKI-Mac vs CKI.svg
-    Modified:   2_plots/2_dge/volcano_plot_treat_CKI-Nme vs CKI.svg
-    Modified:   2_plots/2_dge/volcano_plot_treat_CKI-Omt vs CKI.svg
-    Modified:   2_plots/2_dge/volcano_plot_treat_CKI-Tri vs CKI.svg
-    Modified:   2_plots/2_dge/volcano_plot_treat_UT vs CKI.svg
-    Modified:   3_output/enrichGO_treat.xlsx
-    Modified:   3_output/enrichKEGG_treat_unfiltered.xlsx
-    Modified:   3_output/qlf_filtered.xlsx
-    Modified:   3_output/treat_filtered.xlsx
+    Deleted:    2_plots/2_dge/qlf_pValue_histogram_CKI-Mac vs CKI.svg
+    Deleted:    2_plots/2_dge/qlf_pValue_histogram_CKI-Nme vs CKI.svg
+    Deleted:    2_plots/2_dge/qlf_pValue_histogram_CKI-Omt vs CKI.svg
+    Deleted:    2_plots/2_dge/qlf_pValue_histogram_CKI-Tri vs CKI.svg
+    Deleted:    2_plots/2_dge/qlf_pValue_histogram_UT vs CKI.svg
+    Deleted:    2_plots/2_dge/treat_pValue_histogram_CKI-Mac vs CKI.svg
+    Deleted:    2_plots/2_dge/treat_pValue_histogram_CKI-Nme vs CKI.svg
+    Deleted:    2_plots/2_dge/treat_pValue_histogram_CKI-Omt vs CKI.svg
+    Deleted:    2_plots/2_dge/treat_pValue_histogram_CKI-Tri vs CKI.svg
+    Deleted:    2_plots/2_dge/treat_pValue_histogram_UT vs CKI.svg
+    Deleted:    2_plots/2_dge/volcano_plot_treat_CKI-Mac vs CKI.svg
+    Deleted:    2_plots/2_dge/volcano_plot_treat_CKI-Nme vs CKI.svg
+    Deleted:    2_plots/2_dge/volcano_plot_treat_CKI-Omt vs CKI.svg
+    Deleted:    2_plots/2_dge/volcano_plot_treat_CKI-Tri vs CKI.svg
+    Deleted:    2_plots/2_dge/volcano_plot_treat_UT vs CKI.svg
+    Deleted:    3_output/enrichGO_treat.xlsx
+    Deleted:    3_output/enrichKEGG_treat_unfiltered.xlsx
+    Deleted:    3_output/qlf_filtered.xlsx
+    Deleted:    3_output/treat_filtered.xlsx
 
 </code></pre>
 <p>
@@ -1142,6 +1238,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/tranmanhha135/01_CKI_DGE/blob/848e971e9ccbf102898eeb089076953d68a0817f/1_analysis/setUp.Rmd" target="_blank">848e971</a>
+</td>
+<td>
+Ha Tran
+</td>
+<td>
+2021-11-08
+</td>
+<td>
+adjust plot size, added dot plot for GO and KEGG, added heatmap for DE genes, minor cosmetic changes
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/tranmanhha135/01_CKI_DGE/848e971e9ccbf102898eeb089076953d68a0817f/docs/setUp.html" target="_blank">848e971</a>
+</td>
+<td>
+Ha Tran
+</td>
+<td>
+2021-11-08
+</td>
+<td>
+adjust plot size, added dot plot for GO and KEGG, added heatmap for DE genes, minor cosmetic changes
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1431,23 +1561,18 @@ library(Glimma)
 library(enrichplot)
 
 # Set ggplot theme
-theme_set(theme_bw())
+theme_set(theme_minimal())
 
-theme_update(
-  legend.background = element_rect(fill = &quot;transparent&quot;, colour = NA),
-  legend.box.background = element_rect(fill = &quot;transparent&quot;, colour = NA),
-  
-  panel.background = element_rect(fill = &quot;transparent&quot;,colour = NA),
-  plot.background = element_rect(fill = &quot;transparent&quot;, colour = NA),
-  
-  plot.title = element_text(color = &quot;gray20&quot;, size = 14, angle = 0, hjust = 0, vjust = .5, face = &quot;bold&quot;),
-  plot.subtitle = element_text(color = &quot;gray25&quot;, size = 12, angle = 0, hjust = 0, vjust = .5, face = &quot;plain&quot;),
-  legend.title = element_text(color = &quot;gray25&quot;, size = 11, angle = 0, hjust = 0, vjust = .5, face = &quot;plain&quot;),
-  legend.text = element_text(color = &quot;gray25&quot;, size = 11, angle = 0, hjust = 0, vjust = .5, face = &quot;plain&quot;),
-  axis.text.x = element_text(color = &quot;gray30&quot;, size = 10, angle = 0, hjust = .5, vjust = .5, face = &quot;plain&quot;),
-  axis.text.y = element_text(color = &quot;gray30&quot;, size = 10, angle = 0, hjust = 1, vjust = 0, face = &quot;plain&quot;),  
-  axis.title.x = element_text(color = &quot;gray30&quot;, size = 12, angle = 0, hjust = .5, vjust = 0, face = &quot;plain&quot;),
-  axis.title.y = element_text(color = &quot;gray30&quot;, size = 12, angle = 90, hjust = .5, vjust = .5, face = &quot;plain&quot;))</code></pre>
+# Adjust ggplot theme for poster and report
+# theme_update(
+#   plot.title = element_text(color = &quot;gray20&quot;, size = 7, hjust = 0, vjust = .5, face = &quot;bold&quot;),
+#   plot.subtitle = element_text(color = &quot;gray25&quot;, size = 6, angle = 0, hjust = 0, vjust = .5, face = &quot;plain&quot;),
+#   legend.title = element_text(color = &quot;gray25&quot;, size = 5, angle = 0, hjust = 0, vjust = .5, face = &quot;plain&quot;),
+#   legend.text = element_text(color = &quot;gray25&quot;, size = 5, angle = 0, hjust = 0, vjust = .5, face = &quot;plain&quot;),
+#   axis.text.x = element_text(color = &quot;gray30&quot;, size = 5, angle = 0, hjust = .5, vjust = .5, face = &quot;plain&quot;),
+#   axis.text.y = element_text(color = &quot;gray30&quot;, size = 5, angle = 0, hjust = 1, vjust = 0, face = &quot;plain&quot;),
+#   axis.title.x = element_text(color = &quot;gray30&quot;, size = 6, angle = 0, hjust = .5, vjust = 0, face = &quot;plain&quot;),
+#   axis.title.y = element_text(color = &quot;gray30&quot;, size = 6, angle = 90, hjust = .5, vjust = .5, face = &quot;plain&quot;))</code></pre>
 </div>
 <div id="data-import" class="section level2">
 <h2>Data Import</h2>
@@ -1455,9 +1580,10 @@ theme_update(
 <h3>Import Raw Count Data</h3>
 <pre class="r"><code># raw count data was altered prior to import into R. alterations made were removing number column, removing unnecessary columns, and substituting ws delim to tab delim
 rawCount &lt;- read_tsv(here::here(&quot;0_data/raw_data/GSE125743_raw_count.tsv&quot;),
-                       col_names = TRUE) %&gt;% 
-  column_to_rownames(&quot;Geneid&quot;) %&gt;% 
-  as.data.frame</code></pre>
+  col_names = TRUE
+) %&gt;%
+  column_to_rownames(&quot;Geneid&quot;) %&gt;%
+  as.data.frame()</code></pre>
 </div>
 </div>
 <div id="metadata" class="section level2">
@@ -1473,10 +1599,10 @@ rawCount &lt;- read_tsv(here::here(&quot;0_data/raw_data/GSE125743_raw_count.tsv
 <p><strong>Current Challenges</strong></p>
 <p><strong>1. using obtaining <code>sample_group</code>, <code>sample_type</code> through regex</strong> <strong>2. using conditional to add suffix of the coloumns</strong></p>
 <p>Due to these unresolved issues, the sample metadata will be manually generated and stored in the <code>CKI_DGE/0_data/raw_data/</code> directory</p>
-<pre class="r"><code>sampleMetadata &lt;- read_tsv(here::here(&quot;0_data/raw_data/sample_metadata.tsv&quot;),
-                           col_names = TRUE) %&gt;% 
-  column_to_rownames(&quot;treatment&quot;) %&gt;% 
-  as.data.frame</code></pre>
+<pre class="r"><code># obtain sample data from directory. sample metadata was extracted from the raw feature counts using shell scripts
+sampleMetadata &lt;- read_tsv(here::here(&quot;0_data/raw_data/sample_metadata.tsv&quot;), col_names = TRUE) %&gt;%
+  column_to_rownames(&quot;treatment&quot;) %&gt;%
+  as.data.frame()</code></pre>
 </div>
 <div id="gene-metadata" class="section level3">
 <h3>Gene Metadata</h3>
@@ -1485,37 +1611,42 @@ rawCount &lt;- read_tsv(here::here(&quot;0_data/raw_data/GSE125743_raw_count.tsv
 <li>Annotation Hub also has a web service that can be assessed through the display function. Pulling down the gene annotation can take a long time, so after the initial run, the annotated genes is saved to a <code>genes.rds</code> file. To save time, if <code>genes.rds</code> is already present, don’t run the code chunk.</li>
 </ul>
 <pre class="r"><code>ah &lt;- AnnotationHub()
-ah %&gt;% 
+ah %&gt;%
   subset(grepl(&quot;sapiens&quot;, species)) %&gt;%
   subset(rdataclass == &quot;EnsDb&quot;)
 
-#viewing web service for annotation hub 
-#d &lt;- display(ah)
+# viewing web service for annotation hub
+# d &lt;- display(ah)
 
-#Annotation hub html site was used to identify &#39;code&#39; for the latest human  genome from Ensembl
+# Annotation hub html site was used to identify &#39;code&#39; for the latest human  genome from Ensembl
 ensDb &lt;- ah[[&quot;AH95744&quot;]]
 
-genes &lt;- genes(ensDb) %&gt;% 
+genes &lt;- genes(ensDb) %&gt;%
   as.data.frame()
 
-#the annotated genes are saved into a RDS object to save computational time in subsequent run of the setUp.Rmd
+# the annotated genes are saved into a RDS object to save computational time in subsequent run of the setUp.Rmd
 genes %&gt;% saveRDS(here::here(&quot;0_data/rds_object/genes_metadata.rds&quot;))</code></pre>
 <p>Using the annotated gene list through AnnotationHub(), load into object called <code>geneMetadata</code>. Filter out all genes that are present in the rawCount and display the number of unique gene_biotypes present in the rawCount and geneMetadata</p>
 <pre class="r"><code>genesMetadata &lt;- read_rds(here::here(&quot;0_data/rds_object/genes_metadata.rds&quot;))
 
-#prepare the gene data frame to contain the genes listed in the rownames of &#39;rawCount&#39; data
-genesMetadata &lt;- data.frame(gene = rownames(rawCount)) %&gt;% 
-  left_join(genesMetadata %&gt;% as.data.frame, 
-            by = c(&quot;gene&quot;=&quot;symbol&quot;)) %&gt;%
-  dplyr::distinct(gene, .keep_all=TRUE)
+# prepare the gene data frame to contain the genes listed in the rownames of &#39;rawCount&#39; data
+genesMetadata &lt;- data.frame(gene = rownames(rawCount)) %&gt;%
+  left_join(genesMetadata %&gt;% as.data.frame(),
+    by = c(&quot;gene&quot; = &quot;symbol&quot;)
+  ) %&gt;%
+  dplyr::distinct(gene, .keep_all = TRUE)
 
-#make the gene column the row names
+# make the gene column the row names
 rownames(genesMetadata) &lt;- genesMetadata$gene
 
-#Using the table function, the details of the genes present in the rawCount data can be summaried.
-genes &lt;- genesMetadata$gene_biotype %&gt;% table %&gt;% as.data.frame()
+# Using the table function, the details of the genes present in the rawCount data can be summaried.
+genes &lt;- genesMetadata$gene_biotype %&gt;%
+  table() %&gt;%
+  as.data.frame()
 
-kable(genes) %&gt;% kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;% scroll_box(height = &quot;600px&quot;)</code></pre>
+kable(genes) %&gt;%
+  kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;)) %&gt;%
+  scroll_box(height = &quot;600px&quot;)</code></pre>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:600px; ">
 <table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
 <thead>
@@ -1723,12 +1854,13 @@ vault_RNA
 <p>Digital Gene Expression List (DGElist) is a R object class often used for differential gene expression analysis as it simplifies plotting, and interaction with data and metadata.</p>
 <p>The DGEList object holds the three dataset that have imported/created, including <code>rawCount</code> data and <code>sampleMetadata</code> and <code>geneMetadata</code> metadata.</p>
 <p>To further save time and memory, genes that were not expressed acrossed all samples (i.e., <code>0</code> count across all columns) are all removed</p>
-<pre class="r"><code>#Create DGElist with rawCOunt and gene data. Remove all genes with 0 expression in all treatment groups
+<pre class="r"><code># Create DGElist with rawCOunt and gene data. Remove all genes with 0 expression in all treatment groups
 dge &lt;- edgeR::DGEList(
   counts = rawCount,
   samples = sampleMetadata,
   genes = genesMetadata,
-  remove.zeros = TRUE)</code></pre>
+  remove.zeros = TRUE
+)</code></pre>
 <p>5207 non expressed genes (rows) were removed.</p>
 </div>
 </div>
@@ -1736,150 +1868,104 @@ dge &lt;- edgeR::DGEList(
 <h1>Pre-processing and Quality Checks</h1>
 <p>Pre-processing steps increased the power of the downstream DGE analysis by eliminating majority of unwanted variance that could obscure the true variance caused by the differences in sample conditions. There are several standard steps that are commonly followed to pre-process and QC raw read counts, including:</p>
 <ol style="list-style-type: decimal">
-<li><p>Normalisation</p></li>
 <li><p>Checking library size</p></li>
 <li><p>Removal of low expressed genes</p></li>
+<li><p>Normalisation</p></li>
 <li><p>QC through MDS/PCA</p></li>
 </ol>
-<div id="normalisation" class="section level2">
-<h2>Normalisation</h2>
-<p>Using the TMM (trimmed mean of M value) method of normalisation through the <code>edgeR</code> package. The TMM approach creates a scaling factor as an offset to be supplied to Negative Binomial model. The <code>calcNormFactors</code> function calculate the normalisation and return the adjusted <code>norm.factor</code> to the <code>dge$samples</code> element.</p>
-<div id="before-normalisation" class="section level3">
-<h3>Before Normalisation</h3>
-<pre class="r"><code>#before normalisation
-dge$samples</code></pre>
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["group"],"name":[1],"type":["fct"],"align":["left"]},{"label":["lib.size"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["norm.factors"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["sample_id"],"name":[4],"type":["chr"],"align":["left"]},{"label":["sample_group"],"name":[5],"type":["chr"],"align":["left"]},{"label":["sample_type"],"name":[6],"type":["chr"],"align":["left"]},{"label":["pretty_name"],"name":[7],"type":["chr"],"align":["left"]}],"data":[{"1":"1","2":"19160502","3":"1","4":"S48h_CKI1","5":"CKI","6":"CKI","7":"CKI 1","_rn_":"S48h_CKI1"},{"1":"1","2":"22202863","3":"1","4":"S48h_CKI2","5":"CKI","6":"CKI","7":"CKI 2","_rn_":"S48h_CKI2"},{"1":"1","2":"22235164","3":"1","4":"S48h_CKI3","5":"CKI","6":"CKI","7":"CKI 3","_rn_":"S48h_CKI3"},{"1":"1","2":"22072815","3":"1","4":"S48h_Mac1","5":"Mac","6":"single_deletion","7":"CKI-Mac 1","_rn_":"S48h_Mac1"},{"1":"1","2":"21031084","3":"1","4":"S48h_Mac2","5":"Mac","6":"single_deletion","7":"CKI-Mac 2","_rn_":"S48h_Mac2"},{"1":"1","2":"22141822","3":"1","4":"S48h_Mac3","5":"Mac","6":"single_deletion","7":"CKI-Mac 3","_rn_":"S48h_Mac3"},{"1":"1","2":"22803796","3":"1","4":"S48h_Nme1","5":"Nme","6":"single_deletion","7":"CKI-Nme 1","_rn_":"S48h_Nme1"},{"1":"1","2":"20656780","3":"1","4":"S48h_Nme2","5":"Nme","6":"single_deletion","7":"CKI-Nme 2","_rn_":"S48h_Nme2"},{"1":"1","2":"24603876","3":"1","4":"S48h_Nme3","5":"Nme","6":"single_deletion","7":"CKI-Nme 3","_rn_":"S48h_Nme3"},{"1":"1","2":"22897146","3":"1","4":"S48h_OMT1","5":"Omt","6":"single_deletion","7":"CKI-Omt 1","_rn_":"S48h_OMT1"},{"1":"1","2":"23396986","3":"1","4":"S48h_OMT2","5":"Omt","6":"single_deletion","7":"CKI-Omt 2","_rn_":"S48h_OMT2"},{"1":"1","2":"19197815","3":"1","4":"S48h_OMT3","5":"Omt","6":"single_deletion","7":"CKI-Omt 3","_rn_":"S48h_OMT3"},{"1":"1","2":"17673537","3":"1","4":"S48h_Tri1","5":"Tri","6":"single_deletion","7":"CKI-Tri 1","_rn_":"S48h_Tri1"},{"1":"1","2":"24494266","3":"1","4":"S48h_Tri2","5":"Tri","6":"single_deletion","7":"CKI-Tri 2","_rn_":"S48h_Tri2"},{"1":"1","2":"21065993","3":"1","4":"S48h_Tri3","5":"Tri","6":"single_deletion","7":"CKI-Tri 3","_rn_":"S48h_Tri3"},{"1":"1","2":"25453736","3":"1","4":"S48h_UT1","5":"UT","6":"UT","7":"Untreated 1","_rn_":"S48h_UT1"},{"1":"1","2":"23373761","3":"1","4":"S48h_UT2","5":"UT","6":"UT","7":"Untreated 2","_rn_":"S48h_UT2"},{"1":"1","2":"24268695","3":"1","4":"S48h_UT3","5":"UT","6":"UT","7":"Untreated 3","_rn_":"S48h_UT3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-</div>
-<div id="after-normalisation" class="section level3">
-<h3>After Normalisation</h3>
-<pre class="r"><code>#after normalisation
-dge &lt;- edgeR::calcNormFactors(object = dge, 
-                              method = &quot;TMM&quot;)
-dge$samples</code></pre>
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["group"],"name":[1],"type":["fct"],"align":["left"]},{"label":["lib.size"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["norm.factors"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["sample_id"],"name":[4],"type":["chr"],"align":["left"]},{"label":["sample_group"],"name":[5],"type":["chr"],"align":["left"]},{"label":["sample_type"],"name":[6],"type":["chr"],"align":["left"]},{"label":["pretty_name"],"name":[7],"type":["chr"],"align":["left"]}],"data":[{"1":"1","2":"19160502","3":"1.0137063","4":"S48h_CKI1","5":"CKI","6":"CKI","7":"CKI 1","_rn_":"S48h_CKI1"},{"1":"1","2":"22202863","3":"1.0203586","4":"S48h_CKI2","5":"CKI","6":"CKI","7":"CKI 2","_rn_":"S48h_CKI2"},{"1":"1","2":"22235164","3":"1.0179009","4":"S48h_CKI3","5":"CKI","6":"CKI","7":"CKI 3","_rn_":"S48h_CKI3"},{"1":"1","2":"22072815","3":"0.9970324","4":"S48h_Mac1","5":"Mac","6":"single_deletion","7":"CKI-Mac 1","_rn_":"S48h_Mac1"},{"1":"1","2":"21031084","3":"1.0148122","4":"S48h_Mac2","5":"Mac","6":"single_deletion","7":"CKI-Mac 2","_rn_":"S48h_Mac2"},{"1":"1","2":"22141822","3":"1.0162073","4":"S48h_Mac3","5":"Mac","6":"single_deletion","7":"CKI-Mac 3","_rn_":"S48h_Mac3"},{"1":"1","2":"22803796","3":"0.9937399","4":"S48h_Nme1","5":"Nme","6":"single_deletion","7":"CKI-Nme 1","_rn_":"S48h_Nme1"},{"1":"1","2":"20656780","3":"1.0170450","4":"S48h_Nme2","5":"Nme","6":"single_deletion","7":"CKI-Nme 2","_rn_":"S48h_Nme2"},{"1":"1","2":"24603876","3":"1.0264896","4":"S48h_Nme3","5":"Nme","6":"single_deletion","7":"CKI-Nme 3","_rn_":"S48h_Nme3"},{"1":"1","2":"22897146","3":"0.9907706","4":"S48h_OMT1","5":"Omt","6":"single_deletion","7":"CKI-Omt 1","_rn_":"S48h_OMT1"},{"1":"1","2":"23396986","3":"0.9926421","4":"S48h_OMT2","5":"Omt","6":"single_deletion","7":"CKI-Omt 2","_rn_":"S48h_OMT2"},{"1":"1","2":"19197815","3":"0.9955809","4":"S48h_OMT3","5":"Omt","6":"single_deletion","7":"CKI-Omt 3","_rn_":"S48h_OMT3"},{"1":"1","2":"17673537","3":"1.0227511","4":"S48h_Tri1","5":"Tri","6":"single_deletion","7":"CKI-Tri 1","_rn_":"S48h_Tri1"},{"1":"1","2":"24494266","3":"1.0246428","4":"S48h_Tri2","5":"Tri","6":"single_deletion","7":"CKI-Tri 2","_rn_":"S48h_Tri2"},{"1":"1","2":"21065993","3":"1.0119144","4":"S48h_Tri3","5":"Tri","6":"single_deletion","7":"CKI-Tri 3","_rn_":"S48h_Tri3"},{"1":"1","2":"25453736","3":"0.9475780","4":"S48h_UT1","5":"UT","6":"UT","7":"Untreated 1","_rn_":"S48h_UT1"},{"1":"1","2":"23373761","3":"0.9552923","4":"S48h_UT2","5":"UT","6":"UT","7":"Untreated 2","_rn_":"S48h_UT2"},{"1":"1","2":"24268695","3":"0.9473381","4":"S48h_UT3","5":"UT","6":"UT","7":"Untreated 3","_rn_":"S48h_UT3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
-  </script>
-</div>
-</div>
-<div id="visualisation-of-tmm-normalisation" class="section level3">
-<h3>Visualisation of TMM Normalisation</h3>
-<p>The following visualisation of the TMM normalisation is plotted using the mean-difference (MD) plot. The MD plot visualise the library size-adjusted logFC between two samples (the difference) against the log-expression across all samples (the mean). In this instance, <code>sample 1</code> is used to compare against an artificial library construct from the average of all the other samples</p>
-<pre class="r"><code>limma::plotMD(cpm(dge, log = TRUE), column=1)
-abline(h=0, col=&quot;red&quot;, lty=2, lwd=2)</code></pre>
-<p><img src="figure/setUp.Rmd/visualisingNormalisation-1.png" width="1056" style="display: block; margin: auto;" /> Ideally, the bulk of gene expression following the TMM normalisation should be centred around <code>expression log-ratio</code> of 0, which indicates that library size bias between samples have been successfully removed. This should be repeated with all the samples in the dge object.</p>
-</div>
-</div>
 <div id="checking-library-size" class="section level2">
 <h2>Checking Library Size</h2>
 <p>A simple pre-processing/QC step is checking the quality of library size (total number of mapped and quantified reads) for each treatment. This enable identification of potentially mis-labeled or outlying samples. This is often visualised through <code>ggplot</code>.</p>
-<pre class="r"><code>dge$samples %&gt;% 
-  
-  #plot the sample with the lib.size in x and sample_group in y, colour fill for each sample_group
-  ggplot(aes(
-    x = lib.size, 
-    y = pretty_name, 
-    fill = sample_group)
-    ) +
-  geom_col() +
-  
-  #draw a vertical line for the mean lib.size
-  geom_vline(
-    aes (xintercept = lib.size), 
-    data = . %&gt;% summarise_at(vars(lib.size), mean),
-    linetype = 2
-  ) +
-  
+<pre class="r"><code>dge$samples %&gt;%
+  # plot the sample with the lib.size in x and sample_group in y, colour fill for each sample_group
+  ggplot(aes(x = lib.size, y = pretty_name, fill = sample_group)) +
+  geom_col(alpha = 0.8) +
 
+  # draw a vertical line for the mean lib.size
+  geom_vline(aes(xintercept = lib.size),
+    data = . %&gt;% summarise_at(vars(lib.size), mean),
+    linetype = 2,
+    size = .1
+  ) +
   theme(legend.position = &quot;none&quot;) +
-  
-  #labelling splot
-  labs(title = &quot;Sample Library Size&quot;,
+
+  # labelling plot
+  labs(
+    title = &quot;Sample Library Size&quot;,
     x = &quot;Library Size&quot;,
-    y = &quot;Samples&quot;
+    y = &quot;&quot;
   )</code></pre>
 <p><img src="figure/setUp.Rmd/libraryChecks-1.png" width="1056" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>#save the plot to .svg
-ggsave(filename = &quot;library_size.svg&quot;,
-       plot = last_plot(),
-       path = here::here(&quot;2_plots/1_setup/&quot;))</code></pre>
+<pre class="r"><code># save the plot to .svg
+ggsave(
+  filename = &quot;library_size.svg&quot;,
+  plot = last_plot(), width = 58, height = 60, units = &quot;mm&quot;,
+  path = here::here(&quot;2_plots/1_setup/&quot;)
+)</code></pre>
 <p>It appears that <code>CKI-Tri</code> treatment group</p>
 </div>
 <div id="removal-of-low-expressed-genes" class="section level2">
 <h2>Removal of Low-Expressed Genes</h2>
 <p>Filtering out low-expressed genes is a standard pre-processing step in DGE analysis as it can significantly increase the power to differentiate differentially expressed genes by eliminating the variance caused by genes that are lowly expressed in all samples.</p>
 <p>The threshold of removal is arbitrary and is often determined after visualisation of the count distribution. The count distribution can be illustrated in a density plot through <code>ggplot</code>. A common metric used to display the count distribution if <em>log Counts per Million</em> (logCPM)</p>
-<pre class="r"><code>beforeFiltering &lt;- dge %&gt;% 
-  
-  #transform the raw count to logCPM 
-  edgeR::cpm(log = TRUE) %&gt;% 
-
-  #melting (reorganising) the transformed logCPM data with respect to the id variable (i.e., the row and column names). Very similar to pivot_long fucntion
-  melt %&gt;% 
-  
-  #retain all rows where the logCPM (value) is finite. ALl of them in this case are finite
-  dplyr::filter(is.finite(value)) %&gt;% 
-  
-  #plot the long formate logCPM counts in a density plot with x the logCPM and colour by the sample_id
+<pre class="r"><code>beforeFiltering &lt;- dge %&gt;%
+  # transform the raw count to logCPM
+  edgeR::cpm(log = TRUE) %&gt;%
+  # melting (reorganising) the transformed logCPM data with respect to the id variable (i.e., the row and column names). Very similar to pivot_long fucntion
+  melt() %&gt;%
+  # retain all rows where the logCPM (value) is finite. ALl of them in this case are finite
+  dplyr::filter(is.finite(value)) %&gt;%
+  # plot the long formate logCPM counts in a density plot with x the logCPM and colour by the sample_id
   ggplot(aes(
     x = value,
     colour = Var2
   )) +
   geom_density() +
-    
-  #remove the legend
+
+  # remove the legend
   guides(colour = FALSE) +
-  
-  #add figure tittle and subtitle and labels
-  ggtitle(&quot;Before Filtering Low-expressed Genes&quot;, subtitle = paste0(nrow(dge), &quot; genes&quot;))+
+
+  # add figure tittle and subtitle and labels
+  ggtitle(&quot;Before Filtering&quot;, subtitle = paste0(nrow(dge), &quot; genes&quot;)) +
   labs(
     x = &quot;logCPM&quot;,
     y = &quot;Density&quot;,
     colour = &quot;Sample Groups&quot;
   )
 
-#save plot
-ggsave(filename = &quot;counts_before_filtering.svg&quot;,
-       plot = beforeFiltering,
-       path = here::here(&quot;2_plots/1_setup/&quot;))</code></pre>
+# save plot
+# ggsave(filename = &quot;counts_before_filtering.svg&quot;,
+#        plot = beforeFiltering,
+#        path = here::here(&quot;2_plots/1_setup/&quot;))</code></pre>
 <p>Ideally, the filtering the low-expressed genes should remove the large peak with <code>logCPM &lt; 0</code>, i.e., remove any genes which have less than one count per million.</p>
 <p>A common guideline is to keep all genes that have &gt; 1 cpm in the smallest group on a treatment. In this case, the smallest group is 3 as each treatment condition had three replicates. Therefore any genes that is <strong>more than 1 CPM in at least 3 samples</strong> is kept. Mathematically this would be identifying genes (rows) with CPM <code>&gt; 1</code>; and identifying total row sum that is <code>&gt;= 3</code>.</p>
-<pre class="r"><code>#kept genes old method
+<pre class="r"><code># kept genes old method
 # keep &lt;- edgeR::filterByExpr(y = dge,)
 
-#the genes kept have &gt;1 CPM for at least 3 samples
-keptGenes &lt;- (rowSums(cpm(dge) &gt; 1.5) &gt;= 3) 
+# the genes kept have &gt;1 CPM for at least 3 samples
+keptGenes &lt;- (rowSums(cpm(dge) &gt; 1.5) &gt;= 3)
 
-afterFiltering &lt;- dge %&gt;% 
-  
-  #transform the raw count to logCPM 
-  edgeR::cpm(log = TRUE) %&gt;% 
-  
-  #for var1 (gene names) extract only the keptGenes and discard all other genes in the logCPM data
-  magrittr::extract(keptGenes,) %&gt;% 
-
-  #melting (reorganising) the transformed logCPM data with respect to the id variable (i.e., the row and column names). Very similar to pivot_long fucntion
-  melt %&gt;% 
-  
-  #retain all rows where the logCPM (value) is finite. ALl of them in this case are finite
-  dplyr::filter(is.finite(value)) %&gt;% 
-
-  #ggplot
+afterFiltering &lt;- dge %&gt;%
+  # transform the raw count to logCPM
+  edgeR::cpm(log = TRUE) %&gt;%
+  # for var1 (gene names) extract only the keptGenes and discard all other genes in the logCPM data
+  magrittr::extract(keptGenes, ) %&gt;%
+  # melting (reorganising) the transformed logCPM data with respect to the id variable (i.e., the row and column names). Very similar to pivot_long fucntion
+  melt() %&gt;%
+  # retain all rows where the logCPM (value) is finite. ALl of them in this case are finite
+  dplyr::filter(is.finite(value)) %&gt;%
+  # ggplot
   ggplot(aes(
     x = value,
     colour = Var2
   )) +
   geom_density() +
-  
-  #remove the legend
+
+  # remove the legend
   guides(colour = FALSE) +
-  
-  #add figure tittle and subtitle and labels. since keptGenes is a logic element, the second element represents the number of genes that were kept after the filtering
-  ggtitle(&quot;After Filtering Low-expressed Genes&quot;, subtitle = paste0(table(keptGenes)[[2]], &quot; genes&quot;)) +
+
+  # add figure tittle and subtitle and labels. since keptGenes is a logic element, the second element represents the number of genes that were kept after the filtering
+  ggtitle(&quot;After Filtering&quot;, subtitle = paste0(table(keptGenes)[[2]], &quot; genes&quot;)) +
   labs(
     x = &quot;logCPM&quot;,
     y = &quot;Density&quot;,
@@ -1888,28 +1974,56 @@ afterFiltering &lt;- dge %&gt;%
 
 # afterFiltering
 # save plot
-ggsave(&quot;counts_after_filtering.svg&quot;,
-       plot = afterFiltering,
-       path = here::here(&quot;2_plots/1_setup/&quot;))
+# ggsave(&quot;counts_after_filtering.svg&quot;,
+#        plot = afterFiltering,
+#        path = here::here(&quot;2_plots/1_setup/&quot;))
 
 
-#display plot side by side
+# display plot side by side
 beforeAfterFiltering &lt;- cowplot::plot_grid(beforeFiltering, afterFiltering)
 
 # #save plot
 ggsave(&quot;counts_before_and_after_filtering.svg&quot;,
-       plot = beforeAfterFiltering,
-       path = here::here(&quot;2_plots/1_setup/&quot;))
+  plot = beforeAfterFiltering, width = 121, height = 60, units = &quot;mm&quot;,
+  path = here::here(&quot;2_plots/1_setup/&quot;)
+)
 
-#display side by side figure
+# display side by side figure
 beforeAfterFiltering</code></pre>
 <p><img src="figure/setUp.Rmd/afterFiltering-1.png" width="1056" style="display: block; margin: auto;" /></p>
-<p>Following the filtering of low-expressed genes <strong>&lt; 1.5 CPM in at least 3 samples</strong>, out of the total 22771 genes left after the removal of genes with no expression, 9503 genes were removed, leaving only 13268 genes remaining for the downstream analysis</p>
+<p>Following the filtering of low-expressed genes <strong>&lt; 1.5 CPM in at least 3 samples</strong>, out of the total 22771 genes left after the removal of genes with no expression, 9512 genes were removed, leaving only 13259 genes remaining for the downstream analysis</p>
 <div id="subset-the-dgelist-object" class="section level3">
 <h3>Subset the DGElist object</h3>
 <p>After filtering the low-expressed genes, the DGElist object is updated to eliminate the low-expressed genes from future analysis</p>
-<pre class="r"><code>#extract genes from keptGenes and recalculate the lib size
-dge &lt;- dge[keptGenes,,keep.lib.sizes = FALSE]</code></pre>
+<pre class="r"><code># extract genes from keptGenes and recalculate the lib size
+dge &lt;- dge[keptGenes, , keep.lib.sizes = FALSE]</code></pre>
+</div>
+</div>
+<div id="normalisation" class="section level2">
+<h2>Normalisation</h2>
+<p>Using the TMM (trimmed mean of M value) method of normalisation through the <code>edgeR</code> package. The TMM approach creates a scaling factor as an offset to be supplied to Negative Binomial model. The <code>calcNormFactors</code> function calculate the normalisation and return the adjusted <code>norm.factor</code> to the <code>dge$samples</code> element.</p>
+<!-- ### Before Normalisation -->
+<!-- ```{r beforeNormalisation} -->
+<!-- #before normalisation -->
+<!-- limma::plotMD(cpm(dge, log = TRUE), column=1) -->
+<!-- abline(h=0, col="firebrick3", lty=2, lwd=2) -->
+<!-- invisible(dev.print(svg, here::here("2_plots/1_setup/before_normalisation.svg"))) -->
+<!-- ``` -->
+<!-- ### After Normalisation -->
+<pre class="r"><code># after normalisation
+dge &lt;- edgeR::calcNormFactors(
+  object = dge,
+  method = &quot;TMM&quot;
+)
+# dge_N$samples</code></pre>
+<div id="visualisation-of-tmm-normalisation" class="section level3">
+<h3>Visualisation of TMM Normalisation</h3>
+<p>The following visualisation of the TMM normalisation is plotted using the mean-difference (MD) plot. The MD plot visualise the library size-adjusted logFC between two samples (the difference) against the log-expression across all samples (the mean). In this instance, <code>sample 1</code> is used to compare against an artificial library construct from the average of all the other samples</p>
+<pre class="r"><code>limma::plotMD(cpm(dge, log = TRUE), column = 1, xlab = &quot;Average log-expression&quot;, ylab = &quot;Expression log-ratio&quot;, main = &quot;CKI 1 vs Other Samples&quot;)
+abline(h = 0, col = &quot;firebrick3&quot;, lty = 2, lwd = 2)</code></pre>
+<p><img src="figure/setUp.Rmd/visualisingNormalisation-1.png" width="1056" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>invisible(dev.print(svg, here::here(&quot;2_plots/1_setup/after_normalisation.svg&quot;), width = 8.8, height = 6))</code></pre>
+<p>Ideally, the bulk of gene expression following the TMM normalisation should be centred around <code>expression log-ratio</code> of 0, which indicates that library size bias between samples have been successfully removed. This should be repeated with all the samples in the dge object.</p>
 </div>
 </div>
 <div id="quality-control" class="section level2">
@@ -1923,13 +2037,14 @@ dge &lt;- dge[keptGenes,,keep.lib.sizes = FALSE]</code></pre>
 #           groups = dge$samples$sample_group,
 #           folder = &quot;../5_plots/1_QC_plots/&quot;)
 
-#non-interactive MDS plot
-mdsPlot &lt;-  limma::plotMDS(dge,
-                            main = &quot;MDS Plot for Count Data&quot;,
-                            top = 500,
-                            labels = colnames(dge$counts),
-                            col = as.numeric(dge$samples$sample_id),
-                            plot = TRUE)</code></pre>
+# non-interactive MDS plot
+mdsPlot &lt;- limma::plotMDS(dge,
+  main = &quot;MDS Plot for Count Data&quot;,
+  top = 500,
+  labels = colnames(dge$counts),
+  col = as.numeric(dge$samples$sample_id),
+  plot = TRUE
+)</code></pre>
 <p><img src="figure/setUp.Rmd/MDSplot-1.png" width="1056" style="display: block; margin: auto;" /></p>
 </div>
 <div id="pinciple-component-analysis-pca" class="section level3">
@@ -1937,11 +2052,11 @@ mdsPlot &lt;-  limma::plotMDS(dge,
 <div id="pca-analysis" class="section level4">
 <h4>PCA Analysis</h4>
 <pre class="r"><code># Perform PCA analysis:
-pcaAnalysis &lt;- prcomp(t(cpm(dge, log=TRUE)))
+pcaAnalysis &lt;- prcomp(t(cpm(dge, log = TRUE)))
 summary(pcaAnalysis)$importance %&gt;% as.data.frame()</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["PC1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["PC2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["PC3"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["PC4"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["PC5"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["PC6"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["PC7"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["PC8"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["PC9"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["PC10"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["PC11"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["PC12"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["PC13"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["PC14"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["PC15"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["PC16"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["PC17"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["PC18"],"name":[18],"type":["dbl"],"align":["right"]}],"data":[{"1":"40.54476","2":"23.81122","3":"20.03157","4":"10.06525","5":"6.695378","6":"4.822761","7":"4.163958","8":"4.049459","9":"3.952663","10":"3.886644","11":"3.823976","12":"3.717444","13":"3.672075","14":"3.622698","15":"3.59261","16":"3.494434","17":"3.456378","18":"5.160294e-14","_rn_":"Standard deviation"},{"1":"0.55950","2":"0.19297","3":"0.13657","4":"0.03448","5":"0.015260","6":"0.007920","7":"0.005900","8":"0.005580","9":"0.005320","10":"0.005140","11":"0.004980","12":"0.004700","13":"0.004590","14":"0.004470","15":"0.00439","16":"0.004160","17":"0.004070","18":"0.000000e+00","_rn_":"Proportion of Variance"},{"1":"0.55950","2":"0.75248","3":"0.88905","4":"0.92353","5":"0.938790","6":"0.946710","7":"0.952610","8":"0.958190","9":"0.963510","10":"0.968650","11":"0.973630","12":"0.978330","13":"0.982920","14":"0.987380","15":"0.99178","16":"0.995930","17":"1.000000","18":"1.000000e+00","_rn_":"Cumulative Proportion"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["PC1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["PC2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["PC3"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["PC4"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["PC5"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["PC6"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["PC7"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["PC8"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["PC9"],"name":[9],"type":["dbl"],"align":["right"]},{"label":["PC10"],"name":[10],"type":["dbl"],"align":["right"]},{"label":["PC11"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["PC12"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["PC13"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["PC14"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["PC15"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["PC16"],"name":[16],"type":["dbl"],"align":["right"]},{"label":["PC17"],"name":[17],"type":["dbl"],"align":["right"]},{"label":["PC18"],"name":[18],"type":["dbl"],"align":["right"]}],"data":[{"1":"40.40065","2":"23.76823","3":"19.97026","4":"10.06435","5":"6.658135","6":"4.80615","7":"4.130353","8":"4.046085","9":"3.943185","10":"3.873321","11":"3.814304","12":"3.710899","13":"3.656684","14":"3.618051","15":"3.558747","16":"3.477436","17":"3.44890","18":"4.506029e-14","_rn_":"Standard deviation"},{"1":"0.55896","2":"0.19346","3":"0.13658","4":"0.03469","5":"0.015180","6":"0.00791","7":"0.005840","8":"0.005610","9":"0.005320","10":"0.005140","11":"0.004980","12":"0.004720","13":"0.004580","14":"0.004480","15":"0.004340","16":"0.004140","17":"0.00407","18":"0.000000e+00","_rn_":"Proportion of Variance"},{"1":"0.55896","2":"0.75242","3":"0.88900","4":"0.92369","5":"0.938870","6":"0.94678","7":"0.952620","8":"0.958230","9":"0.963550","10":"0.968690","11":"0.973670","12":"0.978390","13":"0.982970","14":"0.987450","15":"0.991790","16":"0.995930","17":"1.00000","18":"1.000000e+00","_rn_":"Cumulative Proportion"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -1949,19 +2064,20 @@ summary(pcaAnalysis)$importance %&gt;% as.data.frame()</code></pre>
 <h4>PCA of Sample Type</h4>
 <pre class="r"><code># Create the plot:
 pcaSampleType &lt;- ggbiplot(pcaAnalysis,
-                              groups = dge$samples$sample_type,
-                              ellipse = TRUE,
-                              var.axes = FALSE) +
+  groups = dge$samples$sample_type,
+  ellipse = TRUE,
+  var.axes = FALSE
+) +
   labs(title = &quot;Principle Component Analysis&quot;, color = &quot;Sample Type&quot;) +
-  
-  geom_point(aes(colour = dge$samples$sample_type), size = 3) +
-  
-  theme(legend.direction =&#39;horizontal&#39;, 
-        legend.position = &quot;bottom&quot;)
 
-ggsave(filename = &quot;sample_type_PCA_plot.svg&quot;, width = 20,
-       plot = pcaSampleType,
-       path = here::here(&quot;2_plots/1_setup/&quot;))
+  geom_point(aes(colour = dge$samples$sample_type), size = 2)
+
+
+ggsave(
+  filename = &quot;sample_type_PCA_plot.svg&quot;,
+  plot = pcaSampleType,
+  path = here::here(&quot;2_plots/1_setup/&quot;)
+)
 
 pcaSampleType</code></pre>
 <p><img src="figure/setUp.Rmd/pcaSampleType-1.png" width="1056" style="display: block; margin: auto;" /></p>
@@ -1970,22 +2086,29 @@ pcaSampleType</code></pre>
 <h4>PCA of Sample Group</h4>
 <pre class="r"><code># Create the plot:
 pcaSampleGroup &lt;- ggbiplot(pcaAnalysis,
-                           groups = dge$samples$sample_group,
-                           ellipse = TRUE,
-                           ellipse.prob = 0.98,
-                           var.axes = FALSE, alpha = 0.8) +
-  
-  labs(title = &quot;Principle Component Analysis&quot;, color = &quot;Sample Group&quot;) +
-  
-  geom_point(aes(colour = dge$samples$sample_group), size = 3) +
-  
-  theme(legend.direction =&#39;horizontal&#39;, 
-        legend.position = &quot;bottom&quot;)
-        
+  groups = dge$samples$sample_group,
+  ellipse = TRUE,
+  ellipse.prob = 0.98,
+  var.axes = FALSE, alpha = 0
+) +
 
-ggsave(filename = &quot;sample_group_PCA_plot.svg&quot;, width = 20,
-       plot = pcaSampleGroup,
-       path = here::here(&quot;2_plots/1_setup/&quot;))
+  labs(
+    title = &quot;Principle Component Analysis&quot;,
+    color = &quot;Sample Group&quot;
+  ) +
+
+  geom_point(aes(colour = dge$samples$sample_group), size = 2) +
+
+  theme(
+    legend.direction = &quot;vertical&quot;,
+    legend.position = &quot;right&quot;
+  )
+
+ggsave(
+  filename = &quot;sample_group_PCA_plot.svg&quot;,
+  plot = pcaSampleGroup,
+  path = here::here(&quot;2_plots/1_setup/&quot;)
+)
 
 pcaSampleGroup</code></pre>
 <p><img src="figure/setUp.Rmd/pcaSampleGroup-1.png" width="1056" style="display: block; margin: auto;" /></p>
@@ -2068,50 +2191,50 @@ loaded via a namespace (and not attached):
  [61] tools_4.1.0                   ggplotify_0.1.0              
  [63] ellipsis_0.3.2                jquerylib_0.1.4              
  [65] Rcpp_1.0.6                    progress_1.2.2               
- [67] zlibbioc_1.38.0               RCurl_1.98-1.3               
- [69] prettyunits_1.1.1             viridis_0.6.2                
- [71] SummarizedExperiment_1.22.0   haven_2.4.3                  
- [73] fs_1.5.0                      here_1.0.1                   
- [75] data.table_1.14.0             DO.db_2.9                    
- [77] openxlsx_4.2.4                reprex_2.0.1                 
- [79] whisker_0.4                   matrixStats_0.60.1           
- [81] mime_0.11                     patchwork_1.1.1              
- [83] hms_1.1.1                     evaluate_0.14                
- [85] xtable_1.8-4                  XML_3.99-0.6                 
- [87] rio_0.5.27                    readxl_1.3.1                 
- [89] gridExtra_2.3                 compiler_4.1.0               
- [91] shadowtext_0.0.9              writexl_1.4.0                
- [93] crayon_1.4.1                  htmltools_0.5.2              
- [95] ggfun_0.0.4                   later_1.2.0                  
- [97] tzdb_0.1.2                    aplot_0.1.1                  
- [99] geneplotter_1.70.0            lubridate_1.7.10             
-[101] DBI_1.1.1                     tweenr_1.0.2                 
-[103] rappdirs_0.3.3                MASS_7.3-54                  
-[105] Matrix_1.3-3                  car_3.0-11                   
-[107] cli_3.0.1                     igraph_1.2.6                 
-[109] GenomicRanges_1.44.0          pkgconfig_2.0.3              
-[111] foreign_0.8-81                xml2_1.3.2                   
-[113] ggtree_3.0.4                  svglite_2.0.0                
-[115] annotate_1.70.0               bslib_0.3.1                  
-[117] webshot_0.5.2                 XVector_0.32.0               
-[119] rvest_1.0.2                   yulab.utils_0.0.4            
-[121] digest_0.6.27                 Biostrings_2.60.1            
-[123] rmarkdown_2.11                cellranger_1.1.0             
-[125] fastmatch_1.1-3               tidytree_0.3.5               
-[127] curl_4.3.2                    shiny_1.7.1                  
-[129] nlme_3.1-152                  lifecycle_1.0.1              
-[131] jsonlite_1.7.2                carData_3.0-4                
-[133] viridisLite_0.4.0             fansi_0.5.0                  
-[135] pillar_1.6.4                  lattice_0.20-44              
-[137] fastmap_1.1.0                 httr_1.4.2                   
-[139] survival_3.2-11               GO.db_3.13.0                 
-[141] interactiveDisplayBase_1.30.0 glue_1.4.2                   
-[143] zip_2.2.0                     png_0.1-7                    
-[145] BiocVersion_3.13.1            bit_4.0.4                    
-[147] ggforce_0.3.3                 stringi_1.6.2                
-[149] sass_0.4.0                    blob_1.2.2                   
-[151] DESeq2_1.32.0                 memoise_2.0.0                
-[153] ape_5.5                      </code></pre>
+ [67] zlibbioc_1.38.0               BiasedUrn_1.07               
+ [69] RCurl_1.98-1.3                prettyunits_1.1.1            
+ [71] viridis_0.6.2                 SummarizedExperiment_1.22.0  
+ [73] haven_2.4.3                   fs_1.5.0                     
+ [75] here_1.0.1                    data.table_1.14.0            
+ [77] DO.db_2.9                     openxlsx_4.2.4               
+ [79] reprex_2.0.1                  whisker_0.4                  
+ [81] matrixStats_0.60.1            mime_0.11                    
+ [83] patchwork_1.1.1               hms_1.1.1                    
+ [85] evaluate_0.14                 xtable_1.8-4                 
+ [87] XML_3.99-0.6                  rio_0.5.27                   
+ [89] readxl_1.3.1                  gridExtra_2.3                
+ [91] compiler_4.1.0                shadowtext_0.0.9             
+ [93] writexl_1.4.0                 crayon_1.4.1                 
+ [95] htmltools_0.5.2               ggfun_0.0.4                  
+ [97] later_1.2.0                   tzdb_0.1.2                   
+ [99] aplot_0.1.1                   geneplotter_1.70.0           
+[101] lubridate_1.7.10              DBI_1.1.1                    
+[103] tweenr_1.0.2                  rappdirs_0.3.3               
+[105] MASS_7.3-54                   Matrix_1.3-3                 
+[107] car_3.0-11                    cli_3.0.1                    
+[109] igraph_1.2.6                  GenomicRanges_1.44.0         
+[111] pkgconfig_2.0.3               foreign_0.8-81               
+[113] xml2_1.3.2                    ggtree_3.0.4                 
+[115] svglite_2.0.0                 annotate_1.70.0              
+[117] bslib_0.3.1                   webshot_0.5.2                
+[119] XVector_0.32.0                rvest_1.0.2                  
+[121] yulab.utils_0.0.4             digest_0.6.27                
+[123] Biostrings_2.60.1             rmarkdown_2.11               
+[125] cellranger_1.1.0              fastmatch_1.1-3              
+[127] tidytree_0.3.5                curl_4.3.2                   
+[129] shiny_1.7.1                   nlme_3.1-152                 
+[131] lifecycle_1.0.1               jsonlite_1.7.2               
+[133] carData_3.0-4                 viridisLite_0.4.0            
+[135] fansi_0.5.0                   pillar_1.6.4                 
+[137] lattice_0.20-44               fastmap_1.1.0                
+[139] httr_1.4.2                    survival_3.2-11              
+[141] GO.db_3.13.0                  interactiveDisplayBase_1.30.0
+[143] glue_1.4.2                    zip_2.2.0                    
+[145] png_0.1-7                     BiocVersion_3.13.1           
+[147] bit_4.0.4                     ggforce_0.3.3                
+[149] stringi_1.6.2                 sass_0.4.0                   
+[151] blob_1.2.2                    DESeq2_1.32.0                
+[153] memoise_2.0.0                 ape_5.5                      </code></pre>
 </div>
 </div>
 </div>
